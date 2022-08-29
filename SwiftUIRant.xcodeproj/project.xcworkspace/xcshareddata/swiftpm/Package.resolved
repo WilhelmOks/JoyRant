@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftkeychainwrapper",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jrendel/SwiftKeychainWrapper",
+      "state" : {
+        "revision" : "185a3165346a03767101c4f62e9a545a0fe0530f",
+        "version" : "4.0.1"
+      }
+    },
+    {
+      "identity" : "swiftrant",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OmerFlame/SwiftRant",
+      "state" : {
+        "revision" : "9c730754d9e3c4ed8957c801438c218d10dc1fb5",
+        "version" : "0.11.0"
+      }
+    }
+  ],
+  "version" : 2
+}

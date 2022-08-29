@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftRant
 
 struct DevRantView: View {
     @ObservedObject private var dataStore = DataStore.shared
@@ -33,13 +34,7 @@ struct DevRantView: View {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         ForEach(rantFeed.rants, id: \.id) { rant in
-                            VStack(spacing: 0) {
-                                RantSummaryView(rant: rant)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(10)
-                                
-                                Divider()
-                            }
+                            row(rant: rant)
                         }
                     }
                 }
@@ -47,6 +42,16 @@ struct DevRantView: View {
                 ProgressView()
                     .opacity(viewModel.isLoading ? 1 : 0)
             }
+        }
+    }
+    
+    @ViewBuilder func row(rant: RantInFeed) -> some View {
+        VStack(spacing: 0) {
+            RantSummaryView(rant: rant)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(10)
+            
+            Divider()
         }
     }
 }

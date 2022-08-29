@@ -25,18 +25,23 @@ struct RantSummaryView: View {
     }
     
     @ViewBuilder private func image(_ imageUrl: URL?) -> some View {
-        AsyncImage(
-            url: imageUrl,
-            content: { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
-            },
-            placeholder: {
-                ProgressView()
+        if let imageUrl = imageUrl {
+            AsyncImage(url: imageUrl) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                case .failure:
+                    Image(systemName: "photo")
+                @unknown default:
+                    EmptyView()
+                }
             }
-        )
+        }
     }
     
     private func imageURL() -> URL? {

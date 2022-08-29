@@ -64,9 +64,6 @@ struct Networking {
         if let errorMessage = response.0 {
             throw SwiftRantError(message: errorMessage)
         } else {
-            let rantText = response.1?.rants.map { $0.text }.joined(separator: "\n###\n")
-            dlog("RANTS: \n\n\(rantText ?? "-")")
-            
             guard let rantFeed = response.1 else {
                 throw SwiftRantError(message: "No rant feed received.")
             }

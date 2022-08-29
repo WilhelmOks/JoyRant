@@ -4,7 +4,8 @@ An unofficial devRant iOS client.
 
 ## Current state
 
-Log in and log out.
+✅ Log in and log out
+🚧 Rant feed
 
 ## Goals
 

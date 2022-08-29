@@ -24,7 +24,9 @@ struct Networking {
         if let errorMessage = response.0 {
             throw SwiftRantError(message: errorMessage)
         } else {
-            AppState.shared.objectWillChange.send()
+            DispatchQueue.main.async {
+                AppState.shared.objectWillChange.send()
+            }
         }
     }
     
@@ -41,11 +43,13 @@ struct Networking {
         ]
         
         keychainWrapper.removeAllKeys()
-        let osstatus = SecItemDelete(query as CFDictionary)
+        let _ = SecItemDelete(query as CFDictionary)
         
         //dlog("osstatus: \(osstatus)")
         
-        AppState.shared.objectWillChange.send()
+        DispatchQueue.main.async {
+            AppState.shared.objectWillChange.send()
+        }
     }
     
     func rants() async throws {

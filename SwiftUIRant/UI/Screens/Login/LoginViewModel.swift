@@ -11,6 +11,7 @@ class LoginViewModel: ObservableObject {
     @Published var username = ""
     @Published var password = ""
     @Published var isLoading = false
+    @Published var alertMessage: AlertMessage = .none()
     
     var canSubmit: Bool {
         !username.isEmpty && !password.isEmpty
@@ -23,9 +24,9 @@ class LoginViewModel: ObservableObject {
         
         do {
             try await Networking.shared.logIn(username: username, password: password)
-            try await Networking.shared.rants()
+            //try await Networking.shared.rants()
         } catch {
-            dlog(error)
+            alertMessage = .presentedError(error: error)
         }
         
         isLoading = false

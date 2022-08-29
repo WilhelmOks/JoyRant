@@ -18,6 +18,7 @@
 		ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7E28B69892008BF314 /* Logging.swift */; };
 		ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B8028B69D35008BF314 /* Networking.swift */; };
 		ED59CEC428BCE0860007B698 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC328BCE0860007B698 /* AppState.swift */; };
+		ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC628BCF6110007B698 /* AlertMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		ED2C9B7E28B69892008BF314 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		ED2C9B8028B69D35008BF314 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ED59CEC328BCE0860007B698 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		ED59CEC628BCF6110007B698 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		ED2C9B7728B67BD2008BF314 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				ED59CEC528BCF5E30007B698 /* Util */,
 				ED2C9B7828B67BDE008BF314 /* Screens */,
 			);
 			path = UI;
@@ -111,6 +114,14 @@
 				ED2C9B7A28B67C52008BF314 /* LoginView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		ED59CEC528BCF5E30007B698 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				ED59CEC628BCF6110007B698 /* AlertMessage.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
+				ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */,
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,
 				ED59CEC428BCE0860007B698 /* AppState.swift in Sources */,

@@ -56,6 +56,7 @@ struct LoginView: View {
             .disabled(viewModel.isLoading)
             .padding()
         }
+        .alert($viewModel.alertMessage)
     }
 }
 

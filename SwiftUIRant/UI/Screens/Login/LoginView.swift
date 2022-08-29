@@ -27,6 +27,7 @@ struct LoginView: View {
                     }
                     .textInputAutocapitalization(.never)
                     .textContentType(.username)
+                    .autocorrectionDisabled()
                 
                 SecureField("Password", text: $viewModel.password)
                     .focused($focusedField, equals: .password)

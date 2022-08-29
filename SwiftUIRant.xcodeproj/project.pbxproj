@@ -19,6 +19,11 @@
 		ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B8028B69D35008BF314 /* Networking.swift */; };
 		ED59CEC428BCE0860007B698 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC328BCE0860007B698 /* AppState.swift */; };
 		ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC628BCF6110007B698 /* AlertMessage.swift */; };
+		ED59CECA28BD05D00007B698 /* DevRantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC928BD05D00007B698 /* DevRantView.swift */; };
+		ED59CECC28BD05E80007B698 /* DevRantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CECB28BD05E80007B698 /* DevRantViewModel.swift */; };
+		ED59CED128BD0B110007B698 /* RantSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED028BD0B110007B698 /* RantSummaryView.swift */; };
+		ED59CED328BD0EC60007B698 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED228BD0EC60007B698 /* DataStore.swift */; };
+		ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED428BD103C0007B698 /* DataLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +40,11 @@
 		ED2C9B8028B69D35008BF314 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ED59CEC328BCE0860007B698 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		ED59CEC628BCF6110007B698 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		ED59CEC928BD05D00007B698 /* DevRantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevRantView.swift; sourceTree = "<group>"; };
+		ED59CECB28BD05E80007B698 /* DevRantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevRantViewModel.swift; sourceTree = "<group>"; };
+		ED59CED028BD0B110007B698 /* RantSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantSummaryView.swift; sourceTree = "<group>"; };
+		ED59CED228BD0EC60007B698 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		ED59CED428BD103C0007B698 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +82,8 @@
 				ED59CEC328BCE0860007B698 /* AppState.swift */,
 				ED2C9B8028B69D35008BF314 /* Networking.swift */,
 				ED2C9B7E28B69892008BF314 /* Logging.swift */,
+				ED59CED228BD0EC60007B698 /* DataStore.swift */,
+				ED59CED428BD103C0007B698 /* DataLoader.swift */,
 				ED2C9B6928B679D0008BF314 /* Assets.xcassets */,
 				ED2C9B6B28B679D0008BF314 /* SwiftUIRant.entitlements */,
 				ED2C9B7728B67BD2008BF314 /* UI */,
@@ -92,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				ED59CEC528BCF5E30007B698 /* Util */,
+				ED59CECF28BD0A8D0007B698 /* Views */,
 				ED2C9B7828B67BDE008BF314 /* Screens */,
 			);
 			path = UI;
@@ -103,6 +116,7 @@
 				ED2C9B6728B679CB008BF314 /* ContentView.swift */,
 				ED29858F28BCD9AF0065D0E3 /* InternalView.swift */,
 				ED2C9B7928B67BF4008BF314 /* Login */,
+				ED59CEC828BD04A80007B698 /* DevRant */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -122,6 +136,23 @@
 				ED59CEC628BCF6110007B698 /* AlertMessage.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		ED59CEC828BD04A80007B698 /* DevRant */ = {
+			isa = PBXGroup;
+			children = (
+				ED59CECB28BD05E80007B698 /* DevRantViewModel.swift */,
+				ED59CEC928BD05D00007B698 /* DevRantView.swift */,
+			);
+			path = DevRant;
+			sourceTree = "<group>";
+		};
+		ED59CECF28BD0A8D0007B698 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED59CED028BD0B110007B698 /* RantSummaryView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +231,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED59CED328BD0EC60007B698 /* DataStore.swift in Sources */,
+				ED59CECC28BD05E80007B698 /* DevRantViewModel.swift in Sources */,
+				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
 				ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */,
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
@@ -207,7 +241,9 @@
 				ED59CEC428BCE0860007B698 /* AppState.swift in Sources */,
 				ED2C9B7B28B67C53008BF314 /* LoginView.swift in Sources */,
 				ED2C9B6828B679CB008BF314 /* ContentView.swift in Sources */,
+				ED59CECA28BD05D00007B698 /* DevRantView.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
+				ED59CED128BD0B110007B698 /* RantSummaryView.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

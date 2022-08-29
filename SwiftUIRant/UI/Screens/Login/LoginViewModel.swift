@@ -24,9 +24,8 @@ class LoginViewModel: ObservableObject {
         
         do {
             try await Networking.shared.logIn(username: username, password: password)
-            //try await Networking.shared.rants()
         } catch {
-            alertMessage = .presentedError(error: error)
+            alertMessage = .presentedError(error)
         }
         
         isLoading = false

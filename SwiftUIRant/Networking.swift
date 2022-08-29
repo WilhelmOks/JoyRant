@@ -45,6 +45,8 @@ struct Networking {
         keychainWrapper.removeAllKeys()
         let _ = SecItemDelete(query as CFDictionary)
         
+        DataStore.shared.clear()
+        
         //dlog("osstatus: \(osstatus)")
         
         DispatchQueue.main.async {
@@ -52,7 +54,7 @@ struct Networking {
         }
     }
     
-    func rants() async throws {
+    func rants() async throws -> RantFeed {
         guard let token = SwiftRant.shared.tokenFromKeychain else {
             throw SwiftRantError(message: "No token in keychain.")
         }
@@ -64,7 +66,12 @@ struct Networking {
         } else {
             let rantText = response.1?.rants.map { $0.text }.joined(separator: "\n###\n")
             dlog("RANTS: \n\n\(rantText ?? "-")")
-            return
+            
+            guard let rantFeed = response.1 else {
+                throw SwiftRantError(message: "No rant feed received.")
+            }
+            
+            return rantFeed
         }
     }
 }

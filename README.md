@@ -9,6 +9,7 @@ Log in and log out.
 ## Goals
 
 * The first goal of this project is to provide the functionality to browse through rants, write comments, ++/--, and report.
+* A "Notif" screen to see ++'s, Mentions, and so on.
 * Then, I want to provide the functionality to create rants and other types of posts and upload images.
 
 Secondary functions like editing the own profile may be added later but are not considered high priority at the moment.

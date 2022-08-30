@@ -14,8 +14,17 @@ struct RantSummaryView: View {
     var body: some View {
         if let rant = rant {
             VStack(alignment: .leading) {
+                VoteControl(
+                    score: rant.score,
+                    isUpvoted: rant.voteState == 1,
+                    isDownvoted: rant.voteState == -1,
+                    upvoteAction: {},
+                    downvoteAction: {}
+                )
+                .disabled(rant.voteState == -2)
+                
                 Text(rant.text)
-                    .font(.caption)
+                    .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
                 
@@ -98,6 +107,6 @@ struct RantSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         RantSummaryView(rant: .mocked())
             .previewLayout(.sizeThatFits)
-            .padding()
+            .padding(10)
     }
 }

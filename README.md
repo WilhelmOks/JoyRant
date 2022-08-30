@@ -8,6 +8,8 @@ An unofficial devRant iOS client.
 
 🚧 Rant feed
 
+⏹️ Upvoting/Downvoting
+
 ## Goals
 
 * The first goal of this project is to provide the functionality to browse through rants, write comments, ++/--, and report.

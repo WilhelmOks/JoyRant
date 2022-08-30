@@ -20,6 +20,8 @@ struct RantSummaryView: View {
                     .multilineTextAlignment(.leading)
                 
                 image(imageURL())
+                
+                tags()
             }
         }
     }
@@ -47,6 +49,18 @@ struct RantSummaryView: View {
     private func imageURL() -> URL? {
         guard let url = rant?.attachedImage?.url else { return nil }
         return URL(string: url)
+    }
+    
+    @ViewBuilder private func tags() -> some View {
+        if let rant = rant {
+            let tags = rant.tags.joined(separator: ", ")
+            
+            Text(tags)
+                .font(.caption2)
+                .fontWeight(.medium)
+                .foregroundColor(.gray)
+                .padding(.top, 1)
+        }
     }
 }
 

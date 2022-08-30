@@ -24,6 +24,7 @@
 		ED59CED128BD0B110007B698 /* RantSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED028BD0B110007B698 /* RantSummaryView.swift */; };
 		ED59CED328BD0EC60007B698 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED228BD0EC60007B698 /* DataStore.swift */; };
 		ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED428BD103C0007B698 /* DataLoader.swift */; };
+		ED59CED728BE71800007B698 /* VoteControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED628BE71800007B698 /* VoteControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		ED59CED028BD0B110007B698 /* RantSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantSummaryView.swift; sourceTree = "<group>"; };
 		ED59CED228BD0EC60007B698 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		ED59CED428BD103C0007B698 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
+		ED59CED628BE71800007B698 /* VoteControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				ED59CED028BD0B110007B698 /* RantSummaryView.swift */,
+				ED59CED628BE71800007B698 /* VoteControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,
 				ED59CEC428BCE0860007B698 /* AppState.swift in Sources */,
+				ED59CED728BE71800007B698 /* VoteControl.swift in Sources */,
 				ED2C9B7B28B67C53008BF314 /* LoginView.swift in Sources */,
 				ED2C9B6828B679CB008BF314 /* ContentView.swift in Sources */,
 				ED59CECA28BD05D00007B698 /* DevRantView.swift in Sources */,

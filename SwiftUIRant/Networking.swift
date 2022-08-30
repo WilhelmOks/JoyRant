@@ -31,23 +31,9 @@ struct Networking {
     }
     
     func logOut() {
-        let keychainWrapper = KeychainWrapper(
-            serviceName: "SwiftRant",
-            accessGroup: "SwiftRantAccessGroup"
-        )
-        
-        let query: [String:Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecReturnAttributes as String: true,
-            kSecReturnData as String: true,
-        ]
-        
-        keychainWrapper.removeAllKeys()
-        let _ = SecItemDelete(query as CFDictionary)
+        SwiftRant.shared.logOut()
         
         DataStore.shared.clear()
-        
-        //dlog("osstatus: \(osstatus)")
         
         DispatchQueue.main.async {
             AppState.shared.objectWillChange.send()

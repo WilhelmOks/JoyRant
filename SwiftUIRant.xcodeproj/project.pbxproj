@@ -29,6 +29,8 @@
 		ED59CEDC28C788010007B698 /* KeyPathModifiedCopyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEDB28C788010007B698 /* KeyPathModifiedCopyable.swift */; };
 		ED59CEDF28C789B30007B698 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEDE28C789B30007B698 /* Color.swift */; };
 		ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */; };
+		ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE228C78EAF0007B698 /* View+Fill.swift */; };
+		ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		ED59CEDB28C788010007B698 /* KeyPathModifiedCopyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPathModifiedCopyable.swift; sourceTree = "<group>"; };
 		ED59CEDE28C789B30007B698 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+FontExtensions.swift"; sourceTree = "<group>"; };
+		ED59CEE228C78EAF0007B698 /* View+Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fill.swift"; sourceTree = "<group>"; };
+		ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+NotificationCenter.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				ED59CEC628BCF6110007B698 /* AlertMessage.swift */,
+				ED59CEE228C78EAF0007B698 /* View+Fill.swift */,
+				ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -263,8 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED59CED328BD0EC60007B698 /* DataStore.swift in Sources */,
+				ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */,
 				ED59CECC28BD05E80007B698 /* DevRantViewModel.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,
+				ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */,
 				ED59CEDC28C788010007B698 /* KeyPathModifiedCopyable.swift in Sources */,
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
 				ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */,

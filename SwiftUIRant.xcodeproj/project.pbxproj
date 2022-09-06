@@ -25,6 +25,10 @@
 		ED59CED328BD0EC60007B698 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED228BD0EC60007B698 /* DataStore.swift */; };
 		ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED428BD103C0007B698 /* DataLoader.swift */; };
 		ED59CED728BE71800007B698 /* VoteControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED628BE71800007B698 /* VoteControl.swift */; };
+		ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CED828C7861E0007B698 /* UserSettings.swift */; };
+		ED59CEDC28C788010007B698 /* KeyPathModifiedCopyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEDB28C788010007B698 /* KeyPathModifiedCopyable.swift */; };
+		ED59CEDF28C789B30007B698 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEDE28C789B30007B698 /* Color.swift */; };
+		ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,10 @@
 		ED59CED228BD0EC60007B698 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		ED59CED428BD103C0007B698 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		ED59CED628BE71800007B698 /* VoteControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteControl.swift; sourceTree = "<group>"; };
+		ED59CED828C7861E0007B698 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		ED59CEDB28C788010007B698 /* KeyPathModifiedCopyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPathModifiedCopyable.swift; sourceTree = "<group>"; };
+		ED59CEDE28C789B30007B698 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+FontExtensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +94,10 @@
 				ED2C9B7E28B69892008BF314 /* Logging.swift */,
 				ED59CED228BD0EC60007B698 /* DataStore.swift */,
 				ED59CED428BD103C0007B698 /* DataLoader.swift */,
+				ED59CED828C7861E0007B698 /* UserSettings.swift */,
 				ED2C9B6928B679D0008BF314 /* Assets.xcassets */,
 				ED2C9B6B28B679D0008BF314 /* SwiftUIRant.entitlements */,
+				ED59CEDA28C787D80007B698 /* Util */,
 				ED2C9B7728B67BD2008BF314 /* UI */,
 				ED2C9B6C28B679D0008BF314 /* Preview Content */,
 			);
@@ -105,6 +115,7 @@
 		ED2C9B7728B67BD2008BF314 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				ED59CEDD28C789A00007B698 /* Style */,
 				ED59CEC528BCF5E30007B698 /* Util */,
 				ED59CECF28BD0A8D0007B698 /* Views */,
 				ED2C9B7828B67BDE008BF314 /* Screens */,
@@ -156,6 +167,23 @@
 				ED59CED628BE71800007B698 /* VoteControl.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		ED59CEDA28C787D80007B698 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				ED59CEDB28C788010007B698 /* KeyPathModifiedCopyable.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		ED59CEDD28C789A00007B698 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				ED59CEDE28C789B30007B698 /* Color.swift */,
+				ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,7 +265,9 @@
 				ED59CED328BD0EC60007B698 /* DataStore.swift in Sources */,
 				ED59CECC28BD05E80007B698 /* DevRantViewModel.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,
+				ED59CEDC28C788010007B698 /* KeyPathModifiedCopyable.swift in Sources */,
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
+				ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */,
 				ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */,
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,
@@ -247,8 +277,10 @@
 				ED2C9B6828B679CB008BF314 /* ContentView.swift in Sources */,
 				ED59CECA28BD05D00007B698 /* DevRantView.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
+				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED59CED128BD0B110007B698 /* RantSummaryView.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
+				ED59CEDF28C789B30007B698 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

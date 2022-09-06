@@ -49,7 +49,7 @@ struct VoteControl: View {
             }
             .font(.caption)
             .fontWeight(.bold)
-            .foregroundColor(.white) //TODO: use a more dynamic color
+            .foregroundColor(.primaryBackground)
             .padding(3)
             .padding(.bottom, 1)
             .background {

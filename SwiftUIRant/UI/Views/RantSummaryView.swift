@@ -16,12 +16,12 @@ struct RantSummaryView: View {
             VStack(alignment: .leading) {
                 VoteControl(
                     score: rant.score,
-                    isUpvoted: rant.voteState == 1,
-                    isDownvoted: rant.voteState == -1,
+                    isUpvoted: rant.voteState == .upvoted,
+                    isDownvoted: rant.voteState == .downvoted,
                     upvoteAction: {},
                     downvoteAction: {}
                 )
-                .disabled(rant.voteState == -2)
+                .disabled(rant.voteState == .unvotable)
                 
                 Text(rant.text)
                     .font(.subheadline)

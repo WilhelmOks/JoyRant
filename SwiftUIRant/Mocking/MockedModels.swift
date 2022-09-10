@@ -15,11 +15,7 @@ extension RantInFeed {
             text: "Lorem Ipsum Dolor Sit Amet.",
             score: 7,
             createdTime: 100,
-            attachedImage: .init(
-                url: "https://st2.depositphotos.com/3765753/5349/v/450/depositphotos_53491489-stock-illustration-example-rubber-stamp-vector-over.jpg",
-                width: 600,
-                height: 400
-            ),
+            attachedImage: .mocked(),
             commentCount: 42,
             tags: ["tag1", "tag2"],
             voteState: .unvoted,
@@ -39,6 +35,16 @@ extension RantInFeed {
                 avatarImage: nil
             ),
             isUserDPP: nil
+        )
+    }
+}
+
+extension Rant.AttachedImage {
+    static func mocked() -> Self {
+        .init(
+            url: "https://st2.depositphotos.com/3765753/5349/v/450/depositphotos_53491489-stock-illustration-example-rubber-stamp-vector-over.jpg",
+            width: 600,
+            height: 400
         )
     }
 }

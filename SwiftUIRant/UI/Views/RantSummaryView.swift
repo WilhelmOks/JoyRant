@@ -28,53 +28,17 @@ struct RantSummaryView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
                 
-                image(imageURL())
+                image()
                 
                 tags()
             }
         }
     }
     
-    @ViewBuilder private func image(_ imageUrl: URL?) -> some View {
-        if let imageUrl = imageUrl {
-            AsyncImage(url: imageUrl) { phase in
-                switch phase {
-                case .empty:
-                    if let imageSize = imageSize() {
-                        let aspectRatio = imageSize.width / imageSize.height
-                        
-                        ZStack {
-                            Rectangle()
-                                .fill(Color.clear)
-                                .aspectRatio(aspectRatio, contentMode: .fit)
-                            
-                            ProgressView()
-                        }
-                    } else {
-                        ProgressView()
-                    }
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 4))
-                case .failure:
-                    Image(systemName: "photo")
-                @unknown default:
-                    EmptyView()
-                }
-            }
+    @ViewBuilder private func image() -> some View {
+        if let image = rant?.attachedImage {
+            PostedImage(image: image)
         }
-    }
-    
-    private func imageURL() -> URL? {
-        guard let url = rant?.attachedImage?.url else { return nil }
-        return URL(string: url)
-    }
-    
-    private func imageSize() -> CGSize? {
-        guard let attachedImage = rant?.attachedImage else { return nil }
-        return .init(width: attachedImage.width, height: attachedImage.height)
     }
     
     @ViewBuilder private func tags() -> some View {

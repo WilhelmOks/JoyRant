@@ -15,7 +15,11 @@ extension RantInFeed {
             text: "Lorem Ipsum Dolor Sit Amet.",
             score: 7,
             createdTime: 100,
-            attachedImage: nil,
+            attachedImage: .init(
+                url: "https://st2.depositphotos.com/3765753/5349/v/450/depositphotos_53491489-stock-illustration-example-rubber-stamp-vector-over.jpg",
+                width: 600,
+                height: 400
+            ),
             commentCount: 42,
             tags: ["tag1", "tag2"],
             voteState: .unvoted,

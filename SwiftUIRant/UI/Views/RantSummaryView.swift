@@ -40,7 +40,19 @@ struct RantSummaryView: View {
             AsyncImage(url: imageUrl) { phase in
                 switch phase {
                 case .empty:
-                    ProgressView()
+                    if let imageSize = imageSize() {
+                        let aspectRatio = imageSize.width / imageSize.height
+                        
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.clear)
+                                .aspectRatio(aspectRatio, contentMode: .fit)
+                            
+                            ProgressView()
+                        }
+                    } else {
+                        ProgressView()
+                    }
                 case .success(let image):
                     image
                         .resizable()
@@ -58,6 +70,11 @@ struct RantSummaryView: View {
     private func imageURL() -> URL? {
         guard let url = rant?.attachedImage?.url else { return nil }
         return URL(string: url)
+    }
+    
+    private func imageSize() -> CGSize? {
+        guard let attachedImage = rant?.attachedImage else { return nil }
+        return .init(width: attachedImage.width, height: attachedImage.height)
     }
     
     @ViewBuilder private func tags() -> some View {

@@ -73,36 +73,6 @@ struct RantSummaryView: View {
     }
 }
 
-extension RantInFeed {
-    static func mocked() -> Self {
-        let json = """
-        {
-          "id": 1,
-          "created_time": 100,
-          "score": 1337,
-          "text": "Lorem Ipsum dolor sit amet.",
-          "num_comments": 42,
-          "tags": ["tag1", "tag2"],
-          "vote_state": 0,
-          "edited": true,
-          "user_id": 17,
-          "user_username": "Dr. Troll",
-          "user_score": 666,
-          "user_avatar": {
-            "b": "00ff00"
-          },
-          "user_avatar_lg": {
-            "b": "00ff00"
-          }
-        }
-        """
-        
-        let decoded = try! JSONDecoder().decode(RantInFeed.self, from: json.data(using: .utf8)!)
-        
-        return decoded
-    }
-}
-
 struct RantSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         RantSummaryView(rant: .mocked())

@@ -31,6 +31,7 @@
 		ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */; };
 		ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE228C78EAF0007B698 /* View+Fill.swift */; };
 		ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */; };
+		ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE728CB74180007B698 /* MockedModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+FontExtensions.swift"; sourceTree = "<group>"; };
 		ED59CEE228C78EAF0007B698 /* View+Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fill.swift"; sourceTree = "<group>"; };
 		ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+NotificationCenter.swift"; sourceTree = "<group>"; };
+		ED59CEE728CB74180007B698 /* MockedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				ED2C9B6928B679D0008BF314 /* Assets.xcassets */,
 				ED2C9B6B28B679D0008BF314 /* SwiftUIRant.entitlements */,
 				ED59CEDA28C787D80007B698 /* Util */,
+				ED59CEE628CB73F10007B698 /* Mocking */,
 				ED2C9B7728B67BD2008BF314 /* UI */,
 				ED2C9B6C28B679D0008BF314 /* Preview Content */,
 			);
@@ -190,6 +193,14 @@
 				ED59CEE028C78A8E0007B698 /* Text+FontExtensions.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		ED59CEE628CB73F10007B698 /* Mocking */ = {
+			isa = PBXGroup;
+			children = (
+				ED59CEE728CB74180007B698 /* MockedModels.swift */,
+			);
+			path = Mocking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +297,7 @@
 				ED59CECA28BD05D00007B698 /* DevRantView.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
+				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,
 				ED59CED128BD0B110007B698 /* RantSummaryView.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
 				ED59CEDF28C789B30007B698 /* Color.swift in Sources */,

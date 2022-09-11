@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct VoteControl: View {
+    @Environment(\.isEnabled) private var isEnabled
+    
     var isHorizontal = false
     let score: Int
     var isUpvoted: Bool = false
@@ -52,8 +54,9 @@ struct VoteControl: View {
             .padding(.bottom, 1)
             .background {
                 Circle()
-                    .foregroundColor(highlighted ? .accentColor : .secondary)
+                    .foregroundColor(highlighted ? .accentColor : .secondaryForeground)
             }
+            .opacity(isEnabled ? 1 : 0.6)
         }
     }
     
@@ -79,13 +82,22 @@ struct VoteControl: View {
         Text("\(score)")
             .font(.caption2)
             .fontWeight(.medium)
-            .foregroundColor(isUpvoted || isDownvoted ? .accentColor : .secondary)
+            .foregroundColor(isUpvoted || isDownvoted ? .accentColor : .secondaryForeground)
     }
 }
 
 struct VoteControl_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 16) {
+            VoteControl(
+                isHorizontal: true,
+                score: 42,
+                isUpvoted: false,
+                isDownvoted: false,
+                upvoteAction: {},
+                downvoteAction: {}
+            )
+            
             VoteControl(
                 isHorizontal: true,
                 score: 42,
@@ -96,13 +108,45 @@ struct VoteControl_Previews: PreviewProvider {
             )
             
             VoteControl(
-                isHorizontal: false,
+                isHorizontal: true,
                 score: 42,
-                isUpvoted: true,
+                isUpvoted: false,
                 isDownvoted: false,
                 upvoteAction: {},
                 downvoteAction: {}
             )
+            .disabled(true)
+            .padding(.bottom, 30)
+            
+            HStack(spacing: 16) {
+                VoteControl(
+                    isHorizontal: false,
+                    score: 42,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    upvoteAction: {},
+                    downvoteAction: {}
+                )
+                
+                VoteControl(
+                    isHorizontal: false,
+                    score: 42,
+                    isUpvoted: true,
+                    isDownvoted: false,
+                    upvoteAction: {},
+                    downvoteAction: {}
+                )
+                
+                VoteControl(
+                    isHorizontal: false,
+                    score: 42,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    upvoteAction: {},
+                    downvoteAction: {}
+                )
+                .disabled(true)
+            }
         }
     }
 }

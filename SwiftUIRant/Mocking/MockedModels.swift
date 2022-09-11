@@ -18,7 +18,7 @@ extension RantInFeed {
             attachedImage: .mocked(),
             commentCount: 42,
             tags: ["tag1", "tag2"],
-            voteState: .unvoted,
+            voteState: .upvoted,
             isEdited: true,
             link: nil,
             collabType: nil,

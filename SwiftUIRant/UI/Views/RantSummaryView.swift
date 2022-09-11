@@ -13,7 +13,7 @@ struct RantSummaryView: View {
     
     var body: some View {
         if let rant = rant {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 8) {
                 VoteControl(
                     isHorizontal: true,
                     score: rant.score,
@@ -28,6 +28,7 @@ struct RantSummaryView: View {
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
+                    .foregroundColor(.primaryForeground)
                 
                 image()
                 
@@ -49,7 +50,7 @@ struct RantSummaryView: View {
             Text(tags)
                 .font(.caption2)
                 .fontWeight(.medium)
-                .foregroundColor(.gray)
+                .foregroundColor(.secondaryForeground)
                 .padding(.top, 1)
         }
     }
@@ -59,6 +60,7 @@ struct RantSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         RantSummaryView(rant: .mocked())
             .previewLayout(.sizeThatFits)
-            .padding(10)
+            .eachColorScheme()
+            .padding()
     }
 }

@@ -8,7 +8,11 @@ An unofficial devRant iOS client.
 
 🚧 Rant feed
 
-⏹️ Upvoting/Downvoting
+🚧 Upvoting/Downvoting in feed
+
+⏹️ Show Rant with comments
+
+⏹️ Upvoting/Downvoting in rant and comments 
 
 ## Goals
 

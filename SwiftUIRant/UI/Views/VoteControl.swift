@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct VoteControl: View {
+    var isHorizontal = false
     let score: Int
     var isUpvoted: Bool = false
     var isDownvoted: Bool = false
@@ -15,25 +16,22 @@ struct VoteControl: View {
     let downvoteAction: () -> ()
     
     var body: some View {
-        VStack(spacing: 2) {
-            button(
-                text: "++",
-                hiddenText: "--",
-                highlighted: isUpvoted,
-                action: upvoteAction
-            )
-            
-            Text("\(score)")
-                .font(.caption2)
-                .fontWeight(.medium)
-                .foregroundColor(isUpvoted || isDownvoted ? .accentColor : .secondary)
-            
-            button(
-                text: "--",
-                hiddenText: "++",
-                highlighted: isDownvoted,
-                action: downvoteAction
-            )
+        if isHorizontal {
+            HStack(spacing: 4) {
+                downvoteButton()
+                
+                scoreText()
+                
+                upvoteButton()
+            }
+        } else {
+            VStack(spacing: 2) {
+                upvoteButton()
+                
+                scoreText()
+                
+                downvoteButton()
+            }
         }
     }
     
@@ -58,16 +56,53 @@ struct VoteControl: View {
             }
         }
     }
+    
+    @ViewBuilder private func upvoteButton() -> some View {
+        button(
+            text: "++",
+            hiddenText: "--",
+            highlighted: isUpvoted,
+            action: upvoteAction
+        )
+    }
+    
+    @ViewBuilder private func downvoteButton() -> some View {
+        button(
+            text: "--",
+            hiddenText: "++",
+            highlighted: isDownvoted,
+            action: downvoteAction
+        )
+    }
+    
+    @ViewBuilder private func scoreText() -> some View {
+        Text("\(score)")
+            .font(.caption2)
+            .fontWeight(.medium)
+            .foregroundColor(isUpvoted || isDownvoted ? .accentColor : .secondary)
+    }
 }
 
 struct VoteControl_Previews: PreviewProvider {
     static var previews: some View {
-        VoteControl(
-            score: 42,
-            isUpvoted: true,
-            isDownvoted: false,
-            upvoteAction: {},
-            downvoteAction: {}
-        )
+        VStack(spacing: 20) {
+            VoteControl(
+                isHorizontal: true,
+                score: 42,
+                isUpvoted: true,
+                isDownvoted: false,
+                upvoteAction: {},
+                downvoteAction: {}
+            )
+            
+            VoteControl(
+                isHorizontal: false,
+                score: 42,
+                isUpvoted: true,
+                isDownvoted: false,
+                upvoteAction: {},
+                downvoteAction: {}
+            )
+        }
     }
 }

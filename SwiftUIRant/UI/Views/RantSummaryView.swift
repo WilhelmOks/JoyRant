@@ -15,6 +15,7 @@ struct RantSummaryView: View {
         if let rant = rant {
             VStack(alignment: .leading) {
                 VoteControl(
+                    isHorizontal: true,
                     score: rant.score,
                     isUpvoted: rant.voteState == .upvoted,
                     isDownvoted: rant.voteState == .downvoted,

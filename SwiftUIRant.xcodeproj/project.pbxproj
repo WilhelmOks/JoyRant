@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307628CCE1E3001A6A73 /* PostedImage.swift */; };
+		ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307828CCE921001A6A73 /* UserPanel.swift */; };
 		ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29858F28BCD9AF0065D0E3 /* InternalView.swift */; };
 		ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */; };
 		ED2C9B6828B679CB008BF314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B6728B679CB008BF314 /* ContentView.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		ED1B307628CCE1E3001A6A73 /* PostedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedImage.swift; sourceTree = "<group>"; };
+		ED1B307828CCE921001A6A73 /* UserPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanel.swift; sourceTree = "<group>"; };
 		ED29858F28BCD9AF0065D0E3 /* InternalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalView.swift; sourceTree = "<group>"; };
 		ED2C9B6228B679CB008BF314 /* SwiftUIRant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIRant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIRantApp.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				ED59CED028BD0B110007B698 /* RantSummaryView.swift */,
 				ED59CED628BE71800007B698 /* VoteControl.swift */,
 				ED1B307628CCE1E3001A6A73 /* PostedImage.swift */,
+				ED1B307828CCE921001A6A73 /* UserPanel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED59CED328BD0EC60007B698 /* DataStore.swift in Sources */,
+				ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */,
 				ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */,
 				ED59CECC28BD05E80007B698 /* DevRantViewModel.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,

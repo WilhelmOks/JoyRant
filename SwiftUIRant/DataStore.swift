@@ -18,4 +18,11 @@ final class DataStore: ObservableObject {
     func clear() {
         rantFeed = nil
     }
+    
+    func update(rantInFeedId rantId: Int, voteState: RantInFeed.VoteState, score: Int) {
+        if let index = rantFeed?.rants.firstIndex(where: { $0.id == rantId }) {
+            rantFeed?.rants[index].voteState = voteState
+            rantFeed?.rants[index].score = score
+        }
+    }
 }

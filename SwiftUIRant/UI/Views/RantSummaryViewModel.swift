@@ -37,6 +37,7 @@ final class RantSummaryViewModel: ObservableObject {
     var voteScore: Int {
         var score = rant.score
         
+        /*
         switch (loadingVoteState, rant.voteState) {
         case (.upvoted, .unvoted):
             score += 1
@@ -53,6 +54,24 @@ final class RantSummaryViewModel: ObservableObject {
         default:
             break
         }
+        */
+        
+        switch (loadingVoteState, rant.voteState) {
+        case (.upvoted, .unvoted):
+            score += 1
+        case (.upvoted, .downvoted):
+            score += 1
+        case (.downvoted, .unvoted):
+            score -= 0
+        case (.downvoted, .upvoted):
+            score -= 1
+        case (.unvoted, .upvoted):
+            score -= 1
+        case (.unvoted, .downvoted):
+            score += 0
+        default:
+            break
+        }
         
         return score
     }
@@ -60,54 +79,40 @@ final class RantSummaryViewModel: ObservableObject {
     @MainActor func voteUp() async {
         switch rant.voteState {
         case .unvoted, .downvoted:
-            loadingVoteState = .upvoted
-            do {
-                let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: .upvoted)
-                rant.voteState = .init(rawValue: changedRant.voteState) ?? .unvoted
-                rant.score = changedRant.score
-            } catch {
-                alertMessage = .presentedError(error)
-            }
+            await performVote(voteState: .upvoted)
         case .upvoted:
-            loadingVoteState = .unvoted
-            do {
-                let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: .unvoted)
-                rant.voteState = .init(rawValue: changedRant.voteState) ?? .unvoted
-                rant.score = changedRant.score
-            } catch {
-                alertMessage = .presentedError(error)
-            }
+            await performVote(voteState: .unvoted)
         default:
             break
         }
-        
-        loadingVoteState = nil
     }
     
     @MainActor func voteDown() async {
         switch rant.voteState {
         case .unvoted, .upvoted:
-            loadingVoteState = .downvoted
-            do {
-                let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: .downvoted)
-                rant.voteState = .init(rawValue: changedRant.voteState) ?? .unvoted
-                rant.score = changedRant.score
-            } catch {
-                alertMessage = .presentedError(error)
-            }
+            await performVote(voteState: .downvoted)
         case .downvoted:
-            loadingVoteState = .unvoted
-            do {
-                let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: .unvoted)
-                rant.voteState = .init(rawValue: changedRant.voteState) ?? .unvoted
-                rant.score = changedRant.score
-            } catch {
-                alertMessage = .presentedError(error)
-            }
+            await performVote(voteState: .unvoted)
         default:
             break
         }
-        
+    }
+    
+    @MainActor private func performVote(voteState: RantInFeed.VoteState) async {
+        loadingVoteState = voteState
+        do {
+            let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: voteState)
+            applyChangedData(changedRant: changedRant)
+        } catch {
+            alertMessage = .presentedError(error)
+        }
         loadingVoteState = nil
+    }
+    
+    private func applyChangedData(changedRant: Rant) {
+        let changedVoteState: RantInFeed.VoteState = .init(rawValue: changedRant.voteState) ?? .unvoted
+        rant.voteState = changedVoteState
+        rant.score = changedRant.score
+        DataStore.shared.update(rantInFeedId: rant.id, voteState: changedVoteState, score: changedRant.score)
     }
 }

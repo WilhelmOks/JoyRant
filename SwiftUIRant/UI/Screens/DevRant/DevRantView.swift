@@ -30,7 +30,7 @@ struct DevRantView: View {
     
     @ViewBuilder func content() -> some View {
         ZStack {
-            if let rantFeed = DataStore.shared.rantFeed {
+            if let rantFeed = dataStore.rantFeed {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         ForEach(rantFeed.rants, id: \.id) { rant in

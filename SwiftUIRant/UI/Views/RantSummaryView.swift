@@ -10,6 +10,7 @@ import SwiftRant
 
 struct RantSummaryView: View {
     @StateObject var viewModel: RantSummaryViewModel
+    //@ObservedObject private var dataStore = DataStore.shared
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {

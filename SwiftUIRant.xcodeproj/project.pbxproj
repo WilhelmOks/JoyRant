@@ -35,6 +35,7 @@
 		ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE228C78EAF0007B698 /* View+Fill.swift */; };
 		ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */; };
 		ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE728CB74180007B698 /* MockedModels.swift */; };
+		EDE2288C28CE15040025EDB1 /* RantSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288B28CE15040025EDB1 /* RantSummaryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		ED59CEE228C78EAF0007B698 /* View+Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fill.swift"; sourceTree = "<group>"; };
 		ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+NotificationCenter.swift"; sourceTree = "<group>"; };
 		ED59CEE728CB74180007B698 /* MockedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedModels.swift; sourceTree = "<group>"; };
+		EDE2288B28CE15040025EDB1 /* RantSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantSummaryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				ED59CED028BD0B110007B698 /* RantSummaryView.swift */,
+				EDE2288B28CE15040025EDB1 /* RantSummaryViewModel.swift */,
 				ED59CED628BE71800007B698 /* VoteControl.swift */,
 				ED1B307628CCE1E3001A6A73 /* PostedImage.swift */,
 				ED1B307828CCE921001A6A73 /* UserPanel.swift */,
@@ -306,6 +309,7 @@
 				ED1B307B28CE0451001A6A73 /* View+Preview.swift in Sources */,
 				ED2C9B6828B679CB008BF314 /* ContentView.swift in Sources */,
 				ED59CECA28BD05D00007B698 /* DevRantView.swift in Sources */,
+				EDE2288C28CE15040025EDB1 /* RantSummaryViewModel.swift in Sources */,
 				ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,

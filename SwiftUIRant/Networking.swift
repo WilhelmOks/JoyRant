@@ -40,21 +40,44 @@ struct Networking {
         }
     }
     
-    func rants() async throws -> RantFeed {
+    private func token() throws -> UserCredentials {
         guard let token = SwiftRant.shared.tokenFromKeychain else {
             throw SwiftRantError(message: "No token in keychain.")
         }
+        return token
+    }
+    
+    private func noOutputError() -> SwiftRantError {
+        SwiftRantError(message: "No output received.")
+    }
+    
+    func rants() async throws -> RantFeed {
+        let result = await SwiftRant.shared.getRantFeed(token: try token(), skip: 0, prevSet: nil) // "Algo"
         
-        let response = await SwiftRant.shared.getRantFeed(token: token, skip: 0, prevSet: nil) // "Algo"
-        
-        if let errorMessage = response.0 {
+        if let errorMessage = result.0 {
             throw SwiftRantError(message: errorMessage)
         } else {
-            guard let rantFeed = response.1 else {
-                throw SwiftRantError(message: "No rant feed received.")
+            guard let output = result.1 else {
+                throw noOutputError()
             }
             
-            return rantFeed
+            return output
+        }
+    }
+    
+    func vote(rantID: Int, voteState: RantInFeed.VoteState) async throws -> Rant {
+        let result = await SwiftRant.shared.voteOnRant(try token(), rantID: rantID, vote: voteState.rawValue)
+        
+        //TODO: check why downvoting doesn't decrement the score
+        
+        if let errorMessage = result.0 {
+            throw SwiftRantError(message: errorMessage)
+        } else {
+            guard let output = result.1 else {
+                throw noOutputError()
+            }
+            
+            return output
         }
     }
 }

@@ -47,7 +47,7 @@ struct DevRantView: View {
     
     @ViewBuilder func row(rant: RantInFeed) -> some View {
         VStack(spacing: 0) {
-            RantSummaryView(rant: rant)
+            RantSummaryView(viewModel: .init(rant: rant))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(10)
             

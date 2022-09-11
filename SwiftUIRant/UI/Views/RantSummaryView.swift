@@ -25,14 +25,20 @@ struct RantSummaryView: View {
                 .disabled(rant.voteState == .unvotable)
                 
                 Text(rant.text)
-                    .font(.subheadline)
+                    .font(baseSize: 15)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
                 
                 image()
                 
-                tags()
+                HStack {
+                    tags()
+                    
+                    Spacer()
+                    
+                    commentsCounter()
+                }
             }
         }
     }
@@ -48,10 +54,23 @@ struct RantSummaryView: View {
             let tags = rant.tags.joined(separator: ", ")
             
             Text(tags)
-                .font(.caption2)
-                .fontWeight(.medium)
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
                 .foregroundColor(.secondaryForeground)
-                .padding(.top, 1)
+        }
+    }
+    
+    /// Contrary to the original counter, this one will also show 0 comments.
+    @ViewBuilder private func commentsCounter() -> some View {
+        if let rant = rant {
+            HStack(spacing: 3) {
+                Image(systemName: "bubble.right")
+                    .font(baseSize: 11)
+                
+                Text("\(rant.commentCount)")
+                    .font(baseSize: 11, weight: .medium)
+            }
+            .foregroundColor(.secondaryForeground)
         }
     }
 }

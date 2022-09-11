@@ -18,6 +18,12 @@ extension Text {
     }
 }
 
+extension Image {
+    func font(baseSize: Int = 17) -> some View {
+        self.font(fontFromBaseSize(baseSize))
+    }
+}
+
 private func fontFromBaseSize(_ baseSize: Int) -> Font {
     switch baseSize {
     case ...11:     return .caption2

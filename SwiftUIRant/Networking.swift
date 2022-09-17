@@ -12,21 +12,17 @@ import SwiftKeychainWrapper
 struct Networking {
     static let shared = Self()
     
-    struct SwiftRantError: Swift.Error {
+    struct SwiftUIRantError: Swift.Error {
         let message: String
     }
     
     private init() {}
     
     func logIn(username: String, password: String) async throws {
-        let response = await SwiftRant.shared.logIn(username: username, password: password)
+        _ = try await SwiftRant.shared.logIn(username: username, password: password).get()
         
-        if let errorMessage = response.0 {
-            throw SwiftRantError(message: errorMessage)
-        } else {
-            DispatchQueue.main.async {
-                AppState.shared.objectWillChange.send()
-            }
+        DispatchQueue.main.async {
+            AppState.shared.objectWillChange.send()
         }
     }
     
@@ -42,42 +38,19 @@ struct Networking {
     
     private func token() throws -> UserCredentials {
         guard let token = SwiftRant.shared.tokenFromKeychain else {
-            throw SwiftRantError(message: "No token in keychain.")
+            throw SwiftUIRantError(message: "No token in keychain.")
         }
         return token
     }
     
-    private func noOutputError() -> SwiftRantError {
-        SwiftRantError(message: "No output received.")
-    }
-    
     func rants() async throws -> RantFeed {
-        let result = await SwiftRant.shared.getRantFeed(token: try token(), skip: 0, prevSet: nil) // "Algo"
-        
-        if let errorMessage = result.0 {
-            throw SwiftRantError(message: errorMessage)
-        } else {
-            guard let output = result.1 else {
-                throw noOutputError()
-            }
-            
-            return output
-        }
+        // "Algo"
+        try await SwiftRant.shared.getRantFeed(token: try token(), skip: 0, prevSet: nil).get()
     }
     
     func vote(rantID: Int, voteState: RantInFeed.VoteState) async throws -> Rant {
-        let result = await SwiftRant.shared.voteOnRant(try token(), rantID: rantID, vote: voteState.rawValue)
+        try await SwiftRant.shared.voteOnRant(try token(), rantID: rantID, vote: voteState.rawValue).get()
         
         //TODO: check why downvoting doesn't decrement the score
-        
-        if let errorMessage = result.0 {
-            throw SwiftRantError(message: errorMessage)
-        } else {
-            guard let output = result.1 else {
-                throw noOutputError()
-            }
-            
-            return output
-        }
     }
 }

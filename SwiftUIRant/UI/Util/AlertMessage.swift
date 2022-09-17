@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftRant
 
 struct AlertMessage {
     var isPresented: Bool
@@ -27,7 +28,9 @@ extension AlertMessage {
     static func presentedError(_ error: Error) -> Self {
         let message: String
         switch error {
-        case let swiftRantError as Networking.SwiftRantError:
+        case let swiftUIRantError as Networking.SwiftUIRantError:
+            message = swiftUIRantError.message
+        case let swiftRantError as SwiftRantError:
             message = swiftRantError.message
         default:
             message = error.localizedDescription

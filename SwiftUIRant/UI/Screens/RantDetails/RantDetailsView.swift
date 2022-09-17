@@ -8,15 +8,29 @@
 import SwiftUI
 
 struct RantDetailsView: View {
-    @StateObject private var viewModel: RantDetailsViewModel = .init()
+    @StateObject var viewModel: RantDetailsViewModel
     
     var body: some View {
-        Text("TODO: Rant Details")
+        content()
+            .alert($viewModel.alertMessage)
+    }
+    
+    @ViewBuilder private func content() -> some View {
+        if let rant = viewModel.rant, !viewModel.isLoading {
+            VStack {
+                Text("TODO: Rant Details")
+                
+                Text(rant.text)
+            }
+            .padding()
+        } else {
+            ProgressView()
+        }
     }
 }
 
 struct RantDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        RantDetailsView()
+        RantDetailsView(viewModel: .init(rantId: 1))
     }
 }

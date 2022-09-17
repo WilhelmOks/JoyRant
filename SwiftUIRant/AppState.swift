@@ -12,7 +12,7 @@ final class AppState: ObservableObject {
     static let shared = AppState()
     
     enum NavigationDestination: Hashable {
-        case rantDetails
+        case rantDetails(rantId: Int)
     }
     
     @Published var navigationPath: [NavigationDestination] = []

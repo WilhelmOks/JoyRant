@@ -49,15 +49,8 @@ struct RantSummaryView: View {
         }
         .alert($viewModel.alertMessage)
         .onTapGesture {
-            AppState.shared.navigationPath.append(.rantDetails)
+            AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
         }
-        .navigationDestination(for: AppState.NavigationDestination.self) { destination in
-            switch destination {
-            case .rantDetails:
-                RantDetailsView()
-            }
-        }
-        
     }
     
     @ViewBuilder private func image() -> some View {

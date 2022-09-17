@@ -26,6 +26,12 @@ struct DevRantView: View {
             .navigationTitle("devRant")
             .navigationBarTitleDisplayMode(.inline)
             .alert($viewModel.alertMessage)
+            .navigationDestination(for: AppState.NavigationDestination.self) { destination in
+                switch destination {
+                case .rantDetails(let rantId):
+                    RantDetailsView(viewModel: .init(rantId: rantId))
+                }
+            }
     }
     
     @ViewBuilder func content() -> some View {

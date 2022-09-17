@@ -48,6 +48,7 @@ struct RantSummaryView: View {
             }
         }
         .alert($viewModel.alertMessage)
+        .background(Color.primaryBackground)
         .onTapGesture {
             AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
         }

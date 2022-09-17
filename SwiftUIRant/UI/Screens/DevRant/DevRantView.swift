@@ -36,12 +36,25 @@ struct DevRantView: View {
     
     @ViewBuilder func content() -> some View {
         ZStack {
-            if let rantFeed = dataStore.rantFeed {
+            if dataStore.isFeedLoaded {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        ForEach(rantFeed.rants, id: \.id) { rant in
+                        ForEach(dataStore.rantsInFeed, id: \.id) { rant in
                             row(rant: rant)
                         }
+                        
+                        Button {
+                            Task {
+                                await viewModel.loadMore()
+                            }
+                        } label: {
+                            Text("load more")
+                                .foregroundColor(.accentColor)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(viewModel.isLoadingMore)
+                        .fillHorizontally(.center)
+                        .padding()
                     }
                 }
             } else {

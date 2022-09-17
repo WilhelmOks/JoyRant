@@ -13,16 +13,20 @@ final class DataStore: ObservableObject {
     
     private init() {}
     
-    @Published var rantFeed: RantFeed?
+    @Published var isFeedLoaded = false
+    @Published var rantsInFeed: [RantInFeed] = []
+    
+    var currentFeedSession: String?
     
     func clear() {
-        rantFeed = nil
+        rantsInFeed = []
+        isFeedLoaded = false
     }
     
     func update(rantInFeedId rantId: Int, voteState: RantInFeed.VoteState, score: Int) {
-        if let index = rantFeed?.rants.firstIndex(where: { $0.id == rantId }) {
-            rantFeed?.rants[index].voteState = voteState
-            rantFeed?.rants[index].score = score
+        if let index = rantsInFeed.firstIndex(where: { $0.id == rantId }) {
+            rantsInFeed[index].voteState = voteState
+            rantsInFeed[index].score = score
         }
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 class DevRantViewModel: ObservableObject {
     @Published var isLoading = false
+    @Published var isLoadingMore = false
     @Published var alertMessage: AlertMessage = .none()
     
     init() {
@@ -27,5 +28,17 @@ class DevRantViewModel: ObservableObject {
         }
         
         isLoading = false
+    }
+    
+    @MainActor func loadMore() async {
+        isLoadingMore = true
+        
+        do {
+            try await DataLoader.shared.loadMoreFeed()
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoadingMore = false
     }
 }

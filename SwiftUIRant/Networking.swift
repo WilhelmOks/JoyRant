@@ -43,9 +43,8 @@ struct Networking {
         return token
     }
     
-    func rants() async throws -> RantFeed {
-        // "Algo"
-        try await SwiftRant.shared.getRantFeed(token: try token(), skip: 0, prevSet: nil).get()
+    func rants(skip: Int = 0, session: String?) async throws -> RantFeed {
+        try await SwiftRant.shared.getRantFeed(token: try token(), skip: skip, prevSet: session).get()
     }
     
     func getRant(id: Int) async throws -> (Rant, [Comment]) {

@@ -11,6 +11,12 @@ import SwiftRant
 final class AppState: ObservableObject {
     static let shared = AppState()
     
+    enum NavigationDestination: Hashable {
+        case rantDetails
+    }
+    
+    @Published var navigationPath: [NavigationDestination] = []
+    
     var isLoggedIn: Bool {
         SwiftRant.shared.tokenFromKeychain != nil
     }

@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct InternalView: View {
+    @ObservedObject var appState = AppState.shared
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $appState.navigationPath) {
             DevRantView()
         }
     }

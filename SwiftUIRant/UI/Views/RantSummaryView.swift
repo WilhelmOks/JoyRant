@@ -10,7 +10,6 @@ import SwiftRant
 
 struct RantSummaryView: View {
     @StateObject var viewModel: RantSummaryViewModel
-    //@ObservedObject private var dataStore = DataStore.shared
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -49,6 +48,16 @@ struct RantSummaryView: View {
             }
         }
         .alert($viewModel.alertMessage)
+        .onTapGesture {
+            AppState.shared.navigationPath.append(.rantDetails)
+        }
+        .navigationDestination(for: AppState.NavigationDestination.self) { destination in
+            switch destination {
+            case .rantDetails:
+                RantDetailsView()
+            }
+        }
+        
     }
     
     @ViewBuilder private func image() -> some View {

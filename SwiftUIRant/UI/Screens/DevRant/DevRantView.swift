@@ -15,12 +15,25 @@ struct DevRantView: View {
     var body: some View {
         content()
             .toolbar {
-                Button {
-                    DispatchQueue.main.async {
-                        Networking.shared.logOut()
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        DispatchQueue.main.async {
+                            Networking.shared.logOut()
+                        }
+                    } label: {
+                        Text("Log out")
                     }
-                } label: {
-                    Text("Log out")
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        Task {
+                            await viewModel.reload()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .disabled(viewModel.isLoading || viewModel.isLoadingMore)
                 }
             }
             .navigationTitle("devRant")

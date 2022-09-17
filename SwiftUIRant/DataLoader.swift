@@ -34,4 +34,13 @@ final class DataLoader {
             dlog("Found duplicates in rant feed!") //TODO: Still getting duplicates. I don't know how to prevent it.
         }
     }
+    
+    @MainActor func reloadFeed() async throws {
+        dataStore.clearFeed()
+        let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
+        dataStore.currentFeedSession = feed.set
+        dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
+        dataStore.rantsInFeed = feed.rants
+        dataStore.isFeedLoaded = true
+    }
 }

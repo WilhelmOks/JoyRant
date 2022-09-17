@@ -19,8 +19,13 @@ final class DataStore: ObservableObject {
     var currentFeedSession: String?
     
     func clear() {
+        clearFeed()
+    }
+    
+    func clearFeed() {
         rantsInFeed = []
         isFeedLoaded = false
+        currentFeedSession = nil
     }
     
     func update(rantInFeedId rantId: Int, voteState: RantInFeed.VoteState, score: Int) {

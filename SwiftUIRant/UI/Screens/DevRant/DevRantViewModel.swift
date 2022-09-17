@@ -41,4 +41,16 @@ class DevRantViewModel: ObservableObject {
         
         isLoadingMore = false
     }
+    
+    @MainActor func reload() async {
+        isLoading = true
+        
+        do {
+            try await DataLoader.shared.reloadFeed()
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoading = false
+    }
 }

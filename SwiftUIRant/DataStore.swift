@@ -17,6 +17,7 @@ final class DataStore: ObservableObject {
     @Published var rantsInFeed: [RantInFeed] = []
     
     var currentFeedSession: String?
+    var duplicatesInFeed = 0
     
     func clear() {
         clearFeed()
@@ -26,6 +27,7 @@ final class DataStore: ObservableObject {
         rantsInFeed = []
         isFeedLoaded = false
         currentFeedSession = nil
+        duplicatesInFeed = 0
     }
     
     func update(rantInFeedId rantId: Int, voteState: RantInFeed.VoteState, score: Int) {

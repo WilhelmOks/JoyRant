@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftRant
 
 final class DataLoader {
     static let shared = DataLoader()
@@ -23,15 +24,17 @@ final class DataLoader {
     }
     
     @MainActor func loadMoreFeed() async throws {
-        let moreFeed = try await Networking.shared.rants(skip: dataStore.rantsInFeed.count, session: dataStore.currentFeedSession)
+        let rantsToSkip = dataStore.rantsInFeed.count// + dataStore.duplicatesInFeed
+        let moreFeed = try await Networking.shared.rants(skip: rantsToSkip, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = moreFeed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
-        dataStore.rantsInFeed += moreFeed.rants
+        //dataStore.rantsInFeed += moreFeed.rants
+        addMoreRantsToFeed(moreFeed.rants)
         
         let groups = Dictionary(grouping: dataStore.rantsInFeed, by: \.id)
-        let hasDuplicates = groups.first { $1.count > 1 } != nil
-        if hasDuplicates {
-            dlog("Found duplicates in rant feed!") //TODO: Still getting duplicates. I don't know how to prevent it.
+        let duplicates = groups.filter { $1.count > 1 }
+        if !duplicates.isEmpty {
+            dlog("Found duplicates in rant feed: \(duplicates.count)")
         }
     }
     
@@ -42,5 +45,18 @@ final class DataLoader {
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
+    }
+    
+    private func addMoreRantsToFeed(_ rants: [RantInFeed]) {
+        for rant in rants {
+            // According to OmerFlame, duplicates are normal and should be filtered out by the app.
+            let isDuplicate = dataStore.rantsInFeed.first(where: { $0.id == rant.id }) != nil
+            if isDuplicate {
+                dataStore.duplicatesInFeed += 1
+                dlog("duplicates: \(dataStore.duplicatesInFeed)")
+            } else {
+                dataStore.rantsInFeed.append(rant)
+            }
+        }
     }
 }

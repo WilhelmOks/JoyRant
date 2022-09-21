@@ -38,6 +38,7 @@
 		EDE2288C28CE15040025EDB1 /* RantSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288B28CE15040025EDB1 /* RantSummaryViewModel.swift */; };
 		EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */; };
 		EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */; };
+		EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		EDE2288B28CE15040025EDB1 /* RantSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantSummaryViewModel.swift; sourceTree = "<group>"; };
 		EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsView.swift; sourceTree = "<group>"; };
 		EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsViewModel.swift; sourceTree = "<group>"; };
+		EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,8 @@
 			children = (
 				ED59CEC928BD05D00007B698 /* DevRantView.swift */,
 				ED59CECB28BD05E80007B698 /* DevRantViewModel.swift */,
+				ED59CED028BD0B110007B698 /* RantSummaryView.swift */,
+				EDE2288B28CE15040025EDB1 /* RantSummaryViewModel.swift */,
 			);
 			path = DevRant;
 			sourceTree = "<group>";
@@ -186,8 +190,6 @@
 		ED59CECF28BD0A8D0007B698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ED59CED028BD0B110007B698 /* RantSummaryView.swift */,
-				EDE2288B28CE15040025EDB1 /* RantSummaryViewModel.swift */,
 				ED59CED628BE71800007B698 /* VoteControl.swift */,
 				ED1B307628CCE1E3001A6A73 /* PostedImage.swift */,
 				ED1B307828CCE921001A6A73 /* UserPanel.swift */,
@@ -225,6 +227,7 @@
 			children = (
 				EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */,
 				EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */,
+				EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */,
 			);
 			path = RantDetails;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,
 				ED59CED128BD0B110007B698 /* RantSummaryView.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
+				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,
 				ED59CEDF28C789B30007B698 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftRant
 
 struct RantDetailsView: View {
     @StateObject var viewModel: RantDetailsViewModel
@@ -17,14 +18,28 @@ struct RantDetailsView: View {
     
     @ViewBuilder private func content() -> some View {
         if let rant = viewModel.rant, !viewModel.isLoading {
-            VStack {
-                Text("TODO: Rant Details")
-                
-                Text(rant.text)
+            ScrollView {
+                LazyVStack {
+                    rantContent(rant)
+                    
+                    ForEach(viewModel.comments, id: \.id) { comment in
+                        VStack(spacing: 0) {
+                            Divider()
+                            
+                            RantCommentView(comment: comment)
+                        }
+                    }
+                }
             }
-            .padding()
         } else {
             ProgressView()
+        }
+    }
+    
+    @ViewBuilder private func rantContent(_ rant: Rant) -> some View {
+        VStack(spacing: 20) {
+            Text("TODO: Rant Details")
+            Text(rant.text)
         }
     }
 }

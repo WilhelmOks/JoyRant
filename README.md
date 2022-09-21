@@ -6,13 +6,19 @@ An unofficial devRant iOS client.
 
 ✅ Log in and log out
 
-🚧 Rant feed
+🚧 Rant feed (Algo/Recent)
 
 🚧 Upvoting/Downvoting in feed
 
-⏹️ Show Rant with comments
+🚧 Show Rant with comments
 
 ⏹️ Upvoting/Downvoting in rant and comments 
+
+⏹️ Handling embedded links to other rants and external websites
+
+⏹️ Showing images in zoomable fullscreen
+
+⏹️ Showing animated images (gifs?)
 
 ## Goals
 

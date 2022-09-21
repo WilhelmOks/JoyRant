@@ -16,7 +16,7 @@ My motivation for this this project is to have a native iOS devRant app that is 
 
 And I want wo build it in SwiftUI to improve my skills and because I think that SwiftUI is a fun and amazing UI framework.
 
-## Current state
+## Current state of development
 
 ✅ Log in and log out
 
@@ -38,7 +38,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ## Requirements
 
-Xcode 14.0 beta, Swift 5
+Xcode 14, Swift 5
 
 ## Dependencies
 

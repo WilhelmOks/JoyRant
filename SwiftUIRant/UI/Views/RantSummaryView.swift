@@ -49,6 +49,11 @@ struct RantSummaryView: View {
         }
         .alert($viewModel.alertMessage)
         .background(Color.primaryBackground)
+        .onTapGesture(count: 2) {
+            Task {
+                await viewModel.voteByDoubleTap()
+            }
+        }
         .onTapGesture {
             AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
         }

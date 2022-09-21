@@ -98,6 +98,17 @@ final class RantSummaryViewModel: ObservableObject {
         }
     }
     
+    @MainActor func voteByDoubleTap() async {
+        switch rant.voteState {
+        case .downvoted, .upvoted:
+            await performVote(voteState: .unvoted)
+        case .unvoted:
+            await performVote(voteState: .upvoted)
+        default:
+            break
+        }
+    }
+    
     @MainActor private func performVote(voteState: RantInFeed.VoteState) async {
         loadingVoteState = voteState
         do {

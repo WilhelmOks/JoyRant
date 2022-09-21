@@ -15,17 +15,17 @@ struct FeedRantView: View {
         VStack(alignment: .leading, spacing: 8) {
             VoteControl(
                 isHorizontal: true,
-                score: viewModel.voteScore,
-                isUpvoted: viewModel.showAsUpvoted,
-                isDownvoted: viewModel.showAsDownvoted,
+                score: viewModel.voteController.displayedScore,
+                isUpvoted: viewModel.voteController.showAsUpvoted,
+                isDownvoted: viewModel.voteController.showAsDownvoted,
                 upvoteAction: {
                     Task {
-                        await viewModel.voteUp()
+                        await viewModel.voteController.voteUp()
                     }
                 },
                 downvoteAction: {
                     Task {
-                        await viewModel.voteDown()
+                        await viewModel.voteController.voteDown()
                     }
                 }
             )
@@ -49,9 +49,12 @@ struct FeedRantView: View {
         }
         .alert($viewModel.alertMessage)
         .background(Color.primaryBackground)
+        .onReceive(viewModel.voteController.objectWillChange) {
+            viewModel.objectWillChange.send()
+        }
         .onTapGesture(count: 2) {
             Task {
-                await viewModel.voteByDoubleTap()
+                await viewModel.voteController.voteByContext()
             }
         }
         .onTapGesture {

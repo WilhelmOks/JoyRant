@@ -8,116 +8,31 @@
 import Foundation
 import SwiftRant
 
-final class FeedRantViewModel: ObservableObject {
+@MainActor final class FeedRantViewModel: ObservableObject {
     @Published var rant: RantInFeed
     
-    @Published var loadingVoteState: RantInFeed.VoteState?
     @Published var alertMessage: AlertMessage = .none()
+    
+    @Published var voteController: VoteController!
     
     init(rant: RantInFeed) {
         self.rant = rant
-    }
-    
-    var showAsUpvoted: Bool {
-        if let loadingVoteState {
-            return loadingVoteState == .upvoted
-        } else {
-            return rant.voteState == .upvoted
-        }
-    }
-    
-    var showAsDownvoted: Bool {
-        if let loadingVoteState {
-            return loadingVoteState == .downvoted
-        } else {
-            return rant.voteState == .downvoted
-        }
-    }
-    
-    var voteScore: Int {
-        var score = rant.score
         
-        /*
-        switch (loadingVoteState, rant.voteState) {
-        case (.upvoted, .unvoted):
-            score += 1
-        case (.upvoted, .downvoted):
-            score += 2
-        case (.downvoted, .unvoted):
-            score -= 1
-        case (.downvoted, .upvoted):
-            score -= 2
-        case (.unvoted, .upvoted):
-            score -= 1
-        case (.unvoted, .downvoted):
-            score += 1
-        default:
-            break
-        }
-        */
-        
-        switch (loadingVoteState, rant.voteState) {
-        case (.upvoted, .unvoted):
-            score += 1
-        case (.upvoted, .downvoted):
-            score += 1
-        case (.downvoted, .unvoted):
-            score -= 0
-        case (.downvoted, .upvoted):
-            score -= 1
-        case (.unvoted, .upvoted):
-            score -= 1
-        case (.unvoted, .downvoted):
-            score += 0
-        default:
-            break
-        }
-        
-        return score
-    }
-    
-    @MainActor func voteUp() async {
-        switch rant.voteState {
-        case .unvoted, .downvoted:
-            await performVote(voteState: .upvoted)
-        case .upvoted:
-            await performVote(voteState: .unvoted)
-        default:
-            break
-        }
-    }
-    
-    @MainActor func voteDown() async {
-        switch rant.voteState {
-        case .unvoted, .upvoted:
-            await performVote(voteState: .downvoted)
-        case .downvoted:
-            await performVote(voteState: .unvoted)
-        default:
-            break
-        }
-    }
-    
-    @MainActor func voteByDoubleTap() async {
-        switch rant.voteState {
-        case .downvoted, .upvoted:
-            await performVote(voteState: .unvoted)
-        case .unvoted:
-            await performVote(voteState: .upvoted)
-        default:
-            break
-        }
-    }
-    
-    @MainActor private func performVote(voteState: RantInFeed.VoteState) async {
-        loadingVoteState = voteState
-        do {
-            let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: voteState)
-            applyChangedData(changedRant: changedRant)
-        } catch {
-            alertMessage = .presentedError(error)
-        }
-        loadingVoteState = nil
+        voteController = .init(
+            voteState: { [weak self] in
+                self?.rant.voteState ?? .unvoted
+            },
+            score: { [weak self] in
+                self?.rant.score ?? 0
+            },
+            voteAction: { [weak self] voteState in
+                let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: voteState)
+                self?.applyChangedData(changedRant: changedRant)
+            },
+            handleError: { [weak self] error in
+                self?.alertMessage = .presentedError(error)
+            }
+        )
     }
     
     private func applyChangedData(changedRant: Rant) {

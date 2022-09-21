@@ -40,6 +40,7 @@
 		EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */; };
 		EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */; };
 		EDE2289528DB33660025EDB1 /* RantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289428DB33660025EDB1 /* RantView.swift */; };
+		EDE2289728DB3F600025EDB1 /* VoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289628DB3F600025EDB1 /* VoteController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsViewModel.swift; sourceTree = "<group>"; };
 		EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentView.swift; sourceTree = "<group>"; };
 		EDE2289428DB33660025EDB1 /* RantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantView.swift; sourceTree = "<group>"; };
+		EDE2289628DB3F600025EDB1 /* VoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				ED59CEDB28C788010007B698 /* KeyPathModifiedCopyable.swift */,
+				EDE2289628DB3F600025EDB1 /* VoteController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */,
 				ED59CECC28BD05E80007B698 /* FeedViewModel.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,
+				EDE2289728DB3F600025EDB1 /* VoteController.swift in Sources */,
 				EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */,
 				ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */,
 				ED59CEDC28C788010007B698 /* KeyPathModifiedCopyable.swift in Sources */,

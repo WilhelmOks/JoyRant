@@ -17,7 +17,7 @@ final class DataLoader {
     
     @MainActor func loadFeed() async throws {
         let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
-        dataStore.currentFeedSession = feed.set
+        //dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
@@ -26,7 +26,7 @@ final class DataLoader {
     @MainActor func loadMoreFeed() async throws {
         let rantsToSkip = dataStore.rantsInFeed.count// + dataStore.duplicatesInFeed
         let moreFeed = try await Networking.shared.rants(skip: rantsToSkip, session: dataStore.currentFeedSession)
-        dataStore.currentFeedSession = moreFeed.set
+        //dataStore.currentFeedSession = moreFeed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         //dataStore.rantsInFeed += moreFeed.rants
         addMoreRantsToFeed(moreFeed.rants)
@@ -41,7 +41,7 @@ final class DataLoader {
     @MainActor func reloadFeed() async throws {
         dataStore.clearFeed()
         let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
-        dataStore.currentFeedSession = feed.set
+        //dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = feed.rants
         dataStore.isFeedLoaded = true

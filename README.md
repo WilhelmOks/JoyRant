@@ -42,13 +42,13 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ### to build
 
-Xcode 14
-Swift 5
+* Xcode 14
+* Swift 5
 
 ### to run
 
-iOS 16
-macOS 13 (Ventura)
+* iOS 16
+* macOS 13 (Ventura)
 
 ## Dependencies
 

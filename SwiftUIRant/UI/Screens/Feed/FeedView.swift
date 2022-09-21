@@ -1,5 +1,5 @@
 //
-//  DevRantView.swift
+//  FeedView.swift
 //  SwiftUIRant
 //
 //  Created by Wilhelm Oks on 29.08.22.
@@ -8,9 +8,9 @@
 import SwiftUI
 import SwiftRant
 
-struct DevRantView: View {
+struct FeedView: View {
     @ObservedObject private var dataStore = DataStore.shared
-    @StateObject private var viewModel = DevRantViewModel()
+    @StateObject private var viewModel = FeedViewModel()
     
     var body: some View {
         content()
@@ -79,7 +79,7 @@ struct DevRantView: View {
     
     @ViewBuilder func row(rant: RantInFeed) -> some View {
         VStack(spacing: 0) {
-            RantSummaryView(viewModel: .init(rant: rant))
+            FeedRantView(viewModel: .init(rant: rant))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(10)
             
@@ -88,10 +88,10 @@ struct DevRantView: View {
     }
 }
 
-struct DevRantView_Previews: PreviewProvider {
+struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            DevRantView()
+            FeedView()
         }
     }
 }

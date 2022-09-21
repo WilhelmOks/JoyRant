@@ -1,5 +1,5 @@
 //
-//  RantSummaryViewModel.swift
+//  FeedRantViewModel.swift
 //  SwiftUIRant
 //
 //  Created by Wilhelm Oks on 11.09.22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftRant
 
-final class RantSummaryViewModel: ObservableObject {
+final class FeedRantViewModel: ObservableObject {
     @Published var rant: RantInFeed
     
     @Published var loadingVoteState: RantInFeed.VoteState?

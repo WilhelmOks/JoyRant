@@ -12,7 +12,7 @@ struct InternalView: View {
     
     var body: some View {
         NavigationStack(path: $appState.navigationPath) {
-            DevRantView()
+            FeedView()
         }
     }
 }

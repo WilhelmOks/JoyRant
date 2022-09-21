@@ -1,5 +1,5 @@
 //
-//  RantSummaryView.swift
+//  FeedRantView.swift
 //  SwiftUIRant
 //
 //  Created by Wilhelm Oks on 29.08.22.
@@ -8,8 +8,8 @@
 import SwiftUI
 import SwiftRant
 
-struct RantSummaryView: View {
-    @StateObject var viewModel: RantSummaryViewModel
+struct FeedRantView: View {
+    @StateObject var viewModel: FeedRantViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -87,9 +87,9 @@ struct RantSummaryView: View {
     }
 }
 
-struct RantSummaryView_Previews: PreviewProvider {
+struct FeedRantView_Previews: PreviewProvider {
     static var previews: some View {
-        RantSummaryView(viewModel: .init(rant: .mocked()))
+        FeedRantView(viewModel: .init(rant: .mocked()))
             .previewLayout(.sizeThatFits)
             .eachColorScheme()
             .padding()

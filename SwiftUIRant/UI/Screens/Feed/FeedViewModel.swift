@@ -1,5 +1,5 @@
 //
-//  DevRantViewModel.swift
+//  FeedViewModel.swift
 //  SwiftUIRant
 //
 //  Created by Wilhelm Oks on 29.08.22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DevRantViewModel: ObservableObject {
+class FeedViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isLoadingMore = false
     @Published var alertMessage: AlertMessage = .none()

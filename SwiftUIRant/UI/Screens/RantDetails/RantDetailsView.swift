@@ -20,7 +20,7 @@ struct RantDetailsView: View {
         if let rant = viewModel.rant, !viewModel.isLoading {
             ScrollView {
                 LazyVStack {
-                    rantContent(rant)
+                    RantView(rant: rant)
                     
                     ForEach(viewModel.comments, id: \.id) { comment in
                         VStack(spacing: 0) {
@@ -33,13 +33,6 @@ struct RantDetailsView: View {
             }
         } else {
             ProgressView()
-        }
-    }
-    
-    @ViewBuilder private func rantContent(_ rant: Rant) -> some View {
-        VStack(spacing: 20) {
-            Text("TODO: Rant Details")
-            Text(rant.text)
         }
     }
 }

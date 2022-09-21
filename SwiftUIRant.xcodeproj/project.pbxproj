@@ -39,6 +39,7 @@
 		EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */; };
 		EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */; };
 		EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */; };
+		EDE2289528DB33660025EDB1 /* RantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289428DB33660025EDB1 /* RantView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsView.swift; sourceTree = "<group>"; };
 		EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsViewModel.swift; sourceTree = "<group>"; };
 		EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentView.swift; sourceTree = "<group>"; };
+		EDE2289428DB33660025EDB1 /* RantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 			children = (
 				EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */,
 				EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */,
+				EDE2289428DB33660025EDB1 /* RantView.swift */,
 				EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */,
 			);
 			path = RantDetails;
@@ -319,6 +322,7 @@
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
 				ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */,
 				ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */,
+				EDE2289528DB33660025EDB1 /* RantView.swift in Sources */,
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
 				EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,

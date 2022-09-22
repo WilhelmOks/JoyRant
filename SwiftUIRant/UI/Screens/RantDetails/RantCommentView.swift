@@ -28,7 +28,7 @@ struct RantCommentView_Previews: PreviewProvider {
                 body: "Lorem Ipsum",
                 score: 56,
                 createdTime: 0,
-                voteState: 0, //TODO: enum
+                voteState: .unvoted,
                 links: nil, //TODO: test links
                 userID: 1,
                 username: "Saul Goodman",

@@ -28,7 +28,7 @@ struct RantView_Previews: PreviewProvider {
                 attachedImage: nil, //TODO: test
                 commentCount: 2,
                 tags: ["rant", "js suxx"],
-                voteState: 0, //TODO: enum
+                voteState: .unvoted,
                 isEdited: false, //TODO: test
                 link: nil, //TODO: test
                 collabTypeLong: nil, //TODO: test

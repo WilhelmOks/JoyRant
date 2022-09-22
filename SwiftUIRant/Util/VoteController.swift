@@ -9,13 +9,13 @@ import Foundation
 import SwiftRant
 
 @MainActor final class VoteController: ObservableObject {
-    @Published var loadingVoteState: RantInFeed.VoteState?
-    let voteState: () -> RantInFeed.VoteState
+    @Published var loadingVoteState: VoteState?
+    let voteState: () -> VoteState
     let score: () -> Int
-    let voteAction: (RantInFeed.VoteState) async throws -> ()
+    let voteAction: (VoteState) async throws -> ()
     let handleError: (Error) -> ()
     
-    init(loadingVoteState: RantInFeed.VoteState? = nil, voteState: @escaping () -> RantInFeed.VoteState, score: @escaping () -> Int, voteAction: @escaping (RantInFeed.VoteState) async throws -> (), handleError: @escaping (Error) -> ()) {
+    init(loadingVoteState: VoteState? = nil, voteState: @escaping () -> VoteState, score: @escaping () -> Int, voteAction: @escaping (VoteState) async throws -> (), handleError: @escaping (Error) -> ()) {
         self.loadingVoteState = loadingVoteState
         self.voteState = voteState
         self.score = score
@@ -114,7 +114,7 @@ import SwiftRant
         }
     }
     
-    private func performVote(voteState: RantInFeed.VoteState) async {
+    private func performVote(voteState: VoteState) async {
         loadingVoteState = voteState
         do {
             try await voteAction(voteState)

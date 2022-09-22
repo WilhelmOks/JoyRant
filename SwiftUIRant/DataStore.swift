@@ -30,7 +30,7 @@ final class DataStore: ObservableObject {
         duplicatesInFeed = 0
     }
     
-    func update(rantInFeedId rantId: Int, voteState: RantInFeed.VoteState, score: Int) {
+    func update(rantInFeedId rantId: Int, voteState: VoteState, score: Int) {
         if let index = rantsInFeed.firstIndex(where: { $0.id == rantId }) {
             rantsInFeed[index].voteState = voteState
             rantsInFeed[index].score = score

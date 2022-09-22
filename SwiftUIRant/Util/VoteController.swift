@@ -15,6 +15,13 @@ import SwiftRant
     let voteAction: (VoteState) async throws -> ()
     let handleError: (Error) -> ()
     
+    static let empty: VoteController = .init(
+        voteState: { .unvotable },
+        score: { 0 },
+        voteAction: { _ in },
+        handleError: { _ in }
+    )
+    
     init(loadingVoteState: VoteState? = nil, voteState: @escaping () -> VoteState, score: @escaping () -> Int, voteAction: @escaping (VoteState) async throws -> (), handleError: @escaping (Error) -> ()) {
         self.loadingVoteState = loadingVoteState
         self.voteState = voteState

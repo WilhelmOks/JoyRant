@@ -20,7 +20,11 @@ struct RantDetailsView: View {
         if let rant = viewModel.rant, !viewModel.isLoading {
             ScrollView {
                 LazyVStack {
-                    RantView(rant: rant)
+                    RantView(
+                        viewModel: .init(
+                            rant: rant
+                        )
+                    )
                     
                     ForEach(viewModel.comments, id: \.id) { comment in
                         VStack(spacing: 0) {
@@ -39,6 +43,10 @@ struct RantDetailsView: View {
 
 struct RantDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        RantDetailsView(viewModel: .init(rantId: 1))
+        RantDetailsView(
+            viewModel: .init(
+                rantId: 1
+            )
+        )
     }
 }

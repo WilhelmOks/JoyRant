@@ -42,9 +42,16 @@ struct FeedView: View {
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {
                 case .rantDetails(let rantId):
-                    RantDetailsView(viewModel: .init(rantId: rantId))
+                    RantDetailsView(
+                        viewModel: .init(
+                            rantId: rantId
+                        )
+                    )
                 }
             }
+            /*.onReceive(notification: .init(rawValue: "ShouldUpdateFeed")) { _ in
+                dataStore.objectWillChange.send()
+            }*/
     }
     
     @ViewBuilder func content() -> some View {

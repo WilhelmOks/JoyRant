@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftRant
 
 struct FeedRantView: View {
+    //@ObservedObject private var dataStore = DataStore.shared
     @StateObject var viewModel: FeedRantViewModel
     
     var body: some View {
@@ -58,6 +59,7 @@ struct FeedRantView: View {
             }
         }
         .onTapGesture {
+            dlog("### clicked feed with id: \(viewModel.rant.id)")
             AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
         }
     }

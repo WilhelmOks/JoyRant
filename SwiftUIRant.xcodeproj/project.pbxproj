@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
 		ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307628CCE1E3001A6A73 /* PostedImage.swift */; };
 		ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307828CCE921001A6A73 /* UserPanel.swift */; };
 		ED1B307B28CE0451001A6A73 /* View+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307A28CE0451001A6A73 /* View+Preview.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED1B307628CCE1E3001A6A73 /* PostedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedImage.swift; sourceTree = "<group>"; };
 		ED1B307828CCE921001A6A73 /* UserPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanel.swift; sourceTree = "<group>"; };
 		ED1B307A28CE0451001A6A73 /* View+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Preview.swift"; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */,
 				EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */,
 				EDE2289428DB33660025EDB1 /* RantView.swift */,
+				ED00E50A28DCC642000A01DC /* RantViewModel.swift */,
 				EDE2289228DB0FD90025EDB1 /* RantCommentView.swift */,
 			);
 			path = RantDetails;
@@ -329,6 +332,7 @@
 				EDE2289528DB33660025EDB1 /* RantView.swift in Sources */,
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
 				EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */,
+				ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,
 				ED59CEC428BCE0860007B698 /* AppState.swift in Sources */,
 				ED59CED728BE71800007B698 /* VoteControl.swift in Sources */,

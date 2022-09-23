@@ -10,21 +10,6 @@ import SwiftRant
 
 struct RantView: View {
     @StateObject var viewModel: RantViewModel
-    //@State private var alertMessage: AlertMessage = .none()
-    
-    /*init(rant: Rant) {
-        self.rant = rant
-        self.voteController = VoteController(
-            voteState: { rant.voteState },
-            score: { rant.score },
-            voteAction: { voteState in
-                //TODO: ...
-            },
-            handleError: { error in
-                alertMessage = .presentedError(error)
-            }
-        )
-    }*/
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {

@@ -39,12 +39,7 @@ final class DataStore: ObservableObject {
             rantsInFeed[index].voteState = voteState
             rantsInFeed[index].score = score
             
-            //rantsInFeed.append(.mocked())
-            //rantsInFeed.removeLast()
-            
-            //self.objectWillChange.send()
-            
-            //NotificationCenter.default.post(name: .init(rawValue: "ShouldUpdateFeed"), object: nil)
+            BroadcastEvent.shouldUpdateRantInFeed(rantId: rantId).send()
         }
     }
 }

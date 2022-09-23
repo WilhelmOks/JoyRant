@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftRant
 
 struct FeedRantView: View {
-    //@ObservedObject private var dataStore = DataStore.shared
     @StateObject var viewModel: FeedRantViewModel
     
     var body: some View {
@@ -53,13 +52,19 @@ struct FeedRantView: View {
         .onReceive(viewModel.voteController.objectWillChange) {
             viewModel.objectWillChange.send()
         }
+        .onReceive(
+            broadcastEvent: .shouldUpdateRantInFeed(
+                rantId: viewModel.rant.id
+            ), perform: { _ in
+                viewModel.updateRant()
+            }
+        )
         .onTapGesture(count: 2) {
             Task {
                 await viewModel.voteController.voteByContext()
             }
         }
         .onTapGesture {
-            dlog("### clicked feed with id: \(viewModel.rant.id)")
             AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
         }
     }
@@ -79,7 +84,7 @@ struct FeedRantView: View {
             .foregroundColor(.secondaryForeground)
     }
     
-    /// Contrary to the original counter, this one will also show 0 comments.
+    /// Contrary to the original counter, this one will also be visible when there are 0 comments.
     @ViewBuilder private func commentsCounter() -> some View {
         HStack(spacing: 3) {
             Image(systemName: "bubble.right")

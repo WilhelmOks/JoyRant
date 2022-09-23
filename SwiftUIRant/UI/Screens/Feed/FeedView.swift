@@ -49,9 +49,6 @@ struct FeedView: View {
                     )
                 }
             }
-            /*.onReceive(notification: .init(rawValue: "ShouldUpdateFeed")) { _ in
-                dataStore.objectWillChange.send()
-            }*/
     }
     
     @ViewBuilder func content() -> some View {

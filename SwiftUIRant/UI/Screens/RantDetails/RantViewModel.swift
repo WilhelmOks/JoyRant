@@ -36,11 +36,9 @@ import SwiftRant
     }
     
     private func applyChangedData(changedRant: Rant) {
-        dlog("### updating rant with id: \(rant.id)")
         let changedVoteState = changedRant.voteState
         rant.voteState = changedVoteState
         rant.score = changedRant.score
         DataStore.shared.update(rantInFeedId: rant.id, voteState: changedVoteState, score: changedRant.score)
-        //TODO: find out why feed is not updating
     }
 }

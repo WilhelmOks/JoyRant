@@ -35,6 +35,11 @@ import SwiftRant
         )
     }
     
+    func updateRant() {
+        guard let changedRant = DataStore.shared.rantInFeed(byId: rant.id) else { return }
+        self.rant = changedRant
+    }
+    
     private func applyChangedData(changedRant: Rant) {
         let changedVoteState = changedRant.voteState
         rant.voteState = changedVoteState

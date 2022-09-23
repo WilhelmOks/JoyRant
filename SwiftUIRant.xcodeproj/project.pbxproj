@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
+		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
 		ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307628CCE1E3001A6A73 /* PostedImage.swift */; };
 		ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307828CCE921001A6A73 /* UserPanel.swift */; };
 		ED1B307B28CE0451001A6A73 /* View+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307A28CE0451001A6A73 /* View+Preview.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
+		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
 		ED1B307628CCE1E3001A6A73 /* PostedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedImage.swift; sourceTree = "<group>"; };
 		ED1B307828CCE921001A6A73 /* UserPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanel.swift; sourceTree = "<group>"; };
 		ED1B307A28CE0451001A6A73 /* View+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Preview.swift"; sourceTree = "<group>"; };
@@ -120,7 +122,6 @@
 				ED2C9B7E28B69892008BF314 /* Logging.swift */,
 				ED59CED228BD0EC60007B698 /* DataStore.swift */,
 				ED59CED428BD103C0007B698 /* DataLoader.swift */,
-				ED59CED828C7861E0007B698 /* UserSettings.swift */,
 				ED2C9B6928B679D0008BF314 /* Assets.xcassets */,
 				ED2C9B6B28B679D0008BF314 /* SwiftUIRant.entitlements */,
 				ED59CEDA28C787D80007B698 /* Util */,
@@ -206,7 +207,9 @@
 		ED59CEDA28C787D80007B698 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */,
 				ED59CEDB28C788010007B698 /* KeyPathModifiedCopyable.swift */,
+				ED59CED828C7861E0007B698 /* UserSettings.swift */,
 				EDE2289628DB3F600025EDB1 /* VoteController.swift */,
 			);
 			path = Util;
@@ -335,6 +338,7 @@
 				ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,
 				ED59CEC428BCE0860007B698 /* AppState.swift in Sources */,
+				ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */,
 				ED59CED728BE71800007B698 /* VoteControl.swift in Sources */,
 				ED2C9B7B28B67C53008BF314 /* LoginView.swift in Sources */,
 				ED1B307B28CE0451001A6A73 /* View+Preview.swift in Sources */,

@@ -1,6 +1,6 @@
 # SwiftUIRant
 
-An unofficial devRant iOS client.
+An unofficial devRant iOS client (that doesn't crash).
 
 ## Goals
 

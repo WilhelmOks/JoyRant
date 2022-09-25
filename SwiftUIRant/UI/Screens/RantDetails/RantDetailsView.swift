@@ -30,7 +30,7 @@ struct RantDetailsView: View {
                         VStack(spacing: 0) {
                             Divider()
                             
-                            RantCommentView(comment: comment)
+                            RantCommentView(viewModel: .init(comment: comment))
                         }
                     }
                 }

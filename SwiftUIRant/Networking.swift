@@ -54,6 +54,10 @@ struct Networking {
     func vote(rantID: Int, voteState: VoteState) async throws -> Rant {
         try await SwiftRant.shared.voteOnRant(try token(), rantID: rantID, vote: voteState).get()
         
-        //TODO: check why downvoting doesn't decrement the score
+        //TODO: known issue of SwiftRant: downvoting doesn't decrement the score
+    }
+    
+    func vote(commentID: Int, voteState: VoteState) async throws -> Comment {
+        try await SwiftRant.shared.voteOnComment(try token(), commentID: commentID, vote: voteState).get()
     }
 }

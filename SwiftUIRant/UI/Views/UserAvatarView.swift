@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 import SwiftRant
 
 struct UserAvatarView: View {
@@ -21,7 +22,7 @@ struct UserAvatarView: View {
     
     @ViewBuilder private func content() -> some View {
         if let url = avatar.avatarImage.flatMap({ URL(string: "https://avatars.devrant.com/\($0)") }) {            
-            AsyncImage(url: url) { phase in
+            CachedAsyncImage(url: url, urlCache: .userAvatarCache) { phase in
                 switch phase {
                 case .empty:
                     ZStack {

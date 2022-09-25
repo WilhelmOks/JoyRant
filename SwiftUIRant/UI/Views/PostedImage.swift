@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 import SwiftRant
 
 struct PostedImage: View {
     let image: Rant.AttachedImage
     
     var body: some View {
-        AsyncImage(url: imageURL()) { phase in
+        CachedAsyncImage(url: imageURL(), urlCache: .postedImageCache) { phase in
             switch phase {
             case .empty:
                 ZStack {

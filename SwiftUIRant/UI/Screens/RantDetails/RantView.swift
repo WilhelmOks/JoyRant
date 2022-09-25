@@ -31,6 +31,8 @@ struct RantView: View {
             )
             .disabled(viewModel.rant.voteState == .unvotable)
             
+            UserPanel(avatar: viewModel.rant.userAvatar)
+            
             Text(viewModel.rant.text)
                 .font(baseSize: 15)
                 .frame(maxWidth: .infinity, alignment: .leading)

@@ -10,6 +10,7 @@
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
 		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
 		ED14DE5928E07A2F005FCC9A /* RantCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */; };
+		ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */; };
 		ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307628CCE1E3001A6A73 /* PostedImage.swift */; };
 		ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307828CCE921001A6A73 /* UserPanel.swift */; };
 		ED1B307B28CE0451001A6A73 /* View+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307A28CE0451001A6A73 /* View+Preview.swift */; };
@@ -50,6 +51,7 @@
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
 		ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentViewModel.swift; sourceTree = "<group>"; };
+		ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
 		ED1B307628CCE1E3001A6A73 /* PostedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedImage.swift; sourceTree = "<group>"; };
 		ED1B307828CCE921001A6A73 /* UserPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanel.swift; sourceTree = "<group>"; };
 		ED1B307A28CE0451001A6A73 /* View+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Preview.swift"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				ED59CED628BE71800007B698 /* VoteControl.swift */,
 				ED1B307628CCE1E3001A6A73 /* PostedImage.swift */,
 				ED1B307828CCE921001A6A73 /* UserPanel.swift */,
+				ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				ED59CECA28BD05D00007B698 /* FeedView.swift in Sources */,
 				EDE2288C28CE15040025EDB1 /* FeedRantViewModel.swift in Sources */,
 				ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */,
+				ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,

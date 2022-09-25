@@ -12,7 +12,7 @@ struct UserPanel: View {
     let avatar: Rant.UserAvatar
     
     var body: some View {
-        Text("User Panel TODO")
+        UserAvatarView(avatar: avatar)
     }
 }
 

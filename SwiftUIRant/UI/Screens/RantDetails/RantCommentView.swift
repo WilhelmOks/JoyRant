@@ -31,6 +31,12 @@ struct RantCommentView: View {
             )
             .disabled(viewModel.comment.voteState == .unvotable)
             
+            UserPanel(
+                avatar: viewModel.comment.userAvatar,
+                name: viewModel.comment.username,
+                score: viewModel.comment.userScore
+            )
+            
             Text(viewModel.comment.body)
                 .font(baseSize: 15)
                 .frame(maxWidth: .infinity, alignment: .leading)

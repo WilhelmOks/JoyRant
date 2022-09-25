@@ -13,6 +13,7 @@ struct RantDetailsView: View {
     
     var body: some View {
         content()
+            .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
     }
     

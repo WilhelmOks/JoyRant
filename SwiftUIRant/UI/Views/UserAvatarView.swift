@@ -17,7 +17,7 @@ struct UserAvatarView: View {
     var body: some View {
         content()
             .clipShape(Circle())
-            .frame(width: 46, height: 46)
+            .frame(width: 44, height: 44)
     }
     
     @ViewBuilder private func content() -> some View {

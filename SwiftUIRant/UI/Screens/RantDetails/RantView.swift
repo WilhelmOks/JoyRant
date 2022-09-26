@@ -11,6 +11,8 @@ import SwiftRant
 struct RantView: View {
     @StateObject var viewModel: RantViewModel
     
+    //TODO: double tap to vote
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             VoteControl(

@@ -12,6 +12,7 @@ final class RantDetailsViewModel: ObservableObject {
     let rantId: Int
     
     @Published var isLoading = false
+    @Published var isReloading = false
     @Published var alertMessage: AlertMessage = .none()
     
     @Published var rant: Rant?
@@ -25,9 +26,7 @@ final class RantDetailsViewModel: ObservableObject {
         }
     }
     
-    @MainActor func load() async {
-        isLoading = true
-        
+    @MainActor private func performLoad() async {
         do {
             let response = try await Networking.shared.getRant(id: rantId)
             rant = response.0
@@ -35,7 +34,17 @@ final class RantDetailsViewModel: ObservableObject {
         } catch {
             alertMessage = .presentedError(error)
         }
-        
+    }
+    
+    @MainActor func load() async {
+        isLoading = true
+        await performLoad()
         isLoading = false
+    }
+    
+    @MainActor func reload() async {
+        isReloading = true
+        await performLoad()
+        isReloading = false
     }
 }

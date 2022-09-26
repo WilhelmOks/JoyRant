@@ -10,11 +10,14 @@ import SwiftRant
 
 struct RantDetailsView: View {
     @StateObject var viewModel: RantDetailsViewModel
-    
-    //TODO: reload button
-    
+        
     var body: some View {
         content()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    toolbarReloadButton()
+                }
+            }
             .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
     }
@@ -28,12 +31,19 @@ struct RantDetailsView: View {
                             rant: rant
                         )
                     )
+                    .id(rant.uuid)
                     
                     ForEach(viewModel.comments, id: \.id) { comment in
                         VStack(spacing: 0) {
                             Divider()
                             
-                            RantCommentView(viewModel: .init(comment: comment))
+                            RantCommentView(
+                                viewModel: .init(
+                                    comment: comment
+                                )
+                            )
+                            //.id(comment.uuid) //TODO: make uuid public
+                            .id("\(rant.uuid.uuidString)_ \(comment.id)")
                         }
                     }
                 }
@@ -41,6 +51,21 @@ struct RantDetailsView: View {
             }
         } else {
             ProgressView()
+        }
+    }
+    
+    @ViewBuilder private func toolbarReloadButton() -> some View {
+        if viewModel.isReloading {
+            ProgressView()
+        } else {
+            Button {
+                Task {
+                    await viewModel.reload()
+                }
+            } label: {
+                Image(systemName: "arrow.clockwise")
+            }
+            .disabled(viewModel.isLoading)
         }
     }
 }

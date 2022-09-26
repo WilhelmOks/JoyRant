@@ -41,9 +41,7 @@ import SwiftRant
     }
     
     private func applyChangedData(changedRant: Rant) {
-        let changedVoteState = changedRant.voteState
-        rant.voteState = changedVoteState
-        rant.score = changedRant.score
-        DataStore.shared.update(rantInFeedId: rant.id, voteState: changedVoteState, score: changedRant.score)
+        rant = rant.withData(fromRant: changedRant)
+        DataStore.shared.update(rantInFeed: changedRant)
     }
 }

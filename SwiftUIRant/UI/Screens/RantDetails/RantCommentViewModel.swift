@@ -36,8 +36,6 @@ import SwiftRant
     }
     
     private func applyChangedData(changedComment: Comment) {
-        let changedVoteState = changedComment.voteState
-        comment.voteState = changedVoteState
-        comment.score = changedComment.score
+        comment = changedComment
     }
 }

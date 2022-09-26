@@ -13,6 +13,7 @@
 		ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */; };
 		ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */; };
 		ED14DE6028E090E7005FCC9A /* URLCache_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5F28E090E7005FCC9A /* URLCache_Extension.swift */; };
+		ED14DE6228E20E83005FCC9A /* RantInFeed+Rant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE6128E20E83005FCC9A /* RantInFeed+Rant.swift */; };
 		ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307628CCE1E3001A6A73 /* PostedImage.swift */; };
 		ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307828CCE921001A6A73 /* UserPanel.swift */; };
 		ED1B307B28CE0451001A6A73 /* View+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307A28CE0451001A6A73 /* View+Preview.swift */; };
@@ -55,6 +56,7 @@
 		ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentViewModel.swift; sourceTree = "<group>"; };
 		ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
 		ED14DE5F28E090E7005FCC9A /* URLCache_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCache_Extension.swift; sourceTree = "<group>"; };
+		ED14DE6128E20E83005FCC9A /* RantInFeed+Rant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RantInFeed+Rant.swift"; sourceTree = "<group>"; };
 		ED1B307628CCE1E3001A6A73 /* PostedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedImage.swift; sourceTree = "<group>"; };
 		ED1B307828CCE921001A6A73 /* UserPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanel.swift; sourceTree = "<group>"; };
 		ED1B307A28CE0451001A6A73 /* View+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Preview.swift"; sourceTree = "<group>"; };
@@ -133,7 +135,7 @@
 				ED2C9B6928B679D0008BF314 /* Assets.xcassets */,
 				ED2C9B6B28B679D0008BF314 /* SwiftUIRant.entitlements */,
 				ED59CEDA28C787D80007B698 /* Util */,
-				ED59CEE628CB73F10007B698 /* Mocking */,
+				ED59CEE628CB73F10007B698 /* Model Extensions */,
 				ED2C9B7728B67BD2008BF314 /* UI */,
 				ED2C9B6C28B679D0008BF314 /* Preview Content */,
 			);
@@ -234,12 +236,13 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
-		ED59CEE628CB73F10007B698 /* Mocking */ = {
+		ED59CEE628CB73F10007B698 /* Model Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				ED59CEE728CB74180007B698 /* MockedModels.swift */,
+				ED14DE6128E20E83005FCC9A /* RantInFeed+Rant.swift */,
 			);
-			path = Mocking;
+			path = "Model Extensions";
 			sourceTree = "<group>";
 		};
 		EDE2288F28D5E5710025EDB1 /* RantDetails */ = {
@@ -363,6 +366,7 @@
 				ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */,
 				ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
+				ED14DE6228E20E83005FCC9A /* RantInFeed+Rant.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,
 				ED59CED128BD0B110007B698 /* FeedRantView.swift in Sources */,

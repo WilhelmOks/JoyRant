@@ -33,13 +33,11 @@ final class DataStore: ObservableObject {
     func rantInFeed(byId id: Int) -> RantInFeed? {
         rantsInFeed.first { $0.id == id }
     }
-    
-    func update(rantInFeedId rantId: Int, voteState: VoteState, score: Int) {
-        if let index = rantsInFeed.firstIndex(where: { $0.id == rantId }) {
-            rantsInFeed[index].voteState = voteState
-            rantsInFeed[index].score = score
-            
-            BroadcastEvent.shouldUpdateRantInFeed(rantId: rantId).send()
+
+    func update(rantInFeed rant: Rant) {
+        if let index = rantsInFeed.firstIndex(where: { $0.id == rant.id }) {
+            rantsInFeed[index] = rantsInFeed[index].withData(fromRant: rant)
+            BroadcastEvent.shouldUpdateRantInFeed(rantId: rant.id).send()
         }
     }
 }

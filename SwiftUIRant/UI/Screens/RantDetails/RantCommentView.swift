@@ -43,9 +43,9 @@ struct RantCommentView: View {
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
             
-            /*
             image()
             
+            /*
             HStack {
                 tags()
                 
@@ -54,11 +54,18 @@ struct RantCommentView: View {
                 commentsCounter()
             }*/
         }
-        .padding(10)
+        .padding(.top, 10)
+        .padding(.horizontal, 10)
         .alert($viewModel.alertMessage)
         .background(Color.primaryBackground)
         .onReceive(viewModel.voteController.objectWillChange) {
             viewModel.objectWillChange.send()
+        }
+    }
+    
+    @ViewBuilder private func image() -> some View {
+        if let image = viewModel.comment.attachedImage {
+            PostedImage(image: image)
         }
     }
 }

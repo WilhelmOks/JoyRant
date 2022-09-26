@@ -9,6 +9,8 @@ import SwiftUI
 import CachedAsyncImage
 import SwiftRant
 
+/// Shows the image of the user avatar in a circle shape.
+/// Contrary to the official app, the image is not green but gray if there is no avatar.
 struct UserAvatarView: View {
     let avatar: Rant.UserAvatar
     

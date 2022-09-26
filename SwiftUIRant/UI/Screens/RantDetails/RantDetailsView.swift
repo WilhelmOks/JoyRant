@@ -11,6 +11,8 @@ import SwiftRant
 struct RantDetailsView: View {
     @StateObject var viewModel: RantDetailsViewModel
     
+    //TODO: reload button
+    
     var body: some View {
         content()
             .navigationTitle("Rant")
@@ -35,6 +37,7 @@ struct RantDetailsView: View {
                         }
                     }
                 }
+                .padding(.bottom, 10)
             }
         } else {
             ProgressView()

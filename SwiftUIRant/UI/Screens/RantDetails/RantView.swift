@@ -43,7 +43,6 @@ struct RantView: View {
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
             
-            /*
             image()
             
             HStack {
@@ -52,14 +51,41 @@ struct RantView: View {
                 Spacer()
                 
                 commentsCounter()
-            }*/
+            }
         }
-        .padding(10)
+        .padding(.top, 10)
+        .padding(.horizontal, 10)
         .alert($viewModel.alertMessage)
         .background(Color.primaryBackground)
         .onReceive(viewModel.voteController.objectWillChange) {
             viewModel.objectWillChange.send()
         }
+    }
+    
+    @ViewBuilder private func image() -> some View {
+        if let image = viewModel.rant.attachedImage {
+            PostedImage(image: image)
+        }
+    }
+    
+    @ViewBuilder private func tags() -> some View {
+        let tags = viewModel.rant.tags.joined(separator: ", ")
+        
+        Text(tags)
+            .font(baseSize: 11, weight: .medium)
+            .multilineTextAlignment(.leading)
+            .foregroundColor(.secondaryForeground)
+    }
+    
+    @ViewBuilder private func commentsCounter() -> some View {
+        HStack(spacing: 3) {
+            Image(systemName: "bubble.right")
+                .font(baseSize: 11)
+            
+            Text("\(viewModel.rant.commentCount)")
+                .font(baseSize: 11, weight: .medium)
+        }
+        .foregroundColor(.secondaryForeground)
     }
 }
 

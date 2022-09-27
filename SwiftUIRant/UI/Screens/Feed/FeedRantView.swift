@@ -13,23 +13,31 @@ struct FeedRantView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            VoteControl(
-                isHorizontal: true,
-                score: viewModel.voteController.displayedScore,
-                isUpvoted: viewModel.voteController.showAsUpvoted,
-                isDownvoted: viewModel.voteController.showAsDownvoted,
-                upvoteAction: {
-                    Task {
-                        await viewModel.voteController.voteUp()
+            HStack {
+                VoteControl(
+                    isHorizontal: true,
+                    score: viewModel.voteController.displayedScore,
+                    isUpvoted: viewModel.voteController.showAsUpvoted,
+                    isDownvoted: viewModel.voteController.showAsDownvoted,
+                    upvoteAction: {
+                        Task {
+                            await viewModel.voteController.voteUp()
+                        }
+                    },
+                    downvoteAction: {
+                        Task {
+                            await viewModel.voteController.voteDown()
+                        }
                     }
-                },
-                downvoteAction: {
-                    Task {
-                        await viewModel.voteController.voteDown()
-                    }
-                }
-            )
-            .disabled(viewModel.rant.voteState == .unvotable)
+                )
+                .disabled(viewModel.rant.voteState == .unvotable)
+                
+                Spacer()
+                
+                Text(TimeFormatter.shared.string(fromSeconds: viewModel.rant.createdTime))
+                    .font(baseSize: 11, weight: .medium)
+                    .foregroundColor(.secondaryForeground)
+            }
             
             Text(viewModel.rant.text)
                 .font(baseSize: 15)

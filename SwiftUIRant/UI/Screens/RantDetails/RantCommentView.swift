@@ -15,29 +15,39 @@ struct RantCommentView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            VoteControl(
-                isHorizontal: true,
-                score: viewModel.voteController.displayedScore,
-                isUpvoted: viewModel.voteController.showAsUpvoted,
-                isDownvoted: viewModel.voteController.showAsDownvoted,
-                upvoteAction: {
-                    Task {
-                        await viewModel.voteController.voteUp()
-                    }
-                },
-                downvoteAction: {
-                    Task {
-                        await viewModel.voteController.voteDown()
-                    }
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 8) {
+                    VoteControl(
+                        isHorizontal: true,
+                        score: viewModel.voteController.displayedScore,
+                        isUpvoted: viewModel.voteController.showAsUpvoted,
+                        isDownvoted: viewModel.voteController.showAsDownvoted,
+                        upvoteAction: {
+                            Task {
+                                await viewModel.voteController.voteUp()
+                            }
+                        },
+                        downvoteAction: {
+                            Task {
+                                await viewModel.voteController.voteDown()
+                            }
+                        }
+                    )
+                    .disabled(viewModel.comment.voteState == .unvotable)
+                    
+                    UserPanel(
+                        avatar: viewModel.comment.userAvatar,
+                        name: viewModel.comment.username,
+                        score: viewModel.comment.userScore
+                    )
                 }
-            )
-            .disabled(viewModel.comment.voteState == .unvotable)
-            
-            UserPanel(
-                avatar: viewModel.comment.userAvatar,
-                name: viewModel.comment.username,
-                score: viewModel.comment.userScore
-            )
+                
+                Spacer()
+                
+                Text(TimeFormatter.shared.string(fromSeconds: viewModel.comment.createdTime))
+                    .font(baseSize: 11, weight: .medium)
+                    .foregroundColor(.secondaryForeground)
+            }
             
             Text(viewModel.comment.body)
                 .font(baseSize: 15)

@@ -15,29 +15,39 @@ struct RantView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            VoteControl(
-                isHorizontal: true,
-                score: viewModel.voteController.displayedScore,
-                isUpvoted: viewModel.voteController.showAsUpvoted,
-                isDownvoted: viewModel.voteController.showAsDownvoted,
-                upvoteAction: {
-                    Task {
-                        await viewModel.voteController.voteUp()
-                    }
-                },
-                downvoteAction: {
-                    Task {
-                        await viewModel.voteController.voteDown()
-                    }
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 8) {
+                    VoteControl(
+                        isHorizontal: true,
+                        score: viewModel.voteController.displayedScore,
+                        isUpvoted: viewModel.voteController.showAsUpvoted,
+                        isDownvoted: viewModel.voteController.showAsDownvoted,
+                        upvoteAction: {
+                            Task {
+                                await viewModel.voteController.voteUp()
+                            }
+                        },
+                        downvoteAction: {
+                            Task {
+                                await viewModel.voteController.voteDown()
+                            }
+                        }
+                    )
+                    .disabled(viewModel.rant.voteState == .unvotable)
+                    
+                    UserPanel(
+                        avatar: viewModel.rant.userAvatar,
+                        name: viewModel.rant.username,
+                        score: viewModel.rant.userScore
+                    )
                 }
-            )
-            .disabled(viewModel.rant.voteState == .unvotable)
-            
-            UserPanel(
-                avatar: viewModel.rant.userAvatar,
-                name: viewModel.rant.username,
-                score: viewModel.rant.userScore
-            )
+                
+                Spacer()
+                
+                Text(TimeFormatter.shared.string(fromSeconds: viewModel.rant.createdTime))
+                    .font(baseSize: 11, weight: .medium)
+                    .foregroundColor(.secondaryForeground)
+            }
             
             Text(viewModel.rant.text)
                 .font(baseSize: 15)
@@ -47,7 +57,7 @@ struct RantView: View {
             
             image()
             
-            HStack {
+            HStack(alignment: .bottom) {
                 tags()
                 
                 Spacer()
@@ -100,7 +110,8 @@ struct RantView_Previews: PreviewProvider {
                     id: 1,
                     text: "Lorem ipsum dolor sit a rant",
                     score: 83,
-                    createdTime: 0, //TODO: use something realistic
+                    //createdTime: Int(Date().addingTimeInterval(60 * 60 * 24 * -15).timeIntervalSince1970),
+                    createdTime: Int(Date().addingTimeInterval(-15).timeIntervalSince1970),
                     attachedImage: nil, //TODO: test
                     commentCount: 2,
                     tags: ["rant", "js suxx"],

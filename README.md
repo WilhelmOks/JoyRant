@@ -24,19 +24,35 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 🚧 Rant feed (Algo/Recent)
 
-🚧 Upvoting/Downvoting in feed
+⏹️ List top rants
 
-🚧 Show Rant with comments
+⏹️ Weekly rants
 
-⏹️ Upvoting/Downvoting in rant and comments
+✅ Upvoting/Downvoting in feed
 
-⏹️ Report rants
+✅ Show Rant with comments
+
+✅ Upvoting/Downvoting in rant and comments
+
+⏹️ Report rants/comments
+
+⏹️ Favorite/unfavorite rants
 
 ⏹️ Handling embedded links to other rants and external websites
 
 ⏹️ Showing images in zoomable fullscreen
 
 ⏹️ Showing animated images (gifs?)
+
+⏹️ Create rant
+
+⏹️ Create comment
+
+⏹️ Edit rant
+
+⏹️ Edit comment
+
+⏹️ Show notifications
 
 ## Requirements
 

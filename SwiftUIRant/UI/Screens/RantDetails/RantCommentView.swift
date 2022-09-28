@@ -73,6 +73,11 @@ struct RantCommentView: View {
         .onReceive(viewModel.voteController.objectWillChange) {
             viewModel.objectWillChange.send()
         }
+        .onTapGesture(count: 2) {
+            Task {
+                await viewModel.voteController.voteByContext()
+            }
+        }
     }
     
     @ViewBuilder private func image() -> some View {

@@ -49,12 +49,11 @@ import SwiftRant
     var displayedScore: Int {
         var score = score()
         
-        /*
         switch (loadingVoteState, voteState()) {
         case (.upvoted, .unvoted):
             score += 1
         case (.upvoted, .downvoted):
-            score += 2
+            score += 1
         case (.downvoted, .unvoted):
             score -= 1
         case (.downvoted, .upvoted):
@@ -62,25 +61,9 @@ import SwiftRant
         case (.unvoted, .upvoted):
             score -= 1
         case (.unvoted, .downvoted):
-            score += 1
-        default:
-            break
-        }
-        */
-        
-        switch (loadingVoteState, voteState()) {
-        case (.upvoted, .unvoted):
-            score += 1
-        case (.upvoted, .downvoted):
-            score += 1
-        case (.downvoted, .unvoted):
-            score -= 0
-        case (.downvoted, .upvoted):
-            score -= 1
-        case (.unvoted, .upvoted):
-            score -= 1
-        case (.unvoted, .downvoted):
             score += 0
+        case (nil, .downvoted):
+            score -= 1
         default:
             break
         }

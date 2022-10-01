@@ -11,8 +11,6 @@ import SwiftRant
 struct RantView: View {
     @StateObject var viewModel: RantViewModel
     
-    //TODO: double tap to vote
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .top) {
@@ -44,9 +42,10 @@ struct RantView: View {
                 
                 Spacer()
                 
-                Text(TimeFormatter.shared.string(fromSeconds: viewModel.rant.createdTime))
-                    .font(baseSize: 11, weight: .medium)
-                    .foregroundColor(.secondaryForeground)
+                CreationTimeView(
+                    createdTime: viewModel.rant.createdTime,
+                    isEdited: viewModel.rant.isEdited
+                )
             }
             
             Text(viewModel.rant.text)
@@ -117,11 +116,11 @@ struct RantView_Previews: PreviewProvider {
                     score: 83,
                     //createdTime: Int(Date().addingTimeInterval(60 * 60 * 24 * -15).timeIntervalSince1970),
                     createdTime: Int(Date().addingTimeInterval(-15).timeIntervalSince1970),
-                    attachedImage: nil, //TODO: test
+                    attachedImage: nil,
                     commentCount: 2,
                     tags: ["rant", "js suxx"],
                     voteState: .unvoted,
-                    isEdited: false, //TODO: test
+                    isEdited: true,
                     link: nil, //TODO: test
                     collabTypeLong: nil, //TODO: test
                     collabDescription: nil, //TODO: test

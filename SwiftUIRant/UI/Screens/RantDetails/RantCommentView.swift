@@ -11,8 +11,6 @@ import SwiftRant
 struct RantCommentView: View {
     @StateObject var viewModel: RantCommentViewModel
     
-    //TODO: double tap to vote
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .top) {
@@ -44,9 +42,10 @@ struct RantCommentView: View {
                 
                 Spacer()
                 
-                Text(TimeFormatter.shared.string(fromSeconds: viewModel.comment.createdTime))
-                    .font(baseSize: 11, weight: .medium)
-                    .foregroundColor(.secondaryForeground)
+                CreationTimeView(
+                    createdTime: viewModel.comment.createdTime,
+                    isEdited: false
+                )
             }
             
             Text(viewModel.comment.body)
@@ -107,7 +106,7 @@ struct RantCommentView_Previews: PreviewProvider {
                         avatarImage: nil //TODO: test
                     ),
                     isUserDPP: nil, //TODO: test
-                    attachedImage: nil //TODO: test
+                    attachedImage: nil
                 )
             )
         )

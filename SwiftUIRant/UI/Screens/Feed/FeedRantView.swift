@@ -34,9 +34,10 @@ struct FeedRantView: View {
                 
                 Spacer()
                 
-                Text(TimeFormatter.shared.string(fromSeconds: viewModel.rant.createdTime))
-                    .font(baseSize: 11, weight: .medium)
-                    .foregroundColor(.secondaryForeground)
+                CreationTimeView(
+                    createdTime: viewModel.rant.createdTime,
+                    isEdited: false
+                )
             }
             
             Text(viewModel.rant.text)

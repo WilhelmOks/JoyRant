@@ -85,9 +85,12 @@ struct RantView: View {
             viewModel.objectWillChange.send()
         }
         .onTapGesture(count: 2) {
-            Task {
-                //TODO: edit instead of vote if it's the rant of the logged in user
-                await viewModel.voteController.voteByContext()
+            if viewModel.rant.isFromLoggedInUser {
+                viewModel.editRant()
+            } else {
+                Task {
+                    await viewModel.voteController.voteByContext()
+                }
             }
         }
     }
@@ -132,8 +135,7 @@ struct RantView: View {
     
     @ViewBuilder private func editButton() -> some View {
         Button {
-            //TODO: ...
-            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+            viewModel.editRant()
         } label: {
             Text("Edit")
                 .font(baseSize: 11, weight: .medium)

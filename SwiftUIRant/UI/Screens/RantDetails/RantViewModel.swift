@@ -39,4 +39,9 @@ import SwiftRant
         rant = changedRant
         DataStore.shared.update(rantInFeed: rant)
     }
+    
+    func editRant() {
+        //TODO: ...
+        alertMessage = .presentedError(message: "Edit rant is not implemented yet.")
+    }
 }

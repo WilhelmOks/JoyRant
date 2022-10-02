@@ -43,10 +43,24 @@ struct RantCommentView: View {
                 
                 Spacer()
                 
-                CreationTimeView(
-                    createdTime: viewModel.comment.createdTime,
-                    isEdited: false
-                )
+                VStack(alignment: .trailing, spacing: 6) {
+                    CreationTimeView(
+                        createdTime: viewModel.comment.createdTime,
+                        isEdited: false
+                    )
+                    
+                    /*
+                    if viewModel.comment.isFromLoggedInUser {
+                        deleteButton()
+                        
+                        editButton()
+                    } else {
+                        reportButton()
+                    }
+                    
+                    replyButton()
+                    */
+                }
             }
             
             Text(viewModel.comment.body)
@@ -57,12 +71,18 @@ struct RantCommentView: View {
             
             image()
             
-            HStack {
+            HStack(spacing: 10) {
                 replyButton()
                 
                 Spacer()
                 
-                reportButton()
+                if viewModel.comment.isFromLoggedInUser {
+                    deleteButton()
+                    
+                    editButton()
+                } else {
+                    reportButton()
+                }
             }
         }
         .padding(.top, 10)
@@ -74,6 +94,7 @@ struct RantCommentView: View {
         }
         .onTapGesture(count: 2) {
             Task {
+                //TODO: edit instead of vote if it's the comment of the logged in user
                 await viewModel.voteController.voteByContext()
             }
         }
@@ -97,42 +118,89 @@ struct RantCommentView: View {
     }
     
     @ViewBuilder private func reportButton() -> some View {
-        if !viewModel.comment.isFromLoggedInUser {
-            Button {
-                viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
-            } label: {
-                Text("Report")
-                    .font(baseSize: 11, weight: .medium)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.accentColor)
-            }
+        Button {
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Text("Report")
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.accentColor)
+        }
+    }
+    
+    @ViewBuilder private func editButton() -> some View {
+        Button {
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Text("Edit")
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.accentColor)
+        }
+    }
+    
+    @ViewBuilder private func deleteButton() -> some View {
+        Button {
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Text("Delete")
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.accentColor)
         }
     }
 }
 
 struct RantCommentView_Previews: PreviewProvider {
     static var previews: some View {
-        RantCommentView(
-            viewModel: .init(
-                comment: .init(
-                    id: 2,
-                    rantID: 1,
-                    body: "Lorem Ipsum",
-                    score: 56,
-                    createdTime: 0,
-                    voteState: .unvoted,
-                    links: nil, //TODO: test links
-                    userID: 1,
-                    username: "Saul Goodman",
-                    userScore: 43,
-                    userAvatar: .init(
-                        backgroundColor: "00cc00",
-                        avatarImage: nil
-                    ),
-                    isUserDPP: 1,
-                    attachedImage: nil
+        VStack(spacing: 10) {
+            RantCommentView(
+                viewModel: .init(
+                    comment: .init(
+                        id: 2,
+                        rantID: 1,
+                        body: "Lorem Ipsum",
+                        score: 56,
+                        createdTime: 0,
+                        voteState: .unvoted,
+                        links: nil, //TODO: test links
+                        userID: 1,
+                        username: "Saul Goodman",
+                        userScore: 43,
+                        userAvatar: .init(
+                            backgroundColor: "00cc00",
+                            avatarImage: nil
+                        ),
+                        isUserDPP: 1,
+                        attachedImage: nil
+                    )
                 )
             )
-        )
+            
+            Divider()
+            
+            RantCommentView(
+                viewModel: .init(
+                    comment: .init(
+                        id: 2,
+                        rantID: 1,
+                        body: "Comment from me",
+                        score: 100,
+                        createdTime: Int(Date().addingTimeInterval(60 * -15).timeIntervalSince1970),
+                        voteState: .unvotable,
+                        links: nil, //TODO: test links
+                        userID: 1,
+                        username: "Myself and Me",
+                        userScore: 12,
+                        userAvatar: .init(
+                            backgroundColor: "00cc00",
+                            avatarImage: nil
+                        ),
+                        isUserDPP: 0,
+                        attachedImage: nil
+                    )
+                )
+            )
+        }
     }
 }

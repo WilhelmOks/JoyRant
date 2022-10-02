@@ -74,6 +74,7 @@ struct RantView: View {
         }
         .onTapGesture(count: 2) {
             Task {
+                //TODO: edit instead of vote if it's the rant of the logged in user
                 await viewModel.voteController.voteByContext()
             }
         }

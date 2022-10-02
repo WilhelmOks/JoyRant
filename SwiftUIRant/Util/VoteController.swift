@@ -105,6 +105,8 @@ import SwiftRant
     }
     
     private func performVote(voteState: VoteState) async {
+        guard loadingVoteState == nil else { return }
+        
         loadingVoteState = voteState
         do {
             try await voteAction(voteState)

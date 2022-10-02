@@ -120,6 +120,7 @@ struct RantView: View {
     
     @ViewBuilder private func reportButton() -> some View {
         Button {
+            //TODO: ...
             viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
         } label: {
             Text("Report")
@@ -131,6 +132,7 @@ struct RantView: View {
     
     @ViewBuilder private func editButton() -> some View {
         Button {
+            //TODO: ...
             viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
         } label: {
             Text("Edit")
@@ -142,6 +144,7 @@ struct RantView: View {
     
     @ViewBuilder private func deleteButton() -> some View {
         Button {
+            //TODO: ...
             viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
         } label: {
             Text("Delete")

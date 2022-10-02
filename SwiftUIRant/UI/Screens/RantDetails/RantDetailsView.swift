@@ -17,6 +17,10 @@ struct RantDetailsView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     toolbarReloadButton()
                 }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    toolbarMoreButton()
+                }
             }
             .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
@@ -55,18 +59,32 @@ struct RantDetailsView: View {
     }
     
     @ViewBuilder private func toolbarReloadButton() -> some View {
-        if viewModel.isReloading {
+        ZStack {
             ProgressView()
-        } else {
+                .opacity(viewModel.isReloading ? 1 : 0)
+                
             Button {
                 Task {
                     await viewModel.reload()
                 }
             } label: {
                 Image(systemName: "arrow.clockwise")
+                    .frame(width: 26, height: 26)
             }
             .disabled(viewModel.isLoading)
+            .opacity(!viewModel.isReloading ? 1 : 0)
         }
+    }
+    
+    @ViewBuilder private func toolbarMoreButton() -> some View {
+        Button {
+            //TODO: ...
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Image(systemName: "ellipsis")
+                .frame(width: 26, height: 26)
+        }
+        .disabled(viewModel.isLoading)
     }
 }
 

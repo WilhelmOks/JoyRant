@@ -36,7 +36,8 @@ struct RantCommentView: View {
                     UserPanel(
                         avatar: viewModel.comment.userAvatar,
                         name: viewModel.comment.username,
-                        score: viewModel.comment.userScore
+                        score: viewModel.comment.userScore,
+                        isSupporter: viewModel.comment.isUserSupporter
                     )
                 }
                 

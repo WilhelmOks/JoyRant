@@ -44,6 +44,9 @@
 		ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */; };
 		ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE728CB74180007B698 /* MockedModels.swift */; };
 		ED97D62528E86F5200CFC418 /* CreationTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62428E86F5200CFC418 /* CreationTimeView.swift */; };
+		ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62628E9C98900CFC418 /* RantExtensions.swift */; };
+		ED97D62928E9C9E200CFC418 /* CommentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62828E9C9E200CFC418 /* CommentExtensions.swift */; };
+		ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */ = {isa = PBXBuildFile; productRef = ED97D62B28E9CC4B00CFC418 /* HexUIColor */; };
 		EDE2288C28CE15040025EDB1 /* FeedRantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288B28CE15040025EDB1 /* FeedRantViewModel.swift */; };
 		EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */; };
 		EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */; };
@@ -90,6 +93,8 @@
 		ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+NotificationCenter.swift"; sourceTree = "<group>"; };
 		ED59CEE728CB74180007B698 /* MockedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedModels.swift; sourceTree = "<group>"; };
 		ED97D62428E86F5200CFC418 /* CreationTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTimeView.swift; sourceTree = "<group>"; };
+		ED97D62628E9C98900CFC418 /* RantExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantExtensions.swift; sourceTree = "<group>"; };
+		ED97D62828E9C9E200CFC418 /* CommentExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentExtensions.swift; sourceTree = "<group>"; };
 		EDE2288B28CE15040025EDB1 /* FeedRantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRantViewModel.swift; sourceTree = "<group>"; };
 		EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsView.swift; sourceTree = "<group>"; };
 		EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -105,6 +110,7 @@
 			files = (
 				ED2C9B7628B67BB7008BF314 /* SwiftRant in Frameworks */,
 				ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */,
+				ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +253,8 @@
 			children = (
 				ED59CEE728CB74180007B698 /* MockedModels.swift */,
 				ED14DE6128E20E83005FCC9A /* RantInFeed+Rant.swift */,
+				ED97D62628E9C98900CFC418 /* RantExtensions.swift */,
+				ED97D62828E9C9E200CFC418 /* CommentExtensions.swift */,
 			);
 			path = "Model Extensions";
 			sourceTree = "<group>";
@@ -283,6 +291,7 @@
 			packageProductDependencies = (
 				ED2C9B7528B67BB7008BF314 /* SwiftRant */,
 				ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */,
+				ED97D62B28E9CC4B00CFC418 /* HexUIColor */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* SwiftUIRant.app */;
@@ -315,6 +324,7 @@
 			packageReferences = (
 				ED2C9B7428B67BB7008BF314 /* XCRemoteSwiftPackageReference "SwiftRant" */,
 				ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -373,11 +383,13 @@
 				ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */,
 				ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */,
 				ED14DE6428E36241005FCC9A /* TimeFormatter.swift in Sources */,
+				ED97D62928E9C9E200CFC418 /* CommentExtensions.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
 				ED14DE6228E20E83005FCC9A /* RantInFeed+Rant.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,
 				ED59CED128BD0B110007B698 /* FeedRantView.swift in Sources */,
+				ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
 				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,
 				ED59CEDF28C789B30007B698 /* Color.swift in Sources */,
@@ -602,6 +614,14 @@
 				kind = branch;
 			};
 		};
+		ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WilhelmOks/HexColor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -614,6 +634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED2C9B7428B67BB7008BF314 /* XCRemoteSwiftPackageReference "SwiftRant" */;
 			productName = SwiftRant;
+		};
+		ED97D62B28E9CC4B00CFC418 /* HexUIColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */;
+			productName = HexUIColor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,11 +7,13 @@
 
 import SwiftUI
 import SwiftRant
+import HexUIColor
 
 struct UserPanel: View {
     let avatar: Rant.UserAvatar
     let name: String
     let score: Int
+    let isSupporter: Bool
     
     var body: some View {
         HStack(spacing: 8) {
@@ -22,19 +24,39 @@ struct UserPanel: View {
                     .font(baseSize: 15, weightDelta: 2)
                     .foregroundColor(.primaryForeground)
                 
-                Text(scoreText())
-                    .font(baseSize: 11, weightDelta: 2)
-                    .foregroundColor(.primaryBackground)
-                    .padding(.horizontal, 5)
-                    .padding(.vertical, 1)
-                    .background(Color.secondaryForeground)
-                    .cornerRadius(5)
+                HStack(spacing: 4) {
+                    Text(scoreText())
+                        .font(baseSize: 11, weightDelta: 2)
+                        .foregroundColor(.primaryBackground)
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 1)
+                        .background(Color.secondaryForeground)
+                        .cornerRadius(5)
+                    
+                    if isSupporter {
+                        Text("++")
+                            .font(baseSize: 11, weightDelta: 4)
+                            .offset(y: -0.5)
+                            .foregroundColor(.primaryBackground)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 1)
+                            .background(userColor())
+                            .cornerRadius(5)
+                    }
+                }
             }
         }
     }
     
     private func scoreText() -> String {
         score > 0 ? "+\(score)" : "\(score)"
+    }
+    
+    private func userColor() -> Color {
+        guard let uiColor = UIColor.fromHexString(avatar.backgroundColor) else {
+            return Color.secondaryForeground
+        }
+        return Color(uiColor: uiColor)
     }
 }
 
@@ -43,11 +65,12 @@ struct UserPanel_Previews: PreviewProvider {
         VStack(spacing: 20) {
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "00ff00",
+                    backgroundColor: "00cc00",
                     avatarImage: nil
                 ),
                 name: "Walter White",
-                score: 123
+                score: 123,
+                isSupporter: true
             )
             
             UserPanel(
@@ -56,7 +79,8 @@ struct UserPanel_Previews: PreviewProvider {
                     avatarImage: nil
                 ),
                 name: "Walter White",
-                score: -17
+                score: 123,
+                isSupporter: false
             )
             
             UserPanel(
@@ -65,7 +89,18 @@ struct UserPanel_Previews: PreviewProvider {
                     avatarImage: nil
                 ),
                 name: "Walter White",
-                score: 0
+                score: -17,
+                isSupporter: false
+            )
+            
+            UserPanel(
+                avatar: .init(
+                    backgroundColor: "00ff00",
+                    avatarImage: nil
+                ),
+                name: "Walter White",
+                score: 0,
+                isSupporter: false
             )
         }
     }

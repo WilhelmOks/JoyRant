@@ -132,14 +132,14 @@ struct RantView_Previews: PreviewProvider {
                     username: "Spongeblob",
                     userScore: 666,
                     userAvatar: .init(
-                        backgroundColor: "00ff00", //TODO: test
-                        avatarImage: nil //TODO: test
+                        backgroundColor: "00cc00",
+                        avatarImage: nil
                     ),
                     userAvatarLarge: .init(
-                        backgroundColor: "00ff00", //TODO: test
-                        avatarImage: nil //TODO: test
+                        backgroundColor: "00cc00",
+                        avatarImage: nil
                     ),
-                    isUserDPP: nil //TODO: test
+                    isUserDPP: nil
                 )
             )
         )

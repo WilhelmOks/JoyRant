@@ -57,14 +57,13 @@ struct RantCommentView: View {
             
             image()
             
-            /*
             HStack {
-                tags()
+                replyButton()
                 
                 Spacer()
                 
-                commentsCounter()
-            }*/
+                reportButton()
+            }
         }
         .padding(.top, 10)
         .padding(.horizontal, 10)
@@ -85,6 +84,30 @@ struct RantCommentView: View {
             PostedImage(image: image)
         }
     }
+        
+    @ViewBuilder private func replyButton() -> some View {
+        Button {
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Text("Reply")
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.accentColor)
+        }
+    }
+    
+    @ViewBuilder private func reportButton() -> some View {
+        if !viewModel.comment.isFromLoggedInUser {
+            Button {
+                viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+            } label: {
+                Text("Report")
+                    .font(baseSize: 11, weight: .medium)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.accentColor)
+            }
+        }
+    }
 }
 
 struct RantCommentView_Previews: PreviewProvider {
@@ -103,10 +126,10 @@ struct RantCommentView_Previews: PreviewProvider {
                     username: "Saul Goodman",
                     userScore: 43,
                     userAvatar: .init(
-                        backgroundColor: "00ff00", //TODO: test
-                        avatarImage: nil //TODO: test
+                        backgroundColor: "00cc00",
+                        avatarImage: nil
                     ),
-                    isUserDPP: nil, //TODO: test
+                    isUserDPP: 1,
                     attachedImage: nil
                 )
             )

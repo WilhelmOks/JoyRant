@@ -71,7 +71,7 @@ struct RantCommentView: View {
             
             image()
             
-            HStack(spacing: 10) {
+            HStack(alignment: .bottom, spacing: 10) {
                 replyButton()
                 
                 Spacer()

@@ -43,10 +43,14 @@ struct RantView: View {
                 
                 Spacer()
                 
-                CreationTimeView(
-                    createdTime: viewModel.rant.createdTime,
-                    isEdited: viewModel.rant.isEdited
-                )
+                VStack(alignment: .trailing, spacing: 6) {
+                    CreationTimeView(
+                        createdTime: viewModel.rant.createdTime,
+                        isEdited: viewModel.rant.isEdited
+                    )
+                    
+                    commentsCounter()
+                }
             }
             
             Text(viewModel.rant.text)
@@ -57,12 +61,20 @@ struct RantView: View {
             
             image()
             
-            HStack(alignment: .bottom) {
+            HStack(alignment: .bottom, spacing: 10) {
                 tags()
                 
                 Spacer()
                 
-                commentsCounter()
+                //commentsCounter()
+                
+                if viewModel.rant.isFromLoggedInUser {
+                    deleteButton()
+                    
+                    editButton()
+                } else {
+                    reportButton()
+                }
             }
         }
         .padding(.top, 10)
@@ -104,6 +116,39 @@ struct RantView: View {
                 .font(baseSize: 11, weight: .medium)
         }
         .foregroundColor(.secondaryForeground)
+    }
+    
+    @ViewBuilder private func reportButton() -> some View {
+        Button {
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Text("Report")
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.accentColor)
+        }
+    }
+    
+    @ViewBuilder private func editButton() -> some View {
+        Button {
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Text("Edit")
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.accentColor)
+        }
+    }
+    
+    @ViewBuilder private func deleteButton() -> some View {
+        Button {
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Text("Delete")
+                .font(baseSize: 11, weight: .medium)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.accentColor)
+        }
     }
 }
 

@@ -12,4 +12,8 @@ extension Rant {
     var isUserSupporter: Bool {
         isUserDPP == 1
     }
+    
+    var isFromLoggedInUser: Bool {
+        voteState == .unvotable
+    }
 }

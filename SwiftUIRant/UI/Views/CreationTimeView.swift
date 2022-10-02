@@ -12,6 +12,7 @@ struct CreationTimeView: View {
     let isEdited: Bool
     
     var body: some View {
+        /*
         HStack(spacing: 5) {
             Text(TimeFormatter.shared.string(fromSeconds: createdTime))
                 .font(baseSize: 11, weight: .medium)
@@ -20,6 +21,18 @@ struct CreationTimeView: View {
             if isEdited {
                 Image(systemName: "pencil.circle")
                     .font(baseSize: 11)
+                    .foregroundColor(.secondaryForeground)
+            }
+        }*/
+        
+        VStack(alignment: .trailing, spacing: 5) {
+            Text(TimeFormatter.shared.string(fromSeconds: createdTime))
+                .font(baseSize: 11, weight: .medium)
+                .foregroundColor(.secondaryForeground)
+            
+            if isEdited {
+                Text("Edited")
+                    .font(baseSize: 11, weight: .medium)
                     .foregroundColor(.secondaryForeground)
             }
         }

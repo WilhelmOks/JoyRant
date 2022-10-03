@@ -12,56 +12,31 @@ struct RantCommentView: View {
     @StateObject var viewModel: RantCommentViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 8) {
-                    VoteControl(
-                        isHorizontal: true,
-                        score: viewModel.voteController.displayedScore,
-                        isUpvoted: viewModel.voteController.showAsUpvoted,
-                        isDownvoted: viewModel.voteController.showAsDownvoted,
-                        upvoteAction: {
-                            Task {
-                                await viewModel.voteController.voteUp()
-                            }
-                        },
-                        downvoteAction: {
-                            Task {
-                                await viewModel.voteController.voteDown()
-                            }
-                        }
-                    )
-                    .disabled(viewModel.comment.voteState == .unvotable)
-                    
-                    UserPanel(
-                        avatar: viewModel.comment.userAvatar,
-                        name: viewModel.comment.username,
-                        score: viewModel.comment.userScore,
-                        isSupporter: viewModel.comment.isUserSupporter
-                    )
-                }
-                
-                Spacer()
-                
-                VStack(alignment: .trailing, spacing: 6) {
-                    CreationTimeView(
-                        createdTime: viewModel.comment.createdTime,
-                        isEdited: false
-                    )
-                    
-                    /*
-                    if viewModel.comment.isFromLoggedInUser {
-                        deleteButton()
-                        
-                        editButton()
-                    } else {
-                        reportButton()
-                    }
-                    
-                    replyButton()
-                    */
+        content()
+        .padding(.top, 10)
+        .padding(.horizontal, 10)
+        .alert($viewModel.alertMessage)
+        .background(Color.primaryBackground)
+        .onReceive(viewModel.voteController.objectWillChange) {
+            viewModel.objectWillChange.send()
+        }
+        .onTapGesture(count: 2) {
+            if viewModel.comment.isFromLoggedInUser {
+                viewModel.editComment()
+            } else {
+                Task {
+                    await viewModel.voteController.voteByContext()
                 }
             }
+        }
+    }
+    
+    @ViewBuilder private func content() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            topArea(
+                comment: viewModel.comment,
+                voteController: viewModel.voteController
+            )
             
             Text(viewModel.comment.body)
                 .font(baseSize: 15)
@@ -85,22 +60,59 @@ struct RantCommentView: View {
                 }
             }
         }
-        .padding(.top, 10)
-        .padding(.horizontal, 10)
-        .alert($viewModel.alertMessage)
-        .background(Color.primaryBackground)
-        .onReceive(viewModel.voteController.objectWillChange) {
-            viewModel.objectWillChange.send()
-        }
-        .onTapGesture(count: 2) {
-            if viewModel.comment.isFromLoggedInUser {
-                viewModel.editComment()
-            } else {
-                Task {
-                    await viewModel.voteController.voteByContext()
+    }
+    
+    @ViewBuilder private func topArea(comment: Comment, voteController: VoteController) -> some View {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 8) {
+                VoteControl(
+                    isHorizontal: true,
+                    score: voteController.displayedScore,
+                    isUpvoted: voteController.showAsUpvoted,
+                    isDownvoted: voteController.showAsDownvoted,
+                    upvoteAction: {
+                        Task {
+                            await voteController.voteUp()
+                        }
+                    },
+                    downvoteAction: {
+                        Task {
+                            await voteController.voteDown()
+                        }
+                    }
+                )
+                .disabled(comment.voteState == .unvotable)
+                
+                UserPanel(
+                    avatar: comment.userAvatar,
+                    name: comment.username,
+                    score: comment.userScore,
+                    isSupporter: comment.isUserSupporter
+                )
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .trailing, spacing: 6) {
+                CreationTimeView(
+                    createdTime: comment.createdTime,
+                    isEdited: false
+                )
+                
+                /*
+                if viewModel.comment.isFromLoggedInUser {
+                    deleteButton()
+                    
+                    editButton()
+                } else {
+                    reportButton()
                 }
+                
+                replyButton()
+                */
             }
         }
+
     }
     
     @ViewBuilder private func image() -> some View {

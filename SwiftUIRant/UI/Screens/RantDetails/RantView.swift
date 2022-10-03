@@ -12,46 +12,31 @@ struct RantView: View {
     @StateObject var viewModel: RantViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 8) {
-                    VoteControl(
-                        isHorizontal: true,
-                        score: viewModel.voteController.displayedScore,
-                        isUpvoted: viewModel.voteController.showAsUpvoted,
-                        isDownvoted: viewModel.voteController.showAsDownvoted,
-                        upvoteAction: {
-                            Task {
-                                await viewModel.voteController.voteUp()
-                            }
-                        },
-                        downvoteAction: {
-                            Task {
-                                await viewModel.voteController.voteDown()
-                            }
-                        }
-                    )
-                    .disabled(viewModel.rant.voteState == .unvotable)
-                    
-                    UserPanel(
-                        avatar: viewModel.rant.userAvatar,
-                        name: viewModel.rant.username,
-                        score: viewModel.rant.userScore,
-                        isSupporter: viewModel.rant.isUserSupporter
-                    )
-                }
-                
-                Spacer()
-                
-                VStack(alignment: .trailing, spacing: 6) {
-                    CreationTimeView(
-                        createdTime: viewModel.rant.createdTime,
-                        isEdited: viewModel.rant.isEdited
-                    )
-                    
-                    commentsCounter()
+        content()
+        .padding(.top, 10)
+        .padding(.horizontal, 10)
+        .alert($viewModel.alertMessage)
+        .background(Color.primaryBackground)
+        .onReceive(viewModel.voteController.objectWillChange) {
+            viewModel.objectWillChange.send()
+        }
+        .onTapGesture(count: 2) {
+            if viewModel.rant.isFromLoggedInUser {
+                viewModel.editRant()
+            } else {
+                Task {
+                    await viewModel.voteController.voteByContext()
                 }
             }
+        }
+    }
+    
+    @ViewBuilder private func content() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            topArea(
+                rant: viewModel.rant,
+                voteController: viewModel.voteController
+            )
             
             Text(viewModel.rant.text)
                 .font(baseSize: 15)
@@ -77,24 +62,50 @@ struct RantView: View {
                 }
             }
         }
-        .padding(.top, 10)
-        .padding(.horizontal, 10)
-        .alert($viewModel.alertMessage)
-        .background(Color.primaryBackground)
-        .onReceive(viewModel.voteController.objectWillChange) {
-            viewModel.objectWillChange.send()
-        }
-        .onTapGesture(count: 2) {
-            if viewModel.rant.isFromLoggedInUser {
-                viewModel.editRant()
-            } else {
-                Task {
-                    await viewModel.voteController.voteByContext()
-                }
+    }
+    
+    @ViewBuilder private func topArea(rant: Rant, voteController: VoteController) -> some View {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 8) {
+                VoteControl(
+                    isHorizontal: true,
+                    score: voteController.displayedScore,
+                    isUpvoted: voteController.showAsUpvoted,
+                    isDownvoted: voteController.showAsDownvoted,
+                    upvoteAction: {
+                        Task {
+                            await voteController.voteUp()
+                        }
+                    },
+                    downvoteAction: {
+                        Task {
+                            await voteController.voteDown()
+                        }
+                    }
+                )
+                .disabled(rant.voteState == .unvotable)
+                
+                UserPanel(
+                    avatar: rant.userAvatar,
+                    name: rant.username,
+                    score: rant.userScore,
+                    isSupporter: rant.isUserSupporter
+                )
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .trailing, spacing: 6) {
+                CreationTimeView(
+                    createdTime: rant.createdTime,
+                    isEdited: rant.isEdited
+                )
+                
+                commentsCounter()
             }
         }
     }
-    
+        
     @ViewBuilder private func image() -> some View {
         if let image = viewModel.rant.attachedImage {
             PostedImage(image: image)

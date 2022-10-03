@@ -12,6 +12,30 @@ struct FeedRantView: View {
     @StateObject var viewModel: FeedRantViewModel
     
     var body: some View {
+        content()
+        .alert($viewModel.alertMessage)
+        .background(Color.primaryBackground)
+        .onReceive(viewModel.voteController.objectWillChange) {
+            viewModel.objectWillChange.send()
+        }
+        .onReceive(
+            broadcastEvent: .shouldUpdateRantInFeed(
+                rantId: viewModel.rant.id
+            ), perform: { _ in
+                viewModel.updateRant()
+            }
+        )
+        .onTapGesture(count: 2) {
+            Task {
+                await viewModel.voteController.voteByContext()
+            }
+        }
+        .onTapGesture {
+            AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
+        }
+    }
+    
+    @ViewBuilder private func content() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 VoteControl(
@@ -55,26 +79,6 @@ struct FeedRantView: View {
                 
                 commentsCounter()
             }
-        }
-        .alert($viewModel.alertMessage)
-        .background(Color.primaryBackground)
-        .onReceive(viewModel.voteController.objectWillChange) {
-            viewModel.objectWillChange.send()
-        }
-        .onReceive(
-            broadcastEvent: .shouldUpdateRantInFeed(
-                rantId: viewModel.rant.id
-            ), perform: { _ in
-                viewModel.updateRant()
-            }
-        )
-        .onTapGesture(count: 2) {
-            Task {
-                await viewModel.voteController.voteByContext()
-            }
-        }
-        .onTapGesture {
-            AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
         }
     }
     

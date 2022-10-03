@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftRant
+import UIKit
+import SwiftUI
 
 final class AppState: ObservableObject {
     static let shared = AppState()
@@ -24,5 +26,13 @@ final class AppState: ObservableObject {
     func clearImageCache() { //TODO: call from UI
         URLCache.postedImageCache.removeAllCachedResponses()
         URLCache.userAvatarCache.removeAllCachedResponses()
+    }
+    
+    func applyAccentColor() {
+        DispatchQueue.main.async {
+            UIApplication.shared.windows.forEach { window in
+                window.tintColor = UIColor(Color("AccentColor"))
+            }
+        }
     }
 }

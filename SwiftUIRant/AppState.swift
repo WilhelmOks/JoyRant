@@ -20,4 +20,9 @@ final class AppState: ObservableObject {
     var isLoggedIn: Bool {
         SwiftRant.shared.tokenFromKeychain != nil
     }
+    
+    func clearImageCache() { //TODO: call from UI
+        URLCache.postedImageCache.removeAllCachedResponses()
+        URLCache.userAvatarCache.removeAllCachedResponses()
+    }
 }

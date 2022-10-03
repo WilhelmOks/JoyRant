@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftRant
-import HexUIColor
 
 struct UserPanel: View {
     let avatar: Rant.UserAvatar
@@ -53,10 +52,7 @@ struct UserPanel: View {
     }
     
     private func userColor() -> Color {
-        guard let uiColor = UIColor.fromHexString(avatar.backgroundColor) else {
-            return Color.secondaryForeground
-        }
-        return Color(uiColor: uiColor)
+        Color(hexString: avatar.backgroundColor) ?? .secondaryForeground
     }
 }
 

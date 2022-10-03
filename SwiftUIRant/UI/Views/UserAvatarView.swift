@@ -29,7 +29,7 @@ struct UserAvatarView: View {
                 case .empty:
                     ZStack {
                         Rectangle()
-                            .fill(emptyBgColor)
+                            .fill(userColor())
                         
                         ProgressView()
                     }
@@ -46,8 +46,12 @@ struct UserAvatarView: View {
                 }
             }
         } else {
-            emptyBgColor
+            userColor()
         }
+    }
+    
+    private func userColor() -> Color {
+        Color(hexString: avatar.backgroundColor) ?? emptyBgColor
     }
 }
 
@@ -56,14 +60,21 @@ struct UserAvatarView_Previews: PreviewProvider {
         VStack {
             UserAvatarView(
                 avatar: .init(
-                    backgroundColor: "00ff00",
+                    backgroundColor: "66dddd",
                     avatarImage: "v-37_c-3_b-6_g-m_9-1_1-4_16-3_3-4_8-1_7-1_5-1_12-4_6-102_10-1_2-39_22-2_15-10_11-1_4-1.jpg"
                 )
             )
             
             UserAvatarView(
                 avatar: .init(
-                    backgroundColor: "00ff00",
+                    backgroundColor: "66dddd",
+                    avatarImage: nil
+                )
+            )
+            
+            UserAvatarView(
+                avatar: .init(
+                    backgroundColor: "",
                     avatarImage: nil
                 )
             )

@@ -4,13 +4,13 @@ An unofficial devRant iOS client (that doesn't crash).
 
 ## Goals
 
-* The first goal of this project is to provide the functionality to browse through rants, write comments, ++/-- (vote), and report.
+* The first goal of this project is to provide the functionality to browse through rants, write comments, ++/-- (vote), and favorite/unfavorite rants.
 * A "Notif" screen to see ++'s, Mentions, and so on.
 * Then, I want to provide the functionality to create rants and other types of posts and upload images.
 
-Secondary functions like editing the own profile may be added later but are not considered high priority at the moment.
+The first version of the app should provide a better experience for the main and most frequently used functions of the app.
 
-This should also run on macOS (thanks to SwiftUI) but I haven't tested it and it's not a priority.
+Secondary functions like editing the own profile may be added later but are not considered high priority at the moment.
 
 ## Motivation
 
@@ -34,9 +34,9 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Upvoting/Downvoting in rant and comments
 
-⏹️ Report rants/comments
+⏹️ Report rants/comments (this is not available in SwiftRant (yet?))
 
-⏹️ Favorite/unfavorite rants
+✅ Favorite/unfavorite rants
 
 ⏹️ Handling embedded links to other rants and external websites
 

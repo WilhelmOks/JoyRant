@@ -25,7 +25,9 @@ struct LoginView: View {
                     .onSubmit {
                         focusedField = .password
                     }
+                    #if os(iOS)
                     .textInputAutocapitalization(.never)
+                    #endif
                     .textContentType(.username)
                     .autocorrectionDisabled()
                 

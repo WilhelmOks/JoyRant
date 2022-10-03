@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftRant
-import UIKit
 import SwiftUI
+
+#if os(iOS)
+import UIKit
+#endif
 
 final class AppState: ObservableObject {
     static let shared = AppState()
@@ -29,10 +32,12 @@ final class AppState: ObservableObject {
     }
     
     func applyAccentColor() {
-        DispatchQueue.main.async {
-            UIApplication.shared.windows.forEach { window in
-                window.tintColor = UIColor(Color("AccentColor"))
+        #if os(iOS)
+            DispatchQueue.main.async {
+                UIApplication.shared.windows.forEach { window in
+                    window.tintColor = UIColor(Color("AccentColor"))
+                }
             }
-        }
+        #endif
     }
 }

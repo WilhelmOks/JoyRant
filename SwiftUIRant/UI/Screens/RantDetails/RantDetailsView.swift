@@ -14,11 +14,11 @@ struct RantDetailsView: View {
     var body: some View {
         content()
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .automatic) {
                     toolbarReloadButton()
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .automatic) {
                     toolbarMoreButton()
                 }
             }

@@ -15,7 +15,7 @@ struct FeedView: View {
     var body: some View {
         content()
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .primaryAction) {
                     Button {
                         DispatchQueue.main.async {
                             Networking.shared.logOut()
@@ -25,7 +25,7 @@ struct FeedView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .automatic) {
                     Button {
                         Task {
                             await viewModel.reload()
@@ -37,7 +37,9 @@ struct FeedView: View {
                 }
             }
             .navigationTitle("devRant")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .alert($viewModel.alertMessage)
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {

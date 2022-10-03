@@ -58,6 +58,7 @@ struct VoteControl: View {
             }
             .opacity(isEnabled ? 1 : 0.6)
         }
+        .buttonStyle(.plain)
     }
     
     @ViewBuilder private func upvoteButton() -> some View {

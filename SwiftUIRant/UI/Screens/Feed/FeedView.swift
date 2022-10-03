@@ -36,6 +36,7 @@ struct FeedView: View {
                     .disabled(viewModel.isLoading || viewModel.isLoadingMore)
                 }
             }
+            .background(Color.primaryBackground)
             .navigationTitle("devRant")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)

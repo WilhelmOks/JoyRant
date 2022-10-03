@@ -128,7 +128,7 @@ struct RantCommentView: View {
             Text("Reply")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(.accentColor)
+                //.foregroundColor(.accentColor)
         }
     }
     
@@ -140,7 +140,7 @@ struct RantCommentView: View {
             Text("Report")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(.accentColor)
+                //.foregroundColor(.accentColor)
         }
     }
     
@@ -151,7 +151,7 @@ struct RantCommentView: View {
             Text("Edit")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(.accentColor)
+                //.foregroundColor(.accentColor)
         }
     }
     
@@ -163,7 +163,7 @@ struct RantCommentView: View {
             Text("Delete")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(.accentColor)
+                //.foregroundColor(.accentColor)
         }
     }
 }

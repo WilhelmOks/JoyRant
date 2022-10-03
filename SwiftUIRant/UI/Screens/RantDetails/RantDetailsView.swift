@@ -13,6 +13,7 @@ struct RantDetailsView: View {
         
     var body: some View {
         content()
+            .background(Color.primaryBackground)
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     toolbarReloadButton()

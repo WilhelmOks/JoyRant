@@ -53,11 +53,17 @@ struct Networking {
     
     func vote(rantID: Int, voteState: VoteState) async throws -> Rant {
         try await SwiftRant.shared.voteOnRant(try token(), rantID: rantID, vote: voteState).get()
-        
-        //TODO: known issue of SwiftRant: downvoting doesn't decrement the score
     }
     
     func vote(commentID: Int, voteState: VoteState) async throws -> Comment {
         try await SwiftRant.shared.voteOnComment(try token(), commentID: commentID, vote: voteState).get()
+    }
+    
+    func favorite(rantID: Int) async throws {
+        try await SwiftRant.shared.favoriteRant(try token(), rantID: rantID).get()
+    }
+    
+    func unfavorite(rantID: Int) async throws {
+        try await SwiftRant.shared.unfavoriteRant(try token(), rantID: rantID).get()
     }
 }

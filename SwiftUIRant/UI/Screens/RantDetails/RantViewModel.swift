@@ -11,6 +11,7 @@ import SwiftRant
 @MainActor final class RantViewModel: ObservableObject {
     @Published var rant: Rant
     
+    @Published var isLoading = false
     @Published var alertMessage: AlertMessage = .none()
     
     @Published var voteController: VoteController!
@@ -38,6 +39,36 @@ import SwiftRant
     private func applyChangedData(changedRant: Rant) {
         rant = changedRant
         DataStore.shared.update(rantInFeed: rant)
+    }
+    
+    func favorite() async {
+        guard !isLoading else { return }
+        
+        isLoading = true
+        
+        do {
+            try await Networking.shared.favorite(rantID: rant.id)
+            rant.isFavorite = 1
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoading = false
+    }
+    
+    func unfavorite() async {
+        guard !isLoading else { return }
+        
+        isLoading = true
+        
+        do {
+            try await Networking.shared.unfavorite(rantID: rant.id)
+            rant.isFavorite = nil
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoading = false
     }
     
     func editRant() {

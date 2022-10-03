@@ -58,7 +58,8 @@ struct RantView: View {
                     
                     editButton()
                 } else {
-                    reportButton()
+                    //reportButton()
+                    commentsCounter()
                 }
             }
         }
@@ -101,11 +102,11 @@ struct RantView: View {
                     isEdited: rant.isEdited
                 )
                 
-                commentsCounter()
+                favoriteButton()
             }
         }
     }
-        
+    
     @ViewBuilder private func image() -> some View {
         if let image = viewModel.rant.attachedImage {
             PostedImage(image: image)
@@ -140,7 +141,7 @@ struct RantView: View {
             Text("Report")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(.accentColor)
+                //.foregroundColor(.accentColor)
         }
     }
     
@@ -151,7 +152,7 @@ struct RantView: View {
             Text("Edit")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(.accentColor)
+                //.foregroundColor(.accentColor)
         }
     }
     
@@ -163,8 +164,32 @@ struct RantView: View {
             Text("Delete")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(.accentColor)
+                //.foregroundColor(.accentColor)
         }
+    }
+    
+    @ViewBuilder private func favoriteButton() -> some View {
+        let isFavorite = viewModel.rant.isFavorite == 1
+        
+        Button {
+            Task {
+                if isFavorite {
+                    await viewModel.unfavorite()
+                } else {
+                    await viewModel.favorite()
+                }
+            }
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: isFavorite ? "heart.fill" : "heart")
+                    .font(baseSize: 11)
+                
+                Text(isFavorite ? "Unfavorite" : "Favorite")
+                    .font(baseSize: 11, weight: .medium)
+                    .multilineTextAlignment(.leading)
+            }
+        }
+        .disabled(viewModel.isLoading)
     }
 }
 
@@ -184,6 +209,7 @@ struct RantView_Previews: PreviewProvider {
                     tags: ["rant", "js suxx"],
                     voteState: .unvoted,
                     isEdited: true,
+                    isFavorite: 0,
                     link: nil, //TODO: test
                     collabTypeLong: nil, //TODO: test
                     collabDescription: nil, //TODO: test
@@ -194,11 +220,11 @@ struct RantView_Previews: PreviewProvider {
                     username: "Spongeblob",
                     userScore: 666,
                     userAvatar: .init(
-                        backgroundColor: "00cc00",
+                        backgroundColor: "66cc66",
                         avatarImage: nil
                     ),
                     userAvatarLarge: .init(
-                        backgroundColor: "00cc00",
+                        backgroundColor: "66cc66",
                         avatarImage: nil
                     ),
                     isUserDPP: nil

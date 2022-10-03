@@ -37,7 +37,7 @@ struct FeedView: View {
                 }
             }
             .background(Color.primaryBackground)
-            .navigationTitle("devRant")
+            .navigationTitle("Feed")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif

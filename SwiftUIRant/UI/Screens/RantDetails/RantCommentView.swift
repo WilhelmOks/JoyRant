@@ -56,7 +56,7 @@ struct RantCommentView: View {
                     
                     editButton()
                 } else {
-                    reportButton()
+                    //reportButton()
                 }
             }
         }

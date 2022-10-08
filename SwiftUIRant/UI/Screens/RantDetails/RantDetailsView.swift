@@ -19,9 +19,9 @@ struct RantDetailsView: View {
                     toolbarReloadButton()
                 }
                 
-                ToolbarItem(placement: .automatic) {
+                /*ToolbarItem(placement: .automatic) {
                     toolbarMoreButton()
-                }
+                }*/
             }
             .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
@@ -29,34 +29,56 @@ struct RantDetailsView: View {
     
     @ViewBuilder private func content() -> some View {
         if let rant = viewModel.rant, !viewModel.isLoading {
-            ScrollView {
-                LazyVStack {
-                    RantView(
-                        viewModel: .init(
-                            rant: rant
-                        )
-                    )
-                    .id(rant.uuid)
-                    
-                    ForEach(viewModel.comments, id: \.id) { comment in
-                        VStack(spacing: 0) {
-                            Divider()
-                            
-                            RantCommentView(
-                                viewModel: .init(
-                                    comment: comment
-                                )
+            ZStack {
+                ScrollView {
+                    LazyVStack {
+                        RantView(
+                            viewModel: .init(
+                                rant: rant
                             )
-                            //.id(comment.uuid) //TODO: make uuid public
-                            .id("\(rant.uuid.uuidString)_ \(comment.id)")
+                        )
+                        .id(rant.uuid)
+                        
+                        ForEach(viewModel.comments, id: \.id) { comment in
+                            VStack(spacing: 0) {
+                                Divider()
+                                
+                                RantCommentView(
+                                    viewModel: .init(
+                                        comment: comment
+                                    )
+                                )
+                                //.id(comment.uuid) //TODO: make uuid public
+                                .id("\(rant.uuid.uuidString)_ \(comment.id)")
+                            }
                         }
                     }
+                    .padding(.bottom, 10)
+                    .padding(.bottom, 34) //TODO: measure comment button size and set it here
                 }
-                .padding(.bottom, 10)
+                
+                commentButton()
+                .fill(.bottomTrailing)
+                .padding(10)
             }
         } else {
             ProgressView()
         }
+    }
+    
+    @ViewBuilder private func commentButton() -> some View {
+        Button {
+            //TODO: ...
+            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        } label: {
+            Label {
+                Text("Comment")
+            } icon: {
+                Image(systemName: "bubble.right")
+            }
+            .font(baseSize: 12, weightDelta: 1)
+        }
+        .buttonStyle(.borderedProminent)
     }
     
     @ViewBuilder private func toolbarReloadButton() -> some View {

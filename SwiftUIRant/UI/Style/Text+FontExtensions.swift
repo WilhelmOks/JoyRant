@@ -24,6 +24,16 @@ extension Image {
     }
 }
 
+extension Label {
+    func font(baseSize: Int = 17, weight: Font.Weight) -> some View {
+        self.font(fontFromBaseSize(baseSize)).fontWeight(weight)
+    }
+    
+    func font(baseSize: Int = 17, weightDelta: Int = 0) -> some View {
+        self.font(fontFromBaseSize(baseSize)).fontWeight(weightFromNormalizedNumber(weightDelta))
+    }
+}
+
 private func fontFromBaseSize(_ baseSize: Int) -> Font {
     switch baseSize {
     case ...11:     return .caption2

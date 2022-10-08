@@ -49,6 +49,7 @@ struct LoginView: View {
                     Text("Login")
                 }
                 .buttonStyle(.borderedProminent)
+                .tint(.accentColor)
                 .disabled(!viewModel.canSubmit)
                 
                 ProgressView()

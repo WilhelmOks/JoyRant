@@ -33,10 +33,7 @@ struct InternalView: View {
             .toolbar(.visible, in: .navigationBar, .tabBar)
             
             NavigationStack() {
-                //TODO: make a SettingsView in an extra file
-                Text("Settings")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationTitle("Settings")
+                SettingsView()
             }
             .tabItem {
                 Label {

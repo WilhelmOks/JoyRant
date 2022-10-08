@@ -15,16 +15,6 @@ struct FeedView: View {
     var body: some View {
         content()
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        DispatchQueue.main.async {
-                            Networking.shared.logOut()
-                        }
-                    } label: {
-                        Text("Log out")
-                    }
-                }
-                
                 ToolbarItem(placement: .automatic) {
                     Button {
                         Task {

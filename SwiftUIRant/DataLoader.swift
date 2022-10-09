@@ -19,23 +19,17 @@ final class DataLoader {
         let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
         //dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
+        dataStore.unfilteredRantsInFeed = feed.rants
         dataStore.rantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
     }
     
     @MainActor func loadMoreFeed() async throws {
-        let rantsToSkip = dataStore.rantsInFeed.count// + dataStore.duplicatesInFeed
+        let rantsToSkip = dataStore.unfilteredRantsInFeed.count
         let moreFeed = try await Networking.shared.rants(skip: rantsToSkip, session: dataStore.currentFeedSession)
         //dataStore.currentFeedSession = moreFeed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
-        //dataStore.rantsInFeed += moreFeed.rants
         addMoreRantsToFeed(moreFeed.rants)
-        
-        let groups = Dictionary(grouping: dataStore.rantsInFeed, by: \.id)
-        let duplicates = groups.filter { $1.count > 1 }
-        if !duplicates.isEmpty {
-            dlog("Found duplicates in rant feed: \(duplicates.count)")
-        }
     }
     
     @MainActor func reloadFeed() async throws {
@@ -44,6 +38,7 @@ final class DataLoader {
         //dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = feed.rants
+        dataStore.unfilteredRantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
     }
     
@@ -53,10 +48,11 @@ final class DataLoader {
             let isDuplicate = dataStore.rantsInFeed.first(where: { $0.id == rant.id }) != nil
             if isDuplicate {
                 dataStore.duplicatesInFeed += 1
-                dlog("duplicates: \(dataStore.duplicatesInFeed)")
+                dlog("duplicates in feed filtered out in UI: \(dataStore.duplicatesInFeed)")
             } else {
                 dataStore.rantsInFeed.append(rant)
             }
+            dataStore.unfilteredRantsInFeed.append(rant)
         }
     }
 }

@@ -14,6 +14,7 @@ final class DataStore: ObservableObject {
     private init() {}
     
     @Published var isFeedLoaded = false
+    @Published var unfilteredRantsInFeed: [RantInFeed] = []
     @Published var rantsInFeed: [RantInFeed] = []
     
     var currentFeedSession: String?
@@ -24,6 +25,7 @@ final class DataStore: ObservableObject {
     }
     
     func clearFeed() {
+        unfilteredRantsInFeed = []
         rantsInFeed = []
         isFeedLoaded = false
         currentFeedSession = nil

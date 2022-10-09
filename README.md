@@ -22,9 +22,11 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Log in and log out
 
-🚧 Rant feed (Algo/Recent)
+✅ Rant feed (Algo)
 
-⏹️ List top rants
+⏹️ List recent rants (not available in SwiftRant (yet?))
+
+⏹️ List top rants (not available in SwiftRant (yet?))
 
 ⏹️ Weekly rants
 
@@ -34,7 +36,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Upvoting/Downvoting in rant and comments
 
-⏹️ Report rants/comments (this is not available in SwiftRant (yet?))
+⏹️ Report rants/comments (not available in SwiftRant (yet?))
 
 ✅ Favorite/unfavorite rants
 

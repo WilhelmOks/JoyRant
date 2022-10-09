@@ -30,7 +30,9 @@ struct InternalView: View {
                 }
             }
             .tag(Tab.feed)
+            #if os(iOS)
             .toolbar(.visible, in: .navigationBar, .tabBar)
+            #endif
             
             NavigationStack() {
                 SettingsView()
@@ -43,7 +45,9 @@ struct InternalView: View {
                 }
             }
             .tag(Tab.settings)
+            #if os(iOS)
             .toolbar(.visible, in: .navigationBar, .tabBar)
+            #endif
         }
     }
 }

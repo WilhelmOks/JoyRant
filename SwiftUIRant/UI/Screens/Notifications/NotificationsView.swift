@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    @ObservedObject private var appState = AppState.shared
     @StateObject private var viewModel: NotificationsViewModel = .init()
     
     var body: some View {
+        content()
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    toolbarReloadButton()
+                }
+            }
+            .navigationTitle("Notifications")
+            .navigationBarTitleDisplayModeInline()
+            .alert($viewModel.alertMessage)
+    }
+    
+    @ViewBuilder private func content() -> some View {
         VStack {
-            Picker(selection: $viewModel.currentTab, label: EmptyView()) {
+            Picker(selection: $appState.notificationCategoryTab, label: EmptyView()) {
                 ForEach(viewModel.tabs) { tab in
                     Text(tab.displayName).tag(tab)
                 }
@@ -25,9 +38,25 @@ struct NotificationsView: View {
                     
                 }
             }
-            .navigationTitle("Notifications")
         }
-        .navigationBarTitleDisplayModeInline()
+    }
+    
+    @ViewBuilder private func toolbarReloadButton() -> some View {
+        ZStack {
+            ProgressView()
+                .opacity(viewModel.isLoading ? 1 : 0)
+                
+            Button {
+                Task {
+                    await viewModel.load()
+                }
+            } label: {
+                Image(systemName: "arrow.clockwise")
+                    .frame(width: 26, height: 26)
+            }
+            .disabled(viewModel.isLoading)
+            .opacity(!viewModel.isLoading ? 1 : 0)
+        }
     }
 }
 

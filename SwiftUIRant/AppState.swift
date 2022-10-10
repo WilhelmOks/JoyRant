@@ -22,6 +22,8 @@ final class AppState: ObservableObject {
     
     @Published var navigationPath: [NavigationDestination] = []
     
+    @Published var notificationCategoryTab: NotificationCategoryTab = .all
+    
     var isLoggedIn: Bool {
         SwiftRant.shared.tokenFromKeychain != nil
     }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InternalView: View {
     @ObservedObject var appState = AppState.shared
+    @ObservedObject var dataStore = DataStore.shared
     
     enum Tab: Int, Hashable {
         case feed
@@ -19,6 +20,22 @@ struct InternalView: View {
     @State private var tab: Tab = .feed
     
     var body: some View {
+        content()
+            .onAppear {
+                Task {
+                    let category = appState.notificationCategoryTab.category
+                    try? await DataLoader.shared.loadNotifications(for: category)
+                }
+            }
+            .onChange(of: tab) { _ in
+                Task {
+                    let category = appState.notificationCategoryTab.category
+                    try? await DataLoader.shared.loadNotifications(for: category)
+                }
+            }
+    }
+    
+    @ViewBuilder private func content() -> some View {
         TabView(selection: $tab) {
             NavigationStack(path: $appState.navigationPath) {
                 FeedView()
@@ -38,7 +55,7 @@ struct InternalView: View {
             }
             .tabItem {
                 Label {
-                    Text("Notifications")
+                    Text("Notifications (\(dataStore.notifications?.unread.total ?? 0))")
                 } icon: {
                     Image(systemName: "bell")
                 }

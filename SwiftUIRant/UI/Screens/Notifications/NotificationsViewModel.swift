@@ -9,48 +9,27 @@ import Foundation
 import SwiftRant
 
 @MainActor final class NotificationsViewModel: ObservableObject {
-    let tabs = Tab.allCases
-    @Published var currentTab: Tab = .all
-}
-
-extension NotificationsViewModel {
-    enum Tab: Int, CaseIterable, Hashable, Identifiable {
-        case all
-        case upvotes
-        case mentions
-        case comments
-        case subscriptions
+    let tabs = NotificationCategoryTab.allCases
+    
+    @Published var isLoading = false
+    @Published var alertMessage: AlertMessage = .none()
+    
+    init() {
+        Task {
+            await load()
+        }
+    }
+    
+    func load() async {
+        isLoading = true
         
-        var id: Int { rawValue }
-        
-        var displayName: String {
-            switch self {
-            case .all:              return "All"
-            case .upvotes:          return "++"
-            case .mentions:         return "Mentions"
-            case .comments:         return "Comments"
-            case .subscriptions:    return "Subscriptions"
-            }
+        do {
+            let category = AppState.shared.notificationCategoryTab.category
+            try await DataLoader.shared.loadNotifications(for: category)
+        } catch {
+            alertMessage = .presentedError(error)
         }
         
-        static func from(category: Notifications.Categories) -> Self {
-            switch category {
-            case .all:      return .all
-            case .upvotes:  return .upvotes
-            case .mentions: return .mentions
-            case .comments: return .comments
-            case .subs:     return .subscriptions
-            }
-        }
-        
-        var category: Notifications.Categories {
-            switch self {
-            case .all:              return .all
-            case .upvotes:          return .upvotes
-            case .mentions:         return .mentions
-            case .comments:         return .comments
-            case .subscriptions:    return .subs
-            }
-        }
+        isLoading = false
     }
 }

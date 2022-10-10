@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NotificationsView: View {
     @ObservedObject private var appState = AppState.shared
+    @ObservedObject private var dataStore = DataStore.shared
     @StateObject private var viewModel: NotificationsViewModel = .init()
     
     var body: some View {
@@ -40,7 +41,11 @@ struct NotificationsView: View {
             
             ScrollView {
                 LazyVStack {
-                    
+                    //TODO: use something else as id
+                    ForEach(dataStore.notifications?.items ?? [], id: \.createdTime) { notification in
+                        Text(notification.type.rawValue)
+                        Divider()
+                    }
                 }
             }
         }

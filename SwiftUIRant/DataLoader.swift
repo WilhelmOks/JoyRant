@@ -55,4 +55,8 @@ final class DataLoader {
             dataStore.unfilteredRantsInFeed.append(rant)
         }
     }
+    
+    @MainActor func loadNotifications(for category: Notifications.Categories) async throws {
+        dataStore.notifications = try await Networking.shared.getNotifications(for: category)
+    }
 }

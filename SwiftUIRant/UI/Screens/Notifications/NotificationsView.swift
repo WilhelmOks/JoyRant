@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    @StateObject private var viewModel: NotificationsViewModel = .init()
+    
     var body: some View {
         VStack {
-            Text("TODO: filter picker")
+            Picker(selection: $viewModel.currentTab, label: EmptyView()) {
+                ForEach(viewModel.tabs) { tab in
+                    Text(tab.displayName).tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(10)
             
             ScrollView {
                 LazyVStack {

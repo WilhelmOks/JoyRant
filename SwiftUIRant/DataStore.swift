@@ -16,12 +16,14 @@ final class DataStore: ObservableObject {
     @Published var isFeedLoaded = false
     @Published var unfilteredRantsInFeed: [RantInFeed] = []
     @Published var rantsInFeed: [RantInFeed] = []
+    @Published var notifications: Notifications?
     
     var currentFeedSession: String?
     var duplicatesInFeed = 0
     
     func clear() {
         clearFeed()
+        notifications = nil
     }
     
     func clearFeed() {

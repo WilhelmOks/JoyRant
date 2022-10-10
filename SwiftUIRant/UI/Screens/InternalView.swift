@@ -31,9 +31,7 @@ struct InternalView: View {
                 }
             }
             .tag(Tab.feed)
-            #if os(iOS)
-            .toolbar(.visible, in: .navigationBar, .tabBar)
-            #endif
+            .toolbarsVisible()
             
             NavigationStack() {
                 NotificationsView()
@@ -46,9 +44,7 @@ struct InternalView: View {
                 }
             }
             .tag(Tab.notifications)
-            #if os(iOS)
-            .toolbar(.visible, in: .navigationBar, .tabBar)
-            #endif
+            .toolbarsVisible()
             
             NavigationStack() {
                 SettingsView()
@@ -61,9 +57,7 @@ struct InternalView: View {
                 }
             }
             .tag(Tab.settings)
-            #if os(iOS)
-            .toolbar(.visible, in: .navigationBar, .tabBar)
-            #endif
+            .toolbarsVisible()
         }
     }
 }

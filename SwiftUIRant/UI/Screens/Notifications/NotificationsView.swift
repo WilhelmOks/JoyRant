@@ -27,9 +27,7 @@ struct NotificationsView: View {
             }
             .navigationTitle("Notifications")
         }
-        #if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
+        .navigationBarTitleDisplayModeInline()
     }
 }
 

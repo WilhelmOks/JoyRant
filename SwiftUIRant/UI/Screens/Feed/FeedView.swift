@@ -28,9 +28,7 @@ struct FeedView: View {
             }
             .background(Color.primaryBackground)
             .navigationTitle("Feed")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
+            .navigationBarTitleDisplayModeInline()
             .alert($viewModel.alertMessage)
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {

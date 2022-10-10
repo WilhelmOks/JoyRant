@@ -59,4 +59,9 @@ final class DataLoader {
     @MainActor func loadNotifications(for category: Notifications.Categories) async throws {
         dataStore.notifications = try await Networking.shared.getNotifications(for: category)
     }
+    
+    @MainActor func loadNotificationsNumber() async throws {
+        let unreadNotifications = try await Networking.shared.getNotifications(for: .all).unread.total
+        dataStore.numberOfUnreadNotifications = unreadNotifications
+    }
 }

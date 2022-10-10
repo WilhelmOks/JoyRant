@@ -21,11 +21,16 @@ struct NotificationsView: View {
             .navigationTitle("Notifications")
             .navigationBarTitleDisplayModeInline()
             .alert($viewModel.alertMessage)
+            /*.onAppear {
+                Task {
+                    await viewModel.load()
+                }
+            }*/
     }
     
     @ViewBuilder private func content() -> some View {
         VStack {
-            Picker(selection: $appState.notificationCategoryTab, label: EmptyView()) {
+            Picker(selection: $viewModel.categoryTab, label: EmptyView()) {
                 ForEach(viewModel.tabs) { tab in
                     Text(tab.displayName).tag(tab)
                 }

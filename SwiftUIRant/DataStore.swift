@@ -17,6 +17,7 @@ final class DataStore: ObservableObject {
     @Published var unfilteredRantsInFeed: [RantInFeed] = []
     @Published var rantsInFeed: [RantInFeed] = []
     @Published var notifications: Notifications?
+    @Published var numberOfUnreadNotifications = 0
     
     var currentFeedSession: String?
     var duplicatesInFeed = 0
@@ -24,6 +25,7 @@ final class DataStore: ObservableObject {
     func clear() {
         clearFeed()
         notifications = nil
+        numberOfUnreadNotifications = 0
     }
     
     func clearFeed() {

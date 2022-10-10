@@ -23,14 +23,12 @@ struct InternalView: View {
         content()
             .onAppear {
                 Task {
-                    let category = appState.notificationCategoryTab.category
-                    try? await DataLoader.shared.loadNotifications(for: category)
+                    try? await DataLoader.shared.loadNotificationsNumber()
                 }
             }
             .onChange(of: tab) { _ in
                 Task {
-                    let category = appState.notificationCategoryTab.category
-                    try? await DataLoader.shared.loadNotifications(for: category)
+                    try? await DataLoader.shared.loadNotificationsNumber()
                 }
             }
     }
@@ -55,7 +53,7 @@ struct InternalView: View {
             }
             .tabItem {
                 Label {
-                    Text("Notifications (\(dataStore.notifications?.unread.total ?? 0))")
+                    Text("Notifications (\(dataStore.numberOfUnreadNotifications))") //TODO: make a proper number badge
                 } icon: {
                     Image(systemName: "bell")
                 }

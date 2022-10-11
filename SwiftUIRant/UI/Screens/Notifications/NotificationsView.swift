@@ -44,10 +44,12 @@ struct NotificationsView: View {
             .padding(10)
             
             ScrollView {
-                LazyVStack {
+                LazyVStack(spacing: 0) {
                     //TODO: use something else as id
                     ForEach(dataStore.notifications?.items ?? [], id: \.createdTime) { notification in
-                        Text(notification.type.rawValue)
+                        row(notification)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
                         Divider()
                     }
                 }
@@ -71,6 +73,22 @@ struct NotificationsView: View {
             .disabled(viewModel.isLoading)
             .opacity(!viewModel.isLoading ? 1 : 0)
         }
+    }
+    
+    @ViewBuilder private func row(_ notification: SwiftRantNotification) -> some View {
+        //TODO: fetch this in DataStore
+        let userId = notification.uid
+        let userInfo = dataStore.notifications?.usernameMap?.array.first(where: { map in map.uidForUsername == String(userId) })
+        let userAvatar = userInfo?.avatar ?? .init(backgroundColor: "cccccc", avatarImage: nil)
+        let userName = userInfo?.name ?? ""
+        
+        NotificationRowView(
+            userAvatar: userAvatar,
+            userName: userName,
+            notificationType: notification.type,
+            createdTime: notification.createdTime,
+            isRead: notification.read == 1
+        )
     }
 }
 

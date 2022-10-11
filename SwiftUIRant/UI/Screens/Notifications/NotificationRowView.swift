@@ -13,22 +13,25 @@ struct NotificationRowView: View {
     let userName: String
     let notificationType: NotificationType
     let createdTime: Int
+    let isRead: Bool
     
     var body: some View {
         HStack(spacing: 10) {
             UserAvatarView(avatar: userAvatar)
-            
+                //.opacity(isRead ? 0.5 : 1.0)
+                        
             VStack(alignment: .leading, spacing: 4) {
                 Text(userName)
-                    .font(baseSize: 15, weightDelta: 2)
+                    .font(baseSize: 15, weightDelta: isRead ? 1 : 3)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
                 
                 Text(message())
-                    .font(baseSize: 15, weightDelta: 0)
+                    .font(baseSize: 15, weightDelta: isRead ? -1 : 0)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
             }
+            .opacity(isRead ? 0.5 : 1.0)
             
             Spacer()
             
@@ -98,7 +101,8 @@ private struct ExampleView: View {
             
             ForEach(notificationTypes, id: \.rawValue) { notificationType in
                 row(notificationType)
-                    .padding(10)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
                 
                 Divider()
             }
@@ -113,7 +117,8 @@ private struct ExampleView: View {
             ),
             userName: "ShorelockHelms",
             notificationType: notificationType,
-            createdTime: Int(Date().addingTimeInterval(60 * -5).timeIntervalSince1970)
+            createdTime: Int(Date().addingTimeInterval(60 * -5).timeIntervalSince1970),
+            isRead: false
         )
     }
 }

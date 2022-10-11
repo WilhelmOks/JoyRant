@@ -8,10 +8,10 @@
 import Foundation
 import SwiftRant
 
-final class DataLoader {
+final class DataLoader: ObservableObject {
     static let shared = DataLoader()
     
-    let dataStore = DataStore.shared
+    private let dataStore = DataStore.shared
     
     private init() {}
     

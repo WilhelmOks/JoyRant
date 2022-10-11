@@ -10,6 +10,7 @@ import SwiftUI
 struct InternalView: View {
     @ObservedObject var appState = AppState.shared
     @ObservedObject var dataStore = DataStore.shared
+    @ObservedObject var dataLoader = DataLoader.shared
     
     enum Tab: Int, CaseIterable, Hashable, Identifiable {
         case feed
@@ -33,33 +34,36 @@ struct InternalView: View {
         content()
             .onAppear {
                 Task {
-                    try? await DataLoader.shared.loadNotificationsNumber()
+                    try? await dataLoader.loadNotificationsNumber()
                 }
             }
             .onChange(of: tab) { _ in
                 Task {
-                    try? await DataLoader.shared.loadNotificationsNumber()
+                    try? await dataLoader.loadNotificationsNumber()
                 }
             }
     }
     
     @ViewBuilder private func content() -> some View {
+        #if os(iOS)
         TabView(selection: $tab) {
             ForEach(Tab.allCases) { tab in
                 tabView(tab)
             }
         }
-    }
-    
-    @ViewBuilder private func contentForTab(_ tab: Tab) -> some View {
-        switch tab {
-        case .feed:             FeedView()
-        case .notifications:    NotificationsView()
-        case .settings:         SettingsView()
+        #elseif os(macOS)
+        NavigationStack(path: $appState.navigationPath) {
+            TabView(selection: $tab) {
+                ForEach(Tab.allCases) { tab in
+                    tabView(tab)
+                }
+            }
         }
+        #endif
     }
     
-    @ViewBuilder private func tabContent(_ tab: Tab) -> some View {
+    @ViewBuilder private func wrappedContentForTab(_ tab: Tab) -> some View {
+        #if os(iOS)
         switch tab {
         case .feed:
             NavigationStack(path: $appState.navigationPath) {
@@ -70,6 +74,37 @@ struct InternalView: View {
                 contentForTab(tab)
             }
         }
+        #elseif os(macOS)
+        if self.tab == tab {
+            contentForTab(tab)
+        } else {
+            ZStack {}
+        }
+        #endif
+    }
+    
+    @ViewBuilder private func contentForTab(_ tab: Tab) -> some View {
+        switch tab {
+        case .feed:             FeedView()
+        case .notifications:    NotificationsView()
+        case .settings:         SettingsView()
+        }
+    }
+    
+    @ViewBuilder private func tabView(_ tab: Tab) -> some View {
+        //TODO: make a proper number badge
+        let title = tab == .notifications ? "\(tab.displayName) (\(dataStore.numberOfUnreadNotifications))" : tab.displayName
+        
+        wrappedContentForTab(tab)
+            .tabItem {
+                Label {
+                    Text(title)
+                } icon: {
+                    tabIcon(tab)
+                }
+            }
+            .tag(tab)
+            .toolbarsVisible()
     }
     
     @ViewBuilder private func tabIcon(_ tab: Tab) -> some View {
@@ -81,22 +116,6 @@ struct InternalView: View {
         case .settings:
             Image(systemName: "gear")
         }
-    }
-    
-    @ViewBuilder private func tabView(_ tab: Tab) -> some View {
-        //TODO: make a proper number badge
-        let title = tab == .notifications ? "\(tab.displayName) (\(dataStore.numberOfUnreadNotifications))" : tab.displayName
-        
-        tabContent(tab)
-        .tabItem {
-            Label {
-                Text(title)
-            } icon: {
-                tabIcon(tab)
-            }
-        }
-        .tag(tab)
-        .toolbarsVisible()
     }
 }
 

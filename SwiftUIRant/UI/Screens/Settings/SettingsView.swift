@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    var navigationBar = true
+    
     var body: some View {
         Form {
             Button {
@@ -23,8 +25,10 @@ struct SettingsView: View {
             }
 
         }
-        .navigationTitle("Settings")
-        .navigationBarTitleDisplayModeInline()
+        .if(navigationBar) {
+            $0
+            .navigationTitle("Settings")
+        }
     }
 }
 

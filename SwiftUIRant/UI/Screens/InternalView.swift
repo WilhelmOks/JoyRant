@@ -68,26 +68,27 @@ struct InternalView: View {
         case .feed:
             NavigationStack(path: $appState.navigationPath) {
                 contentForTab(tab)
+                    .navigationBarTitleDisplayModeInline()
             }
         default:
             NavigationStack() {
                 contentForTab(tab)
+                    .navigationBarTitleDisplayModeInline()
             }
         }
         #elseif os(macOS)
-        if self.tab == tab {
-            contentForTab(tab)
-        } else {
-            ZStack {}
-        }
+        contentForTab(tab, navigationBar: self.tab == tab)
         #endif
     }
     
-    @ViewBuilder private func contentForTab(_ tab: Tab) -> some View {
+    @ViewBuilder private func contentForTab(_ tab: Tab, navigationBar: Bool = true) -> some View {
         switch tab {
-        case .feed:             FeedView()
-        case .notifications:    NotificationsView()
-        case .settings:         SettingsView()
+        case .feed:
+            FeedView(navigationBar: navigationBar)
+        case .notifications:
+            NotificationsView(navigationBar: navigationBar)
+        case .settings:
+            SettingsView(navigationBar: navigationBar)
         }
     }
     

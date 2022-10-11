@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    var navigationBar = true
+    
     @ObservedObject private var appState = AppState.shared
     @ObservedObject private var dataStore = DataStore.shared
     @StateObject private var viewModel: NotificationsViewModel = .init()
     
     var body: some View {
         content()
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    toolbarReloadButton()
+            .if(navigationBar) {
+                $0
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        toolbarReloadButton()
+                    }
                 }
+                .navigationTitle("Notifications")
             }
-            .navigationTitle("Notifications")
-            .navigationBarTitleDisplayModeInline()
             .alert($viewModel.alertMessage)
             /*.onAppear {
                 Task {

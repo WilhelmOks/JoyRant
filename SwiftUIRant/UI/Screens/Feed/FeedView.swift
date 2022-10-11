@@ -9,26 +9,30 @@ import SwiftUI
 import SwiftRant
 
 struct FeedView: View {
+    var navigationBar = true
+    
     @ObservedObject private var dataStore = DataStore.shared
     @StateObject private var viewModel = FeedViewModel()
     
     var body: some View {
         content()
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Button {
-                        Task {
-                            await viewModel.reload()
+            .if(navigationBar) {
+                $0
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        Button {
+                            Task {
+                                await viewModel.reload()
+                            }
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
                         }
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
+                        .disabled(viewModel.isLoading || viewModel.isLoadingMore)
                     }
-                    .disabled(viewModel.isLoading || viewModel.isLoadingMore)
                 }
+                .navigationTitle("Feed")
             }
             .background(Color.primaryBackground)
-            .navigationTitle("Feed")
-            .navigationBarTitleDisplayModeInline()
             .alert($viewModel.alertMessage)
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {

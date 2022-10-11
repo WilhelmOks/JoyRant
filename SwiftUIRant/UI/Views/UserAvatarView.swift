@@ -13,13 +13,14 @@ import SwiftRant
 /// Contrary to the official app, the image is not green but gray if there is no avatar.
 struct UserAvatarView: View {
     let avatar: Rant.UserAvatar
+    var size: CGFloat = 44
     
     private let emptyBgColor = Color.gray.opacity(0.3)
     
     var body: some View {
         content()
             .clipShape(Circle())
-            .frame(width: 44, height: 44)
+            .frame(width: size, height: size)
     }
     
     @ViewBuilder private func content() -> some View {

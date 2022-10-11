@@ -61,7 +61,7 @@ struct UserPanel_Previews: PreviewProvider {
         VStack(spacing: 20) {
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "00cc00",
+                    backgroundColor: "88ee88",
                     avatarImage: nil
                 ),
                 name: "Walter White",
@@ -71,7 +71,7 @@ struct UserPanel_Previews: PreviewProvider {
             
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "00ff00",
+                    backgroundColor: "88ee88",
                     avatarImage: nil
                 ),
                 name: "Walter White",
@@ -81,7 +81,7 @@ struct UserPanel_Previews: PreviewProvider {
             
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "00ff00",
+                    backgroundColor: "88ee88",
                     avatarImage: nil
                 ),
                 name: "Walter White",
@@ -91,7 +91,7 @@ struct UserPanel_Previews: PreviewProvider {
             
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "00ff00",
+                    backgroundColor: "88ee88",
                     avatarImage: nil
                 ),
                 name: "Walter White",

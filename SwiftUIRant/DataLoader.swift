@@ -17,7 +17,7 @@ final class DataLoader: ObservableObject {
     
     @MainActor func loadFeed() async throws {
         let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
-        //dataStore.currentFeedSession = feed.set
+        dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.unfilteredRantsInFeed = feed.rants
         dataStore.rantsInFeed = feed.rants
@@ -27,7 +27,7 @@ final class DataLoader: ObservableObject {
     @MainActor func loadMoreFeed() async throws {
         let rantsToSkip = dataStore.unfilteredRantsInFeed.count
         let moreFeed = try await Networking.shared.rants(skip: rantsToSkip, session: dataStore.currentFeedSession)
-        //dataStore.currentFeedSession = moreFeed.set
+        dataStore.currentFeedSession = moreFeed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         addMoreRantsToFeed(moreFeed.rants)
     }
@@ -35,7 +35,7 @@ final class DataLoader: ObservableObject {
     @MainActor func reloadFeed() async throws {
         dataStore.clearFeed()
         let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
-        //dataStore.currentFeedSession = feed.set
+        dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = feed.rants
         dataStore.unfilteredRantsInFeed = feed.rants
@@ -61,7 +61,6 @@ final class DataLoader: ObservableObject {
     }
     
     @MainActor func loadNotificationsNumber() async throws {
-        let unreadNotifications = try await Networking.shared.getNotifications(for: .all).unread.total
-        dataStore.numberOfUnreadNotifications = unreadNotifications
+        dataStore.numberOfUnreadNotifications = try await Networking.shared.getNumberOfUnreadNotifications()
     }
 }

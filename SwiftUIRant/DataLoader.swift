@@ -56,9 +56,9 @@ final class DataLoader: ObservableObject {
         }
     }
     
-    @MainActor func loadNotifications(for category: Notifications.Categories) async throws {
+    /*@MainActor func loadNotifications(for category: Notifications.Categories) async throws {
         dataStore.notifications = try await Networking.shared.getNotifications(for: category)
-    }
+    }*/
     
     @MainActor func loadNotificationsNumber() async throws {
         dataStore.numberOfUnreadNotifications = try await Networking.shared.getNumberOfUnreadNotifications()

@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import SwiftRant
 
 struct NotificationsView: View {
     var navigationBar = true
     
+    @StateObject private var viewModel: NotificationsViewModel = .init()
     @ObservedObject private var appState = AppState.shared
     @ObservedObject private var dataStore = DataStore.shared
-    @StateObject private var viewModel: NotificationsViewModel = .init()
     
     var body: some View {
         content()
@@ -41,13 +42,14 @@ struct NotificationsView: View {
                 }
             }
             .pickerStyle(.segmented)
+            .disabled(viewModel.isLoading)
             .padding(10)
             
             ScrollView {
                 LazyVStack(spacing: 0) {
                     //TODO: use something else as id
-                    ForEach(dataStore.notifications?.items ?? [], id: \.createdTime) { notification in
-                        row(notification)
+                    ForEach(viewModel.notificationItems, id: \.createdTime) { item in
+                        row(item)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)
                         Divider()
@@ -75,19 +77,14 @@ struct NotificationsView: View {
         }
     }
     
-    @ViewBuilder private func row(_ notification: SwiftRantNotification) -> some View {
-        //TODO: fetch this in DataStore
-        let userId = notification.uid
-        let userInfo = dataStore.notifications?.usernameMap?.array.first(where: { map in map.uidForUsername == String(userId) })
-        let userAvatar = userInfo?.avatar ?? .init(backgroundColor: "cccccc", avatarImage: nil)
-        let userName = userInfo?.name ?? ""
+    @ViewBuilder private func row(_ item: Notifications.MappedNotificationItem) -> some View {
         
         NotificationRowView(
-            userAvatar: userAvatar,
-            userName: userName,
-            notificationType: notification.type,
-            createdTime: notification.createdTime,
-            isRead: notification.read == 1
+            userAvatar: item.userAvatar,
+            userName: item.userName,
+            notificationType: item.notificationType,
+            createdTime: item.createdTime,
+            isRead: item.isRead
         )
     }
 }

@@ -11,7 +11,14 @@ import SwiftRant
 @MainActor final class NotificationsViewModel: ObservableObject {
     let tabs = CategoryTab.allCases
     
-    @Published var categoryTab: CategoryTab = .all
+    @Published var categoryTab: CategoryTab = .all {
+        didSet {
+            Task {
+                await load()
+            }
+        }
+    }
+    @Published var notificationItems: [Notifications.MappedNotificationItem] = []
     @Published var isLoading = false
     @Published var alertMessage: AlertMessage = .none()
     
@@ -24,8 +31,11 @@ import SwiftRant
     func load() async {
         isLoading = true
         
+        notificationItems = []
+        
         do {
-            try await DataLoader.shared.loadNotifications(for: categoryTab.category)
+            let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
+            notificationItems = notifications.mappedItems
         } catch {
             alertMessage = .presentedError(error)
         }

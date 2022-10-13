@@ -9,34 +9,30 @@ import SwiftUI
 import SwiftRant
 
 struct NotificationRowView: View {
-    let userAvatar: Rant.UserAvatar
-    let userName: String
-    let notificationType: NotificationType
-    let createdTime: Int
-    let isRead: Bool
+    let item: Notifications.MappedNotificationItem
     
     var body: some View {
         HStack(spacing: 10) {
-            UserAvatarView(avatar: userAvatar)
+            UserAvatarView(avatar: item.userAvatar)
                 //.opacity(isRead ? 0.5 : 1.0)
                         
             VStack(alignment: .leading, spacing: 4) {
-                Text(userName)
-                    .font(baseSize: 15, weightDelta: isRead ? 1 : 3)
+                Text(item.userName)
+                    .font(baseSize: 15, weightDelta: item.isRead ? 1 : 3)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
                 
                 Text(message())
-                    .font(baseSize: 15, weightDelta: isRead ? -1 : 0)
+                    .font(baseSize: 15, weightDelta: item.isRead ? -1 : 0)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
             }
-            .opacity(isRead ? 0.5 : 1.0)
+            .opacity(item.isRead ? 0.5 : 1.0)
             
             Spacer()
             
             VStack(alignment: .trailing, spacing: 8) {
-                CreationTimeView(createdTime: createdTime, isEdited: false)
+                CreationTimeView(createdTime: item.createdTime, isEdited: false)
                                 
                 icon()
                     .foregroundColor(.secondaryForeground)
@@ -45,7 +41,7 @@ struct NotificationRowView: View {
     }
     
     private func message() -> String {
-        switch notificationType {
+        switch item.notificationType {
         case .rantUpvote:
             return "++'d your rant"
         case .commentUpvote:
@@ -62,7 +58,7 @@ struct NotificationRowView: View {
     }
     
     @ViewBuilder private func icon() -> some View {
-        switch notificationType {
+        switch item.notificationType {
         case .rantUpvote:
             Text("++")
                 .font(baseSize: 12, weightDelta: 1)
@@ -111,14 +107,17 @@ private struct ExampleView: View {
     
     @ViewBuilder private func row(_ notificationType: NotificationType) -> some View {
         NotificationRowView(
-            userAvatar: .init(
-                backgroundColor: "99cc99",
-                avatarImage: "v-37_c-3_b-6_g-m_9-1_1-4_16-3_3-4_8-1_7-1_5-1_12-4_6-102_10-1_2-39_22-2_15-10_11-1_4-1.jpg"
-            ),
-            userName: "ShorelockHelms",
-            notificationType: notificationType,
-            createdTime: Int(Date().addingTimeInterval(60 * -5).timeIntervalSince1970),
-            isRead: false
+            item: .init(
+                userId: 1,
+                userAvatar: .init(
+                    backgroundColor: "99cc99",
+                    avatarImage: "v-37_c-3_b-6_g-m_9-1_1-4_16-3_3-4_8-1_7-1_5-1_12-4_6-102_10-1_2-39_22-2_15-10_11-1_4-1.jpg"
+                ),
+                userName: "ShorelockHelms",
+                notificationType: notificationType,
+                createdTime: Int(Date().addingTimeInterval(60 * -5).timeIntervalSince1970),
+                isRead: false
+            )
         )
     }
 }

@@ -10,7 +10,8 @@ import SwiftRant
 
 //TODO: move this to the SwiftRant package
 extension Notifications {
-    struct MappedNotificationItem {
+    struct MappedNotificationItem: Identifiable {
+        let id = UUID()
         let userId: Int
         let userAvatar: Rant.UserAvatar //TODO: UserAvatar shouldn't be in a rant because it can also be in a notification or somewhere else, not related to a rant.
         let userName: String

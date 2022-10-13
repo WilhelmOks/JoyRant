@@ -47,11 +47,11 @@ struct NotificationsView: View {
             
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    //TODO: use something else as id
-                    ForEach(viewModel.notificationItems, id: \.createdTime) { item in
-                        row(item)
+                    ForEach(viewModel.notificationItems) { item in
+                        NotificationRowView(item: item)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)
+                        
                         Divider()
                     }
                 }
@@ -75,17 +75,6 @@ struct NotificationsView: View {
             .disabled(viewModel.isLoading)
             .opacity(!viewModel.isLoading ? 1 : 0)
         }
-    }
-    
-    @ViewBuilder private func row(_ item: Notifications.MappedNotificationItem) -> some View {
-        
-        NotificationRowView(
-            userAvatar: item.userAvatar,
-            userName: item.userName,
-            notificationType: item.notificationType,
-            createdTime: item.createdTime,
-            isRead: item.isRead
-        )
     }
 }
 

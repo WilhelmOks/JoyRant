@@ -16,7 +16,7 @@ struct TimeFormatter {
     private init() {
         let currentLocale = Locale.current
         
-        // a locale with the current region of the app user but always in english:
+        // a locale with the current region of the user's device but always in english:
         let locale = Locale(
             languageCode: .init("en"),
             script: currentLocale.scriptCode.flatMap { Locale.Script.init($0) },
@@ -35,7 +35,7 @@ struct TimeFormatter {
     }
     
     func string(fromDate date: Date) -> String {
-        let relativeThreshold: TimeInterval = 60 * 60 * 24 * 10 // 10 days
+        let relativeThreshold: TimeInterval = 60 * 60 * 24 * 6 // 6 days
         let now = Date()
         if date.addingTimeInterval(relativeThreshold) > now {
             return relativeDateTimeFormatter.string(for: date) ?? ""

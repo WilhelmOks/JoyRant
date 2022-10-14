@@ -37,4 +37,14 @@ extension Notifications {
             )
         }
     }
+    
+    var unreadByCategory: [Notifications.Categories: Int] {
+        [
+            .all:       unread.all,
+            .upvotes:   unread.upvotes,
+            .mentions:  unread.mentions,
+            .comments:  unread.comments,
+            .subs:      unread.subs,
+        ]
+    }
 }

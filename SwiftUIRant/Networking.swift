@@ -119,7 +119,7 @@ struct Networking {
         ).get()
     }
     
-    func getNumberOfUnreadNotifications() async throws -> Int {
+    func getNumbersOfUnreadNotifications() async throws -> [Notifications.Categories: Int] {
         let notifications = try await swiftRant.getNotificationFeed(
             token: try token(),
             lastCheckTime: Int(Date().timeIntervalSince1970),
@@ -127,8 +127,8 @@ struct Networking {
             category: .all
         ).get()
         
-        dlog("### notif.items.count: \(notifications.items.count)")
+        dlog("### notifications.items.count: \(notifications.items.count)")
         
-        return notifications.unread.total
+        return notifications.unreadByCategory
     }
 }

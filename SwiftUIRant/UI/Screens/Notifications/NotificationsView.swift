@@ -38,7 +38,9 @@ struct NotificationsView: View {
         VStack {
             Picker(selection: $viewModel.categoryTab, label: EmptyView()) {
                 ForEach(viewModel.tabs) { tab in
-                    Text(tab.displayName).tag(tab)
+                    //TODO: The * is temporary just to see if it works
+                    let tabTitle = (dataStore.unreadNotifications[tab.category] ?? 0 > 0 ? "* " : "") + tab.displayName
+                    Text(tabTitle).tag(tab)
                 }
             }
             .pickerStyle(.segmented)

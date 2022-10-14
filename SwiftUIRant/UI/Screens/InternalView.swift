@@ -34,12 +34,12 @@ struct InternalView: View {
         content()
             .onAppear {
                 Task {
-                    try? await dataLoader.loadNotificationsNumber()
+                    try? await dataLoader.loadNumbersOfUnreadNotifications()
                 }
             }
             .onChange(of: tab) { _ in
                 Task {
-                    try? await dataLoader.loadNotificationsNumber()
+                    try? await dataLoader.loadNumbersOfUnreadNotifications()
                 }
             }
     }
@@ -94,7 +94,7 @@ struct InternalView: View {
     
     @ViewBuilder private func tabView(_ tab: Tab) -> some View {
         //TODO: make a proper number badge
-        let title = tab == .notifications ? "\(tab.displayName) (\(dataStore.numberOfUnreadNotifications))" : tab.displayName
+        let title = tab == .notifications ? "\(tab.displayName) (\(dataStore.unreadNotifications[.all] ?? 0))" : tab.displayName
         
         wrappedContentForTab(tab)
             .tabItem {

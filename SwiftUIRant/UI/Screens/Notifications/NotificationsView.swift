@@ -28,18 +28,13 @@ struct NotificationsView: View {
                 }
                 .navigationTitle("Notifications")
             }
+            .background(Color.primaryBackground)
             .alert($viewModel.alertMessage)
             .onReceive(broadcastEvent: .shouldRefreshNotifications) { _ in
                 Task {
                     await viewModel.refresh()
                 }
             }
-            /*.onAppear {
-                /*Task {
-                    await viewModel.load()
-                }*/
-                dlog("### NotificationsView onAppear")
-            }*/
     }
     
     @ViewBuilder private func content() -> some View {
@@ -60,12 +55,18 @@ struct NotificationsView: View {
                     ForEach(viewModel.notificationItems) { item in
                         VStack(spacing: 0) {
                             NavigationLink {
-                                RantDetailsView(viewModel: .init(rantId: item.rantId)) //TODO: pass commentId to scroll to
+                                RantDetailsView(
+                                    viewModel: .init(
+                                        rantId: item.rantId,
+                                        scrollToCommentWithId: item.commentId
+                                    )
+                                )
                             } label: {
                                 NotificationRowView(item: item)
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 6)
                             }
+                            .buttonStyle(.plain)
                             
                             Divider()
                         }

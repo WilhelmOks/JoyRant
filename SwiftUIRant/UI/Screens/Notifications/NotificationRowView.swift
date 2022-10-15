@@ -38,6 +38,7 @@ struct NotificationRowView: View {
                     .foregroundColor(.secondaryForeground)
             }
         }
+        .background(Color.primaryBackground)
     }
     
     private func message() -> String {

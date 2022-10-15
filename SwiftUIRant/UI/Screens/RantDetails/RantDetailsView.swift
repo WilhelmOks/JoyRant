@@ -30,31 +30,41 @@ struct RantDetailsView: View {
     @ViewBuilder private func content() -> some View {
         if let rant = viewModel.rant, !viewModel.isLoading {
             ZStack {
-                ScrollView {
-                    LazyVStack {
-                        RantView(
-                            viewModel: .init(
-                                rant: rant
-                            )
-                        )
-                        .id(rant.uuid)
-                        
-                        ForEach(viewModel.comments, id: \.id) { comment in
-                            VStack(spacing: 0) {
-                                Divider()
-                                
-                                RantCommentView(
-                                    viewModel: .init(
-                                        comment: comment
-                                    )
+                ScrollViewReader { scrollProxy in
+                    ScrollView {
+                        VStack { //TODO: lazy
+                            RantView(
+                                viewModel: .init(
+                                    rant: rant
                                 )
-                                //.id(comment.uuid) //TODO: make uuid public
-                                .id("\(rant.uuid.uuidString)_ \(comment.id)")
+                            )
+                            .id(rant.uuid)
+                            
+                            ForEach(viewModel.comments, id: \.id) { comment in
+                                VStack(spacing: 0) {
+                                    Divider()
+                                    
+                                    RantCommentView(
+                                        viewModel: .init(
+                                            comment: comment
+                                        )
+                                    )
+                                    //.id(comment.uuid) //TODO: make uuid public
+                                    .id("\(rant.uuid)_\(comment.id)")
+                                }
+                            }
+                        }
+                        .padding(.bottom, 10)
+                        .padding(.bottom, 34) //TODO: measure comment button size and set it here
+                    }
+                    .onReceive(broadcastEvent: .shouldScrollToComment) { _ in
+                        if let commentId = viewModel.scrollToCommentWithId {
+                            withAnimation {
+                                scrollProxy.scrollTo("\(rant.uuid)_\(commentId)", anchor: .top)
+                                //TODO: fix scroll position
                             }
                         }
                     }
-                    .padding(.bottom, 10)
-                    .padding(.bottom, 34) //TODO: measure comment button size and set it here
                 }
                 
                 commentButton()

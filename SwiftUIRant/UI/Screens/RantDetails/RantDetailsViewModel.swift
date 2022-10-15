@@ -18,8 +18,11 @@ final class RantDetailsViewModel: ObservableObject {
     @Published var rant: Rant?
     @Published var comments: [Comment] = []
     
-    init(rantId: Int) {
+    let scrollToCommentWithId: Int?
+    
+    init(rantId: Int, scrollToCommentWithId: Int? = nil) {
         self.rantId = rantId
+        self.scrollToCommentWithId = scrollToCommentWithId
         
         Task {
             await load()
@@ -41,6 +44,9 @@ final class RantDetailsViewModel: ObservableObject {
         await performLoad()
         BroadcastEvent.shouldRefreshNotifications.send()
         isLoading = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            BroadcastEvent.shouldScrollToComment.send()
+        }
     }
     
     @MainActor func reload() async {

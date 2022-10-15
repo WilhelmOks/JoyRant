@@ -12,6 +12,7 @@ import SwiftUI
 enum BroadcastEvent: Equatable {
     case shouldUpdateRantInFeed(rantId: Int)
     case shouldRefreshNotifications
+    case shouldScrollToComment
 }
 
 extension BroadcastEvent {

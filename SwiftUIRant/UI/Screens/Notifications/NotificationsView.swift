@@ -34,6 +34,9 @@ struct NotificationsView: View {
                 Task {
                     await viewModel.refresh()
                 }
+                Task {
+                    try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+                }
             }
     }
     
@@ -58,7 +61,8 @@ struct NotificationsView: View {
                                 RantDetailsView(
                                     viewModel: .init(
                                         rantId: item.rantId,
-                                        scrollToCommentWithId: item.commentId
+                                        scrollToCommentWithId: item.commentId,
+                                        scrollToLastCommentWithUserId: item.notificationType == .commentDiscuss ? item.userId : nil
                                     )
                                 )
                             } label: {

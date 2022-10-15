@@ -18,11 +18,13 @@ final class RantDetailsViewModel: ObservableObject {
     @Published var rant: Rant?
     @Published var comments: [Comment] = []
     
-    let scrollToCommentWithId: Int?
+    var scrollToCommentWithId: Int?
+    private let scrollToLastCommentWithUserId: Int?
     
-    init(rantId: Int, scrollToCommentWithId: Int? = nil) {
+    init(rantId: Int, scrollToCommentWithId: Int? = nil, scrollToLastCommentWithUserId: Int? = nil) {
         self.rantId = rantId
         self.scrollToCommentWithId = scrollToCommentWithId
+        self.scrollToLastCommentWithUserId = scrollToLastCommentWithUserId
         
         Task {
             await load()
@@ -44,6 +46,11 @@ final class RantDetailsViewModel: ObservableObject {
         await performLoad()
         BroadcastEvent.shouldRefreshNotifications.send()
         isLoading = false
+        
+        if let scrollToLastCommentWithUserId {
+            scrollToCommentWithId = comments.last { $0.userID == scrollToLastCommentWithUserId }?.id
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             BroadcastEvent.shouldScrollToComment.send()
         }

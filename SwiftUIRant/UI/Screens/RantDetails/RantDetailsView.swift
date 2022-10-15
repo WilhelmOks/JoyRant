@@ -32,7 +32,7 @@ struct RantDetailsView: View {
             ZStack {
                 ScrollViewReader { scrollProxy in
                     ScrollView {
-                        VStack { //TODO: lazy
+                        LazyVStack { // caution: Lazy might cause problems with scrollTo()
                             RantView(
                                 viewModel: .init(
                                     rant: rant
@@ -52,6 +52,7 @@ struct RantDetailsView: View {
                                     //.id(comment.uuid) //TODO: make uuid public
                                     .id("\(rant.uuid)_\(comment.id)")
                                 }
+                                .id("comment_\(comment.id)")
                             }
                         }
                         .padding(.bottom, 10)
@@ -60,7 +61,7 @@ struct RantDetailsView: View {
                     .onReceive(broadcastEvent: .shouldScrollToComment) { _ in
                         if let commentId = viewModel.scrollToCommentWithId {
                             withAnimation {
-                                scrollProxy.scrollTo("\(rant.uuid)_\(commentId)", anchor: .top)
+                                scrollProxy.scrollTo("comment_\(commentId)", anchor: .top)
                                 //TODO: fix scroll position
                             }
                         }

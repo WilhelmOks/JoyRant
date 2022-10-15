@@ -39,6 +39,7 @@ final class RantDetailsViewModel: ObservableObject {
     @MainActor func load() async {
         isLoading = true
         await performLoad()
+        BroadcastEvent.shouldRefreshNotifications.send()
         isLoading = false
     }
     

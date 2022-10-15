@@ -42,6 +42,19 @@ import SwiftRant
         
         isLoading = false
     }
+    
+    func refresh() async {
+        isLoading = true
+        
+        do {
+            let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
+            notificationItems = notifications.mappedItems
+        } catch {
+            dlog("Error refreshing notifications: \(error)")
+        }
+        
+        isLoading = false
+    }
 }
 
 extension NotificationsViewModel {

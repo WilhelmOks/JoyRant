@@ -108,6 +108,8 @@ private struct ExampleView: View {
     @ViewBuilder private func row(_ notificationType: NotificationType) -> some View {
         NotificationRowView(
             item: .init(
+                rantId: 13,
+                commentId: 14,
                 userId: 1,
                 userAvatar: .init(
                     backgroundColor: "99cc99",

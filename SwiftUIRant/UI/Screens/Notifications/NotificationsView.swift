@@ -23,14 +23,22 @@ struct NotificationsView: View {
                     ToolbarItem(placement: .automatic) {
                         toolbarReloadButton()
                     }
+                    
+                    //TODO: button to clear all unread notifications
                 }
                 .navigationTitle("Notifications")
             }
             .alert($viewModel.alertMessage)
-            /*.onAppear {
+            .onReceive(broadcastEvent: .shouldRefreshNotifications) { _ in
                 Task {
-                    await viewModel.load()
+                    await viewModel.refresh()
                 }
+            }
+            /*.onAppear {
+                /*Task {
+                    await viewModel.load()
+                }*/
+                dlog("### NotificationsView onAppear")
             }*/
     }
     
@@ -50,11 +58,17 @@ struct NotificationsView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.notificationItems) { item in
-                        NotificationRowView(item: item)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                        
-                        Divider()
+                        VStack(spacing: 0) {
+                            NavigationLink {
+                                RantDetailsView(viewModel: .init(rantId: item.rantId)) //TODO: pass commentId to scroll to
+                            } label: {
+                                NotificationRowView(item: item)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 6)
+                            }
+                            
+                            Divider()
+                        }
                     }
                 }
             }

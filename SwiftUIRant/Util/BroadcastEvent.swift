@@ -11,6 +11,7 @@ import SwiftUI
 
 enum BroadcastEvent: Equatable {
     case shouldUpdateRantInFeed(rantId: Int)
+    case shouldRefreshNotifications
 }
 
 extension BroadcastEvent {

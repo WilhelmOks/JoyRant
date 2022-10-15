@@ -23,7 +23,8 @@ struct SettingsView: View {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                 }
             }
-
+            
+            //TODO: button to clear image cache
         }
         .if(navigationBar) {
             $0

@@ -54,9 +54,9 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ⏹️ Edit comment
 
-🚧 Show notifications & navigate to the rant or coment
+🚧 Show notifications & navigate to the rant or comment
 
-⏹️ Mark notifications as read
+✅ Mark notifications as read
 
 🚧 Show number of unread notifications as a badge and keep it up to date
 

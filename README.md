@@ -46,13 +46,9 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ⏹️ Showing animated images (gifs?)
 
-⏹️ Create rant
+⏹️ Create/Edit/Delete rant
 
-⏹️ Create comment
-
-⏹️ Edit rant
-
-⏹️ Edit comment
+⏹️ Create/Edit/Delete comment
 
 🚧 Show notifications & navigate to the rant or comment
 

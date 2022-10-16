@@ -26,7 +26,7 @@ final class AppState: ObservableObject {
         SwiftRant.shared.tokenFromKeychain != nil
     }
     
-    func clearImageCache() { //TODO: call from UI
+    func clearImageCache() {
         URLCache.postedImageCache.removeAllCachedResponses()
         URLCache.userAvatarCache.removeAllCachedResponses()
     }

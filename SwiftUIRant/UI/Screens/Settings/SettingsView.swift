@@ -10,8 +10,23 @@ import SwiftUI
 struct SettingsView: View {
     var navigationBar = true
     
+    @State private var alertMessage: AlertMessage = .none()
+    
     var body: some View {
         Form {
+            Button {
+                DispatchQueue.main.async {
+                    AppState.shared.clearImageCache()
+                    alertMessage = .presentedMessage("Image cache cleared.")
+                }
+            } label: {
+                Label {
+                    Text("Clear image cache")
+                } icon: {
+                    Image(systemName: "photo.on.rectangle.angled")
+                }
+            }
+            
             Button {
                 DispatchQueue.main.async {
                     Networking.shared.logOut()
@@ -23,13 +38,12 @@ struct SettingsView: View {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                 }
             }
-            
-            //TODO: button to clear image cache
         }
         .if(navigationBar) {
             $0
             .navigationTitle("Settings")
         }
+        .alert($alertMessage)
     }
 }
 

@@ -38,6 +38,10 @@ extension AlertMessage {
         dlog("Error: \(message)")
         return presentedError(message: message)
     }
+    
+    static func presentedMessage(_ message: String) -> Self {
+        AlertMessage(isPresented: true, title: "", message: message, buttonText: "OK")
+    }
 }
 
 extension View {

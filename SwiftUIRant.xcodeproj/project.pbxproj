@@ -28,6 +28,8 @@
 		ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7C28B67CFF008BF314 /* LoginViewModel.swift */; };
 		ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7E28B69892008BF314 /* Logging.swift */; };
 		ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B8028B69D35008BF314 /* Networking.swift */; };
+		ED398CA528FC57250012142B /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED398CA428FC57250012142B /* LoadingButton.swift */; };
+		ED398CA728FC59650012142B /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED398CA628FC59650012142B /* RefreshButton.swift */; };
 		ED59CEC428BCE0860007B698 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC328BCE0860007B698 /* AppState.swift */; };
 		ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC628BCF6110007B698 /* AlertMessage.swift */; };
 		ED59CECA28BD05D00007B698 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC928BD05D00007B698 /* FeedView.swift */; };
@@ -87,6 +89,8 @@
 		ED2C9B7C28B67CFF008BF314 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED2C9B7E28B69892008BF314 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		ED2C9B8028B69D35008BF314 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		ED398CA428FC57250012142B /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
+		ED398CA628FC59650012142B /* RefreshButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButton.swift; sourceTree = "<group>"; };
 		ED59CEC328BCE0860007B698 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		ED59CEC628BCF6110007B698 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		ED59CEC928BD05D00007B698 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 				ED1B307828CCE921001A6A73 /* UserPanel.swift */,
 				ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */,
 				ED97D62428E86F5200CFC418 /* CreationTimeView.swift */,
+				ED398CA428FC57250012142B /* LoadingButton.swift */,
+				ED398CA628FC59650012142B /* RefreshButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -433,6 +439,7 @@
 				ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,
 				ED59CEC428BCE0860007B698 /* AppState.swift in Sources */,
+				ED398CA528FC57250012142B /* LoadingButton.swift in Sources */,
 				ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */,
 				ED59CED728BE71800007B698 /* VoteControl.swift in Sources */,
 				ED2C9B7B28B67C53008BF314 /* LoginView.swift in Sources */,
@@ -454,6 +461,7 @@
 				ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
 				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,
+				ED398CA728FC59650012142B /* RefreshButton.swift in Sources */,
 				ED97D63B28F45FB500CFC418 /* View+OS.swift in Sources */,
 				ED59CEDF28C789B30007B698 /* Color.swift in Sources */,
 			);

@@ -131,4 +131,8 @@ struct Networking {
         
         return notifications.unreadByCategory
     }
+    
+    func clearNotifications() async throws {
+        try await swiftRant.clearNotifications(try token()).get()
+    }
 }

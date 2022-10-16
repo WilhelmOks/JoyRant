@@ -55,6 +55,21 @@ import SwiftRant
         
         isLoading = false
     }
+    
+    func clear() async {
+        isLoading = true
+                
+        do {
+            try await Networking.shared.clearNotifications()
+            let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
+            try await DataLoader.shared.loadNumbersOfUnreadNotifications()
+            notificationItems = notifications.mappedItems
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoading = false
+    }
 }
 
 extension NotificationsViewModel {

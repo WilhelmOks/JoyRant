@@ -20,11 +20,19 @@ struct NotificationsView: View {
             .if(navigationBar) {
                 $0
                 .toolbar {
-                    ToolbarItem(placement: .automatic) {
-                        toolbarReloadButton()
+                    LoadingButton(isLoading: viewModel.isLoading) {
+                        Task {
+                            await viewModel.clear()
+                        }
+                    } label: {
+                        Text("Clear")
                     }
                     
-                    //TODO: button to clear all unread notifications
+                    RefreshButton(isLoading: viewModel.isLoading) {
+                        Task {
+                            await viewModel.load()
+                        }
+                    }
                 }
                 .navigationTitle("Notifications")
             }
@@ -77,24 +85,6 @@ struct NotificationsView: View {
                     }
                 }
             }
-        }
-    }
-    
-    @ViewBuilder private func toolbarReloadButton() -> some View {
-        ZStack {
-            ProgressView()
-                .opacity(viewModel.isLoading ? 1 : 0)
-                
-            Button {
-                Task {
-                    await viewModel.load()
-                }
-            } label: {
-                Image(systemName: "arrow.clockwise")
-                    .frame(width: 26, height: 26)
-            }
-            .disabled(viewModel.isLoading)
-            .opacity(!viewModel.isLoading ? 1 : 0)
         }
     }
 }

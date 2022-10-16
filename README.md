@@ -50,7 +50,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ⏹️ Create/Edit/Delete comment
 
-🚧 Show notifications & navigate to the rant or comment
+✅ Show notifications & navigate to the rant or comment
 
 ✅ Mark notifications as read
 

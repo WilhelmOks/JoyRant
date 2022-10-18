@@ -93,8 +93,9 @@ struct InternalView: View {
     }
     
     @ViewBuilder private func tabView(_ tab: Tab) -> some View {
-        //TODO: make a proper number badge
-        let title = tab == .notifications ? "\(tab.displayName) (\(dataStore.unreadNotifications[.all] ?? 0))" : tab.displayName
+        let numberOfNotifications = dataStore.unreadNotifications[.all] ?? 0
+        // It's not possible to make nice looking number badges for the tab bar. As a workaround, the number is shown in the title:
+        let title = tab == .notifications ? "\(tab.displayName) (\(numberOfNotifications))" : tab.displayName
         
         wrappedContentForTab(tab)
             .tabItem {

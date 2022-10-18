@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
 		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
+		ED0FB7E928FF34D000E5163D /* WriteCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7E828FF34D000E5163D /* WriteCommentView.swift */; };
+		ED0FB7EB28FF350500E5163D /* WriteCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7EA28FF350500E5163D /* WriteCommentViewModel.swift */; };
 		ED14DE5928E07A2F005FCC9A /* RantCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */; };
 		ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */; };
 		ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */; };
@@ -70,6 +72,8 @@
 /* Begin PBXFileReference section */
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
+		ED0FB7E828FF34D000E5163D /* WriteCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentView.swift; sourceTree = "<group>"; };
+		ED0FB7EA28FF350500E5163D /* WriteCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentViewModel.swift; sourceTree = "<group>"; };
 		ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentViewModel.swift; sourceTree = "<group>"; };
 		ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
 		ED14DE5F28E090E7005FCC9A /* URLCache_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCache_Extension.swift; sourceTree = "<group>"; };
@@ -141,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED0FB7E728FF348400E5163D /* WriteComment */ = {
+			isa = PBXGroup;
+			children = (
+				ED0FB7E828FF34D000E5163D /* WriteCommentView.swift */,
+				ED0FB7EA28FF350500E5163D /* WriteCommentViewModel.swift */,
+			);
+			path = WriteComment;
+			sourceTree = "<group>";
+		};
 		ED2C9B5928B679CB008BF314 = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +217,7 @@
 				ED2C9B7928B67BF4008BF314 /* Login */,
 				ED59CEC828BD04A80007B698 /* Feed */,
 				EDE2288F28D5E5710025EDB1 /* RantDetails */,
+				ED0FB7E728FF348400E5163D /* WriteComment */,
 				ED97D63528F302D500CFC418 /* Notifications */,
 				ED97D63228F1D4AD00CFC418 /* Settings */,
 			);
@@ -416,12 +430,14 @@
 				ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */,
 				ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */,
 				ED97D63728F3035C00CFC418 /* NotificationsView.swift in Sources */,
+				ED0FB7EB28FF350500E5163D /* WriteCommentViewModel.swift in Sources */,
 				ED59CECC28BD05E80007B698 /* FeedViewModel.swift in Sources */,
 				ED97D63928F44EA800CFC418 /* NotificationsViewModel.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,
 				ED97D64528F8634500CFC418 /* Notification+Map.swift in Sources */,
 				EDE2289728DB3F600025EDB1 /* VoteController.swift in Sources */,
 				EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */,
+				ED0FB7E928FF34D000E5163D /* WriteCommentView.swift in Sources */,
 				ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */,
 				ED97D63F28F5921800CFC418 /* View+If.swift in Sources */,
 				ED59CEDC28C788010007B698 /* KeyPathModifiedCopyable.swift in Sources */,

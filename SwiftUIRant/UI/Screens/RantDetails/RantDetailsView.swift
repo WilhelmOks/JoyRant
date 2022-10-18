@@ -10,6 +10,8 @@ import SwiftRant
 
 struct RantDetailsView: View {
     @StateObject var viewModel: RantDetailsViewModel
+    
+    @State private var presentedWriteCommentView = false
         
     var body: some View {
         content()
@@ -25,6 +27,9 @@ struct RantDetailsView: View {
             }
             .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
+            .sheet(isPresented: $presentedWriteCommentView) {
+                WriteCommentView()
+            }
     }
     
     @ViewBuilder private func content() -> some View {
@@ -79,8 +84,7 @@ struct RantDetailsView: View {
     
     @ViewBuilder private func commentButton() -> some View {
         Button {
-            //TODO: ...
-            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+            presentedWriteCommentView = true
         } label: {
             Label {
                 Text("Comment")

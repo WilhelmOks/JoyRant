@@ -9,6 +9,15 @@ import Foundation
 import SwiftRant
 import SwiftKeychainWrapper
 
+#if os(iOS)
+import UIKit
+typealias PlatformImage = UIImage
+#elseif os(macOS)
+import AppKit
+typealias PlatformImage = NSImage
+#endif
+
+
 struct Networking {
     static let shared = Self()
     
@@ -134,5 +143,10 @@ struct Networking {
     
     func clearNotifications() async throws {
         try await swiftRant.clearNotifications(try token()).get()
+    }
+    
+    //TODO: find a way to make it work on mac with UIImage
+    func postComment(rantId: Int, content: String, image: PlatformImage?) async throws {
+        try await swiftRant.postComment(try token(), rantID: rantId, content: content, image: image).get()
     }
 }

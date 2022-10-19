@@ -17,7 +17,6 @@ import AppKit
 typealias PlatformImage = NSImage
 #endif
 
-
 struct Networking {
     static let shared = Self()
     
@@ -25,22 +24,26 @@ struct Networking {
         let message: String
     }
     
-    private let swiftRant = SwiftRant.shared //SwiftRant(shouldUseKeychainAndUserDefaults: false)
+    private let swiftRant = SwiftRant.shared //TODO: use SwiftRant(shouldUseKeychainAndUserDefaults: false)
     
-    private let keychainWrapper = KeychainWrapper(serviceName: "SwiftRant")
+    private let keychainWrapper = KeychainWrapper(serviceName: "SwiftRant") //TODO: use "SwiftUIRant" as the service name
     
     var userCredentials: UserCredentials? {
         get {
             return keychainWrapper.decode(forKey: "DRToken")
         }
         set {
-            let success = keychainWrapper.encodeAndSet(
-                newValue,
-                forKey: "DRToken",
-                withAccessibility: .whenUnlockedThisDeviceOnly
-            )
-            if !success {
-                dlog("Error: failed to store token in keychain")
+            if let newValue {
+                let success = keychainWrapper.encodeAndSet(
+                    newValue,
+                    forKey: "DRToken",
+                    withAccessibility: .whenUnlockedThisDeviceOnly
+                )
+                if !success {
+                    dlog("Error: failed to store token in keychain")
+                }
+            } else {
+                keychainWrapper.remove(forKey: "DRToken")
             }
         }
     }
@@ -49,6 +52,7 @@ struct Networking {
     
     func logIn(username: String, password: String) async throws {
         _ = try await swiftRant.logIn(username: username, password: password).get()
+        //TODO: store result in userCredentials
         
         DispatchQueue.main.async {
             AppState.shared.objectWillChange.send()
@@ -56,7 +60,9 @@ struct Networking {
     }
     
     func logOut() {
-        swiftRant.logOut()
+        swiftRant.logOut() //TODO: remove after switching to shouldUseKeychainAndUserDefaults: false
+        
+        //TODO: set userCredentials to nil
         
         DataStore.shared.clear()
         
@@ -66,7 +72,6 @@ struct Networking {
     }
     
     private func token() throws -> UserCredentials {
-        //guard let token = SwiftRant.shared.tokenFromKeychain else {
         guard let userCredentials else {
             throw SwiftUIRantError(message: "No access token in keychain.")
         }
@@ -145,7 +150,6 @@ struct Networking {
         try await swiftRant.clearNotifications(try token()).get()
     }
     
-    //TODO: find a way to make it work on mac with UIImage
     func postComment(rantId: Int, content: String, image: PlatformImage?) async throws {
         try await swiftRant.postComment(try token(), rantID: rantId, content: content, image: image).get()
     }

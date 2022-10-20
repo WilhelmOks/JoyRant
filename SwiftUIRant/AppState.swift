@@ -23,7 +23,7 @@ final class AppState: ObservableObject {
     @Published var navigationPath: [NavigationDestination] = []
         
     var isLoggedIn: Bool {
-        SwiftRant.shared.tokenFromKeychain != nil
+        LoginStore.shared.isLoggedIn
     }
     
     func clearImageCache() {

@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftRant
-import SwiftKeychainWrapper
 
 #if os(iOS)
 import UIKit
@@ -24,35 +23,12 @@ struct Networking {
         let message: String
     }
     
-    private let swiftRant = SwiftRant.shared //TODO: use SwiftRant(shouldUseKeychainAndUserDefaults: false)
-    
-    private let keychainWrapper = KeychainWrapper(serviceName: "SwiftRant") //TODO: use "SwiftUIRant" as the service name
-    
-    var userCredentials: UserCredentials? {
-        get {
-            return keychainWrapper.decode(forKey: "DRToken")
-        }
-        set {
-            if let newValue {
-                let success = keychainWrapper.encodeAndSet(
-                    newValue,
-                    forKey: "DRToken",
-                    withAccessibility: .whenUnlockedThisDeviceOnly
-                )
-                if !success {
-                    dlog("Error: failed to store token in keychain")
-                }
-            } else {
-                keychainWrapper.remove(forKey: "DRToken")
-            }
-        }
-    }
+    private let swiftRant = SwiftRant(shouldUseKeychainAndUserDefaults: false)
     
     private init() {}
-    
+
     func logIn(username: String, password: String) async throws {
-        _ = try await swiftRant.logIn(username: username, password: password).get()
-        //TODO: store result in userCredentials
+        LoginStore.shared.token = try await swiftRant.logIn(username: username, password: password).get()
         
         DispatchQueue.main.async {
             AppState.shared.objectWillChange.send()
@@ -60,9 +36,7 @@ struct Networking {
     }
     
     func logOut() {
-        swiftRant.logOut() //TODO: remove after switching to shouldUseKeychainAndUserDefaults: false
-        
-        //TODO: set userCredentials to nil
+        LoginStore.shared.token = nil
         
         DataStore.shared.clear()
         
@@ -72,10 +46,10 @@ struct Networking {
     }
     
     private func token() throws -> UserCredentials {
-        guard let userCredentials else {
+        guard let token = LoginStore.shared.token else {
             throw SwiftUIRantError(message: "No access token in keychain.")
         }
-        return userCredentials
+        return token
     }
     
     func rants(skip: Int = 0, session: String?) async throws -> RantFeed {

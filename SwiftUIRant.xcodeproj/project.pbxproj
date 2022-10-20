@@ -11,6 +11,7 @@
 		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
 		ED0FB7E928FF34D000E5163D /* WriteCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7E828FF34D000E5163D /* WriteCommentView.swift */; };
 		ED0FB7EB28FF350500E5163D /* WriteCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7EA28FF350500E5163D /* WriteCommentViewModel.swift */; };
+		ED0FB7ED2901ADA900E5163D /* LoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7EC2901ADA900E5163D /* LoginStore.swift */; };
 		ED14DE5928E07A2F005FCC9A /* RantCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */; };
 		ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */; };
 		ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */; };
@@ -74,6 +75,7 @@
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
 		ED0FB7E828FF34D000E5163D /* WriteCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentView.swift; sourceTree = "<group>"; };
 		ED0FB7EA28FF350500E5163D /* WriteCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentViewModel.swift; sourceTree = "<group>"; };
+		ED0FB7EC2901ADA900E5163D /* LoginStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStore.swift; sourceTree = "<group>"; };
 		ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentViewModel.swift; sourceTree = "<group>"; };
 		ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
 		ED14DE5F28E090E7005FCC9A /* URLCache_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCache_Extension.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				ED59CEC328BCE0860007B698 /* AppState.swift */,
 				ED2C9B8028B69D35008BF314 /* Networking.swift */,
 				ED2C9B7E28B69892008BF314 /* Logging.swift */,
+				ED0FB7EC2901ADA900E5163D /* LoginStore.swift */,
 				ED59CED228BD0EC60007B698 /* DataStore.swift */,
 				ED59CED428BD103C0007B698 /* DataLoader.swift */,
 				ED2C9B6928B679D0008BF314 /* Assets.xcassets */,
@@ -473,6 +476,7 @@
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED97D62E28EAF46600CFC418 /* Color+Hex.swift in Sources */,
 				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,
+				ED0FB7ED2901ADA900E5163D /* LoginStore.swift in Sources */,
 				ED59CED128BD0B110007B698 /* FeedRantView.swift in Sources */,
 				ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,

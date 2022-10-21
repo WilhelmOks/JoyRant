@@ -28,7 +28,20 @@ struct RantDetailsView: View {
             .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
             .sheet(isPresented: $presentedWriteCommentView) {
-                WriteCommentView()
+                WriteCommentView(
+                    viewModel: .init(
+                        kind: .post(rantId: viewModel.rantId),
+                        onSubmitted: {
+                            Task {
+                                await viewModel.reload()
+                                DispatchQueue.main.async {
+                                    viewModel.scrollToCommentWithId = viewModel.comments.last?.id
+                                    BroadcastEvent.shouldScrollToComment.send()
+                                }
+                            }
+                        }
+                    )
+                )
             }
     }
     
@@ -50,9 +63,10 @@ struct RantDetailsView: View {
                                     Divider()
                                     
                                     RantCommentView(
-                                        viewModel: .init(
-                                            comment: comment
-                                        )
+                                        viewModel: .init(comment: comment),
+                                        onReply: {
+                                            presentedWriteCommentView = true
+                                        }
                                     )
                                     //.id(comment.uuid) //TODO: make uuid public
                                     .id("\(rant.uuid)_\(comment.id)")
@@ -67,7 +81,6 @@ struct RantDetailsView: View {
                         if let commentId = viewModel.scrollToCommentWithId {
                             withAnimation {
                                 scrollProxy.scrollTo("comment_\(commentId)", anchor: .top)
-                                //TODO: fix scroll position
                             }
                         }
                     }

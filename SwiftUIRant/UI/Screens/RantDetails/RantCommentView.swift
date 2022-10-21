@@ -10,6 +10,7 @@ import SwiftRant
 
 struct RantCommentView: View {
     @StateObject var viewModel: RantCommentViewModel
+    let onReply: () -> ()
     
     var body: some View {
         content()
@@ -123,12 +124,13 @@ struct RantCommentView: View {
         
     @ViewBuilder private func replyButton() -> some View {
         Button {
-            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+            //viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+            DataStore.shared.writeCommentContent.append("@\(viewModel.comment.username) ")
+            onReply()
         } label: {
             Text("Reply")
                 .font(baseSize: 11, weight: .medium)
                 .multilineTextAlignment(.leading)
-                //.foregroundColor(.accentColor)
         }
     }
     
@@ -191,7 +193,8 @@ struct RantCommentView_Previews: PreviewProvider {
                         isUserDPP: 1,
                         attachedImage: nil
                     )
-                )
+                ),
+                onReply: {}
             )
             
             Divider()
@@ -216,7 +219,8 @@ struct RantCommentView_Previews: PreviewProvider {
                         isUserDPP: 0,
                         attachedImage: nil
                     )
-                )
+                ),
+                onReply: {}
             )
         }
     }

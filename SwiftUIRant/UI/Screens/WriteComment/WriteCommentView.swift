@@ -10,7 +10,9 @@ import SwiftUI
 struct WriteCommentView: View {
     @Environment(\.presentationMode) private var presentationMode
     
-    @StateObject private var viewModel: WriteCommentViewModel = .init()
+    @StateObject var viewModel: WriteCommentViewModel
+    
+    @ObservedObject private var dataStore = DataStore.shared
     
     //TODO: add image preview
     
@@ -21,15 +23,21 @@ struct WriteCommentView: View {
             .navigationTitle("Comment")
             .navigationBarTitleDisplayModeInline()
             .frame(minWidth: 320, minHeight: 300)
+            .disabled(viewModel.isLoading)
+            .alert($viewModel.alertMessage)
             .toolbar {
                 cancelToolbarItem()
+                sendToolbarItem()
+            }
+            .onReceive(viewModel.dismiss) {
+                presentationMode.wrappedValue.dismiss()
             }
         }
     }
     
     @ViewBuilder private func content() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            TextEditor(text: .constant("Placeholder"))
+            TextEditor(text: $dataStore.writeCommentContent)
                 .foregroundColor(.primaryForeground)
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -51,6 +59,21 @@ struct WriteCommentView: View {
         }
     }
     
+    @ViewBuilder private func sendButton() -> some View {
+        Button {
+            Task {
+                await viewModel.submit()
+            }
+        } label: {
+            Label {
+                Text("Post")
+            } icon: {
+                Image(systemName: "paperplane.fill")
+            }
+        }
+        .disabled(viewModel.isLoading)
+    }
+    
     private func cancelToolbarItem() -> some ToolbarContent {
         #if os(iOS)
         ToolbarItem(placement: .navigationBarLeading) {
@@ -62,10 +85,22 @@ struct WriteCommentView: View {
         }
         #endif
     }
+    
+    private func sendToolbarItem() -> some ToolbarContent {
+        #if os(iOS)
+        ToolbarItem(placement: .navigationBarTrailing) {
+            sendButton()
+        }
+        #else
+        ToolbarItem(placement: .automatic) {
+            sendButton()
+        }
+        #endif
+    }
 }
 
 struct WriteCommentView_Previews: PreviewProvider {
     static var previews: some View {
-        WriteCommentView()
+        WriteCommentView(viewModel: .init(kind: .post(rantId: 0), onSubmitted: {}))
     }
 }

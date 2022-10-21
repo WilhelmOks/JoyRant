@@ -18,6 +18,8 @@ final class DataStore: ObservableObject {
     @Published var rantsInFeed: [RantInFeed] = []
     @Published var unreadNotifications: [Notifications.Categories: Int] = [:]
     
+    @Published var writeCommentContent = ""
+    
     var currentFeedSession: String?
     var duplicatesInFeed = 0
     

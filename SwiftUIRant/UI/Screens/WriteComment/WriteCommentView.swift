@@ -60,7 +60,7 @@ struct WriteCommentView: View {
     }
     
     @ViewBuilder private func sendButton() -> some View {
-        Button {
+        LoadingButton(isLoading: viewModel.isLoading) {
             Task {
                 await viewModel.submit()
             }
@@ -71,7 +71,7 @@ struct WriteCommentView: View {
                 Image(systemName: "paperplane.fill")
             }
         }
-        .disabled(viewModel.isLoading)
+        .disabled(dataStore.writeCommentContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
     }
     
     private func cancelToolbarItem() -> some ToolbarContent {

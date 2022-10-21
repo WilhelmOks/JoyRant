@@ -20,6 +20,11 @@ struct FeedView: View {
                 $0
                 .toolbar {
                     ToolbarItem(placement: .automatic) {
+                        sortPicker()
+                        .disabled(viewModel.isLoading || viewModel.isLoadingMore)
+                    }
+                    
+                    /*ToolbarItem(placement: .automatic) {
                         Button {
                             Task {
                                 await viewModel.reload()
@@ -28,7 +33,7 @@ struct FeedView: View {
                             Image(systemName: "arrow.clockwise")
                         }
                         .disabled(viewModel.isLoading || viewModel.isLoadingMore)
-                    }
+                    }*/
                 }
                 .navigationTitle("Feed")
             }
@@ -83,6 +88,14 @@ struct FeedView: View {
                 .padding(10)
             
             Divider()
+        }
+    }
+        
+    @ViewBuilder func sortPicker() -> some View {
+        Picker(selection: $viewModel.sort, label: EmptyView()) {
+            ForEach(FeedViewModel.Sort.allCases) { item in
+                Text(item.name).tag(item)
+            }
         }
     }
 }

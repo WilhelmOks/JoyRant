@@ -15,8 +15,8 @@ final class DataLoader: ObservableObject {
     
     private init() {}
     
-    @MainActor func loadFeed() async throws {
-        let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
+    @MainActor func loadFeed(_ sort: RantFeed.Sort) async throws {
+        let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.unfilteredRantsInFeed = feed.rants
@@ -24,17 +24,17 @@ final class DataLoader: ObservableObject {
         dataStore.isFeedLoaded = true
     }
     
-    @MainActor func loadMoreFeed() async throws {
+    @MainActor func loadMoreFeed(_ sort: RantFeed.Sort) async throws {
         let rantsToSkip = dataStore.unfilteredRantsInFeed.count
-        let moreFeed = try await Networking.shared.rants(skip: rantsToSkip, session: dataStore.currentFeedSession)
+        let moreFeed = try await Networking.shared.rants(sort: sort, skip: rantsToSkip, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = moreFeed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         addMoreRantsToFeed(moreFeed.rants)
     }
     
-    @MainActor func reloadFeed() async throws {
+    @MainActor func reloadFeed(_ sort: RantFeed.Sort) async throws {
         dataStore.clearFeed()
-        let feed = try await Networking.shared.rants(session: dataStore.currentFeedSession)
+        let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = feed.rants
@@ -55,10 +55,6 @@ final class DataLoader: ObservableObject {
             dataStore.unfilteredRantsInFeed.append(rant)
         }
     }
-    
-    /*@MainActor func loadNotifications(for category: Notifications.Categories) async throws {
-        dataStore.notifications = try await Networking.shared.getNotifications(for: category)
-    }*/
     
     @MainActor func loadNumbersOfUnreadNotifications() async throws {
         dataStore.unreadNotifications = try await Networking.shared.getNumbersOfUnreadNotifications()

@@ -52,9 +52,10 @@ struct Networking {
         return token
     }
     
-    func rants(skip: Int = 0, session: String?) async throws -> RantFeed {
+    func rants(sort: RantFeed.Sort, skip: Int = 0, session: String?) async throws -> RantFeed {
         try await swiftRant.getRantFeed(
             token: try token(),
+            sort: sort,
             skip: skip,
             prevSet: session
         ).get()

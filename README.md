@@ -22,11 +22,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Log in and log out
 
-✅ Rant feed (Algo)
-
-⏹️ List recent rants (not available in SwiftRant (yet?))
-
-⏹️ List top rants (not available in SwiftRant (yet?))
+✅ Rant feed (Algo/Recent/Top)
 
 ⏹️ Weekly rants
 

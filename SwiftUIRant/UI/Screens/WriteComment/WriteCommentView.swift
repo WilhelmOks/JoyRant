@@ -80,7 +80,7 @@ struct WriteCommentView: View {
             cancelButton()
         }
         #else
-        ToolbarItem(placement: .automatic) {
+        ToolbarItem(placement: .cancellationAction) {
             cancelButton()
         }
         #endif
@@ -92,7 +92,7 @@ struct WriteCommentView: View {
             sendButton()
         }
         #else
-        ToolbarItem(placement: .automatic) {
+        ToolbarItem(placement: .confirmationAction) {
             sendButton()
         }
         #endif

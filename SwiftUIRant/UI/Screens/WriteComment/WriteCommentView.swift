@@ -82,7 +82,7 @@ struct WriteCommentView: View {
                 switch viewModel.kind {
                 case .post(rantId: _):
                     Text("Post")
-                case .edit(commentId: _):
+                case .edit(comment: _):
                     Text("Save")
                 }
             } icon: {

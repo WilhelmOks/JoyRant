@@ -15,14 +15,14 @@ struct RantDetailsView: View {
     
     enum PresentedSheet: Identifiable {
         case postComment(rantId: Rant.ID)
-        case editComment(commentId: Comment.ID)
+        case editComment(comment: Comment)
         
         var id: String {
             switch self {
             case .postComment(rantId: let id):
                 return "post_comment_\(String(id))"
-            case .editComment(commentId: let id):
-                return "edit_comment_\(String(id))"
+            case .editComment(comment: let comment):
+                return "edit_comment_\(String(comment.id))"
             }
         }
     }
@@ -60,10 +60,10 @@ struct RantDetailsView: View {
                             }
                         )
                     )
-                case .editComment(commentId: let commentId):
+                case .editComment(comment: let comment):
                     WriteCommentView(
                         viewModel: .init(
-                            kind: .edit(commentId: commentId),
+                            kind: .edit(comment: comment),
                             onSubmitted: {
                                 Task {
                                     await viewModel.reload()
@@ -98,7 +98,7 @@ struct RantDetailsView: View {
                                             presentedSheet = .postComment(rantId: viewModel.rantId)
                                         },
                                         onEdit: {
-                                            presentedSheet = .editComment(commentId: comment.id)
+                                            presentedSheet = .editComment(comment: comment)
                                         }
                                     )
                                     //.id(comment.uuid) //TODO: make uuid public

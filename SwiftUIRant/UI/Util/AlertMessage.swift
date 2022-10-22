@@ -28,7 +28,7 @@ extension AlertMessage {
     static func presentedError(_ error: Error) -> Self {
         let message: String
         switch error {
-        case let swiftUIRantError as Networking.SwiftUIRantError:
+        case let swiftUIRantError as SwiftUIRantError:
             message = swiftUIRantError.message
         case let swiftRantError as SwiftRantError:
             message = swiftRantError.message

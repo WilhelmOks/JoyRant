@@ -19,7 +19,7 @@ final class WriteCommentViewModel: ObservableObject {
     
     enum Kind {
         case post(rantId: Rant.ID)
-        case edit(commentId: Comment.ID)
+        case edit(comment: Comment)
     }
     
     init(kind: Kind, onSubmitted: @escaping () -> ()) {
@@ -29,7 +29,7 @@ final class WriteCommentViewModel: ObservableObject {
     
     deinit {
         switch kind {
-        case .edit(commentId: _):
+        case .edit(comment: _):
             DataStore.shared.writeCommentContent = ""
         case .post(rantId: _):
             break
@@ -47,8 +47,9 @@ final class WriteCommentViewModel: ObservableObject {
             switch kind {
             case .post(rantId: let rantId):
                 try await Networking.shared.postComment(rantId: rantId, content: content, image: nil) //TODO: image
-            case .edit(commentId: let commentId):
-                try await Networking.shared.editComment(commentId: commentId, content: content, image: nil) //TODO: image
+            case .edit(comment: let comment):
+                guard comment.canEdit else { throw SwiftUIRantError.timeWindowForEditMissed }
+                try await Networking.shared.editComment(commentId: comment.id, content: content, image: nil) //TODO: image
             }
             
             DataStore.shared.writeCommentContent = ""

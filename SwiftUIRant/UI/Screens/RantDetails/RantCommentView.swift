@@ -24,7 +24,7 @@ struct RantCommentView: View {
         }
         .onTapGesture(count: 2) {
             if viewModel.comment.isFromLoggedInUser {
-                onEdit()
+                edit()
             } else {
                 Task {
                     await viewModel.voteController.voteByContext()
@@ -149,7 +149,7 @@ struct RantCommentView: View {
     @ViewBuilder private func editButton() -> some View {
         Button {
             DataStore.shared.writeCommentContent = viewModel.comment.body
-            onEdit()
+            edit()
         } label: {
             Text("Edit")
                 .font(baseSize: 11, weight: .medium)
@@ -168,6 +168,14 @@ struct RantCommentView: View {
                 .multilineTextAlignment(.leading)
                 //.foregroundColor(.accentColor)
         }
+    }
+    
+    private func edit() {
+        guard viewModel.comment.canEdit else {
+            viewModel.alertMessage = .presentedMessage(SwiftUIRantError.timeWindowForEditMissed.message)
+            return
+        }
+        onEdit()
     }
 }
 

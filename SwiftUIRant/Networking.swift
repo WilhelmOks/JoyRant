@@ -19,10 +19,6 @@ typealias PlatformImage = NSImage
 struct Networking {
     static let shared = Self()
     
-    struct SwiftUIRantError: Swift.Error {
-        let message: String
-    }
-    
     private let swiftRant = SwiftRant(shouldUseKeychainAndUserDefaults: false)
     
     private init() {}
@@ -47,7 +43,7 @@ struct Networking {
     
     private func token() throws -> UserCredentials {
         guard let token = LoginStore.shared.token else {
-            throw SwiftUIRantError(message: "No access token in keychain.")
+            throw SwiftUIRantError.noAccessTokenInKeychain
         }
         return token
     }

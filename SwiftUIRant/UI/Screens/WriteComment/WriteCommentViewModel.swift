@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftRant
 
 final class WriteCommentViewModel: ObservableObject {
     let kind: Kind
@@ -17,7 +18,8 @@ final class WriteCommentViewModel: ObservableObject {
     let dismiss = PassthroughSubject<Void, Never>()
     
     enum Kind {
-        case post(rantId: Int)
+        case post(rantId: Rant.ID)
+        case edit(commentId: Comment.ID)
     }
     
     init(kind: Kind, onSubmitted: @escaping () -> ()) {
@@ -25,16 +27,29 @@ final class WriteCommentViewModel: ObservableObject {
         self.onSubmitted = onSubmitted
     }
     
+    deinit {
+        switch kind {
+        case .edit(commentId: _):
+            DataStore.shared.writeCommentContent = ""
+        case .post(rantId: _):
+            break
+        }
+    }
+    
     @MainActor func submit() async {
         guard !isLoading else { return }
-        guard case .post(rantId: let rantId) = kind else { return }
         
         isLoading = true
         
         do {
             let content = DataStore.shared.writeCommentContent
             
-            try await Networking.shared.postComment(rantId: rantId, content: content, image: nil) //TODO: image
+            switch kind {
+            case .post(rantId: let rantId):
+                try await Networking.shared.postComment(rantId: rantId, content: content, image: nil) //TODO: image
+            case .edit(commentId: let commentId):
+                try await Networking.shared.editComment(commentId: commentId, content: content, image: nil) //TODO: image
+            }
             
             DataStore.shared.writeCommentContent = ""
             dismiss.send()
@@ -44,5 +59,5 @@ final class WriteCommentViewModel: ObservableObject {
         }
         
         isLoading = false
-    }    
+    }
 }

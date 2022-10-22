@@ -39,8 +39,8 @@ import SwiftRant
         comment = changedComment
     }
     
-    func editComment() {
+    /*func editComment() {
         //TODO: ...
         alertMessage = .presentedError(message: "Edit comment is not implemented yet.")
-    }
+    }*/
 }

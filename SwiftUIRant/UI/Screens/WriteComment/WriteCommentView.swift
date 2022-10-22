@@ -20,7 +20,7 @@ struct WriteCommentView: View {
         NavigationStack {
             content()
             .padding()
-            .navigationTitle("Comment")
+            .navigationTitle("Comment") //TODO: change title based on kind
             .navigationBarTitleDisplayModeInline()
             .frame(minWidth: 320, minHeight: 300)
             .disabled(viewModel.isLoading)
@@ -44,7 +44,20 @@ struct WriteCommentView: View {
                         .stroke()
                         .foregroundColor(.secondaryForeground)
                 }
+            
+            HStack {
+                remainingCharacters()
+                
+                Spacer()
+            }
         }
+    }
+    
+    @ViewBuilder private func remainingCharacters() -> some View {
+        let characters = 1000 - dataStore.writeCommentContent.count
+        Text("\(characters)")
+            .font(baseSize: 13, weightDelta: 2)
+            .foregroundColor(.secondaryForeground)
     }
     
     @ViewBuilder private func cancelButton() -> some View {
@@ -66,7 +79,12 @@ struct WriteCommentView: View {
             }
         } label: {
             Label {
-                Text("Post")
+                switch viewModel.kind {
+                case .post(rantId: _):
+                    Text("Post")
+                case .edit(commentId: _):
+                    Text("Save")
+                }
             } icon: {
                 Image(systemName: "paperplane.fill")
             }

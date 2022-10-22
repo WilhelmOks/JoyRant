@@ -11,7 +11,23 @@ import SwiftRant
 struct RantDetailsView: View {
     @StateObject var viewModel: RantDetailsViewModel
     
-    @State private var presentedWriteCommentView = false
+    //@State private var presentedWriteCommentView = false
+    
+    enum PresentedSheet: Identifiable {
+        case postComment(rantId: Rant.ID)
+        case editComment(commentId: Comment.ID)
+        
+        var id: String {
+            switch self {
+            case .postComment(rantId: let id):
+                return "post_comment_\(String(id))"
+            case .editComment(commentId: let id):
+                return "edit_comment_\(String(id))"
+            }
+        }
+    }
+    
+    @State private var presentedSheet: PresentedSheet?
         
     var body: some View {
         content()
@@ -27,21 +43,35 @@ struct RantDetailsView: View {
             }
             .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
-            .sheet(isPresented: $presentedWriteCommentView) {
-                WriteCommentView(
-                    viewModel: .init(
-                        kind: .post(rantId: viewModel.rantId),
-                        onSubmitted: {
-                            Task {
-                                await viewModel.reload()
-                                DispatchQueue.main.async {
-                                    viewModel.scrollToCommentWithId = viewModel.comments.last?.id
-                                    BroadcastEvent.shouldScrollToComment.send()
+            .sheet(item: $presentedSheet) { item in
+                switch item {
+                case .postComment(rantId: let rantId):
+                    WriteCommentView(
+                        viewModel: .init(
+                            kind: .post(rantId: rantId),
+                            onSubmitted: {
+                                Task {
+                                    await viewModel.reload()
+                                    DispatchQueue.main.async {
+                                        viewModel.scrollToCommentWithId = viewModel.comments.last?.id
+                                        BroadcastEvent.shouldScrollToComment.send()
+                                    }
                                 }
                             }
-                        }
+                        )
                     )
-                )
+                case .editComment(commentId: let commentId):
+                    WriteCommentView(
+                        viewModel: .init(
+                            kind: .edit(commentId: commentId),
+                            onSubmitted: {
+                                Task {
+                                    await viewModel.reload()
+                                }
+                            }
+                        )
+                    )
+                }
             }
     }
     
@@ -65,7 +95,10 @@ struct RantDetailsView: View {
                                     RantCommentView(
                                         viewModel: .init(comment: comment),
                                         onReply: {
-                                            presentedWriteCommentView = true
+                                            presentedSheet = .postComment(rantId: viewModel.rantId)
+                                        },
+                                        onEdit: {
+                                            presentedSheet = .editComment(commentId: comment.id)
                                         }
                                     )
                                     //.id(comment.uuid) //TODO: make uuid public
@@ -97,7 +130,7 @@ struct RantDetailsView: View {
     
     @ViewBuilder private func commentButton() -> some View {
         Button {
-            presentedWriteCommentView = true
+            presentedSheet = .postComment(rantId: viewModel.rantId)
         } label: {
             Label {
                 Text("Comment")

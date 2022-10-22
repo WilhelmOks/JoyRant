@@ -11,6 +11,7 @@ import SwiftRant
 struct RantCommentView: View {
     @StateObject var viewModel: RantCommentViewModel
     let onReply: () -> ()
+    let onEdit: () -> ()
     
     var body: some View {
         content()
@@ -23,7 +24,7 @@ struct RantCommentView: View {
         }
         .onTapGesture(count: 2) {
             if viewModel.comment.isFromLoggedInUser {
-                viewModel.editComment()
+                onEdit()
             } else {
                 Task {
                     await viewModel.voteController.voteByContext()
@@ -124,7 +125,6 @@ struct RantCommentView: View {
         
     @ViewBuilder private func replyButton() -> some View {
         Button {
-            //viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
             DataStore.shared.writeCommentContent.append("@\(viewModel.comment.username) ")
             onReply()
         } label: {
@@ -148,7 +148,8 @@ struct RantCommentView: View {
     
     @ViewBuilder private func editButton() -> some View {
         Button {
-            viewModel.editComment()
+            DataStore.shared.writeCommentContent = viewModel.comment.body
+            onEdit()
         } label: {
             Text("Edit")
                 .font(baseSize: 11, weight: .medium)
@@ -194,7 +195,8 @@ struct RantCommentView_Previews: PreviewProvider {
                         attachedImage: nil
                     )
                 ),
-                onReply: {}
+                onReply: {},
+                onEdit: {}
             )
             
             Divider()
@@ -220,7 +222,8 @@ struct RantCommentView_Previews: PreviewProvider {
                         attachedImage: nil
                     )
                 ),
-                onReply: {}
+                onReply: {},
+                onEdit: {}
             )
         }
     }

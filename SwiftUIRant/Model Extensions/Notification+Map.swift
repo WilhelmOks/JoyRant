@@ -12,10 +12,10 @@ import SwiftRant
 extension Notifications {
     struct MappedNotificationItem: Identifiable {
         let id = UUID()
-        let rantId: Int
-        let commentId: Int?
-        let userId: Int
-        let userAvatar: Rant.UserAvatar //TODO: UserAvatar shouldn't be in a rant because it can also be in a notification or somewhere else, not related to a rant.
+        let rantId: Rant.ID
+        let commentId: Comment.ID?
+        let userId: UserID
+        let userAvatar: Rant.UserAvatar //TODO: UserAvatar shouldn't be in Rant because it can also be in a notification or somewhere else, not related to a rant.
         let userName: String
         let notificationType: NotificationType
         let createdTime: Int
@@ -27,7 +27,7 @@ extension Notifications {
             let rantId = notification.rantID
             let commentId = notification.commentID
             let userId = notification.uid
-            let userInfo = usernameMap?.array.first(where: { map in map.uidForUsername == String(userId) })
+            let userInfo = usernameMap?.array.first { $0.uidForUsername == String(userId) }
             let userAvatar = userInfo?.avatar ?? .init(backgroundColor: "cccccc", avatarImage: nil)
             let userName = userInfo?.name ?? ""
             

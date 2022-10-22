@@ -61,7 +61,7 @@ struct Networking {
         ).get()
     }
     
-    func getRant(id: Int) async throws -> (Rant, [Comment]) {
+    func getRant(id: Rant.ID) async throws -> (Rant, [Comment]) {
         try await swiftRant.getRantFromID(
             token: try token(),
             id: id,
@@ -69,7 +69,7 @@ struct Networking {
         ).get()
     }
     
-    func vote(rantID: Int, voteState: VoteState) async throws -> Rant {
+    func vote(rantID: Rant.ID, voteState: VoteState) async throws -> Rant {
         try await swiftRant.voteOnRant(
             try token(),
             rantID: rantID,
@@ -77,7 +77,7 @@ struct Networking {
         ).get()
     }
     
-    func vote(commentID: Int, voteState: VoteState) async throws -> Comment {
+    func vote(commentID: Comment.ID, voteState: VoteState) async throws -> Comment {
         try await swiftRant.voteOnComment(
             try token(),
             commentID: commentID,
@@ -85,14 +85,14 @@ struct Networking {
         ).get()
     }
     
-    func favorite(rantID: Int) async throws {
+    func favorite(rantID: Rant.ID) async throws {
         try await swiftRant.favoriteRant(
             try token(),
             rantID: rantID
         ).get()
     }
     
-    func unfavorite(rantID: Int) async throws {
+    func unfavorite(rantID: Rant.ID) async throws {
         try await swiftRant.unfavoriteRant(
             try token(),
             rantID: rantID
@@ -115,9 +115,7 @@ struct Networking {
             shouldGetNewNotifs: true,
             category: .all
         ).get()
-        
-        dlog("### notifications.items.count: \(notifications.items.count)")
-        
+                
         return notifications.unreadByCategory
     }
     
@@ -125,7 +123,15 @@ struct Networking {
         try await swiftRant.clearNotifications(try token()).get()
     }
     
-    func postComment(rantId: Int, content: String, image: PlatformImage?) async throws {
+    func postComment(rantId: Rant.ID, content: String, image: PlatformImage?) async throws {
         try await swiftRant.postComment(try token(), rantID: rantId, content: content, image: image).get()
+    }
+    
+    func editComment(commentId: Comment.ID, content: String, image: PlatformImage?) async throws {
+        try await swiftRant.editComment(try token(), commentID: commentId, content: content, image: image).get()
+    }
+    
+    func deleteComment(commentId: Comment.ID) async throws {
+        try await swiftRant.deleteComment(try token(), commentID: commentId).get()
     }
 }

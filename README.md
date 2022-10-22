@@ -52,7 +52,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Mark notifications as read
 
-✅ Show number of unread notifications and keep it up to date
+✅ Show number of unread notifications and keep it up to date (no automatic periodic polling)
 
 🚧 Show unread notifications as red or green badges (instead of text)
 

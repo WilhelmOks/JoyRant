@@ -38,9 +38,4 @@ import SwiftRant
     private func applyChangedData(changedComment: Comment) {
         comment = changedComment
     }
-    
-    /*func editComment() {
-        //TODO: ...
-        alertMessage = .presentedError(message: "Edit comment is not implemented yet.")
-    }*/
 }

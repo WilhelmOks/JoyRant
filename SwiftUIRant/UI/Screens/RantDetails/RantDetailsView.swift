@@ -99,6 +99,11 @@ struct RantDetailsView: View {
                                         },
                                         onEdit: {
                                             presentedSheet = .editComment(comment: comment)
+                                        },
+                                        onDelete: {
+                                            Task {
+                                                await viewModel.deleteComment(comment: comment)
+                                            }
                                         }
                                     )
                                     //.id(comment.uuid) //TODO: make uuid public
@@ -108,7 +113,7 @@ struct RantDetailsView: View {
                             }
                         }
                         .padding(.bottom, 10)
-                        .padding(.bottom, 34) //TODO: measure comment button size and set it here
+                        .padding(.bottom, 40) //TODO: measure comment button size and set it here
                     }
                     .onReceive(broadcastEvent: .shouldScrollToComment) { _ in
                         if let commentId = viewModel.scrollToCommentWithId {

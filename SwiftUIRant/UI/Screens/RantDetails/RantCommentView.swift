@@ -12,12 +12,14 @@ struct RantCommentView: View {
     @StateObject var viewModel: RantCommentViewModel
     let onReply: () -> ()
     let onEdit: () -> ()
+    let onDelete: () -> ()
+    
+    @State private var isDeleteConfirmationAlertPresented = false
     
     var body: some View {
         content()
         .padding(.top, 10)
         .padding(.horizontal, 10)
-        .alert($viewModel.alertMessage)
         .background(Color.primaryBackground)
         .onReceive(viewModel.voteController.objectWillChange) {
             viewModel.objectWillChange.send()
@@ -29,6 +31,21 @@ struct RantCommentView: View {
                 Task {
                     await viewModel.voteController.voteByContext()
                 }
+            }
+        }
+        .background {
+            ZStack {
+                ZStack {}
+                    .alert($viewModel.alertMessage)
+                
+                ZStack {}
+                    .alert(isPresented: $isDeleteConfirmationAlertPresented) {
+                        Alert(
+                            title: Text("Do you want to delete this comment?"),
+                            primaryButton: Alert.Button.cancel(Text("Cancel")),
+                            secondaryButton: .destructive(Text("Delete comment"), action: { onDelete() })
+                        )
+                    }
             }
         }
     }
@@ -98,7 +115,7 @@ struct RantCommentView: View {
             VStack(alignment: .trailing, spacing: 6) {
                 CreationTimeView(
                     createdTime: comment.createdTime,
-                    isEdited: false
+                    isEdited: false //TODO: find out how to know if comment is edited
                 )
                 
                 /*
@@ -160,8 +177,7 @@ struct RantCommentView: View {
     
     @ViewBuilder private func deleteButton() -> some View {
         Button {
-            //TODO: ...
-            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+            delete()
         } label: {
             Text("Delete")
                 .font(baseSize: 11, weight: .medium)
@@ -176,6 +192,10 @@ struct RantCommentView: View {
             return
         }
         onEdit()
+    }
+    
+    private func delete() {
+        isDeleteConfirmationAlertPresented = true
     }
 }
 
@@ -204,7 +224,8 @@ struct RantCommentView_Previews: PreviewProvider {
                     )
                 ),
                 onReply: {},
-                onEdit: {}
+                onEdit: {},
+                onDelete: {}
             )
             
             Divider()
@@ -231,7 +252,8 @@ struct RantCommentView_Previews: PreviewProvider {
                     )
                 ),
                 onReply: {},
-                onEdit: {}
+                onEdit: {},
+                onDelete: {}
             )
         }
     }

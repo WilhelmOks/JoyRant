@@ -61,4 +61,17 @@ final class RantDetailsViewModel: ObservableObject {
         await performLoad()
         isReloading = false
     }
+    
+    @MainActor func deleteComment(comment: Comment) async {
+        isLoading = true
+        
+        do {
+            try await Networking.shared.deleteComment(commentId: comment.id)
+            await reload()
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoading = false
+    }
 }

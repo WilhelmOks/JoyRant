@@ -73,7 +73,7 @@ struct WriteCommentView: View {
     }
     
     @ViewBuilder private func sendButton() -> some View {
-        LoadingButton(isLoading: viewModel.isLoading) {
+        LoadingButton(withSpinner: true, isLoading: viewModel.isLoading) {
             Task {
                 await viewModel.submit()
             }

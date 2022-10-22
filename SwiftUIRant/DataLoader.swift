@@ -67,6 +67,6 @@ final class DataLoader: ObservableObject {
     
     @MainActor func loadNumbersOfUnreadNotifications() async throws {
         dataStore.unreadNotifications = try await Networking.shared.getNumbersOfUnreadNotifications()
-        dlog("Updated number of unread notifications: (\(dataStore.unreadNotifications)")
+        dlog("Updated number of unread notifications: (\(dataStore.unreadNotifications[.all] ?? 0)")
     }
 }

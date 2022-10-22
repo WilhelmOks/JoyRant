@@ -42,9 +42,6 @@ struct NotificationsView: View {
                 Task {
                     await viewModel.refresh()
                 }
-                Task {
-                    try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
-                }
             }
     }
     

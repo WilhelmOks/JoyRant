@@ -36,6 +36,9 @@ import SwiftRant
         do {
             let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
             notificationItems = notifications.mappedItems
+            Task {
+                try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+            }
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -49,6 +52,9 @@ import SwiftRant
         do {
             let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
             notificationItems = notifications.mappedItems
+            Task {
+                try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+            }
         } catch {
             dlog("Error refreshing notifications: \(error)")
         }

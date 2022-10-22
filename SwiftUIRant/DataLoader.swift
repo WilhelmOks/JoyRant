@@ -22,6 +22,9 @@ final class DataLoader: ObservableObject {
         dataStore.unfilteredRantsInFeed = feed.rants
         dataStore.rantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
+        Task {
+            try? await loadNumbersOfUnreadNotifications()
+        }
     }
     
     @MainActor func loadMoreFeed(_ sort: RantFeed.Sort) async throws {
@@ -30,6 +33,9 @@ final class DataLoader: ObservableObject {
         dataStore.currentFeedSession = moreFeed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         addMoreRantsToFeed(moreFeed.rants)
+        Task {
+            try? await loadNumbersOfUnreadNotifications()
+        }
     }
     
     @MainActor func reloadFeed(_ sort: RantFeed.Sort) async throws {
@@ -40,6 +46,9 @@ final class DataLoader: ObservableObject {
         dataStore.rantsInFeed = feed.rants
         dataStore.unfilteredRantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
+        Task {
+            try? await loadNumbersOfUnreadNotifications()
+        }
     }
     
     private func addMoreRantsToFeed(_ rants: [RantInFeed]) {
@@ -58,5 +67,6 @@ final class DataLoader: ObservableObject {
     
     @MainActor func loadNumbersOfUnreadNotifications() async throws {
         dataStore.unreadNotifications = try await Networking.shared.getNumbersOfUnreadNotifications()
+        dlog("Updated number of unread notifications: (\(dataStore.unreadNotifications)")
     }
 }

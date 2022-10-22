@@ -36,6 +36,10 @@ final class RantDetailsViewModel: ObservableObject {
             let response = try await Networking.shared.getRant(id: rantId)
             rant = response.0
             comments = response.1
+            
+            Task {
+                try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+            }
         } catch {
             alertMessage = .presentedError(error)
         }

@@ -22,7 +22,7 @@ struct WriteCommentView: View {
             .padding()
             .navigationTitle("Comment") //TODO: change title based on kind
             .navigationBarTitleDisplayModeInline()
-            .frame(minWidth: 320, minHeight: 300)
+            .frame(minWidth: 320, minHeight: 300) //TODO: make it resizable. Maybe with maxWidth/maxHeight?
             .disabled(viewModel.isLoading)
             .alert($viewModel.alertMessage)
             .toolbar {
@@ -54,6 +54,8 @@ struct WriteCommentView: View {
     }
     
     @ViewBuilder private func remainingCharacters() -> some View {
+        //TODO: Check if characters are counted by devRant "correclty" or "naively"
+        //TODO: prevent user from submitting if message is too long.
         let characters = 1000 - dataStore.writeCommentContent.count
         Text("\(characters)")
             .font(baseSize: 13, weightDelta: 2)

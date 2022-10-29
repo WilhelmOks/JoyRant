@@ -118,6 +118,7 @@
 		ED59CEE228C78EAF0007B698 /* View+Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fill.swift"; sourceTree = "<group>"; };
 		ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+NotificationCenter.swift"; sourceTree = "<group>"; };
 		ED59CEE728CB74180007B698 /* MockedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedModels.swift; sourceTree = "<group>"; };
+		ED8622D4290D3E7F0070A7D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ED97D62428E86F5200CFC418 /* CreationTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTimeView.swift; sourceTree = "<group>"; };
 		ED97D62628E9C98900CFC418 /* RantExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantExtensions.swift; sourceTree = "<group>"; };
 		ED97D62828E9C9E200CFC418 /* CommentExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentExtensions.swift; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 		ED2C9B6428B679CB008BF314 /* SwiftUIRant */ = {
 			isa = PBXGroup;
 			children = (
+				ED8622D4290D3E7F0070A7D2 /* Info.plist */,
 				ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */,
 				ED59CEC328BCE0860007B698 /* AppState.swift */,
 				ED2C9B8028B69D35008BF314 /* Networking.swift */,
@@ -624,6 +626,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftUIRant/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
@@ -657,6 +660,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftUIRant/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;

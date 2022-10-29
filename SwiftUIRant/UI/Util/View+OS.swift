@@ -18,9 +18,9 @@ extension View {
     func toolbarsVisible() -> some View {
         self
         #if os(iOS)
-        .toolbar(.visible, in: .navigationBar, .tabBar)
+            .toolbar(.visible, for: .navigationBar, .tabBar)
         #elseif os(macOS)
-        .toolbar(.visible, in: .windowToolbar, .automatic)
+            .toolbar(.visible, for: .windowToolbar, .automatic)
         #endif
     }
 }

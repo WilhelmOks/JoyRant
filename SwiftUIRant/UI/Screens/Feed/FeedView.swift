@@ -19,10 +19,8 @@ struct FeedView: View {
             .if(navigationBar) {
                 $0
                 .toolbar {
-                    ToolbarItem(placement: .automatic) {
-                        sortPicker()
+                    sortPicker()
                         .disabled(viewModel.isLoading || viewModel.isLoadingMore)
-                    }
                     
                     /*ToolbarItem(placement: .automatic) {
                         Button {
@@ -92,11 +90,12 @@ struct FeedView: View {
     }
         
     @ViewBuilder func sortPicker() -> some View {
-        Picker(selection: $viewModel.sort, label: EmptyView()) {
+        Picker(selection: $viewModel.sort, label: Text(viewModel.sort.name)) {
             ForEach(FeedViewModel.Sort.allCases) { item in
                 Text(item.name).tag(item)
             }
         }
+        .pickerStyle(.menu)
     }
 }
 

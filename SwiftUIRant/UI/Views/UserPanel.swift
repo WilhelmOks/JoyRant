@@ -20,12 +20,12 @@ struct UserPanel: View {
             
             VStack(alignment: .leading, spacing: 3) {
                 Text(name)
-                    .font(baseSize: 15, weightDelta: 2)
+                    .font(baseSize: 16, weightDelta: 2)
                     .foregroundColor(.primaryForeground)
                 
                 HStack(spacing: 4) {
                     Text(scoreText())
-                        .font(baseSize: 11, weightDelta: 2)
+                        .font(baseSize: 12, weightDelta: 2)
                         .foregroundColor(.primaryBackground)
                         .padding(.horizontal, 5)
                         .padding(.vertical, 1)
@@ -34,7 +34,7 @@ struct UserPanel: View {
                     
                     if isSupporter {
                         Text("++")
-                            .font(baseSize: 11, weightDelta: 4)
+                            .font(baseSize: 12, weightDelta: 4)
                             .offset(y: -0.5)
                             .foregroundColor(.primaryBackground)
                             .padding(.horizontal, 5)

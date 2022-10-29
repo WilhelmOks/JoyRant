@@ -18,12 +18,12 @@ struct NotificationRowView: View {
                         
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.userName)
-                    .font(baseSize: 15, weightDelta: item.isRead ? 1 : 3)
+                    .font(baseSize: 16, weightDelta: item.isRead ? 1 : 3)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
                 
                 Text(message())
-                    .font(baseSize: 15, weightDelta: item.isRead ? -1 : 0)
+                    .font(baseSize: 16, weightDelta: item.isRead ? -1 : 0)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
             }
@@ -62,22 +62,22 @@ struct NotificationRowView: View {
         switch item.notificationType {
         case .rantUpvote:
             Text("++")
-                .font(baseSize: 12, weightDelta: 1)
+                .font(baseSize: 13, weightDelta: 1)
         case .commentUpvote:
             Text("++")
-                .font(baseSize: 12, weightDelta: 1)
+                .font(baseSize: 13, weightDelta: 1)
         case .commentContent:
             Image(systemName: "bubble.right")
-                .font(baseSize: 11)
+                .font(baseSize: 12)
         case .commentDiscuss:
             Image(systemName: "bubble.right")
-                .font(baseSize: 11)
+                .font(baseSize: 12)
         case .commentMention:
             Text("@")
-                .font(baseSize: 13, weightDelta: 1)
+                .font(baseSize: 14, weightDelta: 1)
         case .rantSub:
             Image(systemName: "bubble.right.fill")
-                .font(baseSize: 11)
+                .font(baseSize: 12)
         }
     }
 }

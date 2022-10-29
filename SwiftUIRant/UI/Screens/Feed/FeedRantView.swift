@@ -65,7 +65,7 @@ struct FeedRantView: View {
             }
             
             Text(viewModel.rant.text)
-                .font(baseSize: 15)
+                .font(baseSize: 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
@@ -92,7 +92,7 @@ struct FeedRantView: View {
         let tags = viewModel.rant.tags.joined(separator: ", ")
         
         Text(tags)
-            .font(baseSize: 11, weight: .medium)
+            .font(baseSize: 12, weight: .medium)
             .multilineTextAlignment(.leading)
             .foregroundColor(.secondaryForeground)
     }
@@ -101,10 +101,10 @@ struct FeedRantView: View {
     @ViewBuilder private func commentsCounter() -> some View {
         HStack(spacing: 3) {
             Image(systemName: "bubble.right")
-                .font(baseSize: 11)
+                .font(baseSize: 12)
             
             Text("\(viewModel.rant.commentCount)")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
         }
         .foregroundColor(.secondaryForeground)
     }

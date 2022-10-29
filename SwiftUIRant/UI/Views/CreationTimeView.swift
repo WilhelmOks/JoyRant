@@ -15,24 +15,24 @@ struct CreationTimeView: View {
         /*
         HStack(spacing: 5) {
             Text(TimeFormatter.shared.string(fromSeconds: createdTime))
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .foregroundColor(.secondaryForeground)
             
             if isEdited {
                 Image(systemName: "pencil.circle")
-                    .font(baseSize: 11)
+                    .font(baseSize: 12)
                     .foregroundColor(.secondaryForeground)
             }
         }*/
         
         VStack(alignment: .trailing, spacing: 5) {
             Text(TimeFormatter.shared.string(fromSeconds: createdTime))
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .foregroundColor(.secondaryForeground)
             
             if isEdited {
                 Text("Edited")
-                    .font(baseSize: 11, weight: .medium)
+                    .font(baseSize: 12, weight: .medium)
                     .foregroundColor(.secondaryForeground)
             }
         }

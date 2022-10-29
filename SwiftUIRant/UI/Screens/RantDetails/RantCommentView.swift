@@ -58,7 +58,7 @@ struct RantCommentView: View {
             )
             
             Text(viewModel.comment.body)
-                .font(baseSize: 15)
+                .font(baseSize: 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
@@ -146,7 +146,7 @@ struct RantCommentView: View {
             onReply()
         } label: {
             Text("Reply")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
         }
     }
@@ -157,7 +157,7 @@ struct RantCommentView: View {
             viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
         } label: {
             Text("Report")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
                 //.foregroundColor(.accentColor)
         }
@@ -169,7 +169,7 @@ struct RantCommentView: View {
             edit()
         } label: {
             Text("Edit")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
                 //.foregroundColor(.accentColor)
         }
@@ -180,7 +180,7 @@ struct RantCommentView: View {
             delete()
         } label: {
             Text("Delete")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
                 //.foregroundColor(.accentColor)
         }

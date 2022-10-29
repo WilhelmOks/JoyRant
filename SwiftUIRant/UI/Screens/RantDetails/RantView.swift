@@ -39,7 +39,7 @@ struct RantView: View {
             )
             
             Text(viewModel.rant.text)
-                .font(baseSize: 15)
+                .font(baseSize: 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
@@ -117,7 +117,7 @@ struct RantView: View {
         let tags = viewModel.rant.tags.joined(separator: ", ")
         
         Text(tags)
-            .font(baseSize: 11, weight: .medium)
+            .font(baseSize: 12, weight: .medium)
             .multilineTextAlignment(.leading)
             .foregroundColor(.secondaryForeground)
     }
@@ -125,10 +125,10 @@ struct RantView: View {
     @ViewBuilder private func commentsCounter() -> some View {
         HStack(spacing: 3) {
             Image(systemName: "bubble.right")
-                .font(baseSize: 11)
+                .font(baseSize: 12)
             
             Text("\(viewModel.rant.commentCount)")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
         }
         .foregroundColor(.secondaryForeground)
     }
@@ -139,7 +139,7 @@ struct RantView: View {
             viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
         } label: {
             Text("Report")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
                 //.foregroundColor(.accentColor)
         }
@@ -150,7 +150,7 @@ struct RantView: View {
             viewModel.editRant()
         } label: {
             Text("Edit")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
                 //.foregroundColor(.accentColor)
         }
@@ -162,7 +162,7 @@ struct RantView: View {
             viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
         } label: {
             Text("Delete")
-                .font(baseSize: 11, weight: .medium)
+                .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
                 //.foregroundColor(.accentColor)
         }
@@ -182,10 +182,10 @@ struct RantView: View {
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: isFavorite ? "heart.fill" : "heart")
-                    .font(baseSize: 11)
+                    .font(baseSize: 12)
                 
                 Text(isFavorite ? "Unfavorite" : "Favorite")
-                    .font(baseSize: 11, weight: .medium)
+                    .font(baseSize: 12, weight: .medium)
                     .multilineTextAlignment(.leading)
             }
         }

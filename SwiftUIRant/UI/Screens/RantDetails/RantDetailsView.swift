@@ -142,7 +142,7 @@ struct RantDetailsView: View {
             } icon: {
                 Image(systemName: "bubble.right")
             }
-            .font(baseSize: 12, weightDelta: 1)
+            .font(baseSize: 13, weightDelta: 1)
         }
         .buttonStyle(.borderedProminent)
     }

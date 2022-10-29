@@ -38,6 +38,7 @@ struct WriteCommentView: View {
     @ViewBuilder private func content() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             TextEditor(text: $dataStore.writeCommentContent)
+                .font(.callout)
                 .foregroundColor(.primaryForeground)
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -58,7 +59,7 @@ struct WriteCommentView: View {
         //TODO: prevent user from submitting if message is too long.
         let characters = 1000 - dataStore.writeCommentContent.count
         Text("\(characters)")
-            .font(baseSize: 13, weightDelta: 2)
+            .font(baseSize: 12, weightDelta: 2)
             .foregroundColor(.secondaryForeground)
     }
     

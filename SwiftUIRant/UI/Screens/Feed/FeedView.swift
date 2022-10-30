@@ -20,18 +20,7 @@ struct FeedView: View {
                 $0
                 .toolbar {
                     sortPicker()
-                        .disabled(viewModel.isLoading || viewModel.isLoadingMore)
-                    
-                    /*ToolbarItem(placement: .automatic) {
-                        Button {
-                            Task {
-                                await viewModel.reload()
-                            }
-                        } label: {
-                            Image(systemName: "arrow.clockwise")
-                        }
-                        .disabled(viewModel.isLoading || viewModel.isLoadingMore)
-                    }*/
+                        .disabled(viewModel.isLoading || viewModel.isLoadingMore || viewModel.isReloading)
                 }
                 .navigationTitle("Feed")
             }
@@ -71,6 +60,9 @@ struct FeedView: View {
                         .fillHorizontally(.center)
                         .padding()
                     }
+                }
+                .refreshable {
+                    await viewModel.reload()
                 }
             } else {
                 ProgressView()

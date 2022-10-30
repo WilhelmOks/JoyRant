@@ -36,6 +36,12 @@ final class DataStore: ObservableObject {
         duplicatesInFeed = 0
     }
     
+    func clearFeedForRefresh() {
+        unfilteredRantsInFeed = []
+        currentFeedSession = nil
+        duplicatesInFeed = 0
+    }
+    
     func rantInFeed(byId id: Int) -> RantInFeed? {
         rantsInFeed.first { $0.id == id }
     }

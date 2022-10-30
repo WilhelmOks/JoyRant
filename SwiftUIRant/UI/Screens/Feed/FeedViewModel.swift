@@ -11,6 +11,7 @@ import SwiftRant
 final class FeedViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isLoadingMore = false
+    @Published var isReloading = false
     @Published var alertMessage: AlertMessage = .none()
     
     @Published var sort: Sort = .algorithm {
@@ -53,7 +54,7 @@ final class FeedViewModel: ObservableObject {
     }
     
     @MainActor func reload() async {
-        isLoading = true
+        isReloading = true
         
         do {
             try await DataLoader.shared.reloadFeed(sort.swiftRantSort)
@@ -61,7 +62,7 @@ final class FeedViewModel: ObservableObject {
             alertMessage = .presentedError(error)
         }
         
-        isLoading = false
+        isReloading = false
     }
 }
 

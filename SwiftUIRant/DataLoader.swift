@@ -19,7 +19,9 @@ final class DataLoader: ObservableObject {
         let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
+        dataStore.unfilteredRantsInFeed = []
         dataStore.unfilteredRantsInFeed = feed.rants
+        dataStore.rantsInFeed = []
         dataStore.rantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
         Task {
@@ -43,7 +45,9 @@ final class DataLoader: ObservableObject {
         let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
+        dataStore.rantsInFeed = []
         dataStore.rantsInFeed = feed.rants
+        dataStore.unfilteredRantsInFeed = []
         dataStore.unfilteredRantsInFeed = feed.rants
         dataStore.isFeedLoaded = true
         Task {

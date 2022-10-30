@@ -43,7 +43,7 @@ struct FeedView: View {
             if dataStore.isFeedLoaded {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        ForEach(dataStore.rantsInFeed, id: \.id) { rant in
+                        ForEach(dataStore.rantsInFeed, id: \.uuid) { rant in
                             row(rant: rant)
                         }
                         

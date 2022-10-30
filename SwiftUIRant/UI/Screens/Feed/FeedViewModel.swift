@@ -19,6 +19,7 @@ final class FeedViewModel: ObservableObject {
             DataStore.shared.currentFeedSession = nil
             UserDefaults.standard.setValue(sort.rawValue, forKey: "feed_sort")
             Task {
+                DataStore.shared.clearFeed()
                 await reload()
             }
         }

@@ -14,16 +14,19 @@ final class FeedViewModel: ObservableObject {
     @Published var isReloading = false
     @Published var alertMessage: AlertMessage = .none()
     
-    @Published var sort: Sort = .algorithm {
+    @Published var sort: Sort {
         didSet {
             DataStore.shared.currentFeedSession = nil
+            UserDefaults.standard.setValue(sort.rawValue, forKey: "feed_sort")
             Task {
                 await reload()
             }
         }
     }
-    
+        
     init() {
+        let sortRaw = UserDefaults.standard.integer(forKey: "feed_sort")
+        sort = .init(rawValue: sortRaw) ?? .algorithm
         Task {
             await load()
         }

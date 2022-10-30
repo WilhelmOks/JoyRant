@@ -20,6 +20,7 @@ import SwiftRant
     }
     @Published var notificationItems: [Notifications.MappedNotificationItem] = []
     @Published var isLoading = false
+    @Published var isRefreshing = false
     @Published var alertMessage: AlertMessage = .none()
     
     init() {
@@ -47,7 +48,7 @@ import SwiftRant
     }
     
     func refresh() async {
-        isLoading = true
+        isRefreshing = true
         
         do {
             let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
@@ -59,11 +60,11 @@ import SwiftRant
             dlog("Error refreshing notifications: \(error)")
         }
         
-        isLoading = false
+        isRefreshing = false
     }
     
     func clear() async {
-        isLoading = true
+        isRefreshing = true
                 
         do {
             try await Networking.shared.clearNotifications()
@@ -74,7 +75,7 @@ import SwiftRant
             alertMessage = .presentedError(error)
         }
         
-        isLoading = false
+        isRefreshing = false
     }
 }
 

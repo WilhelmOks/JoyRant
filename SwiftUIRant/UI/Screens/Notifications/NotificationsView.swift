@@ -20,7 +20,7 @@ struct NotificationsView: View {
             .if(navigationBar) {
                 $0
                 .toolbar {
-                    LoadingButton(isLoading: viewModel.isLoading) {
+                    LoadingButton(isLoading: viewModel.isLoading || viewModel.isRefreshing) {
                         Task {
                             await viewModel.clear()
                         }
@@ -28,11 +28,11 @@ struct NotificationsView: View {
                         Text("Clear")
                     }
                     
-                    RefreshButton(isLoading: viewModel.isLoading) {
+                    /*RefreshButton(isLoading: viewModel.isLoading) {
                         Task {
                             await viewModel.load()
                         }
-                    }
+                    }*/
                 }
                 .navigationTitle("Notifications")
             }
@@ -55,7 +55,7 @@ struct NotificationsView: View {
                 }
             }
             .pickerStyle(.segmented)
-            .disabled(viewModel.isLoading)
+            .disabled(viewModel.isLoading || viewModel.isRefreshing)
             .padding(10)
             
             ScrollView {
@@ -81,6 +81,9 @@ struct NotificationsView: View {
                         }
                     }
                 }
+            }
+            .refreshable {
+                await viewModel.refresh()
             }
         }
     }

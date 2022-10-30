@@ -34,9 +34,8 @@ struct Networking {
     func logOut() {
         LoginStore.shared.token = nil
         
-        DataStore.shared.clear()
-        
         DispatchQueue.main.async {
+            DataStore.shared.clear()
             AppState.shared.objectWillChange.send()
         }
     }

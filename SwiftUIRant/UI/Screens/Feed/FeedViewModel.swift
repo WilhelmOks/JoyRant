@@ -8,7 +8,7 @@
 import Foundation
 import SwiftRant
 
-final class FeedViewModel: ObservableObject {
+@MainActor final class FeedViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isLoadingMore = false
     @Published var isReloading = false
@@ -33,7 +33,7 @@ final class FeedViewModel: ObservableObject {
         }
     }
     
-    @MainActor func load() async {
+    func load() async {
         isLoading = true
         
         do {
@@ -45,7 +45,7 @@ final class FeedViewModel: ObservableObject {
         isLoading = false
     }
     
-    @MainActor func loadMore() async {
+    func loadMore() async {
         isLoadingMore = true
         
         do {
@@ -57,7 +57,7 @@ final class FeedViewModel: ObservableObject {
         isLoadingMore = false
     }
     
-    @MainActor func reload() async {
+    func reload() async {
         isReloading = true
         
         do {

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftRant
 
-final class DataStore: ObservableObject {
+@MainActor final class DataStore: ObservableObject {
     static let shared = DataStore()
     
     private init() {}

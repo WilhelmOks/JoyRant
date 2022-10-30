@@ -55,7 +55,7 @@ final class DataLoader: ObservableObject {
         }
     }
     
-    private func addMoreRantsToFeed(_ rants: [RantInFeed]) {
+    @MainActor private func addMoreRantsToFeed(_ rants: [RantInFeed]) {
         for rant in rants {
             // According to OmerFlame, duplicates are normal and should be filtered out by the app.
             let isDuplicate = dataStore.rantsInFeed.first(where: { $0.id == rant.id }) != nil

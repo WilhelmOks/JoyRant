@@ -30,7 +30,9 @@ final class WriteCommentViewModel: ObservableObject {
     deinit {
         switch kind {
         case .edit(comment: _):
-            DataStore.shared.writeCommentContent = ""
+            DispatchQueue.main.async {
+                DataStore.shared.writeCommentContent = ""                
+            }
         case .post(rantId: _):
             break
         }

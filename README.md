@@ -58,7 +58,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ## TestFlight
 
-testflight.apple.com/join/NoiaKmoN
+https://testflight.apple.com/join/NoiaKmoN
 
 ## Requirements
 

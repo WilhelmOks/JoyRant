@@ -56,6 +56,10 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 🚧 Show unread notifications as red or green badges (instead of text)
 
+## TestFlight
+
+testflight.apple.com/join/NoiaKmoN
+
 ## Requirements
 
 ### to build

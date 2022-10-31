@@ -620,7 +620,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwiftUIRant/SwiftUIRant.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIRant/Preview Content\"";
 				DEVELOPMENT_TEAM = J8UL3VBQ4J;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -654,7 +654,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwiftUIRant/SwiftUIRant.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIRant/Preview Content\"";
 				DEVELOPMENT_TEAM = J8UL3VBQ4J;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -717,7 +717,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OmerFlame/SwiftRant";
 			requirement = {
-				branch = public_uuid;
+				branch = notif_state_int_fix;
 				kind = branch;
 			};
 		};

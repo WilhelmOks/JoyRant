@@ -23,6 +23,8 @@ import SwiftRant
     var currentFeedSession: String?
     var duplicatesInFeed = 0
     
+    //TODO: reset navigation stack when logged out
+    
     func clear() {
         clearFeed()
         unreadNotifications = [:]

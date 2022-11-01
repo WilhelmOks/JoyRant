@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftRant
 
 struct RantDetailsView: View {
+    @Environment(\.presentationMode) private var presentationMode
+
+    let sourceTab: InternalView.Tab
     @StateObject var viewModel: RantDetailsViewModel
     
     //@State private var presentedWriteCommentView = false
@@ -71,6 +74,16 @@ struct RantDetailsView: View {
                             }
                         )
                     )
+                }
+            }
+            .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
+                if sourceTab == .feed {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+            .onReceive(broadcastEvent: .didReselectMainTab(.notifications)) { _ in
+                if sourceTab == .notifications {
+                    presentationMode.wrappedValue.dismiss()
                 }
             }
     }
@@ -180,6 +193,7 @@ struct RantDetailsView: View {
 struct RantDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         RantDetailsView(
+            sourceTab: .feed,
             viewModel: .init(
                 rantId: 1
             )

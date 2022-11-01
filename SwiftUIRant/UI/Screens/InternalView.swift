@@ -50,15 +50,27 @@ struct InternalView: View {
     }
     
     @ViewBuilder private func content() -> some View {
+        let tabBinding = Binding<Tab>(
+            get: { tab },
+            set: { newValue in
+                if newValue == tab {
+                    DispatchQueue.main.async {
+                        BroadcastEvent.didReselectMainTab(tab).send()
+                    }
+                }
+                tab = newValue
+            }
+        )
+        
         #if os(iOS)
-        TabView(selection: $tab) {
+        TabView(selection: tabBinding) {
             ForEach(Tab.allCases) { tab in
                 tabView(tab)
             }
         }
         #elseif os(macOS)
         NavigationStack(path: $appState.navigationPath) {
-            TabView(selection: $tab) {
+            TabView(selection: tabBinding) {
                 ForEach(Tab.allCases) { tab in
                     tabView(tab)
                 }

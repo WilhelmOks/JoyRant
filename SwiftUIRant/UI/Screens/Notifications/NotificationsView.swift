@@ -65,6 +65,7 @@ struct NotificationsView: View {
                         VStack(spacing: 0) {
                             NavigationLink {
                                 RantDetailsView(
+                                    sourceTab: .notifications,
                                     viewModel: .init(
                                         rantId: item.rantId,
                                         scrollToCommentWithId: item.commentId,

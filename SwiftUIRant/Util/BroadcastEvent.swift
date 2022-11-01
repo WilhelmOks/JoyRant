@@ -14,6 +14,7 @@ enum BroadcastEvent: Equatable {
     case shouldRefreshNotifications
     case shouldScrollToComment
     case didSwitchToMainTab(_ tab: InternalView.Tab)
+    case didReselectMainTab(_ tab: InternalView.Tab)
 }
 
 extension BroadcastEvent {

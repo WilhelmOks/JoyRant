@@ -30,6 +30,7 @@ struct FeedView: View {
                 switch destination {
                 case .rantDetails(let rantId):
                     RantDetailsView(
+                        sourceTab: .feed,
                         viewModel: .init(
                             rantId: rantId
                         )

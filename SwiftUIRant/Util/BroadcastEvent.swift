@@ -12,6 +12,7 @@ import SwiftUI
 enum BroadcastEvent: Equatable {
     case shouldUpdateRantInFeed(rantId: Int)
     case shouldRefreshNotifications
+    case shouldScrollNotificationsToTop
     case shouldScrollToComment
     case didSwitchToMainTab(_ tab: InternalView.Tab)
     case didReselectMainTab(_ tab: InternalView.Tab)

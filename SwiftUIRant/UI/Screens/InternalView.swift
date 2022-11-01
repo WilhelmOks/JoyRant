@@ -87,6 +87,11 @@ struct InternalView: View {
                 contentForTab(tab)
                     .navigationBarTitleDisplayModeInline()
             }
+        case .notifications:
+            NavigationStack(path: $appState.notificationsNavigationPath) {
+                contentForTab(tab)
+                    .navigationBarTitleDisplayModeInline()
+            }
         default:
             NavigationStack() {
                 contentForTab(tab)

@@ -21,6 +21,7 @@ final class AppState: ObservableObject {
     }
     
     @Published var navigationPath: [NavigationDestination] = []
+    @Published var notificationsNavigationPath = NavigationPath()
         
     var isLoggedIn: Bool {
         LoginStore.shared.isLoggedIn

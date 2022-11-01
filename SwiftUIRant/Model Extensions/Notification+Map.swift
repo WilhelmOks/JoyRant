@@ -10,8 +10,8 @@ import SwiftRant
 
 //TODO: move this to the SwiftRant package
 extension Notifications {
-    struct MappedNotificationItem: Identifiable {
-        let id = UUID()
+    struct MappedNotificationItem: Hashable {
+        let uuid = UUID()
         let rantId: Rant.ID
         let commentId: Comment.ID?
         let userId: UserID

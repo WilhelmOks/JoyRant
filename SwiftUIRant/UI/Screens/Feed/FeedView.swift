@@ -21,6 +21,16 @@ struct FeedView: View {
                 .toolbar {
                     sortPicker()
                         .disabled(viewModel.isLoading || viewModel.isLoadingMore || viewModel.isReloading)
+                    
+                    #if os(macOS)
+                    LoadingButton(isLoading: viewModel.isReloading || viewModel.isLoading || viewModel.isLoadingMore) {
+                        Task {
+                            await viewModel.reload()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    #endif
                 }
                 .navigationTitle("Feed")
             }

@@ -28,6 +28,16 @@ struct NotificationsView: View {
                     } label: {
                         Text("Clear")
                     }
+                    
+                    #if os(macOS)
+                    LoadingButton(isLoading: viewModel.isLoading || viewModel.isRefreshing) {
+                        Task {
+                            await viewModel.refresh()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    #endif
                 }
                 .navigationTitle("Notifications")
             }

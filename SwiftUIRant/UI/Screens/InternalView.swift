@@ -63,20 +63,31 @@ struct InternalView: View {
         )
         
         #if os(iOS)
+        tabViewWithTabs(tabBinding)
+        #elseif os(macOS)
+        switch tab {
+        case .feed:
+            NavigationStack(path: $appState.navigationPath) {
+                tabViewWithTabs(tabBinding)
+            }
+        case .notifications:
+            NavigationStack(path: $appState.notificationsNavigationPath) {
+                tabViewWithTabs(tabBinding)
+            }
+        case .settings:
+            NavigationStack() {
+                tabViewWithTabs(tabBinding)
+            }
+        }
+        #endif
+    }
+    
+    @ViewBuilder private func tabViewWithTabs(_ tabBinding: Binding<Tab>) -> some View {
         TabView(selection: tabBinding) {
             ForEach(Tab.allCases) { tab in
                 tabView(tab)
             }
         }
-        #elseif os(macOS)
-        NavigationStack(path: $appState.navigationPath) {
-            TabView(selection: tabBinding) {
-                ForEach(Tab.allCases) { tab in
-                    tabView(tab)
-                }
-            }
-        }
-        #endif
     }
     
     @ViewBuilder private func wrappedContentForTab(_ tab: Tab) -> some View {

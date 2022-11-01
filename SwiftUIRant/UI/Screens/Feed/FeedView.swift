@@ -37,29 +37,47 @@ struct FeedView: View {
                     )
                 }
             }
+            .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
+                if AppState.shared.navigationPath.isEmpty {
+                    DispatchQueue.main.async {
+                        BroadcastEvent.shouldScrollFeedToTop.send()
+                    }
+                    Task {
+                        await viewModel.reload()
+                    }
+                }
+            }
     }
     
     @ViewBuilder func content() -> some View {
         ZStack {
             if dataStore.isFeedLoaded {
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 0) {
-                        ForEach(dataStore.rantsInFeed, id: \.uuid) { rant in
-                            row(rant: rant)
-                        }
-                        
-                        Button {
-                            Task {
-                                await viewModel.loadMore()
+                ScrollViewReader { scrollProxy in
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 0) {
+                            ForEach(dataStore.rantsInFeed, id: \.uuid) { rant in
+                                row(rant: rant)
+                                    .id(rant.uuid)
                             }
-                        } label: {
-                            Text("load more")
-                                .foregroundColor(.accentColor)
+                            
+                            Button {
+                                Task {
+                                    await viewModel.loadMore()
+                                }
+                            } label: {
+                                Text("load more")
+                                    .foregroundColor(.accentColor)
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(viewModel.isLoadingMore)
+                            .fillHorizontally(.center)
+                            .padding()
                         }
-                        .buttonStyle(.plain)
-                        .disabled(viewModel.isLoadingMore)
-                        .fillHorizontally(.center)
-                        .padding()
+                    }
+                    .onReceive(broadcastEvent: .shouldScrollFeedToTop) { _ in
+                        withAnimation {
+                            scrollProxy.scrollTo(dataStore.rantsInFeed.first?.uuid, anchor: .top)
+                        }
                     }
                 }
                 .refreshable {

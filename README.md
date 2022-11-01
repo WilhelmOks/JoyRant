@@ -14,7 +14,7 @@ Secondary functions like editing the own profile may be added later but are not 
 
 ## Motivation
 
-My motivation for this this project is to have a native iOS devRant app that is not crashing and has some improved UI/UX over the official devRant iOS app.
+My motivation for this this project is to have a native iOS devRant app that doesn't crash and has some improved UI/UX over the official devRant iOS app.
 
 And I want wo build it in SwiftUI to improve my skills and because I think that SwiftUI is a fun and amazing UI framework.
 

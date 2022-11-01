@@ -19,7 +19,7 @@ struct TimeFormatter {
         // a locale with the current region of the user's device but always in english:
         let locale = Locale(
             languageCode: .init("en"),
-            script: currentLocale.scriptCode.flatMap { Locale.Script.init($0) },
+            script: currentLocale.language.script,
             languageRegion: currentLocale.region
         )
         

@@ -37,9 +37,14 @@ struct InternalView: View {
                     try? await dataLoader.loadNumbersOfUnreadNotifications()
                 }
             }
-            .onChange(of: tab) { _ in
-                Task {
-                    try? await dataLoader.loadNumbersOfUnreadNotifications()
+            .onChange(of: tab) { newValue in
+                DispatchQueue.main.async {
+                    BroadcastEvent.didSwitchToMainTab(newValue).send()
+                }
+                if newValue != .notifications {
+                    Task {
+                        try? await dataLoader.loadNumbersOfUnreadNotifications()
+                    }
                 }
             }
     }

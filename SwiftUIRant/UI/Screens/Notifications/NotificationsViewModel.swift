@@ -23,6 +23,8 @@ import SwiftRant
     @Published var isRefreshing = false
     @Published var alertMessage: AlertMessage = .none()
     
+    private(set) var isLoaded = false
+    
     init() {
         Task {
             await load()
@@ -40,6 +42,7 @@ import SwiftRant
             Task {
                 try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
             }
+            isLoaded = true
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -56,6 +59,7 @@ import SwiftRant
             Task {
                 try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
             }
+            isLoaded = true
         } catch {
             dlog("Error refreshing notifications: \(error)")
         }

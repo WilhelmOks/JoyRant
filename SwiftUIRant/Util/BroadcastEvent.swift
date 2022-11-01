@@ -13,6 +13,7 @@ enum BroadcastEvent: Equatable {
     case shouldUpdateRantInFeed(rantId: Int)
     case shouldRefreshNotifications
     case shouldScrollToComment
+    case didSwitchToMainTab(_ tab: InternalView.Tab)
 }
 
 extension BroadcastEvent {

@@ -27,12 +27,6 @@ struct NotificationsView: View {
                     } label: {
                         Text("Clear")
                     }
-                    
-                    /*RefreshButton(isLoading: viewModel.isLoading) {
-                        Task {
-                            await viewModel.load()
-                        }
-                    }*/
                 }
                 .navigationTitle("Notifications")
             }
@@ -41,6 +35,13 @@ struct NotificationsView: View {
             .onReceive(broadcastEvent: .shouldRefreshNotifications) { _ in
                 Task {
                     await viewModel.refresh()
+                }
+            }
+            .onReceive(broadcastEvent: .didSwitchToMainTab(.notifications)) { _ in
+                if viewModel.isLoaded {
+                    Task {
+                        await viewModel.refresh()
+                    }
                 }
             }
     }

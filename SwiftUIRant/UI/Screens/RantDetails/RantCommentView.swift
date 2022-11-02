@@ -57,7 +57,7 @@ struct RantCommentView: View {
                 voteController: viewModel.voteController
             )
             
-            Text(viewModel.comment.body)
+            Text(attributedString)
                 .font(baseSize: 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
@@ -196,6 +196,31 @@ struct RantCommentView: View {
     
     private func delete() {
         isDeleteConfirmationAlertPresented = true
+    }
+    
+    private var attributedString: AttributedString {
+        let body = viewModel.comment.body
+        var result = AttributedString(stringLiteral: body)
+        
+        //TODO: handle devrant links
+        
+        viewModel.comment.links?.forEach { link in
+            if let range = result.range(of: link.title) {
+                //TODO: make an enum for link.type
+                if link.type == "url" {
+                    result[range].foregroundColor = .primaryForeground
+                    result[range].underlineStyle = .single
+                    result[range].link = URL(string: link.url)
+                } else if link.type == "mention" {
+                    result[range].foregroundColor = .primary
+                    result[range].font = .baseSize(16).bold()
+                    result[range].swiftUI.font = .baseSize(16).bold()
+                    result[range].link = URL(string: link.url)
+                }
+            }
+        }
+        
+        return result
     }
 }
 

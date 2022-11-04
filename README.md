@@ -1,4 +1,4 @@
-# SwiftUIRant
+# JoyRant (former SwiftUIRant)
 
 An unofficial devRant client for iOS and macOS, that doesn't crash.
 

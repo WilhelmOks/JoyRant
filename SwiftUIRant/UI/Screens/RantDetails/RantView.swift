@@ -38,7 +38,7 @@ struct RantView: View {
                 voteController: viewModel.voteController
             )
             
-            Text(attributedString)
+            Text(AttributedString.from(postedContent: viewModel.rant.text, links: viewModel.rant.links))
                 .font(baseSize: 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
@@ -190,31 +190,6 @@ struct RantView: View {
             }
         }
         .disabled(viewModel.isLoading)
-    }
-    
-    private var attributedString: AttributedString {
-        let body = viewModel.rant.text
-        var result = AttributedString(stringLiteral: body)
-        
-        //TODO: handle devrant links
-        
-        viewModel.rant.links?.forEach { link in
-            if let range = result.range(of: link.title) {
-                //TODO: make an enum for link.type
-                if link.type == "url" {
-                    result[range].foregroundColor = .primaryForeground
-                    result[range].underlineStyle = .single
-                    result[range].link = URL(string: link.url)
-                } else if link.type == "mention" {
-                    result[range].foregroundColor = .primary
-                    result[range].font = .baseSize(16).bold()
-                    result[range].swiftUI.font = .baseSize(16).bold()
-                    result[range].link = URL(string: link.url)
-                }
-            }
-        }
-        
-        return result
     }
 }
 

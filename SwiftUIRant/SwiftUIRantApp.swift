@@ -12,6 +12,8 @@ struct SwiftUIRantApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .handlesExternalEvents(preferring: ["*"], allowing: ["*"])
         }
+        .handlesExternalEvents(matching: ["*"])
     }
 }

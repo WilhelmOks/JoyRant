@@ -36,7 +36,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Favorite/unfavorite rants
 
-⏹️ Handling embedded links to other rants and external websites
+✅ Handling embedded links to other rants and external websites
 
 ⏹️ Showing images in zoomable fullscreen
 

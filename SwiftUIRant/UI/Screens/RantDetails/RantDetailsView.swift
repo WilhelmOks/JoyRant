@@ -86,6 +86,24 @@ struct RantDetailsView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
             }
+            .onOpenURL{ url in
+                if (url.scheme == "joyrant" && url.host == "rant") {
+                    guard let rantId = url.pathComponents.last.flatMap(Int.init) else {
+                        dlog("Rant ID could not be parsed: \(url)")
+                        return
+                    }
+                    
+                    switch sourceTab {
+                    case .feed:
+                        AppState.shared.navigationPath.append(.rantDetails(rantId: rantId))
+                    case .notifications:
+                        let destination = AppState.NavigationDestination.rantDetails(rantId: rantId)
+                        AppState.shared.notificationsNavigationPath.append(destination)
+                    case .settings:
+                        break
+                    }
+                }
+            }
     }
     
     @ViewBuilder private func content() -> some View {

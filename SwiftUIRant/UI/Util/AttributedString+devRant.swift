@@ -20,7 +20,7 @@ extension AttributedString {
                 if link.type == "url" {
                     result[range].foregroundColor = .primaryForeground
                     result[range].underlineStyle = .single
-                    result[range].link = URL(string: link.url)
+                    result[range].link = url(link: link.url)
                 } else if link.type == "mention" {
                     result[range].foregroundColor = .primary
                     result[range].font = .baseSize(16).bold()
@@ -31,5 +31,21 @@ extension AttributedString {
         }
         
         return result
+    }
+    
+    private static func url(link: String) -> URL? {
+        if link.hasPrefix("https://devrant.com/rants/") {
+            // a rant link looks like this:
+            // https://devrant.com/rants/<rant-id>/first-few-letters-of-rant-content
+            // convert it into this:
+            // joyrant://rant/<rant-id>
+            // so that it can be opened in this app.
+            let withCustomScheme = link.replacing("https://devrant.com/rants/", with: "joyrant://rant/")
+            let components = withCustomScheme.split(separator: "/", omittingEmptySubsequences: false)
+            let joinedUntilRantId = components.prefix(upTo: 4).joined(separator: "/")
+            return URL(string: joinedUntilRantId)
+        } else {
+            return URL(string: link)
+        }
     }
 }

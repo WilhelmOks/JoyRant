@@ -117,6 +117,15 @@ struct NotificationsView: View {
                     )
                 )
             }
+            .navigationDestination(for: AppState.NavigationDestination.self) { item in
+                switch item {
+                case .rantDetails(rantId: let rantId):
+                    RantDetailsView(
+                        sourceTab: .notifications,
+                        viewModel: .init(rantId: rantId)
+                    )
+                }
+            }
         }
     }
 }

@@ -211,7 +211,7 @@ struct RantCommentView_Previews: PreviewProvider {
                         score: 56,
                         createdTime: 0,
                         voteState: .unvoted,
-                        links: nil, //TODO: test links
+                        links: nil,
                         userID: 1,
                         username: "Saul Goodman",
                         userScore: 43,

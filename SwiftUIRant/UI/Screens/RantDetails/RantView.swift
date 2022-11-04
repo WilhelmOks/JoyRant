@@ -211,6 +211,7 @@ struct RantView_Previews: PreviewProvider {
                     isEdited: true,
                     isFavorite: 0,
                     link: nil, //TODO: test
+                    links: nil,
                     collabTypeLong: nil, //TODO: test
                     collabDescription: nil, //TODO: test
                     collabTechStack: nil, //TODO: test

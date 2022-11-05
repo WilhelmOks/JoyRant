@@ -14,6 +14,7 @@ final class WriteCommentViewModel: ObservableObject {
     let onSubmitted: () -> ()
     @Published var alertMessage: AlertMessage = .none()
     @Published var isLoading = false
+    @Published var selectedImage: PlatformImage? = nil
 
     let dismiss = PassthroughSubject<Void, Never>()
     
@@ -48,10 +49,10 @@ final class WriteCommentViewModel: ObservableObject {
             
             switch kind {
             case .post(rantId: let rantId):
-                try await Networking.shared.postComment(rantId: rantId, content: content, image: nil) //TODO: image
+                try await Networking.shared.postComment(rantId: rantId, content: content, image: selectedImage)
             case .edit(comment: let comment):
                 guard comment.canEdit else { throw SwiftUIRantError.timeWindowForEditMissed }
-                try await Networking.shared.editComment(commentId: comment.id, content: content, image: nil) //TODO: image
+                try await Networking.shared.editComment(commentId: comment.id, content: content, image: selectedImage)
             }
             
             DataStore.shared.writeCommentContent = ""

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import PhotosUI
+import CachedAsyncImage
 
 struct WriteCommentView: View {
     @Environment(\.presentationMode) private var presentationMode
@@ -14,7 +16,7 @@ struct WriteCommentView: View {
     
     @ObservedObject private var dataStore = DataStore.shared
     
-    //TODO: add image preview
+    @State private var selectedPhotoItem: PhotosPickerItem? = nil
     
     var body: some View {
         NavigationStack {
@@ -22,7 +24,7 @@ struct WriteCommentView: View {
             .padding()
             .navigationTitle("Comment") //TODO: change title based on kind
             .navigationBarTitleDisplayModeInline()
-            .frame(minWidth: 320, minHeight: 300) //TODO: make it resizable. Maybe with maxWidth/maxHeight?
+            .frame(minWidth: 320, minHeight: 300)
             .disabled(viewModel.isLoading)
             .alert($viewModel.alertMessage)
             .toolbar {
@@ -46,10 +48,17 @@ struct WriteCommentView: View {
                         .foregroundColor(.secondaryForeground)
                 }
             
-            HStack {
+            HStack(alignment: .top, spacing: 14) {
                 remainingCharacters()
                 
                 Spacer()
+                
+                imagePicker()
+                
+                imagePreview()
+                    .overlay {
+                        Rectangle().stroke().foregroundColor(.secondaryForeground)
+                    }
             }
         }
     }
@@ -59,8 +68,80 @@ struct WriteCommentView: View {
         //TODO: prevent user from submitting if message is too long.
         let characters = 1000 - dataStore.writeCommentContent.count
         Text("\(characters)")
-            .font(baseSize: 12, weightDelta: 2)
+            .font(baseSize: 13, weightDelta: 2)
             .foregroundColor(.secondaryForeground)
+    }
+    
+    @ViewBuilder private func imagePicker() -> some View {
+        PhotosPicker(selection: $selectedPhotoItem, matching: nil, photoLibrary: .shared()) {
+            Label {
+                Text("Attach image")
+            } icon: {
+                Image(systemName: "photo")
+            }
+            .font(baseSize: 16, weightDelta: 1)
+        }
+        .disabled(existingImageUrl() != nil)
+        .onChange(of: selectedPhotoItem) { newValue in
+            Task {
+                if let data = try? await newValue?.loadTransferable(type: Data.self) {
+                    viewModel.selectedImage = PlatformImage(data: data)
+                }
+            }
+        }
+    }
+    
+    private func existingImageUrl() -> URL? {
+        switch viewModel.kind {
+        case .edit(comment: let comment):
+            guard let urlString = comment.attachedImage?.url else { return nil }
+            return URL(string: urlString)
+        case .post(rantId: _):
+            return nil
+        }
+    }
+    
+    @ViewBuilder private func imagePreview() -> some View {
+        if let image = viewModel.selectedImage {
+            imagePreview(platformImage: image)
+        } else if let url = existingImageUrl() {
+            imagePreview(url: url)
+        }
+    }
+    
+    @ViewBuilder private func imagePreview(url: URL, size: CGFloat = 50) -> some View {
+        CachedAsyncImage(url: url, urlCache: .postedImageCache) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+                    .frame(width: size, height: size)
+            case .success(let image):
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size, height: size)
+            case .failure:
+                Image(systemName: "exclamationmark.triangle")
+            @unknown default:
+                EmptyView()
+            }
+        }
+        .frame(width: size, height: size)
+    }
+    
+    @ViewBuilder private func imagePreview(platformImage: PlatformImage, size: CGFloat = 50) -> some View {
+        image(platformImage: platformImage)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: size, height: size)
+    }
+    
+    private func image(platformImage: PlatformImage) -> Image {
+        #if os(iOS)
+        Image(uiImage: platformImage)
+        #elseif os(macOS)
+        Image(nsImage: platformImage)
+        #endif
     }
     
     @ViewBuilder private func cancelButton() -> some View {

@@ -89,7 +89,7 @@
 		ED1B307828CCE921001A6A73 /* UserPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanel.swift; sourceTree = "<group>"; };
 		ED1B307A28CE0451001A6A73 /* View+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Preview.swift"; sourceTree = "<group>"; };
 		ED29858F28BCD9AF0065D0E3 /* InternalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalView.swift; sourceTree = "<group>"; };
-		ED2C9B6228B679CB008BF314 /* SwiftUIRant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIRant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED2C9B6228B679CB008BF314 /* JoyRant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JoyRant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIRantApp.swift; sourceTree = "<group>"; };
 		ED2C9B6728B679CB008BF314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		ED2C9B6928B679D0008BF314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		ED2C9B6328B679CB008BF314 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED2C9B6228B679CB008BF314 /* SwiftUIRant.app */,
+				ED2C9B6228B679CB008BF314 /* JoyRant.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				ED97D63028EB22C100CFC418 /* HexNSColor */,
 			);
 			productName = SwiftUIRant;
-			productReference = ED2C9B6228B679CB008BF314 /* SwiftUIRant.app */;
+			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -624,7 +624,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwiftUIRant/SwiftUIRant.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIRant/Preview Content\"";
 				DEVELOPMENT_TEAM = J8UL3VBQ4J;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -643,7 +643,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = wilhelmoks.SwiftUIRant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = JoyRant;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -659,7 +659,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwiftUIRant/SwiftUIRant.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIRant/Preview Content\"";
 				DEVELOPMENT_TEAM = J8UL3VBQ4J;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -678,7 +678,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = wilhelmoks.SwiftUIRant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = JoyRant;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;

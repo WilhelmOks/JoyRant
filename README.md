@@ -46,7 +46,9 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Create/Edit/Delete comment
 
-⏹️ Upload image for rant or comment
+⏹️ Upload image for rant
+
+✅ Upload image for comment
 
 ✅ Show notifications & navigate to the rant or comment
 

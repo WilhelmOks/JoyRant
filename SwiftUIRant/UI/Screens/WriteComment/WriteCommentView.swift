@@ -18,6 +18,8 @@ struct WriteCommentView: View {
     
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     
+    @State private var isLoadingImage = false
+    
     private let numberOfAllowedCharacters = 1000
     
     private var numberOfRemainingCharacters: Int {
@@ -93,9 +95,11 @@ struct WriteCommentView: View {
         .disabled(existingImageUrl() != nil)
         .onChange(of: selectedPhotoItem) { newValue in
             Task {
+                isLoadingImage = true
                 if let data = try? await newValue?.loadTransferable(type: Data.self) {
                     viewModel.selectedImage = PlatformImage(data: data)
                 }
+                isLoadingImage = false
             }
         }
     }
@@ -115,7 +119,14 @@ struct WriteCommentView: View {
             imagePreview(platformImage: image)
         } else if let url = existingImageUrl() {
             imagePreview(url: url)
+        } else if isLoadingImage {
+            imagePreviewProgress()
         }
+    }
+    
+    @ViewBuilder private func imagePreviewProgress(size: CGFloat = 50) -> some View {
+        ProgressView()
+            .frame(width: size, height: size)
     }
     
     @ViewBuilder private func imagePreview(url: URL, size: CGFloat = 50) -> some View {

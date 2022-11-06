@@ -126,6 +126,10 @@ struct Networking {
         try await swiftRant.editComment(try token(), commentID: commentId, content: content, image: image).get()
     }
     
+    func deleteRant(rantId: Rant.ID) async throws {
+        try await swiftRant.deleteRant(try token(), rantID: rantId).get()
+    }
+    
     func deleteComment(commentId: Comment.ID) async throws {
         try await swiftRant.deleteComment(try token(), commentID: commentId).get()
     }

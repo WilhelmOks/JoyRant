@@ -14,8 +14,6 @@ struct RantDetailsView: View {
     let sourceTab: InternalView.Tab
     @StateObject var viewModel: RantDetailsViewModel
     
-    //@State private var presentedWriteCommentView = false
-    
     enum PresentedSheet: Identifiable {
         case postComment(rantId: Rant.ID)
         case editComment(comment: Comment)
@@ -39,10 +37,6 @@ struct RantDetailsView: View {
                 ToolbarItem(placement: .automatic) {
                     toolbarReloadButton()
                 }
-                
-                /*ToolbarItem(placement: .automatic) {
-                    toolbarMoreButton()
-                }*/
             }
             .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
@@ -86,6 +80,9 @@ struct RantDetailsView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
             }
+            .onReceive(viewModel.dismiss) { _ in
+                presentationMode.wrappedValue.dismiss()
+            }
             .onOpenURL{ url in
                 if (url.scheme == "joyrant" && url.host == "rant") {
                     guard let rantId = url.pathComponents.last.flatMap(Int.init) else {
@@ -115,7 +112,12 @@ struct RantDetailsView: View {
                             RantView(
                                 viewModel: .init(
                                     rant: rant
-                                )
+                                ),
+                                onDelete: {
+                                    Task {
+                                        await viewModel.deleteRant(rant: rant)
+                                    }
+                                }
                             )
                             .id(rant.uuid)
                             

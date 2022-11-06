@@ -159,7 +159,6 @@ struct RantCommentView: View {
             Text("Report")
                 .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
-                //.foregroundColor(.accentColor)
         }
     }
     
@@ -182,7 +181,6 @@ struct RantCommentView: View {
             Text("Delete")
                 .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
-                //.foregroundColor(.accentColor)
         }
     }
     

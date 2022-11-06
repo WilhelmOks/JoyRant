@@ -10,12 +10,14 @@ import SwiftRant
 
 struct RantView: View {
     @StateObject var viewModel: RantViewModel
+    let onDelete: () -> ()
+    
+    @State private var isDeleteConfirmationAlertPresented = false
     
     var body: some View {
         content()
         .padding(.top, 10)
         .padding(.horizontal, 10)
-        .alert($viewModel.alertMessage)
         .background(Color.primaryBackground)
         .onReceive(viewModel.voteController.objectWillChange) {
             viewModel.objectWillChange.send()
@@ -27,6 +29,21 @@ struct RantView: View {
                 Task {
                     await viewModel.voteController.voteByContext()
                 }
+            }
+        }
+        .background {
+            ZStack {
+                ZStack {}
+                    .alert($viewModel.alertMessage)
+                
+                ZStack {}
+                    .alert(isPresented: $isDeleteConfirmationAlertPresented) {
+                        Alert(
+                            title: Text("Do you want to delete this rant?"),
+                            primaryButton: Alert.Button.cancel(Text("Cancel")),
+                            secondaryButton: .destructive(Text("Delete rant"), action: { onDelete() })
+                        )
+                    }
             }
         }
     }
@@ -158,8 +175,7 @@ struct RantView: View {
     
     @ViewBuilder private func deleteButton() -> some View {
         Button {
-            //TODO: ...
-            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+            delete()
         } label: {
             Text("Delete")
                 .font(baseSize: 12, weight: .medium)
@@ -190,6 +206,10 @@ struct RantView: View {
             }
         }
         .disabled(viewModel.isLoading)
+    }
+    
+    private func delete() {
+        isDeleteConfirmationAlertPresented = true
     }
 }
 
@@ -230,7 +250,8 @@ struct RantView_Previews: PreviewProvider {
                     ),
                     isUserDPP: nil
                 )
-            )
+            ),
+            onDelete: {}
         )
     }
 }

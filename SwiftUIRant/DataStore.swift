@@ -54,4 +54,8 @@ import SwiftRant
             BroadcastEvent.shouldUpdateRantInFeed(rantId: rant.id).send()
         }
     }
+    
+    func remove(rantInFeed rant: Rant) {
+        rantsInFeed.removeAll { $0.id == rant.id }
+    }
 }

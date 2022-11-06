@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 import SwiftRant
 
 final class RantDetailsViewModel: ObservableObject {
@@ -17,6 +18,8 @@ final class RantDetailsViewModel: ObservableObject {
     
     @Published var rant: Rant?
     @Published var comments: [Comment] = []
+    
+    let dismiss = PassthroughSubject<Void, Never>()
     
     var scrollToCommentWithId: Int?
     private let scrollToLastCommentWithUserId: Int?
@@ -64,6 +67,20 @@ final class RantDetailsViewModel: ObservableObject {
         isReloading = true
         await performLoad()
         isReloading = false
+    }
+    
+    @MainActor func deleteRant(rant: Rant) async {
+        isLoading = true
+        
+        do {
+            try await Networking.shared.deleteRant(rantId: rant.id)
+            DataStore.shared.remove(rantInFeed: rant)
+            dismiss.send()
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoading = false
     }
     
     @MainActor func deleteComment(comment: Comment) async {

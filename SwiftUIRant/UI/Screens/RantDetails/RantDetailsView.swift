@@ -49,7 +49,7 @@ struct RantDetailsView: View {
             .sheet(item: $presentedSheet) { item in
                 switch item {
                 case .postComment(rantId: let rantId):
-                    WriteCommentView(
+                    WritePostView(
                         viewModel: .init(
                             kind: .post(rantId: rantId),
                             onSubmitted: {
@@ -64,7 +64,7 @@ struct RantDetailsView: View {
                         )
                     )
                 case .editComment(comment: let comment):
-                    WriteCommentView(
+                    WritePostView(
                         viewModel: .init(
                             kind: .edit(comment: comment),
                             onSubmitted: {

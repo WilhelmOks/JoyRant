@@ -18,7 +18,7 @@ import SwiftRant
     @Published var rantsInFeed: [RantInFeed] = []
     @Published var unreadNotifications: [Notifications.Categories: Int] = [:]
     
-    @Published var writeCommentContent = ""
+    @Published var writePostContent = ""
     
     var currentFeedSession: String?
     var duplicatesInFeed = 0

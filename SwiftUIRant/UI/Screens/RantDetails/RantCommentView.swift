@@ -142,7 +142,7 @@ struct RantCommentView: View {
         
     @ViewBuilder private func replyButton() -> some View {
         Button {
-            DataStore.shared.writeCommentContent.append("@\(viewModel.comment.username) ")
+            DataStore.shared.writePostContent.append("@\(viewModel.comment.username) ")
             onReply()
         } label: {
             Text("Reply")
@@ -165,7 +165,7 @@ struct RantCommentView: View {
     
     @ViewBuilder private func editButton() -> some View {
         Button {
-            DataStore.shared.writeCommentContent = viewModel.comment.body
+            DataStore.shared.writePostContent = viewModel.comment.body
             edit()
         } label: {
             Text("Edit")

@@ -1,5 +1,5 @@
 //
-//  WriteCommentView.swift
+//  WritePostView.swift
 //  SwiftUIRant
 //
 //  Created by Wilhelm Oks on 18.10.22.
@@ -9,10 +9,10 @@ import SwiftUI
 import PhotosUI
 import CachedAsyncImage
 
-struct WriteCommentView: View {
+struct WritePostView: View {
     @Environment(\.presentationMode) private var presentationMode
     
-    @StateObject var viewModel: WriteCommentViewModel
+    @StateObject var viewModel: WritePostViewModel
     
     @ObservedObject private var dataStore = DataStore.shared
     
@@ -23,13 +23,13 @@ struct WriteCommentView: View {
     private let numberOfAllowedCharacters = 1000
     
     private var numberOfRemainingCharacters: Int {
-        numberOfAllowedCharacters - dataStore.writeCommentContent.utf8.count
+        numberOfAllowedCharacters - dataStore.writePostContent.utf8.count
     }
     
     private var canSubmit: Bool {
         return
             numberOfRemainingCharacters >= 0 &&
-            !dataStore.writeCommentContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            !dataStore.writePostContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
     var body: some View {
@@ -53,7 +53,7 @@ struct WriteCommentView: View {
     
     @ViewBuilder private func content() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            TextEditor(text: $dataStore.writeCommentContent)
+            TextEditor(text: $dataStore.writePostContent)
                 .font(.callout)
                 .foregroundColor(.primaryForeground)
                 .overlay {
@@ -221,8 +221,8 @@ struct WriteCommentView: View {
     }
 }
 
-struct WriteCommentView_Previews: PreviewProvider {
+struct WritePostView_Previews: PreviewProvider {
     static var previews: some View {
-        WriteCommentView(viewModel: .init(kind: .post(rantId: 0), onSubmitted: {}))
+        WritePostView(viewModel: .init(kind: .post(rantId: 0), onSubmitted: {}))
     }
 }

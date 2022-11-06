@@ -1,5 +1,5 @@
 //
-//  WriteCommentViewModel.swift
+//  WritePostViewModel.swift
 //  SwiftUIRant
 //
 //  Created by Wilhelm Oks on 18.10.22.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftRant
 
-final class WriteCommentViewModel: ObservableObject {
+final class WritePostViewModel: ObservableObject {
     let kind: Kind
     let onSubmitted: () -> ()
     @Published var alertMessage: AlertMessage = .none()
@@ -32,7 +32,7 @@ final class WriteCommentViewModel: ObservableObject {
         switch kind {
         case .edit(comment: _):
             DispatchQueue.main.async {
-                DataStore.shared.writeCommentContent = ""                
+                DataStore.shared.writePostContent = ""
             }
         case .post(rantId: _):
             break
@@ -45,7 +45,7 @@ final class WriteCommentViewModel: ObservableObject {
         isLoading = true
         
         do {
-            let content = DataStore.shared.writeCommentContent
+            let content = DataStore.shared.writePostContent
             
             switch kind {
             case .post(rantId: let rantId):
@@ -55,7 +55,7 @@ final class WriteCommentViewModel: ObservableObject {
                 try await Networking.shared.editComment(commentId: comment.id, content: content, image: selectedImage)
             }
             
-            DataStore.shared.writeCommentContent = ""
+            DataStore.shared.writePostContent = ""
             dismiss.send()
             onSubmitted()
         } catch {

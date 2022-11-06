@@ -18,6 +18,18 @@ struct WriteCommentView: View {
     
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     
+    private let numberOfAllowedCharacters = 1000
+    
+    private var numberOfRemainingCharacters: Int {
+        numberOfAllowedCharacters - dataStore.writeCommentContent.utf8.count
+    }
+    
+    private var canSubmit: Bool {
+        return
+            numberOfRemainingCharacters >= 0 &&
+            !dataStore.writeCommentContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
     var body: some View {
         NavigationStack {
             content()
@@ -64,10 +76,7 @@ struct WriteCommentView: View {
     }
     
     @ViewBuilder private func remainingCharacters() -> some View {
-        //TODO: Check if characters are counted by devRant "correclty" or "naively"
-        //TODO: prevent user from submitting if message is too long.
-        let characters = 1000 - dataStore.writeCommentContent.count
-        Text("\(characters)")
+        Text("\(numberOfRemainingCharacters)")
             .font(baseSize: 13, weightDelta: 2)
             .foregroundColor(.secondaryForeground)
     }
@@ -173,7 +182,7 @@ struct WriteCommentView: View {
                 Image(systemName: "paperplane.fill")
             }
         }
-        .disabled(dataStore.writeCommentContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        .disabled(!canSubmit)
     }
     
     private func cancelToolbarItem() -> some ToolbarContent {

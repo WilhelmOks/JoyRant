@@ -57,6 +57,7 @@ struct WritePostView: View {
                 isTextEditorFocused = true
             }
         }
+        //.presentationDetents([.large, .medium])
     }
     
     @ViewBuilder private func content() -> some View {
@@ -64,15 +65,17 @@ struct WritePostView: View {
             TextEditor(text: $dataStore.writePostContent)
                 .font(.callout)
                 .focused($isTextEditorFocused)
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
-                                    Button {
-                                        DataStore.shared.writePostContent.append(suggestion + " ")
-                                    } label: {
-                                        Text(suggestion)
+                .if(!viewModel.mentionSuggestions.isEmpty) {
+                    $0.toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
+                                        Button {
+                                            DataStore.shared.writePostContent.append(suggestion + " ")
+                                        } label: {
+                                            Text(suggestion)
+                                        }
                                     }
                                 }
                             }

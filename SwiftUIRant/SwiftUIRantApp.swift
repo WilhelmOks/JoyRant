@@ -14,7 +14,9 @@ struct SwiftUIRantApp: App {
             ContentView()
                 .handlesExternalEvents(preferring: ["*"], allowing: ["*"])
                 .onAppear {
+                    #if os(iOS)
                     UITabBarItem.appearance().badgeColor = UIColor(Color("BadgeBG"))
+                    #endif
                 }
         }
         .handlesExternalEvents(matching: ["*"])

@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Algorithms
 import SwiftRant
 
 final class RantDetailsViewModel: ObservableObject {
@@ -94,5 +95,13 @@ final class RantDetailsViewModel: ObservableObject {
         }
         
         isLoading = false
+    }
+    
+    func commentMentionSuggestions() -> [String] {
+        let filtered = comments.filter { comment in
+            !comment.isFromLoggedInUser && rant?.userID != comment.userID
+        }
+        let mentiones = filtered.map { "@" + $0.username }
+        return Array(mentiones.uniqued())
     }
 }

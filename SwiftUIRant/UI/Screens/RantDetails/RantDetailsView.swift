@@ -46,6 +46,7 @@ struct RantDetailsView: View {
                     WritePostView(
                         viewModel: .init(
                             kind: .post(rantId: rantId),
+                            mentionSuggestions: viewModel.commentMentionSuggestions(),
                             onSubmitted: {
                                 Task {
                                     await viewModel.reload()
@@ -61,6 +62,7 @@ struct RantDetailsView: View {
                     WritePostView(
                         viewModel: .init(
                             kind: .edit(comment: comment),
+                            mentionSuggestions: viewModel.commentMentionSuggestions(),
                             onSubmitted: {
                                 Task {
                                     await viewModel.reload()

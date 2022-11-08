@@ -20,6 +20,8 @@ struct WritePostView: View {
     
     @State private var isLoadingImage = false
     
+    @FocusState private var isTextEditorFocused
+    
     private let numberOfAllowedCharacters = 1000
     
     private var numberOfRemainingCharacters: Int {
@@ -40,6 +42,9 @@ struct WritePostView: View {
             .navigationBarTitleDisplayModeInline()
             .frame(minWidth: 320, minHeight: 300)
             .disabled(viewModel.isLoading)
+            .onTapGesture {
+                isTextEditorFocused = false
+            }
             .alert($viewModel.alertMessage)
             .toolbar {
                 cancelToolbarItem()
@@ -48,6 +53,9 @@ struct WritePostView: View {
             .onReceive(viewModel.dismiss) {
                 presentationMode.wrappedValue.dismiss()
             }
+            .onAppear {
+                isTextEditorFocused = true
+            }
         }
     }
     
@@ -55,17 +63,33 @@ struct WritePostView: View {
         VStack(alignment: .leading, spacing: 10) {
             TextEditor(text: $dataStore.writePostContent)
                 .font(.callout)
+                .focused($isTextEditorFocused)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
+                                    Button {
+                                        DataStore.shared.writePostContent.append(suggestion + " ")
+                                    } label: {
+                                        Text(suggestion)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 .foregroundColor(.primaryForeground)
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .stroke()
                         .foregroundColor(.secondaryForeground)
                 }
+                .onTapGesture {}
             
             HStack(alignment: .top, spacing: 14) {
                 remainingCharacters()
-                
-                Spacer()
+                    .fillHorizontally(.leading)
                 
                 imagePicker()
                 

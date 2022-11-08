@@ -11,6 +11,7 @@ import SwiftRant
 
 final class WritePostViewModel: ObservableObject {
     let kind: Kind
+    let mentionSuggestions: [String]
     let onSubmitted: () -> ()
     @Published var alertMessage: AlertMessage = .none()
     @Published var isLoading = false
@@ -23,8 +24,9 @@ final class WritePostViewModel: ObservableObject {
         case edit(comment: Comment)
     }
     
-    init(kind: Kind, onSubmitted: @escaping () -> ()) {
+    init(kind: Kind, mentionSuggestions: [String] = [], onSubmitted: @escaping () -> ()) {
         self.kind = kind
+        self.mentionSuggestions = mentionSuggestions
         self.onSubmitted = onSubmitted
     }
     

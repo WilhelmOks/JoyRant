@@ -36,6 +36,7 @@
 		ED33C23F2904178B00A59A11 /* SwiftUIRantError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED33C23E2904178B00A59A11 /* SwiftUIRantError.swift */; };
 		ED398CA528FC57250012142B /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED398CA428FC57250012142B /* LoadingButton.swift */; };
 		ED398CA728FC59650012142B /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED398CA628FC59650012142B /* RefreshButton.swift */; };
+		ED427DDA291AE07500C3B30A /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = ED427DD9291AE07500C3B30A /* Algorithms */; };
 		ED59CEC428BCE0860007B698 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC328BCE0860007B698 /* AppState.swift */; };
 		ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC628BCF6110007B698 /* AlertMessage.swift */; };
 		ED59CECA28BD05D00007B698 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEC928BD05D00007B698 /* FeedView.swift */; };
@@ -149,6 +150,7 @@
 				ED2C9B7628B67BB7008BF314 /* SwiftRant in Frameworks */,
 				ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */,
 				ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */,
+				ED427DDA291AE07500C3B30A /* Algorithms in Frameworks */,
 				ED97D63128EB22C100CFC418 /* HexNSColor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +385,7 @@
 				ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */,
 				ED97D62B28E9CC4B00CFC418 /* HexUIColor */,
 				ED97D63028EB22C100CFC418 /* HexNSColor */,
+				ED427DD9291AE07500C3B30A /* Algorithms */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -416,6 +419,7 @@
 				ED2C9B7428B67BB7008BF314 /* XCRemoteSwiftPackageReference "SwiftRant" */,
 				ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */,
+				ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -727,6 +731,14 @@
 				kind = branch;
 			};
 		};
+		ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WilhelmOks/HexColor.git";
@@ -747,6 +759,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED2C9B7428B67BB7008BF314 /* XCRemoteSwiftPackageReference "SwiftRant" */;
 			productName = SwiftRant;
+		};
+		ED427DD9291AE07500C3B30A /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 		ED97D62B28E9CC4B00CFC418 /* HexUIColor */ = {
 			isa = XCSwiftPackageProductDependency;

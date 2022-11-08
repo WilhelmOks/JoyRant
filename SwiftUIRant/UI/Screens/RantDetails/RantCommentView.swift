@@ -57,8 +57,14 @@ struct RantCommentView: View {
                 voteController: viewModel.voteController
             )
             
-            Text(AttributedString.from(postedContent: viewModel.comment.body, links: viewModel.comment.links))
+            let text = AttributedString.from(
+                postedContent: viewModel.comment.body,
+                links: viewModel.comment.links
+            )
+            
+            Text(text)
                 .font(baseSize: 16)
+                .textSelection(.enabled)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)

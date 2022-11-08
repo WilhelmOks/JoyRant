@@ -115,20 +115,8 @@ struct RantCommentView: View {
             VStack(alignment: .trailing, spacing: 6) {
                 CreationTimeView(
                     createdTime: comment.createdTime,
-                    isEdited: false //TODO: find out how to know if comment is edited
+                    isEdited: comment.isEdited
                 )
-                
-                /*
-                if viewModel.comment.isFromLoggedInUser {
-                    deleteButton()
-                    
-                    editButton()
-                } else {
-                    reportButton()
-                }
-                
-                replyButton()
-                */
             }
         }
 

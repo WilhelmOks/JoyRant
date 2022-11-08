@@ -126,9 +126,11 @@ struct InternalView: View {
     }
     
     @ViewBuilder private func tabView(_ tab: Tab) -> some View {
+        let title = tab.displayName
+        
         let numberOfNotifications = dataStore.unreadNotifications[.all] ?? 0
-        // It's not possible to make nice looking number badges for the tab bar. As a workaround, the number is shown in the title:
-        let title = tab == .notifications ? "\(tab.displayName) (\(numberOfNotifications))" : tab.displayName
+        
+        let badgeNumber = tab == .notifications ? numberOfNotifications : 0
         
         wrappedContentForTab(tab)
             .tabItem {
@@ -139,6 +141,7 @@ struct InternalView: View {
                 }
             }
             .tag(tab)
+            .badge(badgeNumber)
             .toolbarsVisible()
     }
     

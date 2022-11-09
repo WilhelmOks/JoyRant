@@ -130,7 +130,7 @@ struct RantCommentView: View {
     
     @ViewBuilder private func image() -> some View {
         if let image = viewModel.comment.attachedImage {
-            PostedImage(image: image)
+            PostedImage(image: image, opensSheet: true)
         }
     }
         

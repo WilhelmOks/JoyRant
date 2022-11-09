@@ -132,7 +132,7 @@ struct RantView: View {
     
     @ViewBuilder private func image() -> some View {
         if let image = viewModel.rant.attachedImage {
-            PostedImage(image: image)
+            PostedImage(image: image, opensSheet: true)
         }
     }
     

@@ -13,6 +13,8 @@ struct NotificationsView: View {
     
     @StateObject private var viewModel: NotificationsViewModel = .init()
     
+    @Environment(\.scenePhase) private var scenePhase
+    
     @ObservedObject private var appState = AppState.shared
     @ObservedObject private var dataStore = DataStore.shared
     
@@ -60,6 +62,13 @@ struct NotificationsView: View {
                     DispatchQueue.main.async {
                         BroadcastEvent.shouldScrollNotificationsToTop.send()
                     }
+                    Task {
+                        await viewModel.refresh()
+                    }
+                }
+            }
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
                     Task {
                         await viewModel.refresh()
                     }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct InternalView: View {
+    @Environment(\.scenePhase) private var scenePhase
+    
     @ObservedObject var appState = AppState.shared
     @ObservedObject var dataStore = DataStore.shared
     @ObservedObject var dataLoader = DataLoader.shared
@@ -44,6 +46,13 @@ struct InternalView: View {
                 if newValue != .notifications {
                     Task {
                         try? await dataLoader.loadNumbersOfUnreadNotifications()
+                    }
+                }
+            }
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    Task {
+                        try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
                     }
                 }
             }

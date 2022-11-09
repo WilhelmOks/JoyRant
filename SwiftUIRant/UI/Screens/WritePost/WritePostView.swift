@@ -75,6 +75,7 @@ struct WritePostView: View {
                                             DataStore.shared.writePostContent.append(suggestion + " ")
                                         } label: {
                                             Text(suggestion)
+                                                .padding(.vertical, 8)
                                         }
                                     }
                                 }

@@ -112,7 +112,7 @@ struct WritePostView: View {
     }
     
     @ViewBuilder private func imagePicker() -> some View {
-        PhotosPicker(selection: $selectedPhotoItem, matching: nil, photoLibrary: .shared()) {
+        PhotosPicker(selection: $selectedPhotoItem, matching: .any(of: [.images]), photoLibrary: .shared()) {
             Label {
                 Text("Attach image")
             } icon: {

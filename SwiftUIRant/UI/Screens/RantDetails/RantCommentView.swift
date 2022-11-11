@@ -158,13 +158,11 @@ struct RantCommentView: View {
     
     @ViewBuilder private func editButton() -> some View {
         Button {
-            DataStore.shared.writePostContent = viewModel.comment.body
             edit()
         } label: {
             Text("Edit")
                 .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
-                //.foregroundColor(.accentColor)
         }
     }
     
@@ -183,6 +181,7 @@ struct RantCommentView: View {
             viewModel.alertMessage = .presentedMessage(SwiftUIRantError.timeWindowForEditMissed.message)
             return
         }
+        DataStore.shared.writePostContent = viewModel.comment.body
         onEdit()
     }
     

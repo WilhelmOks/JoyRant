@@ -52,10 +52,10 @@ final class WritePostViewModel: ObservableObject {
             
             switch kind {
             case .post(rantId: let rantId):
-                try await Networking.shared.postComment(rantId: rantId, content: content, image: selectedImage)
+                try await Networking.shared.postComment(rantId: rantId, content: content, image: selectedImageData)
             case .edit(comment: let comment):
                 guard comment.canEdit else { throw SwiftUIRantError.timeWindowForEditMissed }
-                try await Networking.shared.editComment(commentId: comment.id, content: content, image: selectedImage)
+                try await Networking.shared.editComment(commentId: comment.id, content: content, image: selectedImageData)
             }
             
             DataStore.shared.writePostContent = ""

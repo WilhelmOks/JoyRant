@@ -727,7 +727,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OmerFlame/SwiftRant";
 			requirement = {
-				branch = main;
+				branch = generalized_image_upload;
 				kind = branch;
 			};
 		};

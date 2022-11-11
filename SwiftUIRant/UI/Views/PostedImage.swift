@@ -16,6 +16,10 @@ struct PostedImage: View {
     
     @State private var isSheetPresented = false
     
+    var isGif: Bool {
+        image.url.lowercased().hasSuffix(".gif")
+    }
+    
     var body: some View {
         if opensSheet {
             Button {
@@ -56,6 +60,20 @@ struct PostedImage: View {
                 Image(systemName: "photo")
             @unknown default:
                 EmptyView()
+            }
+        }
+        .overlay(alignment: .topLeading) {
+            if isGif && opensSheet {
+                Text("GIF")
+                    .font(baseSize: 14, weightDelta: 2)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 2)
+                    .padding(.horizontal, 5)
+                    .background {
+                        RoundedRectangle(cornerRadius: 4)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(5)
             }
         }
     }

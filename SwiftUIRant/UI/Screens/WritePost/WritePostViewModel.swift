@@ -16,6 +16,7 @@ final class WritePostViewModel: ObservableObject {
     @Published var alertMessage: AlertMessage = .none()
     @Published var isLoading = false
     @Published var selectedImage: PlatformImage? = nil
+    var selectedImageData: Data? = nil
 
     let dismiss = PassthroughSubject<Void, Never>()
     

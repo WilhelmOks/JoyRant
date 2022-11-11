@@ -9,6 +9,14 @@ import SwiftUI
 import PhotosUI
 import CachedAsyncImage
 
+#if os(iOS)
+import UIKit
+typealias PlatformImage = UIImage
+#elseif os(macOS)
+import AppKit
+typealias PlatformImage = NSImage
+#endif
+
 struct WritePostView: View {
     @Environment(\.presentationMode) private var presentationMode
     
@@ -93,7 +101,8 @@ struct WritePostView: View {
             
             HStack(alignment: .top, spacing: 14) {
                 remainingCharacters()
-                    .fillHorizontally(.leading)
+                    
+                Spacer()
                 
                 imagePicker()
                 
@@ -125,6 +134,7 @@ struct WritePostView: View {
             Task {
                 isLoadingImage = true
                 if let data = try? await newValue?.loadTransferable(type: Data.self) {
+                    viewModel.selectedImageData = data
                     viewModel.selectedImage = PlatformImage(data: data)
                 }
                 isLoadingImage = false

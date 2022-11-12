@@ -70,9 +70,4 @@ import SwiftRant
         
         isLoading = false
     }
-    
-    func editRant() {
-        //TODO: ...
-        alertMessage = .presentedError(message: "Edit rant is not implemented yet.")
-    }
 }

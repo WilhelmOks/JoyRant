@@ -10,6 +10,7 @@ import SwiftRant
 
 struct RantView: View {
     @StateObject var viewModel: RantViewModel
+    let onEdit: () -> ()
     let onDelete: () -> ()
     
     @State private var isDeleteConfirmationAlertPresented = false
@@ -24,7 +25,7 @@ struct RantView: View {
         }
         .onTapGesture(count: 2) {
             if viewModel.rant.isFromLoggedInUser {
-                viewModel.editRant()
+                edit()
             } else {
                 Task {
                     await viewModel.voteController.voteByContext()
@@ -170,12 +171,11 @@ struct RantView: View {
     
     @ViewBuilder private func editButton() -> some View {
         Button {
-            viewModel.editRant()
+            edit()
         } label: {
             Text("Edit")
                 .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
-                //.foregroundColor(.accentColor)
         }
     }
     
@@ -186,7 +186,6 @@ struct RantView: View {
             Text("Delete")
                 .font(baseSize: 12, weight: .medium)
                 .multilineTextAlignment(.leading)
-                //.foregroundColor(.accentColor)
         }
     }
     
@@ -212,6 +211,15 @@ struct RantView: View {
             }
         }
         .disabled(viewModel.isLoading)
+    }
+    
+    private func edit() {
+        guard viewModel.rant.canEdit else {
+            viewModel.alertMessage = .presentedMessage(SwiftUIRantError.timeWindowForEditMissed.message)
+            return
+        }
+        DataStore.shared.writePostContent = viewModel.rant.text
+        onEdit()
     }
     
     private func delete() {
@@ -257,6 +265,7 @@ struct RantView_Previews: PreviewProvider {
                     isUserDPP: nil
                 )
             ),
+            onEdit: {},
             onDelete: {}
         )
     }

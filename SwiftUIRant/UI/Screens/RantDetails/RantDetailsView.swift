@@ -15,11 +15,14 @@ struct RantDetailsView: View {
     @StateObject var viewModel: RantDetailsViewModel
     
     enum PresentedSheet: Identifiable {
+        case editRant(rant: Rant)
         case postComment(rantId: Rant.ID)
         case editComment(comment: Comment)
         
         var id: String {
             switch self {
+            case .editRant(rant: let rant):
+                return "edit_rant_\(String(rant.id))"
             case .postComment(rantId: let id):
                 return "post_comment_\(String(id))"
             case .editComment(comment: let comment):
@@ -63,6 +66,17 @@ struct RantDetailsView: View {
                         viewModel: .init(
                             kind: .editComment(comment: comment),
                             mentionSuggestions: viewModel.commentMentionSuggestions(),
+                            onSubmitted: {
+                                Task {
+                                    await viewModel.reload()
+                                }
+                            }
+                        )
+                    )
+                case .editRant(rant: let rant):
+                    WritePostView(
+                        viewModel: .init(
+                            kind: .editRant(rant: rant),
                             onSubmitted: {
                                 Task {
                                     await viewModel.reload()
@@ -115,6 +129,9 @@ struct RantDetailsView: View {
                                 viewModel: .init(
                                     rant: rant
                                 ),
+                                onEdit: {
+                                    presentedSheet = .editRant(rant: rant)
+                                },
                                 onDelete: {
                                     Task {
                                         await viewModel.deleteRant(rant: rant)

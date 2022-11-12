@@ -30,7 +30,14 @@ struct WritePostView: View {
     
     @FocusState private var isTextEditorFocused
     
-    private let numberOfAllowedCharacters = 1000
+    private var numberOfAllowedCharacters: Int {
+        switch viewModel.kind {
+        case .postRant, .editRant(rant: _):
+            return 5000
+        case .postComment(rantId: _), .editComment(comment: _):
+            return 1000
+        }
+    }
     
     private var numberOfRemainingCharacters: Int {
         numberOfAllowedCharacters - dataStore.writePostContent.utf8.count
@@ -93,6 +100,11 @@ struct WritePostView: View {
                     }
                 }
                 .foregroundColor(.primaryForeground)
+                .background {
+                    RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        .foregroundColor(.primaryBackground)
+                    //TODO: this doesn't work
+                }
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .stroke()
@@ -116,7 +128,9 @@ struct WritePostView: View {
             switch viewModel.kind {
             case .postRant, .editRant(rant: _):
                 TextField("Tags (comma separated)", text: $viewModel.tags)
+                    .font(.callout)
                     .textFieldStyle(.roundedBorder)
+                //TODO: first tap on this textfield doesn't focus.
             case .postComment(rantId: _), .editComment(comment: _):
                 EmptyView()
             }

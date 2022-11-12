@@ -14,6 +14,19 @@ struct FeedView: View {
     @ObservedObject private var dataStore = DataStore.shared
     @StateObject private var viewModel = FeedViewModel()
     
+    enum PresentedSheet: Identifiable {
+        case postRant
+        
+        var id: String {
+            switch self {
+            case .postRant:
+                return "post_rant"
+            }
+        }
+    }
+    
+    @State private var presentedSheet: PresentedSheet?
+    
     var body: some View {
         content()
             .if(navigationBar) {
@@ -36,6 +49,17 @@ struct FeedView: View {
             }
             .background(Color.primaryBackground)
             .alert($viewModel.alertMessage)
+            .sheet(item: $presentedSheet) { item in
+                switch item {
+                case .postRant:
+                    WritePostView(
+                        viewModel: .init(
+                            kind: .postRant,
+                            onSubmitted: {}
+                        )
+                    )
+                }
+            }
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {
                 case .rantDetails(let rantId):
@@ -62,42 +86,58 @@ struct FeedView: View {
     @ViewBuilder func content() -> some View {
         ZStack {
             if dataStore.isFeedLoaded {
-                ScrollViewReader { scrollProxy in
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 0) {
-                            ForEach(dataStore.rantsInFeed, id: \.uuid) { rant in
-                                row(rant: rant)
-                                    .id(rant.uuid)
-                            }
-                            
-                            Button {
-                                Task {
-                                    await viewModel.loadMore()
+                ZStack {
+                    ScrollViewReader { scrollProxy in
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 0) {
+                                ForEach(dataStore.rantsInFeed, id: \.uuid) { rant in
+                                    row(rant: rant)
+                                        .id(rant.uuid)
                                 }
-                            } label: {
-                                Text("load more")
-                                    .foregroundColor(.accentColor)
+                                
+                                Button {
+                                    Task {
+                                        await viewModel.loadMore()
+                                    }
+                                } label: {
+                                    Text("load more")
+                                        .foregroundColor(.accentColor)
+                                }
+                                .buttonStyle(.plain)
+                                .disabled(viewModel.isLoadingMore)
+                                .fillHorizontally(.center)
+                                .padding()
                             }
-                            .buttonStyle(.plain)
-                            .disabled(viewModel.isLoadingMore)
-                            .fillHorizontally(.center)
-                            .padding()
+                        }
+                        .onReceive(broadcastEvent: .shouldScrollFeedToTop) { _ in
+                            withAnimation {
+                                scrollProxy.scrollTo(dataStore.rantsInFeed.first?.uuid, anchor: .top)
+                            }
                         }
                     }
-                    .onReceive(broadcastEvent: .shouldScrollFeedToTop) { _ in
-                        withAnimation {
-                            scrollProxy.scrollTo(dataStore.rantsInFeed.first?.uuid, anchor: .top)
-                        }
+                    .refreshable {
+                        await viewModel.reload()
                     }
-                }
-                .refreshable {
-                    await viewModel.reload()
+                    
+                    newRantButton()
+                    .fill(.bottomTrailing)
+                    .padding(10)
                 }
             } else {
                 ProgressView()
                     .opacity(viewModel.isLoading ? 1 : 0)
             }
         }
+    }
+    
+    @ViewBuilder private func newRantButton() -> some View {
+        Button {
+            presentedSheet = .postRant
+        } label: {
+            Text("+")
+            .font(baseSize: 20, weightDelta: 1)
+        }
+        .buttonStyle(.borderedProminent)
     }
     
     @ViewBuilder func row(rant: RantInFeed) -> some View {

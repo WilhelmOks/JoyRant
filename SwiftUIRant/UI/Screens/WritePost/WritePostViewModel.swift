@@ -56,16 +56,16 @@ final class WritePostViewModel: ObservableObject {
             
             switch kind {
             case .postRant:
-                try await Networking.shared.postRant(type: rantKind.rantType, content: content, tags: tags, image: selectedImageData)
-                //TODO: navigate to new rant
+                let newRantId = try await Networking.shared.postRant(type: rantKind.rantType, content: content, tags: tags, image: selectedImageData)
+                AppState.shared.navigationPath.append(.rantDetails(rantId: newRantId))
             case .editRant(rant: let rant):
                 //TODO: pass the rant type from the original rant
-                try await Networking.shared.editRant(rantId: rant.id, type: rantKind.rantType, content: content, tags: tags, image: nil)
+                try await Networking.shared.editRant(rantId: rant.id, type: rantKind.rantType, content: content, tags: tags, image: selectedImageData)
             case .postComment(rantId: let rantId):
                 try await Networking.shared.postComment(rantId: rantId, content: content, image: selectedImageData)
             case .editComment(comment: let comment):
                 guard comment.canEdit else { throw SwiftUIRantError.timeWindowForEditMissed }
-                try await Networking.shared.editComment(commentId: comment.id, content: content, image: nil)
+                try await Networking.shared.editComment(commentId: comment.id, content: content, image: selectedImageData)
             }
             
             DataStore.shared.writePostContent = ""

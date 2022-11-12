@@ -110,16 +110,28 @@ struct Networking {
         try await swiftRant.clearNotifications(try token()).get()
     }
     
+    // rant
+    
+    func postRant(type: Rant.RantType, content: String, tags: String?, image: Data?) async throws -> Rant.ID {
+        try await swiftRant.postRant(try token(), postType: type, content: content, tags: tags, image: image).get()
+    }
+    
+    func editRant(rantId: Rant.ID, type: Rant.RantType, content: String, tags: String?, image: Data?) async throws {
+        try await swiftRant.editRant(try token(), rantID: rantId, postType: type, content: content, tags: tags, image: image).get()
+    }
+    
+    func deleteRant(rantId: Rant.ID) async throws {
+        try await swiftRant.deleteRant(try token(), rantID: rantId).get()
+    }
+    
+    // comment
+    
     func postComment(rantId: Rant.ID, content: String, image: Data?) async throws {
         try await swiftRant.postComment(try token(), rantID: rantId, content: content, image: image).get()
     }
     
     func editComment(commentId: Comment.ID, content: String, image: Data?) async throws {
         try await swiftRant.editComment(try token(), commentID: commentId, content: content, image: image).get()
-    }
-    
-    func deleteRant(rantId: Rant.ID) async throws {
-        try await swiftRant.deleteRant(try token(), rantID: rantId).get()
     }
     
     func deleteComment(commentId: Comment.ID) async throws {

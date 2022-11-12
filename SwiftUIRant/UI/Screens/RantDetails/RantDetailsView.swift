@@ -45,7 +45,7 @@ struct RantDetailsView: View {
                 case .postComment(rantId: let rantId):
                     WritePostView(
                         viewModel: .init(
-                            kind: .post(rantId: rantId),
+                            kind: .postComment(rantId: rantId),
                             mentionSuggestions: viewModel.commentMentionSuggestions(),
                             onSubmitted: {
                                 Task {
@@ -61,7 +61,7 @@ struct RantDetailsView: View {
                 case .editComment(comment: let comment):
                     WritePostView(
                         viewModel: .init(
-                            kind: .edit(comment: comment),
+                            kind: .editComment(comment: comment),
                             mentionSuggestions: viewModel.commentMentionSuggestions(),
                             onSubmitted: {
                                 Task {

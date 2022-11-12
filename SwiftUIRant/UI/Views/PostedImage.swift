@@ -64,7 +64,7 @@ struct PostedImage: View {
             }
         }
         .overlay(alignment: .topLeading) {
-            if isGif && opensSheet {
+            if isGif {
                 Text("GIF")
                     .font(baseSize: 14, weightDelta: 2)
                     .foregroundColor(.white)

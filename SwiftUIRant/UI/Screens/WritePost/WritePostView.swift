@@ -76,18 +76,7 @@ struct WritePostView: View {
                 .if(!viewModel.mentionSuggestions.isEmpty) {
                     $0.toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
-                                        Button {
-                                            DataStore.shared.writePostContent.append(suggestion + " ")
-                                        } label: {
-                                            Text(suggestion)
-                                                .padding(.vertical, 8)
-                                        }
-                                    }
-                                }
-                            }
+                            mentionSuggestions()
                         }
                     }
                 }
@@ -95,7 +84,7 @@ struct WritePostView: View {
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .stroke()
-                        .foregroundColor(.secondaryForeground)
+                        .foregroundColor(.secondaryForeground.opacity(0.4))
                 }
                 .onTapGesture {}
             
@@ -108,8 +97,31 @@ struct WritePostView: View {
                 
                 imagePreview()
                     .overlay {
-                        Rectangle().stroke().foregroundColor(.secondaryForeground)
+                        Rectangle().stroke().foregroundColor(.secondaryForeground.opacity(0.4))
                     }
+            }
+            
+            switch viewModel.kind {
+            case .postRant, .editRant(rant: _):
+                TextField("Tags (comma separated)", text: $viewModel.tags)
+                    .textFieldStyle(.roundedBorder)
+            case .postComment(rantId: _), .editComment(comment: _):
+                EmptyView()
+            }
+        }
+    }
+    
+    @ViewBuilder private func mentionSuggestions() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
+                    Button {
+                        DataStore.shared.writePostContent.append(suggestion + " ")
+                    } label: {
+                        Text(suggestion)
+                            .padding(.vertical, 8)
+                    }
+                }
             }
         }
     }
@@ -144,10 +156,13 @@ struct WritePostView: View {
     
     private func existingImageUrl() -> URL? {
         switch viewModel.kind {
-        case .edit(comment: let comment):
+        case .editRant(rant: let rant):
+            guard let urlString = rant.attachedImage?.url else { return nil }
+            return URL(string: urlString)
+        case .editComment(comment: let comment):
             guard let urlString = comment.attachedImage?.url else { return nil }
             return URL(string: urlString)
-        case .post(rantId: _):
+        case .postComment(rantId: _), .postRant:
             return nil
         }
     }
@@ -222,9 +237,9 @@ struct WritePostView: View {
         } label: {
             Label {
                 switch viewModel.kind {
-                case .post(rantId: _):
+                case .postComment(rantId: _), .postRant:
                     Text("Post")
-                case .edit(comment: _):
+                case .editComment(comment: _), .editRant(rant: _):
                     Text("Save")
                 }
             } icon: {
@@ -261,6 +276,6 @@ struct WritePostView: View {
 
 struct WritePostView_Previews: PreviewProvider {
     static var previews: some View {
-        WritePostView(viewModel: .init(kind: .post(rantId: 0), onSubmitted: {}))
+        WritePostView(viewModel: .init(kind: .postRant, onSubmitted: {}))
     }
 }

@@ -42,11 +42,22 @@ struct WritePostView: View {
             !dataStore.writePostContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
+    private var title: String {
+        switch viewModel.kind {
+        case .postRant:
+            return "New Rant"
+        case .editRant(rant: _):
+            return "Edit Rant"
+        case .postComment(rantId: _), .editComment(comment: _):
+            return "Comment"
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             content()
             .padding()
-            .navigationTitle("Comment") //TODO: change title based on kind
+            .navigationTitle(title)
             .navigationBarTitleDisplayModeInline()
             .frame(minWidth: 320, minHeight: 300)
             .disabled(viewModel.isLoading)
@@ -57,6 +68,7 @@ struct WritePostView: View {
             .toolbar {
                 cancelToolbarItem()
                 sendToolbarItem()
+                titleToolbarItem()
             }
             .onReceive(viewModel.dismiss) {
                 presentationMode.wrappedValue.dismiss()
@@ -249,6 +261,30 @@ struct WritePostView: View {
         .disabled(!canSubmit)
     }
     
+    @ViewBuilder private func toolbarTitle() -> some View {
+        switch viewModel.kind {
+        case .postRant, .editRant(rant: _):
+            Picker("Post Type", selection: $viewModel.rantKind) {
+                ForEach(WritePostViewModel.RantKind.allCases) { rantKind in
+                    Text(rantKindName(rantKind)).tag(rantKind)
+                }
+            }
+            .fixedSize()
+        case .postComment(rantId: _), .editComment(comment: _):
+            EmptyView()
+        }
+    }
+    
+    private func rantKindName(_ rantKind: WritePostViewModel.RantKind) -> String {
+        switch rantKind {
+        case .rant:     return "Rant/Story"
+        case .jokeMeme: return "Joke/Meme"
+        case .question: return "Question"
+        case .devRant:  return "devRant"
+        case .random:   return "Random"
+        }
+    }
+    
     private func cancelToolbarItem() -> some ToolbarContent {
         #if os(iOS)
         ToolbarItem(placement: .navigationBarLeading) {
@@ -269,6 +305,18 @@ struct WritePostView: View {
         #else
         ToolbarItem(placement: .confirmationAction) {
             sendButton()
+        }
+        #endif
+    }
+    
+    private func titleToolbarItem() -> some ToolbarContent {
+        #if os(iOS)
+        ToolbarItem(placement: .principal) {
+            toolbarTitle()
+        }
+        #else
+        ToolbarItem(placement: .principal) {
+            toolbarTitle()
         }
         #endif
     }

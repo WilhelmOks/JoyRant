@@ -10,7 +10,7 @@ import Combine
 import SwiftRant
 
 final class WritePostViewModel: ObservableObject {
-    let kind: Kind
+    let kind: WriteKind
     let mentionSuggestions: [String]
     let onSubmitted: () -> ()
     @Published var alertMessage: AlertMessage = .none()
@@ -22,7 +22,7 @@ final class WritePostViewModel: ObservableObject {
 
     let dismiss = PassthroughSubject<Void, Never>()
     
-    init(kind: Kind, mentionSuggestions: [String] = [], onSubmitted: @escaping () -> ()) {
+    init(kind: WriteKind, mentionSuggestions: [String] = [], onSubmitted: @escaping () -> ()) {
         self.kind = kind
         self.mentionSuggestions = mentionSuggestions
         self.onSubmitted = onSubmitted
@@ -80,7 +80,7 @@ final class WritePostViewModel: ObservableObject {
 }
 
 extension WritePostViewModel {
-    enum Kind { //TODO: rename WriteKind
+    enum WriteKind {
         case postRant
         case editRant(rant: Rant)
         case postComment(rantId: Rant.ID)
@@ -89,12 +89,14 @@ extension WritePostViewModel {
 }
 
 extension WritePostViewModel {
-    enum RantKind {
+    enum RantKind: Int, CaseIterable, Identifiable {
         case rant
         case jokeMeme
         case question
         case devRant
         case random
+        
+        var id: Int { rawValue }
         
         var rantType: Rant.RantType {
             switch self {

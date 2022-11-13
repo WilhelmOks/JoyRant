@@ -52,6 +52,7 @@
 		ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE228C78EAF0007B698 /* View+Fill.swift */; };
 		ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */; };
 		ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE728CB74180007B698 /* MockedModels.swift */; };
+		ED74D50B2921117800088CE6 /* SegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74D50A2921117800088CE6 /* SegmentedPicker.swift */; };
 		ED91BF1B291589E000B400C4 /* AttributedString+devRant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91BF1A291589E000B400C4 /* AttributedString+devRant.swift */; };
 		ED97D62528E86F5200CFC418 /* CreationTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62428E86F5200CFC418 /* CreationTimeView.swift */; };
 		ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62628E9C98900CFC418 /* RantExtensions.swift */; };
@@ -120,6 +121,7 @@
 		ED59CEE228C78EAF0007B698 /* View+Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fill.swift"; sourceTree = "<group>"; };
 		ED59CEE428C78FC60007B698 /* View+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+NotificationCenter.swift"; sourceTree = "<group>"; };
 		ED59CEE728CB74180007B698 /* MockedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedModels.swift; sourceTree = "<group>"; };
+		ED74D50A2921117800088CE6 /* SegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPicker.swift; sourceTree = "<group>"; };
 		ED8622D4290D3E7F0070A7D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ED91BF1A291589E000B400C4 /* AttributedString+devRant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+devRant.swift"; sourceTree = "<group>"; };
 		ED97D62428E86F5200CFC418 /* CreationTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTimeView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				ED97D62428E86F5200CFC418 /* CreationTimeView.swift */,
 				ED398CA428FC57250012142B /* LoadingButton.swift */,
 				ED398CA628FC59650012142B /* RefreshButton.swift */,
+				ED74D50A2921117800088CE6 /* SegmentedPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				ED59CED128BD0B110007B698 /* FeedRantView.swift in Sources */,
 				ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */,
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
+				ED74D50B2921117800088CE6 /* SegmentedPicker.swift in Sources */,
 				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,
 				ED33C23F2904178B00A59A11 /* SwiftUIRantError.swift in Sources */,
 				ED398CA728FC59650012142B /* RefreshButton.swift in Sources */,

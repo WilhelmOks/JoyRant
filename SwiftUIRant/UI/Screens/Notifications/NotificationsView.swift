@@ -77,17 +77,9 @@ struct NotificationsView: View {
     }
     
     @ViewBuilder private func content() -> some View {
-        VStack {
-            Picker(selection: $viewModel.categoryTab, label: EmptyView()) {
-                ForEach(viewModel.tabs) { tab in
-                    //TODO: The * is temporary just to see if it works
-                    let tabTitle = (dataStore.unreadNotifications[tab.category] ?? 0 > 0 ? "* " : "") + tab.displayName
-                    Text(tabTitle).tag(tab)
-                }
-            }
-            .pickerStyle(.segmented)
-            .disabled(viewModel.isLoading || viewModel.isRefreshing)
-            .padding(10)
+        VStack(spacing: 0) {
+            categoryPicker()
+                .padding(.vertical, 10)
             
             ScrollViewReader { scrollProxy in
                 ScrollView {
@@ -136,6 +128,39 @@ struct NotificationsView: View {
                 }
             }
         }
+    }
+    
+    @ViewBuilder private func categoryPicker() -> some View {
+        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs) { segment in
+            let unread = dataStore.unreadNotifications[segment.item.category] ?? 0 > 0
+            HStack(spacing: 4) {
+                if unread {
+                    Circle()
+                        .foregroundColor(.badgeBackground)
+                        .frame(width: 6, height: 6)
+                }
+                
+                Text(segment.item.displayName)
+                    .font(baseSize: 17, weightDelta: unread ? 2 : 0)
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .background {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .foregroundColor(.primaryBackground)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .stroke(lineWidth: segment.selected ? 2 : 1)
+                    .foregroundColor(segment.selected ? .accentColor : .secondaryForeground)
+            }
+            .padding(.vertical, 1)
+        }
+        .buttonStyle(.plain)
+        .onChange(of: viewModel.categoryTabIndex) { newValue in
+            viewModel.categoryTab = viewModel.tabs[newValue]
+        }
+        .disabled(viewModel.isLoading || viewModel.isRefreshing)
     }
 }
 

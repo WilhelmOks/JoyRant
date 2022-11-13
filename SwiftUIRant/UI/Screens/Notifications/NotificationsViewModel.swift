@@ -13,11 +13,13 @@ import SwiftRant
     
     @Published var categoryTab: CategoryTab = .all {
         didSet {
+            categoryTabIndex = tabs.firstIndex(of: categoryTab) ?? 0
             Task {
                 await load()
             }
         }
     }
+    @Published var categoryTabIndex: Int = 0
     @Published var notificationItems: [Notifications.MappedNotificationItem] = []
     @Published var isLoading = false
     @Published var isRefreshing = false

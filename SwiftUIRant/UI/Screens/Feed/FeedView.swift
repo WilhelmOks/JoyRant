@@ -134,8 +134,12 @@ struct FeedView: View {
         Button {
             presentedSheet = .postRant
         } label: {
-            Text("+")
-            .font(baseSize: 20, weightDelta: 1)
+            Label {
+                Text("Rant")
+            } icon: {
+                Image(systemName: "plus")
+            }
+            .font(baseSize: 13, weightDelta: 1)
         }
         .buttonStyle(.borderedProminent)
     }

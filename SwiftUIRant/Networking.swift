@@ -110,6 +110,8 @@ struct Networking {
         try await swiftRant.clearNotifications(try token()).get()
     }
     
+    //TODO: missing API: tag suggestions
+    
     // rant
     
     func postRant(type: Rant.RantType, content: String, tags: String?, image: Data?) async throws -> Rant.ID {

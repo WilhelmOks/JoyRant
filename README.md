@@ -42,9 +42,7 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Handling embedded links to other rants and external websites
 
-✅ Showing images in zoomable fullscreen
-
-✅ Showing gifs and playing their animation
+✅ Showing images and gifs in zoomable fullscreen
 
 ✅ Create/Edit/Delete rant
 
@@ -52,19 +50,15 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Upload image for rant and comments
 
-✅ Show notifications & navigate to the rant or comment
-
-✅ Mark notifications as read
-
-✅ Show number of unread notifications and keep it up to date (no automatic periodic polling)
-
-🚧 Show unread notifications as red or green badges (instead of text)
+✅ Notifications
 
 ⏹️ Sharing rants via link
 
 ⏹️ Viewing "Collab" rants properly
 
 ⏹️ Creating "Collab" rants
+
+⏹️ Tag suggestions (not available in SwiftRant (yet?))
 
 ## TestFlight
 

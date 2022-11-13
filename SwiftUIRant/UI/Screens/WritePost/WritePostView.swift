@@ -134,7 +134,9 @@ struct WritePostView: View {
             switch viewModel.kind {
             case .postRant, .editRant(rant: _):
                 TextField("Tags (comma separated)", text: $viewModel.tags)
+                    #if os(iOS)
                     .textInputAutocapitalization(.never)
+                    #endif
                     .font(.callout)
                     .focused($focusedControl, equals: .tags)
                     .textFieldStyle(.roundedBorder)
@@ -337,7 +339,7 @@ struct WritePostView: View {
             toolbarTitle()
         }
         #else
-        ToolbarItem(placement: .principal) {
+        ToolbarItem(placement: .automatic) {
             toolbarTitle()
         }
         #endif

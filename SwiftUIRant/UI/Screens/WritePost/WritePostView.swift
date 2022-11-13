@@ -28,7 +28,12 @@ struct WritePostView: View {
     
     @State private var isLoadingImage = false
     
-    @FocusState private var isTextEditorFocused
+    enum FocusedControl {
+        case content
+        case tags
+    }
+    
+    @FocusState private var focusedControl: FocusedControl?
     
     private var numberOfAllowedCharacters: Int {
         switch viewModel.kind {
@@ -69,7 +74,7 @@ struct WritePostView: View {
             .frame(minWidth: 320, minHeight: 300)
             .disabled(viewModel.isLoading)
             .onTapGesture {
-                isTextEditorFocused = false
+                focusedControl = nil
             }
             .alert($viewModel.alertMessage)
             .toolbar {
@@ -81,7 +86,7 @@ struct WritePostView: View {
                 presentationMode.wrappedValue.dismiss()
             }
             .onAppear {
-                isTextEditorFocused = true
+                focusedControl = .content
             }
         }
         //.presentationDetents([.large, .medium])
@@ -91,7 +96,8 @@ struct WritePostView: View {
         VStack(alignment: .leading, spacing: 10) {
             TextEditor(text: $dataStore.writePostContent)
                 .font(.callout)
-                .focused($isTextEditorFocused)
+                .focused($focusedControl, equals: .content)
+                .textFieldStyle(.plain)
                 .if(!viewModel.mentionSuggestions.isEmpty) {
                     $0.toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
@@ -100,15 +106,15 @@ struct WritePostView: View {
                     }
                 }
                 .foregroundColor(.primaryForeground)
+                .scrollContentBackground(.hidden)
                 .background {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .foregroundColor(.primaryBackground)
-                    //TODO: this doesn't work
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .stroke()
-                        .foregroundColor(.secondaryForeground.opacity(0.4))
+                        .foregroundColor(.secondaryForeground.opacity(0.3))
                 }
                 .onTapGesture {}
             
@@ -121,7 +127,7 @@ struct WritePostView: View {
                 
                 imagePreview()
                     .overlay {
-                        Rectangle().stroke().foregroundColor(.secondaryForeground.opacity(0.4))
+                        Rectangle().stroke().foregroundColor(.secondaryForeground.opacity(0.3))
                     }
             }
             
@@ -129,8 +135,9 @@ struct WritePostView: View {
             case .postRant, .editRant(rant: _):
                 TextField("Tags (comma separated)", text: $viewModel.tags)
                     .font(.callout)
+                    .focused($focusedControl, equals: .tags)
                     .textFieldStyle(.roundedBorder)
-                //TODO: first tap on this textfield doesn't focus.
+                    .onTapGesture {}
             case .postComment(rantId: _), .editComment(comment: _):
                 EmptyView()
             }

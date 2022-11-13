@@ -59,8 +59,8 @@ final class WritePostViewModel: ObservableObject {
                 let newRantId = try await Networking.shared.postRant(type: rantKind.rantType, content: content, tags: tags, image: selectedImageData)
                 AppState.shared.navigationPath.append(.rantDetails(rantId: newRantId))
             case .editRant(rant: let rant):
-                //TODO: pass the rant type from the original rant
-                try await Networking.shared.editRant(rantId: rant.id, type: rantKind.rantType, content: content, tags: tags, image: selectedImageData)
+                //We can not change the rant type when editing, so we pass the standard .rant type. The rant type seems to be determined by the tags.
+                try await Networking.shared.editRant(rantId: rant.id, type: .rant, content: content, tags: tags, image: selectedImageData)
             case .postComment(rantId: let rantId):
                 try await Networking.shared.postComment(rantId: rantId, content: content, image: selectedImageData)
             case .editComment(comment: let comment):

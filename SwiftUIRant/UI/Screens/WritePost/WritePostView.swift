@@ -277,14 +277,14 @@ struct WritePostView: View {
     
     @ViewBuilder private func toolbarTitle() -> some View {
         switch viewModel.kind {
-        case .postRant, .editRant(rant: _):
+        case .postRant:
             Picker("Post Type", selection: $viewModel.rantKind) {
                 ForEach(WritePostViewModel.RantKind.allCases) { rantKind in
                     Text(rantKindName(rantKind)).tag(rantKind)
                 }
             }
             .fixedSize()
-        case .postComment(rantId: _), .editComment(comment: _):
+        case .postComment(rantId: _), .editComment(comment: _), .editRant(rant: _):
             EmptyView()
         }
     }

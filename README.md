@@ -2,7 +2,7 @@
 
 An unofficial devRant client for iOS and macOS, that doesn't crash.
 
-The goal of this project is to make a devRant app that has the most commonly used devRant features.
+The goal of this project is to make an app that has the most commonly used devRant features.
 
 Features like registration or avatar customization are not considered commonly used and are out of scope for now.
 

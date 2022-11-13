@@ -26,6 +26,10 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ⏹️ Weekly rants
 
+⏹️ Search
+
+⏹️ User profiles
+
 ✅ Upvoting/Downvoting in feed
 
 ✅ Show Rant with comments
@@ -42,13 +46,11 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 
 ✅ Showing gifs and playing their animation
 
-⏹️ Create/Edit/Delete rant
+✅ Create/Edit/Delete rant
 
 ✅ Create/Edit/Delete comment
 
-⏹️ Upload image for rant
-
-✅ Upload image for comment
+✅ Upload image for rant and comments
 
 ✅ Show notifications & navigate to the rant or comment
 
@@ -57,6 +59,12 @@ And I want wo build it in SwiftUI to improve my skills and because I think that 
 ✅ Show number of unread notifications and keep it up to date (no automatic periodic polling)
 
 🚧 Show unread notifications as red or green badges (instead of text)
+
+⏹️ Sharing rants via link
+
+⏹️ Viewing "Collab" rants properly
+
+⏹️ Creating "Collab" rants
 
 ## TestFlight
 

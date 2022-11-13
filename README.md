@@ -1,22 +1,14 @@
-# JoyRant (former SwiftUIRant)
+# JoyRant
 
 An unofficial devRant client for iOS and macOS, that doesn't crash.
 
-## Goals
+The goal of this project is to make a devRant app that has the most commonly used devRant features.
 
-* The first goal of this project is to provide the functionality to browse through rants, write comments, ++/-- (vote), and favorite/unfavorite rants.
-* A "Notif" screen to see ++'s, Mentions, and so on.
-* Then, I want to provide the functionality to create rants and other types of posts and upload images.
+Features like registration or avatar customization are not considered commonly used and are out of scope for now.
 
-The first version of the app should provide a better experience for the main and most frequently used functions of the app.
+JoyRant is broadly similar to the official devRant app but tries to improve the UI/UX in many places.
 
-Secondary functions like editing the own profile may be added later but are not considered high priority at the moment.
-
-## Motivation
-
-My motivation for this this project is to have a native iOS devRant app that doesn't crash and has some improved UI/UX over the official devRant iOS app.
-
-And I want wo build it in SwiftUI to improve my skills and because I think that SwiftUI is a fun and amazing UI framework.
+It's built with SwiftUI and is utilizing it for the vast majority of the app's functions and UI.
 
 ## Current state of development
 

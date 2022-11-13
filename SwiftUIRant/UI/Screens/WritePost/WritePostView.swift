@@ -134,6 +134,7 @@ struct WritePostView: View {
             switch viewModel.kind {
             case .postRant, .editRant(rant: _):
                 TextField("Tags (comma separated)", text: $viewModel.tags)
+                    .textInputAutocapitalization(.never)
                     .font(.callout)
                     .focused($focusedControl, equals: .tags)
                     .textFieldStyle(.roundedBorder)

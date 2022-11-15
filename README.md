@@ -44,7 +44,7 @@ It's built with SwiftUI and is utilizing it for the vast majority of the app's f
 
 ✅ Notifications
 
-⏹️ Sharing rants via link
+✅ Sharing rants via link
 
 ⏹️ Viewing "Collab" rants properly
 

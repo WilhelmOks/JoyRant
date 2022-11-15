@@ -28,6 +28,10 @@ struct Networking {
         
         DispatchQueue.main.async {
             DataStore.shared.clear()
+            
+            AppState.shared.navigationPath.removeAll()
+            AppState.shared.notificationsNavigationPath = .init()
+            
             AppState.shared.objectWillChange.send()
         }
     }

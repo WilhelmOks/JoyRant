@@ -20,11 +20,18 @@ struct ContentView: View {
     }
     
     @ViewBuilder private func content() -> some View {
+        #if os(macOS)
         if AppState.shared.isLoggedIn {
             InternalView()
         } else {
             LoginView()
         }
+        #elseif os(iOS)
+        LoginView()
+            .fullScreenCover(isPresented: .constant(AppState.shared.isLoggedIn)) {
+                InternalView()
+            }
+        #endif
     }
 }
 

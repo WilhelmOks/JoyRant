@@ -7,12 +7,15 @@
 
 import SwiftUI
 import SwiftRant
+import UniformTypeIdentifiers
 
 struct RantDetailsView: View {
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) private var dismiss
 
     let sourceTab: InternalView.Tab
     @StateObject var viewModel: RantDetailsViewModel
+    
+    @State private var isMoreMenuPresented = false
     
     enum PresentedSheet: Identifiable {
         case editRant(rant: Rant)
@@ -36,12 +39,16 @@ struct RantDetailsView: View {
     var body: some View {
         content()
             .background(Color.primaryBackground)
+            .navigationTitle("Rant")
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     toolbarReloadButton()
                 }
+                
+                ToolbarItem(placement: .automatic) {
+                    toolbarMoreButton()
+                }
             }
-            .navigationTitle("Rant")
             .alert($viewModel.alertMessage)
             .sheet(item: $presentedSheet) { item in
                 switch item {
@@ -88,16 +95,16 @@ struct RantDetailsView: View {
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
                 if sourceTab == .feed {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.notifications)) { _ in
                 if sourceTab == .notifications {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
             }
             .onReceive(viewModel.dismiss) { _ in
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
             .onOpenURL{ url in
                 if (url.scheme == "joyrant" && url.host == "rant") {
@@ -218,14 +225,53 @@ struct RantDetailsView: View {
     }
     
     @ViewBuilder private func toolbarMoreButton() -> some View {
-        Button {
-            //TODO: ...
-            viewModel.alertMessage = .presentedError(message: "Not implemented yet.")
+        #if os(macOS)
+        Menu {
+            if let link = viewModel.rant?.link {
+                Button {
+                    let devRantLink = "https://devrant.com/\(link)"
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(devRantLink, forType: .string)
+                } label: {
+                    Label("Copy Rant Link", systemImage: "doc.on.doc")
+                }
+            }
         } label: {
             Image(systemName: "ellipsis")
                 .frame(width: 26, height: 26)
         }
-        .disabled(viewModel.isLoading)
+        .disabled(viewModel.isLoading || viewModel.isReloading)
+        #endif
+        
+        // Using ActionSheet instead of Menu on iOS because the Menu appears to be a bit buggy:
+        // When Menu is open and user taps on "Comment" button, the comment button becomes broken and can not be tapped until view is dismissed and opened again.
+        #if os(iOS)
+        Button {
+            isMoreMenuPresented = true
+        } label: {
+            Image(systemName: "ellipsis")
+                .frame(width: 26, height: 26)
+        }
+        .disabled(viewModel.isLoading || viewModel.isReloading)
+        .actionSheet(isPresented: $isMoreMenuPresented) {
+            ActionSheet(
+                title: Text(""),
+                message: nil,
+                buttons: [
+                    .default(Text("Copy Rant Link")) {
+                        if let link = viewModel.rant?.link {
+                            let devRantLink = "https://devrant.com/\(link)"
+                            UIPasteboard.general.setValue(devRantLink, forPasteboardType: UTType.plainText.identifier)
+                        }
+                    },
+                    .cancel()
+                ]
+            )
+        }
+        #endif
+        
+        //TODO: Subscribe to User's Rants
+        //TODO: Mute Notifs for this Rant (except @mentions)
     }
 }
 

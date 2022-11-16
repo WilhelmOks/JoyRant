@@ -6,19 +6,12 @@
 //
 
 import SwiftUI
-#if canImport(HexUIColor)
-import HexUIColor
-#elseif canImport(HexNSColor)
-import HexNSColor
-#endif
 
 struct SettingsView: View {
     var navigationBar = true
     
     @State private var alertMessage: AlertMessage = .none()
-    //@State private var colorSelection: CGColor// = .init(red: 0, green: 0, blue: 0, alpha: 1)
-    
-    private let fallbackColor: CGColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
+    @ObservedObject private var appState = AppState.shared
     
     var body: some View {
         Form {
@@ -39,15 +32,13 @@ struct SettingsView: View {
                 Section("Accent Color") {
                     let colorSelection = Binding<CGColor>(
                         get: {
-                            if let hexString = UserDefaults.standard.string(forKey: "accent_color") {
-                                return PlatformColor.fromHexString(hexString)?.cgColor ?? fallbackColor
-                            } else {
-                                return PlatformColor(Color.accentColor).cgColor
-                            }
+                            appState.customAccentColor ?? PlatformColor(Color.accentColor).cgColor
                         },
                         set: { newValue in
-                            let hexString = hexStringFromColor(color: .init(cgColor: newValue))
-                            UserDefaults.standard.set(hexString, forKey: "accent_color")
+                            DispatchQueue.main.async {
+                                appState.customAccentColor = newValue
+                                appState.applyAccentColor()
+                            }
                         }
                     )
                     
@@ -60,7 +51,10 @@ struct SettingsView: View {
                     }
                     
                     Button {
-                        
+                        DispatchQueue.main.async {
+                            appState.customAccentColor = nil
+                            appState.applyAccentColor()
+                        }
                     } label: {
                         Label {
                             Text("Reset to default")

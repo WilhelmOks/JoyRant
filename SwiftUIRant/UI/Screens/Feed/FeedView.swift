@@ -153,6 +153,8 @@ struct FeedView: View {
             Divider()
         }
     }
+    
+    @State private var sortPickerId = UUID()
         
     @ViewBuilder func sortPicker() -> some View {
         Picker(selection: $viewModel.sort, label: Text(viewModel.sort.name)) {
@@ -161,6 +163,15 @@ struct FeedView: View {
             }
         }
         .pickerStyle(.menu)
+        .id(sortPickerId)
+        .onChange(of: AppState.shared.customAccentColor) { newValue in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                sortPickerId = UUID()
+            }
+        }
+        .onChange(of: dataStore.rantsInFeed) { newValue in
+            sortPickerId = UUID()
+        }
     }
 }
 

@@ -14,5 +14,5 @@ extension Color {
     static let secondaryForeground = Color("SecondaryForeground")
     static let badgeBackground = Color("BadgeBG")
     
-    static var primaryAccent: Color { Color("AccentColor") }
+    static var primaryAccent: Color { AppState.shared.customAccentColor.flatMap { Color($0) } ?? Color("AccentColor") }
 }

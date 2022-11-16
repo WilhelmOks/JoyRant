@@ -32,6 +32,29 @@ final class AppState: ObservableObject {
         URLCache.userAvatarCache.removeAllCachedResponses()
     }
     
+    var customAccentColor: CGColor? {
+        get {
+            if let hexString = UserDefaults.standard.string(forKey: "accent_color") {
+                return PlatformColor.fromHexString(hexString)?.cgColor
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let newValue {
+                #if os(iOS)
+                let hexString = hexStringFromColor(color: .init(cgColor: newValue))
+                #elseif os(macOS)
+                let hexString = hexStringFromColor(color: .init(cgColor: newValue) ?? .init(white: 0.5, alpha: 1))
+                #endif
+                UserDefaults.standard.set(hexString, forKey: "accent_color")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "accent_color")
+            }
+            objectWillChange.send()
+        }
+    }
+    
     func applyAccentColor() {
         #if os(iOS)
             DispatchQueue.main.async {

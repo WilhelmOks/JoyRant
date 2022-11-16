@@ -13,4 +13,6 @@ extension Color {
     static let primaryForeground = Color("PrimaryForeground")
     static let secondaryForeground = Color("SecondaryForeground")
     static let badgeBackground = Color("BadgeBG")
+    
+    static var primaryAccent: Color { Color("AccentColor") }
 }

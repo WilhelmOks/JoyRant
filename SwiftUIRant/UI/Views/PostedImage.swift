@@ -92,7 +92,7 @@ private struct WebImageView: View {
     
     var htmlString: String {
         let bgColor = colorScheme == .dark ? Color.black : Color.white
-        let backgroundColor = hexStringFromColor(color: bgColor)
+        let backgroundColor = hexStringFromColor(color: PlatformColor(bgColor))
         let style = """
             html, body, #wrapper {
                 height: 100%;
@@ -167,23 +167,6 @@ private struct WebView : UIViewRepresentable {
     }
 }
 
-private func hexStringFromColor(color: Color) -> String {
-    var red: CGFloat = 0.0
-    var green: CGFloat = 0.0
-    var blue: CGFloat = 0.0
-    var opacity: CGFloat = 0.0
-    
-    guard UIColor(color).getRed(&red, green: &green, blue: &blue, alpha: &opacity) else { return "-" }
-    
-    let hexString = String(
-        format: "#%02lX%02lX%02lX",
-        lroundf(Float(red * 255)),
-        lroundf(Float(green * 255)),
-        lroundf(Float(blue * 255))
-    )
-    return hexString
-}
-
 #elseif os(macOS)
 
 private struct WebView : NSViewRepresentable {
@@ -197,23 +180,6 @@ private struct WebView : NSViewRepresentable {
     func updateNSView(_ uiView: WKWebView, context: Context) {
         uiView.loadHTMLString(htmlString, baseURL: nil)
     }
-}
-
-private func hexStringFromColor(color: Color) -> String {
-    var red: CGFloat = 0.0
-    var green: CGFloat = 0.0
-    var blue: CGFloat = 0.0
-    var opacity: CGFloat = 0.0
-    
-    NSColor(color).getRed(&red, green: &green, blue: &blue, alpha: &opacity)
-    
-    let hexString = String(
-        format: "#%02lX%02lX%02lX",
-        lroundf(Float(red * 255)),
-        lroundf(Float(green * 255)),
-        lroundf(Float(blue * 255))
-    )
-    return hexString
 }
 
 #endif

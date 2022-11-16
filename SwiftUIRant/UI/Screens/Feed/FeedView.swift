@@ -101,7 +101,7 @@ struct FeedView: View {
                                     }
                                 } label: {
                                     Text("load more")
-                                        .foregroundColor(.accentColor)
+                                        .foregroundColor(.primaryAccent)
                                 }
                                 .buttonStyle(.plain)
                                 .disabled(viewModel.isLoadingMore)

@@ -36,7 +36,7 @@ final class AppState: ObservableObject {
         #if os(iOS)
             DispatchQueue.main.async {
                 UIApplication.shared.windows.forEach { window in
-                    window.tintColor = UIColor(Color("AccentColor"))
+                    window.tintColor = UIColor(Color.primaryAccent)
                 }
             }
         #endif

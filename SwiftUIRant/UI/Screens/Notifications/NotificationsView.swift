@@ -152,7 +152,7 @@ struct NotificationsView: View {
             .overlay {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .stroke(lineWidth: segment.selected ? 2 : 1)
-                    .foregroundColor(segment.selected ? .accentColor : .secondaryForeground)
+                    .foregroundColor(segment.selected ? .primaryAccent : .secondaryForeground)
             }
             .padding(.vertical, 1)
         }

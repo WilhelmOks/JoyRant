@@ -49,7 +49,7 @@ struct LoginView: View {
                     Text("Login")
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.accentColor)
+                .tint(.primaryAccent)
                 .disabled(!viewModel.canSubmit)
                 
                 ProgressView()

@@ -16,7 +16,7 @@ struct ContentView: View {
                 // This is necessary so that Alert buttons, ActionSheets, etc. get the accent color, too.
                 AppState.shared.applyAccentColor()
             }
-            .tint(.accentColor)
+            .tint(.primaryAccent)
     }
     
     @ViewBuilder private func content() -> some View {

@@ -49,13 +49,6 @@ struct InternalView: View {
                     }
                 }
             }
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .active {
-                    Task {
-                        try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
-                    }
-                }
-            }
     }
     
     @ViewBuilder private func content() -> some View {

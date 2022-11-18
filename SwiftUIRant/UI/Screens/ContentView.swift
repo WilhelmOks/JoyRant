@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject private var appState = AppState.shared
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         content()
@@ -17,6 +18,13 @@ struct ContentView: View {
                 AppState.shared.applyAccentColor()
             }
             .tint(.primaryAccent)
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active && AppState.shared.isLoggedIn {
+                    Task {
+                        try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+                    }
+                }
+            }
     }
     
     @ViewBuilder private func content() -> some View {

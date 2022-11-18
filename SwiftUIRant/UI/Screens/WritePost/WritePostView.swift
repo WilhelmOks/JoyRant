@@ -182,7 +182,6 @@ struct WritePostView: View {
             Task {
                 isLoadingImage = true
                 if let data = try? await newValue?.loadTransferable(type: Data.self) {
-                    //let converted = UnsupportedToJpegImageDataConverter.unsupportedToJpeg.convert(data)
                     viewModel.selectedImageData = data
                     viewModel.selectedImage = PlatformImage(data: data)
                 }

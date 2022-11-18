@@ -54,7 +54,6 @@
 		ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59CEE728CB74180007B698 /* MockedModels.swift */; };
 		ED74D50B2921117800088CE6 /* SegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74D50A2921117800088CE6 /* SegmentedPicker.swift */; };
 		ED74D50D292542F700088CE6 /* ColorToHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74D50C292542F700088CE6 /* ColorToHex.swift */; };
-		ED74D50F29281DD800088CE6 /* ImageDataConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74D50E29281DD800088CE6 /* ImageDataConversion.swift */; };
 		ED91BF1B291589E000B400C4 /* AttributedString+devRant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91BF1A291589E000B400C4 /* AttributedString+devRant.swift */; };
 		ED97D62528E86F5200CFC418 /* CreationTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62428E86F5200CFC418 /* CreationTimeView.swift */; };
 		ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62628E9C98900CFC418 /* RantExtensions.swift */; };
@@ -125,7 +124,6 @@
 		ED59CEE728CB74180007B698 /* MockedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedModels.swift; sourceTree = "<group>"; };
 		ED74D50A2921117800088CE6 /* SegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPicker.swift; sourceTree = "<group>"; };
 		ED74D50C292542F700088CE6 /* ColorToHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToHex.swift; sourceTree = "<group>"; };
-		ED74D50E29281DD800088CE6 /* ImageDataConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataConversion.swift; sourceTree = "<group>"; };
 		ED8622D4290D3E7F0070A7D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ED91BF1A291589E000B400C4 /* AttributedString+devRant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+devRant.swift"; sourceTree = "<group>"; };
 		ED97D62428E86F5200CFC418 /* CreationTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationTimeView.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 				ED14DE6328E36241005FCC9A /* TimeFormatter.swift */,
 				ED33C23E2904178B00A59A11 /* SwiftUIRantError.swift */,
 				ED74D50C292542F700088CE6 /* ColorToHex.swift */,
-				ED74D50E29281DD800088CE6 /* ImageDataConversion.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -461,7 +458,6 @@
 				ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */,
 				ED97D63728F3035C00CFC418 /* NotificationsView.swift in Sources */,
 				ED0FB7EB28FF350500E5163D /* WritePostViewModel.swift in Sources */,
-				ED74D50F29281DD800088CE6 /* ImageDataConversion.swift in Sources */,
 				ED59CECC28BD05E80007B698 /* FeedViewModel.swift in Sources */,
 				ED97D63928F44EA800CFC418 /* NotificationsViewModel.swift in Sources */,
 				ED33C23929040E3300A59A11 /* Models+TimeToModify.swift in Sources */,

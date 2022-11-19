@@ -108,12 +108,15 @@ struct RantCommentView: View {
                 )
                 .disabled(comment.voteState == .unvotable)
                 
-                UserPanel(
-                    avatar: comment.userAvatar,
-                    name: comment.username,
-                    score: comment.userScore,
-                    isSupporter: comment.isUserSupporter
-                )
+                NavigationLink(value: AppState.NavigationDestination.userProfile(userId: comment.userID)) {
+                    UserPanel(
+                        avatar: comment.userAvatar,
+                        name: comment.username,
+                        score: comment.userScore,
+                        isSupporter: comment.isUserSupporter
+                    )
+                }
+                
             }
             
             Spacer()

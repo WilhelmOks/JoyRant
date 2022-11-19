@@ -69,6 +69,8 @@ struct FeedView: View {
                             rantId: rantId
                         )
                     )
+                case .userProfile(let userId):
+                    ProfileView(viewModel: .init(userId: userId))
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in

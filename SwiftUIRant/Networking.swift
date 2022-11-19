@@ -133,7 +133,7 @@ struct Networking {
     // comment
     
     func postComment(rantId: Rant.ID, content: String, image: Data?) async throws {
-        try await swiftRant.postComment(try token(), rantID: rantId, content: content, image: image).get()
+        try await swiftRant.postComment(try token(), rantID: rantId, content: content, image: image).get()        
     }
     
     func editComment(commentId: Comment.ID, content: String, image: Data?) async throws {

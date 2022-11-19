@@ -24,12 +24,12 @@ extension AttributedString {
                 case .url:
                     result[range].foregroundColor = .primaryForeground
                     result[range].underlineStyle = .single
-                    result[range].link = url(link: link.url)
+                    result[range].link = rantUrl(link: link.url)
                 case .mention:
                     result[range].foregroundColor = .primary
                     result[range].font = .baseSize(16).bold()
                     result[range].swiftUI.font = .baseSize(16).bold()
-                    result[range].link = URL(string: link.url)
+                    result[range].link = mentionUrl(userId: link.url)
                 case nil:
                     break
                 }
@@ -39,7 +39,7 @@ extension AttributedString {
         return result
     }
     
-    private static func url(link: String) -> URL? {
+    private static func rantUrl(link: String) -> URL? {
         let rantPrefix = "https://devrant.com/rants/"
         if link.hasPrefix(rantPrefix) {
             // A rant link looks like this:
@@ -54,5 +54,9 @@ extension AttributedString {
         } else {
             return URL(string: link)
         }
+    }
+    
+    private static func mentionUrl(userId: String) -> URL? {
+        return URL(string: "joyrant://profile/\(userId)")
     }
 }

@@ -107,6 +107,7 @@ struct RantDetailsView: View {
                 dismiss()
             }
             .onOpenURL{ url in
+                //TODO: make a handler: url -> NavigationDestination
                 if (url.scheme == "joyrant" && url.host == "rant") {
                     guard let rantId = url.pathComponents.last.flatMap(Int.init) else {
                         dlog("Rant ID could not be parsed: \(url)")

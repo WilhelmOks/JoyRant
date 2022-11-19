@@ -110,12 +110,14 @@ struct RantView: View {
                 )
                 .disabled(rant.voteState == .unvotable)
                 
-                UserPanel(
-                    avatar: rant.userAvatar,
-                    name: rant.username,
-                    score: rant.userScore,
-                    isSupporter: rant.isUserSupporter
-                )
+                NavigationLink(value: AppState.NavigationDestination.userProfile(userId: rant.userID)) {
+                    UserPanel(
+                        avatar: rant.userAvatar,
+                        name: rant.username,
+                        score: rant.userScore,
+                        isSupporter: rant.isUserSupporter
+                    )
+                }
             }
             
             Spacer()

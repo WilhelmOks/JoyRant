@@ -18,6 +18,7 @@ final class AppState: ObservableObject {
     
     enum NavigationDestination: Hashable {
         case rantDetails(rantId: Rant.ID)
+        case userProfile(userId: UserID)
     }
     
     @Published var navigationPath: [NavigationDestination] = []

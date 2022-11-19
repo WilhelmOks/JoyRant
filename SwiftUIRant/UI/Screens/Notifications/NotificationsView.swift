@@ -125,6 +125,8 @@ struct NotificationsView: View {
                         sourceTab: .notifications,
                         viewModel: .init(rantId: rantId)
                     )
+                case .userProfile(userId: let userId):
+                    ProfileView(viewModel: .init(userId: userId))
                 }
             }
         }

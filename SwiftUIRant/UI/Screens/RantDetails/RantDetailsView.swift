@@ -106,24 +106,8 @@ struct RantDetailsView: View {
             .onReceive(viewModel.dismiss) { _ in
                 dismiss()
             }
-            .onOpenURL{ url in
-                //TODO: make a handler: url -> NavigationDestination
-                if (url.scheme == "joyrant" && url.host == "rant") {
-                    guard let rantId = url.pathComponents.last.flatMap(Int.init) else {
-                        dlog("Rant ID could not be parsed: \(url)")
-                        return
-                    }
-                    
-                    switch sourceTab {
-                    case .feed:
-                        AppState.shared.navigationPath.append(.rantDetails(rantId: rantId))
-                    case .notifications:
-                        let destination = AppState.NavigationDestination.rantDetails(rantId: rantId)
-                        AppState.shared.notificationsNavigationPath.append(destination)
-                    case .settings:
-                        break
-                    }
-                }
+            .onOpenURL { url in
+                AppState.shared.navigate(from: sourceTab, to: url)
             }
     }
     

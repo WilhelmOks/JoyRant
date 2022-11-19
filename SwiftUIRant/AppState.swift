@@ -28,6 +28,22 @@ final class AppState: ObservableObject {
         LoginStore.shared.isLoggedIn
     }
     
+    func navigate(from sourceTab: InternalView.Tab, to destination: NavigationDestination) {
+        switch sourceTab {
+        case .feed:
+            AppState.shared.navigationPath.append(destination)
+        case .notifications:
+            AppState.shared.notificationsNavigationPath.append(destination)
+        case .settings:
+            break
+        }
+    }
+    
+    func navigate(from sourceTab: InternalView.Tab, to url: URL) {
+        guard let destination = URLHandler().navigationDestination(forUrl: url) else { return }
+        navigate(from: sourceTab, to: destination)
+    }
+    
     func clearImageCache() {
         URLCache.postedImageCache.removeAllCachedResponses()
         URLCache.userAvatarCache.removeAllCachedResponses()

@@ -49,12 +49,12 @@ struct VoteControl: View {
             }
             .font(.caption)
             .fontWeight(.bold)
-            .foregroundColor(.primaryBackground)
+            .foregroundColor(.primaryForeground)
             .padding(3)
             .padding(.bottom, 1)
             .background {
                 Circle()
-                    .foregroundColor(highlighted ? .primaryAccent : .secondaryForeground)
+                    .foregroundColor(highlighted ? .primaryAccent : .secondaryBackground)
             }
             .opacity(isEnabled ? 1 : 0.6)
         }
@@ -83,7 +83,7 @@ struct VoteControl: View {
         Text("\(score)")
             .font(.caption2)
             .fontWeight(.medium)
-            .foregroundColor(isUpvoted || isDownvoted ? .primaryAccent : .secondaryForeground)
+            .foregroundColor(isUpvoted || isDownvoted ? .primaryAccent : .primaryForeground)
     }
 }
 

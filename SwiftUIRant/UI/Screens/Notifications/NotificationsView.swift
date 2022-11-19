@@ -133,7 +133,7 @@ struct NotificationsView: View {
     }
     
     @ViewBuilder private func categoryPicker() -> some View {
-        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs) { segment in
+        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs, spacing: 0) { segment in
             let unread = dataStore.unreadNotifications[segment.item.category] ?? 0 > 0
             HStack(spacing: 4) {
                 if unread {

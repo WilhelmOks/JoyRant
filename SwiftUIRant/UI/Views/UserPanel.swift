@@ -26,17 +26,17 @@ struct UserPanel: View {
                 HStack(spacing: 4) {
                     Text(scoreText())
                         .font(baseSize: 12, weightDelta: 2)
-                        .foregroundColor(.primaryBackground)
+                        .foregroundColor(.primaryForeground)
                         .padding(.horizontal, 5)
                         .padding(.vertical, 1)
-                        .background(Color.secondaryForeground)
+                        .background(Color.secondaryBackground)
                         .cornerRadius(5)
                     
                     if isSupporter {
                         Text("++")
-                            .font(baseSize: 12, weightDelta: 4)
+                            .font(baseSize: 12, weightDelta: 3)
                             .offset(y: -0.5)
-                            .foregroundColor(.primaryBackground)
+                            .foregroundColor(.primaryForeground)
                             .padding(.horizontal, 5)
                             .padding(.vertical, 1)
                             .background(userColor())

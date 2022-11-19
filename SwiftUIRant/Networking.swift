@@ -143,4 +143,12 @@ struct Networking {
     func deleteComment(commentId: Comment.ID) async throws {
         try await swiftRant.deleteComment(try token(), commentID: commentId).get()
     }
+    
+    // profile
+    
+    func userProfile(userId: UserID) async throws -> Profile {
+        //TODO: other userContentType
+        //TODO: other skip value
+        try await swiftRant.getProfileFromID(userId, token: try token(), userContentType: .all, skip: 0).get()
+    }
 }

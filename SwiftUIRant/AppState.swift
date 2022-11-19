@@ -46,6 +46,7 @@ final class AppState: ObservableObject {
     
     func clearImageCache() {
         URLCache.postedImageCache.removeAllCachedResponses()
+        URLCache.profileImageCache.removeAllCachedResponses()
         URLCache.userAvatarCache.removeAllCachedResponses()
     }
     

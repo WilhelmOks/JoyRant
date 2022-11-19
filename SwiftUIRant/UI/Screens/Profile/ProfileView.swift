@@ -30,20 +30,58 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func content() -> some View {
-        VStack(spacing: 0) {
-            header()
-                .frame(height: 250)
-                .overlay(alignment: .topLeading) {
-                    score()
-                        .padding(10)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
+                header()
+                    .frame(height: 250)
+                    .overlay(alignment: .topLeading) {
+                        score()
+                            .padding(10)
+                    }
+                
+                infoArea()
+                    .fillHorizontally(.leading)
+                    .padding(.horizontal, 10)
+            }
+            .if(!viewModel.isLoaded) {
+                $0.redacted(reason: .placeholder)
+            }
+        }
+    }
+    
+    @ViewBuilder private func infoArea() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            infoRow(iconName: "person", text: profile.about)
+            infoRow(iconName: "s.circle", text: profile.skills)
+            if let website = profile.website {
+                infoRow(iconName: "w.circle", text: website) //TODO: open as link
+            }
+            infoRow(iconName: "g.circle", text: profile.github) //TODO: open as link. (the text is just the user's github name)
+            
+            //TODO: hide empty
+            //TODO: change icons
+            //TODO: show join date
+        }
+    }
+    
+    @ViewBuilder private func infoRow(iconName: String, text: String) -> some View {
+        HStack(alignment: .center, spacing: 10) {
+            Image(systemName: iconName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 24, height: 24)
+                .foregroundColor(.primaryForeground)
+                .alignmentGuide(VerticalAlignment.center) { dim in
+                    dim[VerticalAlignment.center] + 5
                 }
             
-            //Text(profile.username)
-            
-            Spacer()
-        }
-        .if(!viewModel.isLoaded) {
-            $0.redacted(reason: .placeholder)
+            Text(text)
+                .font(baseSize: 16)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.primaryForeground)
+                .alignmentGuide(VerticalAlignment.center) { dim in
+                    dim[.firstTextBaseline]
+                }
         }
     }
     
@@ -60,34 +98,20 @@ struct ProfileView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .foregroundColor(.secondaryBackground)
             }
+        
+        //TODO: show supporter status
     }
     
     @ViewBuilder private func header() -> some View {
         if let url = avatarUrl() {
-            CachedAsyncImage(url: url, urlCache: .profileImageCache) { phase in
-                switch phase {
-                case .empty:
-                    ZStack {
-                        userColor()
-                        
-                        ProgressView()
-                            .foregroundColor(.primaryForeground)
-                            .tint(.primaryForeground)
-                            .accentColor(.primaryForeground)
-                    }
-                case .success(let image):
-                    ZStack {
-                        userColor()
-                        
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    }
-                case .failure:
-                    Image(systemName: "photo")
-                @unknown default:
-                    EmptyView()
-                }
+            CachedAsyncImage(url: url, urlCache: .profileImageCache) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .fillHorizontally()
+                    .background(userColor())
+            } placeholder: {
+                userColor()
             }
         } else {
             userColor()

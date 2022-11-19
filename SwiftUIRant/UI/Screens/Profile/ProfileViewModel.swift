@@ -19,12 +19,12 @@ import SwiftRant
     let placeholderProfile: Profile = .init(
         username: "Placeholder",
         score: 100,
-        about: "about",
+        about: "This is a placeholder text that tells something about the user. It should be long enough to span a few lines.",
         location: "location",
         createdTime: 0,
-        skills: "skills",
-        github: "github",
-        website: "website",
+        skills: "first skill\nsecond\nand third scill",
+        github: "https://github.com/example",
+        website: "https://www.website.com",
         content: .init(
             content: .init(rants: [], upvoted: [], comments: []),
             counts: .init(rants: 0, upvoted: 0, comments: 0, favorites: 0, collabs: 0)

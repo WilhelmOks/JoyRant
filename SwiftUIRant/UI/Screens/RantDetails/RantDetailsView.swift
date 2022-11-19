@@ -93,16 +93,6 @@ struct RantDetailsView: View {
                     )
                 }
             }
-            .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
-                if sourceTab == .feed {
-                    dismiss()
-                }
-            }
-            .onReceive(broadcastEvent: .didReselectMainTab(.notifications)) { _ in
-                if sourceTab == .notifications {
-                    dismiss()
-                }
-            }
             .onReceive(viewModel.dismiss) { _ in
                 dismiss()
             }

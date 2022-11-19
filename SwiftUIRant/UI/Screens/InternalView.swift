@@ -49,6 +49,16 @@ struct InternalView: View {
                     }
                 }
             }
+            .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
+                withAnimation {
+                    appState.navigationPath.removeAll()
+                }
+            }
+            .onReceive(broadcastEvent: .didReselectMainTab(.notifications)) { _ in
+                withAnimation {
+                    appState.notificationsNavigationPath = .init()
+                }
+            }
     }
     
     @ViewBuilder private func content() -> some View {

@@ -27,6 +27,12 @@ import SwiftRant
     
     private(set) var isLoaded = false
     
+    private var currentRequestTask: Task<(), Never>? {
+        didSet {
+            isLoading = currentRequestTask != nil
+        }
+    }
+    
     init() {
         Task {
             await load()
@@ -34,37 +40,49 @@ import SwiftRant
     }
     
     func load() async {
-        isLoading = true
+        currentRequestTask?.cancel()
+        currentRequestTask = nil
         
         notificationItems = []
         
-        do {
-            let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
-            notificationItems = notifications.mappedItems
-            Task {
-                try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+        currentRequestTask = Task { @MainActor in
+            do {
+                let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
+                try Task.checkCancellation()
+                notificationItems = notifications.mappedItems
+                Task {
+                    try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+                }
+                isLoaded = true
+            } catch {
+                alertMessage = .presentedError(error)
             }
-            isLoaded = true
-        } catch {
-            alertMessage = .presentedError(error)
+            currentRequestTask = nil
         }
-        
-        isLoading = false
+        let _ = await currentRequestTask?.value
     }
     
     func refresh() async {
+        currentRequestTask?.cancel()
+        currentRequestTask = nil
+        
         isRefreshing = true
         
-        do {
-            let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
-            notificationItems = notifications.mappedItems
-            Task {
-                try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+        currentRequestTask = Task { @MainActor in
+            do {
+                let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
+                try Task.checkCancellation()
+                notificationItems = notifications.mappedItems
+                Task {
+                    try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+                }
+                isLoaded = true
+            } catch {
+                dlog("Error refreshing notifications: \(error)")
             }
-            isLoaded = true
-        } catch {
-            dlog("Error refreshing notifications: \(error)")
+            currentRequestTask = nil
         }
+        let _ = await currentRequestTask?.value
         
         isRefreshing = false
     }

@@ -147,12 +147,8 @@ struct NotificationsView: View {
             .padding(.vertical, 6)
             .background {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .foregroundColor(.primaryBackground)
-            }
-            .overlay {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke(lineWidth: segment.selected ? 2 : 1)
-                    .foregroundColor(segment.selected ? .primaryAccent : .secondaryForeground)
+                    .foregroundColor(segment.selected ? .secondaryBackground : .clear)
+                    .animation(.easeOut, value: viewModel.categoryTabIndex)
             }
             .padding(.vertical, 1)
         }
@@ -160,7 +156,7 @@ struct NotificationsView: View {
         .onChange(of: viewModel.categoryTabIndex) { newValue in
             viewModel.categoryTab = viewModel.tabs[newValue]
         }
-        .disabled(viewModel.isLoading || viewModel.isRefreshing)
+        //.disabled(viewModel.isLoading || viewModel.isRefreshing)
     }
 }
 

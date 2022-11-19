@@ -28,6 +28,8 @@ extension AlertMessage {
     static func presentedError(_ error: Error) -> Self {
         let message: String
         switch error {
+        case is CancellationError:
+            return .none()
         case let swiftUIRantError as SwiftUIRantError:
             message = swiftUIRantError.message
         case let swiftRantError as SwiftRantError:

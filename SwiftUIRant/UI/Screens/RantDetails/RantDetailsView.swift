@@ -165,8 +165,7 @@ struct RantDetailsView: View {
                                             }
                                         }
                                     )
-                                    //.id(comment.uuid) //TODO: make uuid public
-                                    .id("\(rant.uuid)_\(comment.id)")
+                                    .id(comment.uuid)
                                 }
                                 .id("comment_\(comment.id)")
                             }

@@ -230,7 +230,7 @@ struct RantCommentView_Previews: PreviewProvider {
                         score: 100,
                         createdTime: Int(Date().addingTimeInterval(60 * -15).timeIntervalSince1970),
                         voteState: .unvotable,
-                        links: nil, //TODO: test links
+                        links: nil,
                         userID: 1,
                         username: "Myself and Me",
                         userScore: 12,

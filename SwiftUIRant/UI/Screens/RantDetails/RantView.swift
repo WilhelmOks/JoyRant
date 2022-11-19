@@ -243,7 +243,7 @@ struct RantView_Previews: PreviewProvider {
                     voteState: .unvoted,
                     isEdited: true,
                     isFavorite: 0,
-                    link: nil, //TODO: test
+                    link: nil,
                     links: nil,
                     collabTypeLong: nil, //TODO: test
                     collabDescription: nil, //TODO: test

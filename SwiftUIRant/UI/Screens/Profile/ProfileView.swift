@@ -53,8 +53,9 @@ struct ProfileView: View {
         VStack(alignment: .leading, spacing: 10) {
             infoRow(iconName: "person", text: profile.about)
             infoRow(iconName: "s.circle", text: profile.skills)
+            infoRow(iconName: "mappin.and.ellipse", text: profile.location)
             if let website = profile.website {
-                infoRow(iconName: "w.circle", text: website) //TODO: open as link
+                infoRow(iconName: "globe", text: website) //TODO: open as link
             }
             infoRow(iconName: "g.circle", text: profile.github) //TODO: open as link. (the text is just the user's github name)
             
@@ -131,6 +132,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: .init(userId: 0))
+        ProfileView(viewModel: .init(userId: 0, mocked: true))
     }
 }

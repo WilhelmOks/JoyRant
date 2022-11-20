@@ -18,9 +18,11 @@ It's built with SwiftUI and is utilizing it for the vast majority of the app's f
 
 ⏹️ Weekly rants
 
-⏹️ Search
+⏹️ Search for rants and users
 
-⏹️ User profiles
+🚧 User profiles
+
+⏹️ Subscribe to a user
 
 ✅ Upvoting/Downvoting in feed
 
@@ -50,7 +52,7 @@ It's built with SwiftUI and is utilizing it for the vast majority of the app's f
 
 ⏹️ Creating "Collab" rants
 
-⏹️ Tag suggestions (not available in SwiftRant (yet?))
+⏹️ Tag suggestions for rants (not available in SwiftRant (yet?))
 
 ## TestFlight
 

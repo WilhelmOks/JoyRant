@@ -8,7 +8,7 @@ Features like registration or avatar customization are not considered commonly u
 
 JoyRant is broadly similar to the official devRant app but tries to improve the UI/UX in many places.
 
-It's built with SwiftUI and is utilizing it for the vast majority of the app's functions and UI.
+It's built with SwiftUI and it is utilizing it for the vast majority of the app's functions and UI.
 
 ## Current state of development
 

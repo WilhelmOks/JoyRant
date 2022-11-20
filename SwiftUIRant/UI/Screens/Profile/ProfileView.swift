@@ -38,6 +38,10 @@ struct ProfileView: View {
                         score()
                             .padding(10)
                     }
+                    .overlay(alignment: .topTrailing) {
+                        joinedOnDate()
+                            .padding(10)
+                    }
                 
                 infoArea()
                     .fillHorizontally(.leading)
@@ -61,7 +65,6 @@ struct ProfileView: View {
             
             //TODO: hide empty
             //TODO: change icons
-            //TODO: show join date
         }
     }
     
@@ -87,20 +90,40 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func score() -> some View {
-        let score = profile.score
-        let scoreText = score > 0 ? "+\(score)" : "\(score)"
-        
-        Text(scoreText)
-            .font(baseSize: 13, weightDelta: 2)
-            .foregroundColor(.primaryForeground)
-            .padding(.vertical, 1)
-            .padding(.horizontal, 5)
-            .background {
-                RoundedRectangle(cornerRadius: 5)
-                    .foregroundColor(.secondaryBackground)
+        VStack(alignment: .leading, spacing: 10) {
+            if profile.isUserDPP == 1 {
+                Text("Supporter")
+                    .font(baseSize: 13, weightDelta: 2)
+                    .foregroundColor(.primaryForeground)
+                    .padding(.vertical, 1)
+                    .padding(.horizontal, 5)
+                    .background {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(.secondaryBackground)
+                    }
             }
-        
-        //TODO: show supporter status
+            
+            let score = profile.score
+            let scoreText = score > 0 ? "+\(score)" : "\(score)"
+            
+            Text(scoreText)
+                .font(baseSize: 13, weightDelta: 2)
+                .foregroundColor(.primaryForeground)
+                .padding(.vertical, 1)
+                .padding(.horizontal, 5)
+                .background {
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.secondaryBackground)
+                }
+        }
+    }
+    
+    @ViewBuilder private func joinedOnDate() -> some View {
+        let formattedDate = AbsoluteDateFormatter.shared.string(fromSeconds: profile.createdTime)
+        Text("Joined on\n\(formattedDate)")
+            .font(baseSize: 13, weightDelta: 2)
+            .multilineTextAlignment(.trailing)
+            .foregroundColor(.white)
     }
     
     @ViewBuilder private func header() -> some View {

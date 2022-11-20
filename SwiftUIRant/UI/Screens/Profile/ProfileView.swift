@@ -12,6 +12,8 @@ import CachedAsyncImage
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
     
+    @Environment(\.openURL) private var openURL
+    
     private let emptyBgColor = Color.gray.opacity(0.3)
         
     var profile: Profile {
@@ -33,7 +35,7 @@ struct ProfileView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 header()
-                    .frame(height: 250)
+                    .frame(height: 220)
                     .overlay(alignment: .topLeading) {
                         score()
                             .padding(10)
@@ -54,39 +56,113 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func infoArea() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            infoRow(iconName: "person", text: profile.about)
-            infoRow(iconName: "s.circle", text: profile.skills)
-            infoRow(iconName: "mappin.and.ellipse", text: profile.location)
-            if let website = profile.website {
-                infoRow(iconName: "globe", text: website) //TODO: open as link
+        VStack(alignment: .leading, spacing: 12) {
+            if !profile.about.isEmpty {
+                infoRow {
+                    infoRowIcon(systemName: "person")
+                } content: {
+                    infoRowText(text: profile.about)
+                }
             }
-            infoRow(iconName: "g.circle", text: profile.github) //TODO: open as link. (the text is just the user's github name)
+
+            if !profile.skills.isEmpty {
+                infoRow {
+                    infoRowIcon(systemName: "curlybraces")
+                } content: {
+                    infoRowText(text: profile.skills)
+                }
+            }
             
-            //TODO: hide empty
-            //TODO: change icons
+            if !profile.location.isEmpty {
+                infoRow {
+                    infoRowIcon(systemName: "mappin.and.ellipse")
+                } content: {
+                    infoRowText(text: profile.location) //TODO: open as link
+                }
+            }
+            
+            if let website = profile.website, !website.isEmpty {
+                infoRow {
+                    infoRowIcon(systemName: "globe")
+                } content: {
+                    infoRowText(text: website)
+                } action: {
+                    if let url = URL(string: website) {
+                        openURL(url)
+                    }
+                }
+            }
+            
+            if !profile.github.isEmpty {
+                infoRow {
+                    infoRowIcon(name: "github")
+                } content: {
+                    infoRowText(text: profile.github)
+                } action: {
+                    if let url = URL(string: "https://github.com/\(profile.github)") {
+                        openURL(url)
+                    }
+                }
+            }
         }
     }
     
-    @ViewBuilder private func infoRow(iconName: String, text: String) -> some View {
+    @ViewBuilder private func infoRow<Icon: View, Content: View>(@ViewBuilder icon: () -> Icon, @ViewBuilder content: () -> Content, action: (() -> ())? = nil) -> some View {
+        if let action {
+            Button {
+                action()
+            } label: {
+                infoRowLabel {
+                    icon()
+                } content: {
+                    content()
+                }
+                .background(Color.primaryBackground)
+            }
+            .buttonStyle(.plain)
+        } else {
+            infoRowLabel {
+                icon()
+            } content: {
+                content()
+            }
+        }
+    }
+    
+    @ViewBuilder private func infoRowLabel<Icon: View, Content: View>(@ViewBuilder icon: () -> Icon, @ViewBuilder content: () -> Content) -> some View {
         HStack(alignment: .center, spacing: 10) {
-            Image(systemName: iconName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+            icon()
                 .frame(width: 24, height: 24)
                 .foregroundColor(.primaryForeground)
                 .alignmentGuide(VerticalAlignment.center) { dim in
                     dim[VerticalAlignment.center] + 5
                 }
             
-            Text(text)
-                .font(baseSize: 16)
-                .multilineTextAlignment(.leading)
+            content()
                 .foregroundColor(.primaryForeground)
                 .alignmentGuide(VerticalAlignment.center) { dim in
                     dim[.firstTextBaseline]
                 }
         }
+    }
+    
+    @ViewBuilder private func infoRowIcon(systemName: String) -> some View {
+        Image(systemName: systemName)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+    }
+    
+    @ViewBuilder private func infoRowIcon(name: String) -> some View {
+        Image(name)
+            .renderingMode(.template)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+    }
+    
+    @ViewBuilder private func infoRowText(text: String) -> some View {
+        Text(text)
+            .font(baseSize: 16)
+            .multilineTextAlignment(.leading)
     }
     
     @ViewBuilder private func score() -> some View {

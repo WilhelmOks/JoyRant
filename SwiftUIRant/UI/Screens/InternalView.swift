@@ -50,14 +50,10 @@ struct InternalView: View {
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
-                withAnimation {
-                    appState.navigationPath.removeAll()
-                }
+                appState.navigateToRoot(from: .feed)
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.notifications)) { _ in
-                withAnimation {
-                    appState.notificationsNavigationPath = .init()
-                }
+                appState.navigateToRoot(from: .notifications)
             }
     }
     
@@ -106,7 +102,7 @@ struct InternalView: View {
         #if os(iOS)
         switch tab {
         case .feed:
-            NavigationStack(path: $appState.navigationPath) {
+            NavigationStack(path: $appState.feedNavigationPath) {
                 contentForTab(tab)
                     .navigationBarTitleDisplayModeInline()
             }

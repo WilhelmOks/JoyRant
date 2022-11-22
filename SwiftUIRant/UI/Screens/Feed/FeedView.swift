@@ -74,7 +74,7 @@ struct FeedView: View {
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
-                if AppState.shared.navigationPath.isEmpty {
+                if AppState.shared.feedNavigationPath.isEmpty {
                     DispatchQueue.main.async {
                         BroadcastEvent.shouldScrollFeedToTop.send()
                     }

@@ -31,7 +31,7 @@ struct FeedRantView: View {
             }
         }
         .onTapGesture {
-            AppState.shared.navigationPath.append(.rantDetails(rantId: viewModel.rant.id))
+            AppState.shared.navigate(from: .feed, to: .rantDetails(rantId: viewModel.rant.id))
         }
     }
     

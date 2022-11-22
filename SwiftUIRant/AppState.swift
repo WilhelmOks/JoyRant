@@ -21,7 +21,7 @@ final class AppState: ObservableObject {
         case userProfile(userId: UserID)
     }
     
-    @Published var navigationPath: [NavigationDestination] = []
+    @Published var feedNavigationPath = NavigationPath()
     @Published var notificationsNavigationPath = NavigationPath()
         
     var isLoggedIn: Bool {
@@ -31,9 +31,20 @@ final class AppState: ObservableObject {
     func navigate(from sourceTab: InternalView.Tab, to destination: NavigationDestination) {
         switch sourceTab {
         case .feed:
-            AppState.shared.navigationPath.append(destination)
+            feedNavigationPath.append(destination)
         case .notifications:
-            AppState.shared.notificationsNavigationPath.append(destination)
+            notificationsNavigationPath.append(destination)
+        case .settings:
+            break
+        }
+    }
+    
+    func navigateToRoot(from sourceTab: InternalView.Tab) {
+        switch sourceTab {
+        case .feed:
+            feedNavigationPath = .init()
+        case .notifications:
+            notificationsNavigationPath = .init()
         case .settings:
             break
         }

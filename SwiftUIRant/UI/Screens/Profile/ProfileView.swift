@@ -54,6 +54,7 @@ struct ProfileView: View {
             .if(!viewModel.isLoaded) {
                 $0.redacted(reason: .placeholder)
             }
+            .disabled(!viewModel.isLoaded)
         }
     }
     
@@ -231,16 +232,15 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func categoryPicker() -> some View {
-        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs, spacing: 10, horizontalScrolling: true) { segment in
+        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs, spacing: 10) { segment in
             HStack(spacing: 4) {
                 VStack(spacing: 4) {
-                    Text("231")
+                    Text("231") //TODO: ...
                         .font(baseSize: 17, weightDelta: 1)
                     
                     Text(segment.item.displayName)
                         .font(baseSize: 15, weightDelta: 1)
                 }
-                //.fillHorizontally()
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 6)

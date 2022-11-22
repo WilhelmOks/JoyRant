@@ -33,7 +33,7 @@ struct ProfileView: View {
     
     @ViewBuilder private func content() -> some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 12) {
                 header()
                     .frame(height: 220)
                     .overlay(alignment: .topLeading) {
@@ -48,6 +48,8 @@ struct ProfileView: View {
                 infoArea()
                     .fillHorizontally(.leading)
                     .padding(.horizontal, 10)
+                
+                categoryPicker()
             }
             .if(!viewModel.isLoaded) {
                 $0.redacted(reason: .placeholder)
@@ -226,6 +228,33 @@ struct ProfileView: View {
     
     private func userColor() -> Color {
         Color(hexString: profile.avatar.backgroundColor) ?? emptyBgColor
+    }
+    
+    @ViewBuilder private func categoryPicker() -> some View {
+        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs, spacing: 10, horizontalScrolling: true) { segment in
+            HStack(spacing: 4) {
+                VStack(spacing: 4) {
+                    Text("231")
+                        .font(baseSize: 17, weightDelta: 1)
+                    
+                    Text(segment.item.displayName)
+                        .font(baseSize: 15, weightDelta: 1)
+                }
+                //.fillHorizontally()
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .background {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .foregroundColor(segment.selected ? .secondaryBackground : .primaryBackground)
+                    .animation(.easeOut, value: viewModel.categoryTabIndex)
+            }
+            .padding(.vertical, 1)
+        }
+        .buttonStyle(.plain)
+        .onChange(of: viewModel.categoryTabIndex) { newValue in
+            viewModel.categoryTab = viewModel.tabs[newValue]
+        }
     }
 }
 

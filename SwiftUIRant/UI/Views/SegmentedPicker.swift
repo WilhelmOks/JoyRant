@@ -12,6 +12,7 @@ struct SegmentedPicker<Item, ItemView: View>: View {
     let items: [Item]
     
     var spacing: CGFloat = 10
+    var horizontalScrolling: Bool = true
     var innerHorizontalPadding: CGFloat = 10
     
     struct Segment {
@@ -22,18 +23,26 @@ struct SegmentedPicker<Item, ItemView: View>: View {
     @ViewBuilder let itemView: (Segment) -> (ItemView)
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: spacing) {
-                ForEach(items.indices, id: \.self) { index in
-                    Button {
-                        selectedIndex = index
-                    } label: {
-                        itemView(.init(item: items[index], selected: selectedIndex == index))
-                    }
+        if horizontalScrolling {
+            ScrollView(.horizontal, showsIndicators: false) {
+                content()
+            }
+        } else {
+            content()
+        }
+    }
+    
+    @ViewBuilder private func content() -> some View {
+        HStack(spacing: spacing) {
+            ForEach(items.indices, id: \.self) { index in
+                Button {
+                    selectedIndex = index
+                } label: {
+                    itemView(.init(item: items[index], selected: selectedIndex == index))
                 }
             }
-            .padding(.horizontal, innerHorizontalPadding)
         }
+        .padding(.horizontal, innerHorizontalPadding)
     }
 }
 

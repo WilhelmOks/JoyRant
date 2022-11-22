@@ -10,11 +10,22 @@ import SwiftRant
 
 @MainActor final class ProfileViewModel: ObservableObject {
     let userId: UserID
+    let tabs = CategoryTab.allCases
     
     @Published var isLoading = true
     @Published var alertMessage: AlertMessage = .none()
     @Published var profile: Profile?
     @Published var title = ""
+    
+    @Published var categoryTab: CategoryTab = .rants {
+        didSet {
+            categoryTabIndex = tabs.firstIndex(of: categoryTab) ?? 0
+            Task {
+                //await load()
+            }
+        }
+    }
+    @Published var categoryTabIndex: Int = 0
     
     let placeholderProfile: Profile = .init(
         username: "Placeholder",
@@ -93,5 +104,45 @@ import SwiftRant
         }
         
         isLoading = false
+    }
+}
+
+extension ProfileViewModel {
+    enum CategoryTab: Int, CaseIterable, Hashable, Identifiable {
+        case rants
+        case upvotes
+        case comments
+        case favorites
+        
+        var id: Int { rawValue }
+        
+        var displayName: String {
+            switch self {
+            case .rants:        return "Rants"
+            case .upvotes:      return "++'s"
+            case .comments:     return "Comments"
+            case .favorites:    return "Favorites"
+            }
+        }
+        
+        //TODO: there is more in Profile.ProfileContentTypes: "all" and "viewed". Check what to do with it.
+        static func from(category: Profile.ProfileContentTypes) -> Self {
+            switch category {
+            case .rants:    return .rants
+            case .upvoted:  return .upvotes
+            case .comments: return .comments
+            case .favorite: return .favorites
+            default:        return .rants
+            }
+        }
+        
+        var profileContentType: Profile.ProfileContentTypes {
+            switch self {
+            case .rants:        return .rants
+            case .upvotes:      return .upvoted
+            case .comments:     return .comments
+            case .favorites:    return .favorite
+            }
+        }
     }
 }

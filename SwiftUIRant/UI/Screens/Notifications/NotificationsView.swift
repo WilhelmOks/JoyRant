@@ -149,7 +149,7 @@ struct NotificationsView: View {
             .padding(.vertical, 6)
             .background {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .foregroundColor(segment.selected ? .secondaryBackground : .clear)
+                    .foregroundColor(segment.selected ? .secondaryBackground : .primaryBackground)
                     .animation(.easeOut, value: viewModel.categoryTabIndex)
             }
             .padding(.vertical, 1)

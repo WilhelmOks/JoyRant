@@ -40,6 +40,7 @@ struct SegmentedPicker<Item, ItemView: View>: View {
                 } label: {
                     itemView(.init(item: items[index], selected: selectedIndex == index))
                 }
+                //TODO: add accessibility trait for isSelected
             }
         }
         .padding(.horizontal, innerHorizontalPadding)

@@ -49,7 +49,9 @@ struct ProfileView: View {
                     .fillHorizontally(.leading)
                     .padding(.horizontal, 10)
                 
-                categoryPicker()
+                if !viewModel.categoryTabs.isEmpty {
+                    categoryPicker()
+                }
             }
             .if(!viewModel.isLoaded) {
                 $0.redacted(reason: .placeholder)
@@ -232,14 +234,17 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func categoryPicker() -> some View {
-        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs, spacing: 10) { segment in
+        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.categoryTabs, spacing: 10) { segment in
             HStack(spacing: 4) {
-                VStack(spacing: 4) {
-                    Text("231") //TODO: ...
-                        .font(baseSize: 17, weightDelta: 1)
-                    
-                    Text(segment.item.displayName)
-                        .font(baseSize: 15, weightDelta: 1)
+                let count = viewModel.categoryCounts[segment.item] ?? 0
+                if count > 0 {
+                    VStack(spacing: 4) {
+                        Text("\(count)")
+                            .font(baseSize: 17, weightDelta: 1)
+                        
+                        Text(segment.item.displayName)
+                            .font(baseSize: 15, weightDelta: 1)
+                    }
                 }
             }
             .padding(.horizontal, 8)
@@ -252,9 +257,6 @@ struct ProfileView: View {
             .padding(.vertical, 1)
         }
         .buttonStyle(.plain)
-        .onChange(of: viewModel.categoryTabIndex) { newValue in
-            viewModel.categoryTab = viewModel.tabs[newValue]
-        }
     }
 }
 

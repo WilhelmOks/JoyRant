@@ -10,22 +10,26 @@ import SwiftRant
 
 @MainActor final class ProfileViewModel: ObservableObject {
     let userId: UserID
-    let tabs = CategoryTab.allCases
     
     @Published var isLoading = true
     @Published var alertMessage: AlertMessage = .none()
     @Published var profile: Profile?
     @Published var title = ""
     
-    @Published var categoryTab: CategoryTab = .rants {
+    var categoryTabs: [CategoryTab] {
+        CategoryTab.allCases.filter { (categoryCounts[$0] ?? 0) > 0 }
+    }
+    var categoryTab: CategoryTab {
+        guard categoryTabIndex >= 0 && categoryTabIndex < categoryTabs.count else { return .rants }
+        return categoryTabs[categoryTabIndex]
+    }
+    @Published var categoryTabIndex: Int = 0 {
         didSet {
-            categoryTabIndex = tabs.firstIndex(of: categoryTab) ?? 0
             Task {
                 //await load()
             }
         }
     }
-    @Published var categoryTabIndex: Int = 0
     
     let placeholderProfile: Profile = .init(
         username: "Placeholder",
@@ -104,6 +108,16 @@ import SwiftRant
         }
         
         isLoading = false
+    }
+    
+    var categoryCounts: [CategoryTab: Int] {
+        let counts = (profile ?? placeholderProfile).content.counts
+        return [
+            .rants: counts.rants,
+            .upvotes: counts.upvoted,
+            .comments: counts.comments,
+            .favorites: counts.favorites,
+        ]
     }
 }
 

@@ -42,7 +42,7 @@ import SwiftRant
         website: "https://www.website.com",
         content: .init(
             content: .init(rants: [], upvoted: [], comments: []),
-            counts: .init(rants: 0, upvoted: 0, comments: 0, favorites: 0, collabs: 0)
+            counts: .init(rants: 100, upvoted: 1000, comments: 500, favorites: 30, collabs: 0)
         ),
         avatar: .init(backgroundColor: "999999", avatarImage: nil),
         avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),
@@ -96,7 +96,7 @@ import SwiftRant
                 website: "https://www.example.com",
                 content: .init(
                     content: .init(rants: [], upvoted: [], comments: []),
-                    counts: .init(rants: 0, upvoted: 0, comments: 0, favorites: 0, collabs: 0)
+                    counts: .init(rants: 100, upvoted: 1000, comments: 500, favorites: 30, collabs: 0)
                 ),
                 avatar: .init(backgroundColor: "999999", avatarImage: nil),
                 avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),

@@ -234,17 +234,32 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func categoryPicker() -> some View {
-        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.categoryTabs, spacing: 10) { segment in
+        ViewThatFits(in: .horizontal) {
+            categoryPicker(scrolling: false)
+            categoryPicker(scrolling: true)
+        }
+    }
+    
+    @ViewBuilder private func categoryPicker(scrolling: Bool) -> some View {
+        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.categoryTabs, spacing: 10, horizontalScrolling: scrolling) { segment in
             HStack(spacing: 4) {
                 let count = viewModel.categoryCounts[segment.item] ?? 0
-                if count > 0 {
-                    VStack(spacing: 4) {
-                        Text("\(count)")
-                            .font(baseSize: 17, weightDelta: 1)
-                        
-                        Text(segment.item.displayName)
-                            .font(baseSize: 15, weightDelta: 1)
-                    }
+                VStack(spacing: 4) {
+                    Text("\(count)")
+                        .font(baseSize: 17, weightDelta: 1)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false)
+                        .if(!scrolling) {
+                            $0.fillHorizontally()
+                        }
+                    
+                    Text(segment.item.displayName)
+                        .font(baseSize: 15, weightDelta: 1)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false)
+                        .if(!scrolling) {
+                            $0.fillHorizontally()
+                        }
                 }
             }
             .padding(.horizontal, 8)
@@ -252,6 +267,13 @@ struct ProfileView: View {
             .background {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .foregroundColor(segment.selected ? .secondaryBackground : .primaryBackground)
+                    .animation(.easeOut, value: viewModel.categoryTabIndex)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .stroke()
+                    .foregroundColor(!segment.selected ? .secondaryBackground : .clear)
+                    .padding(1)
                     .animation(.easeOut, value: viewModel.categoryTabIndex)
             }
             .padding(.vertical, 1)

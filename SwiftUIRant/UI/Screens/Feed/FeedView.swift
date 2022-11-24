@@ -91,25 +91,15 @@ struct FeedView: View {
                 ZStack {
                     ScrollViewReader { scrollProxy in
                         ScrollView {
-                            LazyVStack(alignment: .leading, spacing: 0) {
-                                ForEach(dataStore.rantsInFeed, id: \.uuid) { rant in
-                                    row(rant: rant)
-                                        .id(rant.uuid)
-                                }
-                                
-                                Button {
+                            RantList(
+                                rants: dataStore.rantsInFeed,
+                                isLoadingMore: viewModel.isLoadingMore,
+                                loadMore: {
                                     Task {
                                         await viewModel.loadMore()
                                     }
-                                } label: {
-                                    Text("load more")
-                                        .foregroundColor(.primaryAccent)
                                 }
-                                .buttonStyle(.plain)
-                                .disabled(viewModel.isLoadingMore)
-                                .fillHorizontally(.center)
-                                .padding()
-                            }
+                            )
                         }
                         .onReceive(broadcastEvent: .shouldScrollFeedToTop) { _ in
                             withAnimation {
@@ -144,16 +134,6 @@ struct FeedView: View {
             .font(baseSize: 13, weightDelta: 1)
         }
         .buttonStyle(.borderedProminent)
-    }
-    
-    @ViewBuilder func row(rant: RantInFeed) -> some View {
-        VStack(spacing: 0) {
-            FeedRantView(viewModel: .init(rant: rant))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(10)
-            
-            Divider()
-        }
     }
     
     @State private var sortPickerId = UUID()

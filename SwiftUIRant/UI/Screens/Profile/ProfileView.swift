@@ -29,6 +29,11 @@ struct ProfileView: View {
                     Text(viewModel.title).fontWeight(.semibold)
                 }
             }
+            /*
+            #if os(iOS)
+            .toolbarBackground(.hidden, for: .navigationBar)
+            #endif
+            */
     }
     
     @ViewBuilder private func content() -> some View {
@@ -44,6 +49,10 @@ struct ProfileView: View {
                         joinedOnDate()
                             .padding(10)
                     }
+                    /*.background {
+                        userColor()
+                            .padding(.top, -1000)
+                    }*/
                 
                 infoArea()
                     .fillHorizontally(.leading)
@@ -51,6 +60,17 @@ struct ProfileView: View {
                 
                 if !viewModel.categoryTabs.isEmpty {
                     categoryPicker()
+                    
+                    switch viewModel.categoryTab {
+                    case .rants:
+                        RantList(
+                            rants: profile.content.content.rants,
+                            isLoadingMore: false,
+                            loadMore: nil
+                        )
+                    default:
+                        EmptyView()
+                    }
                 }
             }
             .if(!viewModel.isLoaded) {

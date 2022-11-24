@@ -38,6 +38,7 @@ import SwiftRant
     
     private func applyChangedData(changedRant: Rant) {
         rant = changedRant
+        //TODO: send BroadcastEvent to change rant in all lists
         DataStore.shared.update(rantInFeed: rant)
     }
     

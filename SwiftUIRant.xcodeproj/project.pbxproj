@@ -72,6 +72,7 @@
 		ED97D64128F5969600CFC418 /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64028F5969600CFC418 /* NotificationRowView.swift */; };
 		ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64228F5B1E500CFC418 /* Disambuguation.swift */; };
 		ED97D64528F8634500CFC418 /* Notification+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64428F8634500CFC418 /* Notification+Map.swift */; };
+		EDCA4564292FD7D400C12A6D /* RantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4563292FD7D400C12A6D /* RantList.swift */; };
 		EDE2288C28CE15040025EDB1 /* FeedRantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288B28CE15040025EDB1 /* FeedRantViewModel.swift */; };
 		EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */; };
 		EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */; };
@@ -144,6 +145,7 @@
 		ED97D64028F5969600CFC418 /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
 		ED97D64228F5B1E500CFC418 /* Disambuguation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disambuguation.swift; sourceTree = "<group>"; };
 		ED97D64428F8634500CFC418 /* Notification+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Map.swift"; sourceTree = "<group>"; };
+		EDCA4563292FD7D400C12A6D /* RantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantList.swift; sourceTree = "<group>"; };
 		EDE2288B28CE15040025EDB1 /* FeedRantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRantViewModel.swift; sourceTree = "<group>"; };
 		EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsView.swift; sourceTree = "<group>"; };
 		EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				ED398CA428FC57250012142B /* LoadingButton.swift */,
 				ED398CA628FC59650012142B /* RefreshButton.swift */,
 				ED74D50A2921117800088CE6 /* SegmentedPicker.swift */,
+				EDCA4563292FD7D400C12A6D /* RantList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				ED97D62528E86F5200CFC418 /* CreationTimeView.swift in Sources */,
 				ED97D63428F1D4C700CFC418 /* SettingsView.swift in Sources */,
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
+				EDCA4564292FD7D400C12A6D /* RantList.swift in Sources */,
 				ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */,
 				ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */,
 				ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */,

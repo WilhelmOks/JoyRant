@@ -39,11 +39,6 @@ struct ProfileView: View {
             } perform: { (rant: Rant) in
                 viewModel.profile?.updateRant(rant)
             }
-            /*
-            #if os(iOS)
-            .toolbarBackground(.hidden, for: .navigationBar)
-            #endif
-            */
     }
     
     @ViewBuilder private func content() -> some View {
@@ -51,18 +46,14 @@ struct ProfileView: View {
             VStack(alignment: .leading, spacing: 12) {
                 header()
                     .frame(height: 220)
-                    .overlay(alignment: .topLeading) {
+                    .overlay(alignment: .bottomLeading) {
                         score()
                             .padding(10)
                     }
-                    .overlay(alignment: .topTrailing) {
+                    .overlay(alignment: .bottomTrailing) {
                         joinedOnDate()
                             .padding(10)
                     }
-                    /*.background {
-                        userColor()
-                            .padding(.top, -1000)
-                    }*/
                 
                 infoArea()
                     .fillHorizontally(.leading)

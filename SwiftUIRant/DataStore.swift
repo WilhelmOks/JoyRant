@@ -47,9 +47,9 @@ import SwiftRant
     }
 
     func update(rantInFeed rant: Rant) {
-        if let index = rantsInFeed.firstIndex(where: { $0.id == rant.id }) {
-            rantsInFeed[index] = rantsInFeed[index].withData(fromRant: rant)
-            BroadcastEvent.shouldUpdateRantInFeed(rantId: rant.id).send()
+        let updated = rantsInFeed.updateRant(rant)
+        if updated {
+            //BroadcastEvent.shouldUpdateRantInFeed(rantId: rant.id).send() //TODO: remove everywhere if not needed anymore
         }
     }
     

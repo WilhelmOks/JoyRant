@@ -29,6 +29,14 @@ struct ProfileView: View {
                     Text(viewModel.title).fontWeight(.semibold)
                 }
             }
+            .onReceive { event in
+                switch event {
+                case .shouldUpdateRantInLists(let rant): return rant
+                default: return nil
+                }
+            } perform: { (rant: Rant) in
+                viewModel.profile?.updateRant(rant)
+            }
             /*
             #if os(iOS)
             .toolbarBackground(.hidden, for: .navigationBar)

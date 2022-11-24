@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import SwiftRant
 
 enum BroadcastEvent: Equatable {
     case shouldUpdateRantInFeed(rantId: Int)
@@ -17,6 +18,7 @@ enum BroadcastEvent: Equatable {
     case shouldScrollToComment
     case didSwitchToMainTab(_ tab: InternalView.Tab)
     case didReselectMainTab(_ tab: InternalView.Tab)
+    case shouldUpdateRantInLists(_ rant: Rant)
 }
 
 extension BroadcastEvent {

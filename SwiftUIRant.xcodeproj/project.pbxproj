@@ -73,6 +73,7 @@
 		ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64228F5B1E500CFC418 /* Disambuguation.swift */; };
 		ED97D64528F8634500CFC418 /* Notification+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64428F8634500CFC418 /* Notification+Map.swift */; };
 		EDCA4564292FD7D400C12A6D /* RantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4563292FD7D400C12A6D /* RantList.swift */; };
+		EDCEF96C292FE7940007C9BD /* RantListUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCEF96B292FE7940007C9BD /* RantListUpdating.swift */; };
 		EDE2288C28CE15040025EDB1 /* FeedRantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288B28CE15040025EDB1 /* FeedRantViewModel.swift */; };
 		EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */; };
 		EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */; };
@@ -146,6 +147,7 @@
 		ED97D64228F5B1E500CFC418 /* Disambuguation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disambuguation.swift; sourceTree = "<group>"; };
 		ED97D64428F8634500CFC418 /* Notification+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Map.swift"; sourceTree = "<group>"; };
 		EDCA4563292FD7D400C12A6D /* RantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantList.swift; sourceTree = "<group>"; };
+		EDCEF96B292FE7940007C9BD /* RantListUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantListUpdating.swift; sourceTree = "<group>"; };
 		EDE2288B28CE15040025EDB1 /* FeedRantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRantViewModel.swift; sourceTree = "<group>"; };
 		EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsView.swift; sourceTree = "<group>"; };
 		EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				ED33C23E2904178B00A59A11 /* SwiftUIRantError.swift */,
 				ED74D50C292542F700088CE6 /* ColorToHex.swift */,
 				ED74D5152929291000088CE6 /* URLHandler.swift */,
+				EDCEF96B292FE7940007C9BD /* RantListUpdating.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				ED97D63728F3035C00CFC418 /* NotificationsView.swift in Sources */,
 				ED0FB7EB28FF350500E5163D /* WritePostViewModel.swift in Sources */,
 				ED59CECC28BD05E80007B698 /* FeedViewModel.swift in Sources */,
+				EDCEF96C292FE7940007C9BD /* RantListUpdating.swift in Sources */,
 				ED97D63928F44EA800CFC418 /* NotificationsViewModel.swift in Sources */,
 				ED33C23929040E3300A59A11 /* Models+TimeToModify.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,

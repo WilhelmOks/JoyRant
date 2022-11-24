@@ -83,6 +83,14 @@ struct FeedView: View {
                     }
                 }
             }
+            .onReceive { event in
+                switch event {
+                case .shouldUpdateRantInLists(let rant): return rant
+                default: return nil
+                }
+            } perform: { rant in
+                DataStore.shared.update(rantInFeed: rant)
+            }
     }
     
     @ViewBuilder func content() -> some View {

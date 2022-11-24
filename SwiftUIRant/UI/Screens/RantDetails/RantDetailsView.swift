@@ -13,6 +13,7 @@ struct RantDetailsView: View {
     @Environment(\.dismiss) private var dismiss
 
     let sourceTab: InternalView.Tab
+    
     @StateObject var viewModel: RantDetailsViewModel
     
     @State private var isMoreMenuPresented = false

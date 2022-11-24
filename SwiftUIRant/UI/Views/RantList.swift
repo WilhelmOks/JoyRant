@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftRant
 
 struct RantList: View {
+    let sourceTab: InternalView.Tab
     let rants: [RantInFeed]
     var isLoadingMore = false
     var loadMore: (() -> ())?
@@ -35,9 +36,12 @@ struct RantList: View {
     
     @MainActor @ViewBuilder func row(rant: RantInFeed) -> some View {
         VStack(spacing: 0) {
-            FeedRantView(viewModel: .init(rant: rant))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(10)
+            FeedRantView(
+                sourceTab: sourceTab,
+                viewModel: .init(rant: rant)
+            )
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(10)
             
             Divider()
         }
@@ -46,6 +50,6 @@ struct RantList: View {
 
 struct RantList_Previews: PreviewProvider {
     static var previews: some View {
-        RantList(rants: [])
+        RantList(sourceTab: .feed, rants: [])
     }
 }

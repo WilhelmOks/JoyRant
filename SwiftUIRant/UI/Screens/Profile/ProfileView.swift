@@ -10,6 +10,8 @@ import SwiftRant
 import CachedAsyncImage
 
 struct ProfileView: View {
+    let sourceTab: InternalView.Tab
+    
     @StateObject var viewModel: ProfileViewModel
     
     @Environment(\.openURL) private var openURL
@@ -72,6 +74,7 @@ struct ProfileView: View {
                     switch viewModel.categoryTab {
                     case .rants:
                         RantList(
+                            sourceTab: sourceTab,
                             rants: profile.content.content.rants,
                             isLoadingMore: false,
                             loadMore: nil
@@ -313,7 +316,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProfileView(viewModel: .init(userId: 0, mocked: true))
+            ProfileView(sourceTab: .feed, viewModel: .init(userId: 0, mocked: true))
                 .navigationBarTitleDisplayModeInline()
         }
     }

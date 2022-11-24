@@ -70,7 +70,12 @@ struct FeedView: View {
                         )
                     )
                 case .userProfile(let userId):
-                    ProfileView(viewModel: .init(userId: userId))
+                    ProfileView(
+                        sourceTab: .feed,
+                        viewModel: .init(
+                            userId: userId
+                        )
+                    )
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in
@@ -100,6 +105,7 @@ struct FeedView: View {
                     ScrollViewReader { scrollProxy in
                         ScrollView {
                             RantList(
+                                sourceTab: .feed,
                                 rants: dataStore.rantsInFeed,
                                 isLoadingMore: viewModel.isLoadingMore,
                                 loadMore: {

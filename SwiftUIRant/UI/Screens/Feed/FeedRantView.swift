@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftRant
 
 struct FeedRantView: View {
+    let sourceTab: InternalView.Tab
+    
     @StateObject var viewModel: FeedRantViewModel
     
     var body: some View {
@@ -31,7 +33,7 @@ struct FeedRantView: View {
             }
         }
         .onTapGesture {
-            AppState.shared.navigate(from: .feed, to: .rantDetails(rantId: viewModel.rant.id))
+            AppState.shared.navigate(from: sourceTab, to: .rantDetails(rantId: viewModel.rant.id))
         }
     }
     
@@ -112,7 +114,7 @@ struct FeedRantView: View {
 
 struct FeedRantView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedRantView(viewModel: .init(rant: .mocked()))
+        FeedRantView(sourceTab: .feed, viewModel: .init(rant: .mocked()))
             .previewLayout(.sizeThatFits)
             .eachColorScheme()
             .padding()

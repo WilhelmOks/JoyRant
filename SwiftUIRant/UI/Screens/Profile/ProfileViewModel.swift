@@ -41,7 +41,7 @@ import SwiftRant
         github: "GithubName",
         website: "https://www.website.com",
         content: .init(
-            content: .init(rants: [], upvoted: [], comments: []),
+            content: .init(rants: [.mocked2()], upvoted: [], comments: []),
             counts: .init(rants: 100, upvoted: 1000, comments: 500, favorites: 30, collabs: 0)
         ),
         avatar: .init(backgroundColor: "999999", avatarImage: nil),
@@ -95,7 +95,7 @@ import SwiftRant
                 github: "BlobberSponge",
                 website: "https://www.example.com",
                 content: .init(
-                    content: .init(rants: [], upvoted: [], comments: []),
+                    content: .init(rants: [.mocked2()], upvoted: [], comments: []),
                     counts: .init(rants: 100, upvoted: 1000, comments: 500, favorites: 30, collabs: 0)
                 ),
                 avatar: .init(backgroundColor: "999999", avatarImage: nil),

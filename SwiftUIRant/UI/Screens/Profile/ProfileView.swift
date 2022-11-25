@@ -263,10 +263,10 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func categoryPicker(scrolling: Bool) -> some View {
-        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.categoryTabs, spacing: 10, horizontalScrolling: scrolling) { segment in
+        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.categoryTabs, spacing: 8, horizontalScrolling: scrolling) { segment in
             HStack(spacing: 4) {
                 let count = viewModel.categoryCounts[segment.item] ?? 0
-                VStack(spacing: 4) {
+                VStack(spacing: 2) {
                     Text("\(count)")
                         .font(baseSize: 17, weightDelta: 1)
                         .lineLimit(1)
@@ -283,19 +283,21 @@ struct ProfileView: View {
                             $0.fillHorizontally()
                         }
                 }
+                .foregroundColor(segment.selected ? .primaryForeground : .primaryForeground)
+                .padding(.bottom, 3)
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
             .background {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .foregroundColor(segment.selected ? .secondaryBackground : .primaryBackground)
+                    .foregroundColor(/*segment.selected ? .primaryAccent.opacity(0.3) : */.primaryBackground)
                     .animation(.easeOut, value: viewModel.categoryTabIndex)
             }
-            .overlay {
+            .overlay(alignment: .bottom) {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke()
-                    .foregroundColor(!segment.selected ? .secondaryBackground : .clear)
-                    .padding(1)
+                    //.stroke()
+                    .foregroundColor(segment.selected ? .primaryAccent : .secondaryBackground)
+                    .frame(height: 3)
                     .animation(.easeOut, value: viewModel.categoryTabIndex)
             }
             .padding(.vertical, 1)

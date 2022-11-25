@@ -6,18 +6,17 @@
 //
 
 import Foundation
-import SwiftRant
 
 @MainActor final class ProfileViewModel: ObservableObject {
     let userId: UserID
     
     @Published var isLoading = true
     @Published var alertMessage: AlertMessage = .none()
-    @Published var profile: Profile?
+    @Published var profile: UserProfile?
     @Published var title = ""
     
     var categoryTabs: [CategoryTab] {
-        CategoryTab.allCases.filter { (categoryCounts[$0] ?? 0) > 0 }
+        CategoryTab.allCases.filter { categoryCount(tab: $0) > 0 }
     }
     var categoryTab: CategoryTab {
         guard categoryTabIndex >= 0 && categoryTabIndex < categoryTabs.count else { return .rants }
@@ -31,22 +30,26 @@ import SwiftRant
         }
     }
     
-    let placeholderProfile: Profile = .init(
+    let placeholderProfile: UserProfile = .init(
         username: "Placeholder",
         score: 100,
+        createdTime: 0,
         about: "This is a placeholder text that tells something about the user. It should be long enough to span a few lines.",
         location: "Placeholder Location",
-        createdTime: 0,
         skills: "first skill\nsecond\nand third scill",
         github: "GithubName",
         website: "https://www.website.com",
-        content: .init(
-            content: .init(rants: [.mocked2()], upvoted: [], comments: []),
-            counts: .init(rants: 100, upvoted: 1000, comments: 500, favorites: 30, collabs: 0)
-        ),
         avatar: .init(backgroundColor: "999999", avatarImage: nil),
         avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),
-        isUserDPP: nil
+        isSupporter: false,
+        content: .init(
+            counts: [.rants: 100, .upvoted: 1000, .comments: 500, .favorites: 30, .collabs: 0],
+            rants: [.mocked2()],
+            upvoted: [],
+            comments: [],
+            favorites: [],
+            viewed: []
+        )
     )
     
     var isLoaded: Bool { profile != nil }
@@ -71,7 +74,7 @@ import SwiftRant
         isLoading = true
         
         do {
-            profile = try await Networking.shared.userProfile(userId: userId)
+            profile = .init(profile: try await Networking.shared.userProfile(userId: userId))
             title = profile?.username ?? ""
         } catch {
             alertMessage = .presentedError(error)
@@ -88,19 +91,23 @@ import SwiftRant
             profile = .init(
                 username: "Spongeblob",
                 score: 100,
+                createdTime: 0,
                 about: "This is a mocked text that tells something about the user. It should be long enough to span a few lines.",
                 location: "Bikini Bottom",
-                createdTime: 0,
                 skills: "first skill\nsecond\nand third scill",
                 github: "BlobberSponge",
                 website: "https://www.example.com",
-                content: .init(
-                    content: .init(rants: [.mocked2()], upvoted: [], comments: []),
-                    counts: .init(rants: 100, upvoted: 1000, comments: 500, favorites: 30, collabs: 0)
-                ),
                 avatar: .init(backgroundColor: "999999", avatarImage: nil),
                 avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),
-                isUserDPP: nil
+                isSupporter: false,
+                content: .init(
+                    counts: [.rants: 100, .upvoted: 1000, .comments: 500, .favorites: 30, .collabs: 0],
+                    rants: [.mocked2()],
+                    upvoted: [],
+                    comments: [],
+                    favorites: [],
+                    viewed: []
+                )
             )
             title = profile?.username ?? ""
         } catch {
@@ -110,14 +117,8 @@ import SwiftRant
         isLoading = false
     }
     
-    var categoryCounts: [CategoryTab: Int] {
-        let counts = (profile ?? placeholderProfile).content.counts
-        return [
-            .rants: counts.rants,
-            .upvotes: counts.upvoted,
-            .comments: counts.comments,
-            .favorites: counts.favorites,
-        ]
+    func categoryCount(tab: CategoryTab) -> Int {
+        (profile ?? placeholderProfile).content.counts[tab.contentType] ?? 0
     }
 }
 
@@ -139,23 +140,22 @@ extension ProfileViewModel {
             }
         }
         
-        //TODO: there is more in Profile.ProfileContentTypes: "all" and "viewed". Check what to do with it.
-        static func from(category: Profile.ProfileContentTypes) -> Self {
-            switch category {
-            case .rants:    return .rants
-            case .upvoted:  return .upvotes
-            case .comments: return .comments
-            case .favorite: return .favorites
-            default:        return .rants
+        static func from(contentType: UserProfile.ContentType) -> Self {
+            switch contentType {
+            case .rants:        return .rants
+            case .upvoted:      return .upvotes
+            case .comments:     return .comments
+            case .favorites:    return .favorites
+            default:            return .rants
             }
         }
         
-        var profileContentType: Profile.ProfileContentTypes {
+        var contentType: UserProfile.ContentType {
             switch self {
             case .rants:        return .rants
             case .upvotes:      return .upvoted
             case .comments:     return .comments
-            case .favorites:    return .favorite
+            case .favorites:    return .favorites
             }
         }
     }

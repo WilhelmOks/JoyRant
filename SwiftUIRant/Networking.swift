@@ -146,9 +146,7 @@ struct Networking {
     
     // profile
     
-    func userProfile(userId: UserID) async throws -> Profile {
-        //TODO: other userContentType
-        //TODO: other skip value
-        try await swiftRant.getProfileFromID(userId, token: try token(), userContentType: .all, skip: 0).get()
+    func userProfile(userId: UserID, contentType: Profile.ProfileContentTypes = .all, skip: Int = 0) async throws -> Profile {
+        try await swiftRant.getProfileFromID(userId, token: try token(), userContentType: contentType, skip: skip).get()
     }
 }

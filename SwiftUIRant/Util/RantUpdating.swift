@@ -18,6 +18,7 @@ extension Array where Element == RantInFeed {
     }
 }
 
+/*
 extension Profile: KeyPathModifiedCopyable {
     mutating func updateRant(_ rant: Rant) {
         var innerContent = content.content
@@ -28,3 +29,4 @@ extension Profile: KeyPathModifiedCopyable {
         )
     }
 }
+*/

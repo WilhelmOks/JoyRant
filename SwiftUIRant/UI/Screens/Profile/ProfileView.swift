@@ -18,7 +18,7 @@ struct ProfileView: View {
     
     private let emptyBgColor = Color.gray.opacity(0.3)
         
-    var profile: Profile {
+    var profile: UserProfile {
         viewModel.profile ?? viewModel.placeholderProfile
     }
     
@@ -40,7 +40,7 @@ struct ProfileView: View {
                 default: return nil
                 }
             } perform: { (rant: Rant) in
-                viewModel.profile?.updateRant(rant)
+                viewModel.profile?.content.rants.updateRant(rant)
             }
     }
     
@@ -69,7 +69,7 @@ struct ProfileView: View {
                     case .rants:
                         RantList(
                             sourceTab: sourceTab,
-                            rants: profile.content.content.rants,
+                            rants: profile.content.rants,
                             isLoadingMore: false,
                             loadMore: nil
                         )
@@ -87,31 +87,31 @@ struct ProfileView: View {
     
     @ViewBuilder private func infoArea() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            if !profile.about.isEmpty {
+            if let about = profile.about {
                 infoRow {
                     infoRowIcon(systemName: "person")
                 } content: {
-                    infoRowText(text: profile.about)
+                    infoRowText(text: about)
                 }
             }
 
-            if !profile.skills.isEmpty {
+            if let skills = profile.skills {
                 infoRow {
                     infoRowIcon(systemName: "curlybraces")
                 } content: {
-                    infoRowText(text: profile.skills)
+                    infoRowText(text: skills)
                 }
             }
             
-            if !profile.location.isEmpty {
+            if let location = profile.location {
                 infoRow {
                     infoRowIcon(systemName: "mappin.and.ellipse")
                 } content: {
-                    infoRowText(text: profile.location) //TODO: open as link
+                    infoRowText(text: location)
                 }
             }
             
-            if let website = profile.website, !website.isEmpty {
+            if let website = profile.website {
                 infoRow {
                     infoRowIcon(systemName: "globe")
                 } content: {
@@ -123,13 +123,13 @@ struct ProfileView: View {
                 }
             }
             
-            if !profile.github.isEmpty {
+            if let github = profile.github {
                 infoRow {
                     infoRowIcon(name: "github")
                 } content: {
-                    infoRowText(text: profile.github)
+                    infoRowText(text: github)
                 } action: {
-                    if let url = URL(string: "https://github.com/\(profile.github)") {
+                    if let url = URL(string: "https://github.com/\(github)") {
                         openURL(url)
                     }
                 }
@@ -197,7 +197,7 @@ struct ProfileView: View {
     
     @ViewBuilder private func score() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            if profile.isUserDPP == 1 {
+            if profile.isSupporter {
                 Text("Supporter")
                     .font(baseSize: 13, weightDelta: 2)
                     .foregroundColor(.primaryForeground)
@@ -268,7 +268,7 @@ struct ProfileView: View {
     @ViewBuilder private func categoryPicker(scrolling: Bool) -> some View {
         SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.categoryTabs, spacing: 8, horizontalScrolling: scrolling) { segment in
             HStack(spacing: 4) {
-                let count = viewModel.categoryCounts[segment.item] ?? 0
+                let count = viewModel.categoryCount(tab: segment.item)
                 VStack(spacing: 2) {
                     Text("\(count)")
                         .font(baseSize: 17, weightDelta: 1)

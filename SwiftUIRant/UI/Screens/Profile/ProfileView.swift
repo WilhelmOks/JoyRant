@@ -289,16 +289,14 @@ struct ProfileView: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
             .background {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .foregroundColor(/*segment.selected ? .primaryAccent.opacity(0.3) : */.primaryBackground)
-                    .animation(.easeOut, value: viewModel.categoryTabIndex)
+                // this is needed so that the View is tappable in empty regions
+                Color.primaryBackground
             }
             .overlay(alignment: .bottom) {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    //.stroke()
                     .foregroundColor(segment.selected ? .primaryAccent : .secondaryBackground)
                     .frame(height: 3)
-                    .animation(.easeOut, value: viewModel.categoryTabIndex)
+                    .animation(.easeInOut.speed(2), value: viewModel.categoryTabIndex)
             }
             .padding(.vertical, 1)
         }

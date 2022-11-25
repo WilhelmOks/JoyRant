@@ -24,13 +24,16 @@ struct ProfileView: View {
     
     var body: some View {
         content()
+            .background(Color.primaryBackground)
             .alert($viewModel.alertMessage)
             .navigationTitle(viewModel.title)
+            #if os(iOS)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(viewModel.title).fontWeight(.semibold)
                 }
             }
+            #endif
             .onReceive { event in
                 switch event {
                 case .shouldUpdateRantInLists(let rant): return rant
@@ -159,7 +162,7 @@ struct ProfileView: View {
     @ViewBuilder private func infoRowLabel<Icon: View, Content: View>(@ViewBuilder icon: () -> Icon, @ViewBuilder content: () -> Content) -> some View {
         HStack(alignment: .center, spacing: 10) {
             icon()
-                .frame(width: 24, height: 24)
+                .frame(width: 18, height: 18)
                 .foregroundColor(.primaryForeground)
                 .alignmentGuide(VerticalAlignment.center) { dim in
                     dim[VerticalAlignment.center] + 5

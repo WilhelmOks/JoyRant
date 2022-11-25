@@ -118,6 +118,7 @@ struct RantView: View {
                         isSupporter: rant.isUserSupporter
                     )
                 }
+                .buttonStyle(.plain)
             }
             
             Spacer()

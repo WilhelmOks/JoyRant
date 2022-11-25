@@ -45,6 +45,7 @@ struct UserPanel: View {
                 }
             }
         }
+        .background(Color.primaryBackground)
     }
     
     private func scoreText() -> String {

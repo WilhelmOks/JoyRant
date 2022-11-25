@@ -75,7 +75,7 @@ struct InternalView: View {
         #elseif os(macOS)
         switch tab {
         case .feed:
-            NavigationStack(path: $appState.navigationPath) {
+            NavigationStack(path: $appState.feedNavigationPath) {
                 tabViewWithTabs(tabBinding)
             }
         case .notifications:

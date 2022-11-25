@@ -247,11 +247,11 @@
 				ED29858F28BCD9AF0065D0E3 /* InternalView.swift */,
 				ED2C9B7928B67BF4008BF314 /* Login */,
 				ED59CEC828BD04A80007B698 /* Feed */,
+				EDE2288F28D5E5710025EDB1 /* RantDetails */,
+				ED74D5102928FD2300088CE6 /* Profile */,
+				ED0FB7E728FF348400E5163D /* WritePost */,
 				ED97D63528F302D500CFC418 /* Notifications */,
 				ED97D63228F1D4AD00CFC418 /* Settings */,
-				EDE2288F28D5E5710025EDB1 /* RantDetails */,
-				ED0FB7E728FF348400E5163D /* WritePost */,
-				ED74D5102928FD2300088CE6 /* Profile */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

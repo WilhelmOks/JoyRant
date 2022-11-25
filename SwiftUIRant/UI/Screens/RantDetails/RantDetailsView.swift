@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftRant
 import UniformTypeIdentifiers
 
+//TODO: fix bug on mac:
+// mentions (@user) are blue and open a new window instead of navigating to the profile.
+
 struct RantDetailsView: View {
     @Environment(\.dismiss) private var dismiss
 

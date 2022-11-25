@@ -11,6 +11,7 @@ import Foundation
     let userId: UserID
     
     @Published var isLoading = true
+    @Published var isLoadingMore = false
     @Published var alertMessage: AlertMessage = .none()
     @Published var profile: UserProfile?
     @Published var title = ""
@@ -22,13 +23,7 @@ import Foundation
         guard categoryTabIndex >= 0 && categoryTabIndex < categoryTabs.count else { return .rants }
         return categoryTabs[categoryTabIndex]
     }
-    @Published var categoryTabIndex: Int = 0 {
-        didSet {
-            Task {
-                //await load()
-            }
-        }
-    }
+    @Published var categoryTabIndex: Int = 0
     
     let placeholderProfile: UserProfile = .init(
         username: "Placeholder",
@@ -65,6 +60,16 @@ import Foundation
         }
     }
     
+    private func currentLoadedContentCount(tab: CategoryTab) -> Int {
+        guard let content = profile?.content else { return 0 }
+        switch tab {
+        case .rants:        return content.rants.count
+        case .upvotes:      return content.upvoted.count
+        case .comments:     return content.comments.count
+        case .favorites:    return content.favorites.count
+        }
+    }
+    
     func load() async {
         guard !mocked else {
             await loadMocked()
@@ -81,6 +86,24 @@ import Foundation
         }
         
         isLoading = false
+    }
+    
+    func loadMore() async {
+        isLoadingMore = true
+        
+        do {
+            guard let contentType = categoryTab.contentType.profileContentType else {
+                throw SwiftUIRantError.unknownProfileContentType
+            }
+            let skip = currentLoadedContentCount(tab: categoryTab)
+            let moreProfile = try await Networking.shared.userProfile(userId: userId, contentType: contentType, skip: skip)
+            profile?.append(profile: moreProfile)
+            title = profile?.username ?? ""
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+        
+        isLoadingMore = false
     }
     
     private func loadMocked() async {

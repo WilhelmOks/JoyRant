@@ -27,7 +27,7 @@ extension UserProfile {
     init(profile: Profile) {
         username = profile.username
         score = profile.score
-        createdTime = profile.score
+        createdTime = profile.createdTime
         about = profile.about.emptyToNil
         location = profile.location.emptyToNil
         skills = profile.skills.emptyToNil
@@ -55,7 +55,7 @@ extension UserProfile {
     mutating func append(profile: Profile) {
         username = profile.username
         score = profile.score
-        createdTime = profile.score
+        createdTime = profile.createdTime
         about = profile.about.emptyToNil
         location = profile.location.emptyToNil
         skills = profile.skills.emptyToNil

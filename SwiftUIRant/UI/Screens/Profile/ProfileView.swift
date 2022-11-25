@@ -70,8 +70,12 @@ struct ProfileView: View {
                         RantList(
                             sourceTab: sourceTab,
                             rants: profile.content.rants,
-                            isLoadingMore: false,
-                            loadMore: nil
+                            isLoadingMore: viewModel.isLoadingMore,
+                            loadMore: {
+                                Task {
+                                    await viewModel.loadMore()
+                                }
+                            }
                         )
                     default:
                         EmptyView()

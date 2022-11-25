@@ -97,6 +97,14 @@ struct RantDetailsView: View {
             .onReceive(viewModel.dismiss) { _ in
                 dismiss()
             }
+            .onReceive { event in
+                switch event {
+                case .shouldUpdateCommentInLists(let comment): return comment
+                default: return nil
+                }
+            } perform: { (comment: Comment) in
+                viewModel.comments.updateComment(comment)
+            }
             .onOpenURL { url in
                 AppState.shared.navigate(from: sourceTab, to: url)
             }

@@ -19,6 +19,7 @@ enum BroadcastEvent: Equatable {
     case didSwitchToMainTab(_ tab: InternalView.Tab)
     case didReselectMainTab(_ tab: InternalView.Tab)
     case shouldUpdateRantInLists(_ rant: Rant)
+    case shouldUpdateCommentInLists(_ comment: Comment)
 }
 
 extension BroadcastEvent {

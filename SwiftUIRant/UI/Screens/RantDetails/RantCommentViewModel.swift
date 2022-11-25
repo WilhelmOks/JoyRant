@@ -37,5 +37,6 @@ import SwiftRant
     
     private func applyChangedData(changedComment: Comment) {
         comment = changedComment
+        BroadcastEvent.shouldUpdateCommentInLists(comment).send()
     }
 }

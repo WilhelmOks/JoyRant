@@ -1,5 +1,5 @@
 //
-//  RantListUpdating.swift
+//  RantUpdating.swift
 //  SwiftUIRant
 //
 //  Created by Wilhelm Oks on 24.11.22.

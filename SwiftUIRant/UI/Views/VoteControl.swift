@@ -50,7 +50,7 @@ struct VoteControl: View {
             .font(.caption)
             .fontWeight(.bold)
             .foregroundColor(.primaryForeground)
-            .padding(3)
+            .padding(4)
             .padding(.bottom, 1)
             .background {
                 Circle()

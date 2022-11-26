@@ -41,6 +41,9 @@ struct ProfileView: View {
                 }
             } perform: { (rant: Rant) in
                 viewModel.profile?.content.rants.updateRant(rant)
+                viewModel.profile?.content.upvoted.updateRant(rant)
+                viewModel.profile?.content.favorites.updateRant(rant)
+                viewModel.profile?.content.viewed.updateRant(rant)
             }
     }
     
@@ -77,8 +80,30 @@ struct ProfileView: View {
                                 }
                             }
                         )
-                    default:
-                        EmptyView()
+                    case .upvotes:
+                        RantList(
+                            sourceTab: sourceTab,
+                            rants: profile.content.upvoted,
+                            isLoadingMore: viewModel.isLoadingMore,
+                            loadMore: {
+                                Task {
+                                    await viewModel.loadMore()
+                                }
+                            }
+                        )
+                    case .comments:
+                        EmptyView() //TODO: ...
+                    case .favorites:
+                        RantList(
+                            sourceTab: sourceTab,
+                            rants: profile.content.favorites,
+                            isLoadingMore: viewModel.isLoadingMore,
+                            loadMore: {
+                                Task {
+                                    await viewModel.loadMore()
+                                }
+                            }
+                        )
                     }
                 }
             }

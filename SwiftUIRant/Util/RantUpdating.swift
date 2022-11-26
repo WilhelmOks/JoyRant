@@ -17,16 +17,3 @@ extension Array where Element == RantInFeed {
         return false
     }
 }
-
-/*
-extension Profile: KeyPathModifiedCopyable {
-    mutating func updateRant(_ rant: Rant) {
-        var innerContent = content.content
-        innerContent.rants.updateRant(rant)
-        content = .init(
-            content: innerContent,
-            counts: content.counts
-        )
-    }
-}
-*/

@@ -45,6 +45,13 @@ struct ProfileView: View {
                 viewModel.profile?.content.favorites.updateRant(rant)
                 viewModel.profile?.content.viewed.updateRant(rant)
             }
+            .onChange(of: viewModel.categoryTabIndex) { newValue in
+                if let tab = viewModel.categoryTab(atIndex: newValue) {
+                    Task {
+                        await viewModel.loadFirstDataSetIfEmpty(tab: tab)
+                    }
+                }
+            }
     }
     
     @ViewBuilder private func content() -> some View {
@@ -68,17 +75,23 @@ struct ProfileView: View {
                 if !viewModel.categoryTabs.isEmpty {
                     categoryPicker()
                     
-                    switch viewModel.categoryTab {
-                    case .rants:
-                        rantList(profile.content.rants)
-                    case .upvotes:
-                        rantList(profile.content.upvoted)
-                    case .comments:
-                        EmptyView() //TODO: ...
-                    case .viewed:
-                        rantList(profile.content.viewed)
-                    case .favorites:
-                        rantList(profile.content.favorites)
+                    if viewModel.isLoadingFirst {
+                        ProgressView()
+                            .fillHorizontally()
+                            .padding(.vertical, 10)
+                    } else {
+                        switch viewModel.categoryTab {
+                        case .rants:
+                            rantList(profile.content.rants)
+                        case .upvotes:
+                            rantList(profile.content.upvoted)
+                        case .comments:
+                            EmptyView() //TODO: ...
+                        case .viewed:
+                            rantList(profile.content.viewed)
+                        case .favorites:
+                            rantList(profile.content.favorites)
+                        }
                     }
                 }
             }
@@ -96,7 +109,7 @@ struct ProfileView: View {
             isLoadingMore: viewModel.isLoadingMore,
             loadMore: {
                 Task {
-                    await viewModel.loadMore()
+                    await viewModel.loadMore(tab: viewModel.categoryTab)
                 }
             }
         )
@@ -295,6 +308,7 @@ struct ProfileView: View {
                             $0.fillHorizontally()
                         }
                         .if(segment.item == .viewed) {
+                            // show clock icon instead of the number 0 but occupy the same space to align with the rest.
                             $0.opacity(0).accessibility(hidden: true)
                                 .overlay {
                                     Image(systemName: "clock")
@@ -323,7 +337,6 @@ struct ProfileView: View {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .foregroundColor(segment.selected ? .primaryAccent : .secondaryBackground)
                     .frame(height: 3)
-                    .animation(.easeInOut.speed(2), value: viewModel.categoryTabIndex)
             }
             .padding(.vertical, 1)
         }

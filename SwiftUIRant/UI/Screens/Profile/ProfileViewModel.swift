@@ -12,6 +12,7 @@ import Foundation
     
     @Published var isLoading = true
     @Published var isLoadingMore = false
+    @Published var isLoadingFirst = false
     @Published var alertMessage: AlertMessage = .none()
     @Published var profile: UserProfile?
     @Published var title = ""
@@ -31,6 +32,7 @@ import Foundation
         LoginStore.shared.token?.authToken.userID == userId
     }
     
+    // This will be visible as a redacted view while the actual profile data is loading.
     let placeholderProfile: UserProfile = .init(
         username: "Placeholder",
         score: 100,
@@ -77,6 +79,11 @@ import Foundation
         }
     }
     
+    func categoryTab(atIndex index: Int) -> CategoryTab? {
+        guard index >= 0 && index < categoryTabs.count else { return nil }
+        return categoryTabs[index]
+    }
+    
     func load() async {
         guard !mocked else {
             await loadMocked()
@@ -95,14 +102,14 @@ import Foundation
         isLoading = false
     }
     
-    func loadMore() async {
+    func loadMore(tab: CategoryTab) async {
         isLoadingMore = true
         
         do {
-            guard let contentType = categoryTab.contentType.profileContentType else {
+            guard let contentType = tab.contentType.profileContentType else {
                 throw SwiftUIRantError.unknownProfileContentType
             }
-            let skip = currentLoadedContentCount(tab: categoryTab)
+            let skip = currentLoadedContentCount(tab: tab)
             let moreProfile = try await Networking.shared.userProfile(userId: userId, contentType: contentType, skip: skip)
             profile?.append(profile: moreProfile)
             title = profile?.username ?? ""
@@ -111,6 +118,16 @@ import Foundation
         }
         
         isLoadingMore = false
+    }
+    
+    func loadFirstDataSetIfEmpty(tab: CategoryTab) async {
+        guard currentLoadedContentCount(tab: tab) == 0 else { return }
+        
+        isLoadingFirst = true
+        
+        await loadMore(tab: tab)
+        
+        isLoadingFirst = false
     }
     
     private func loadMocked() async {

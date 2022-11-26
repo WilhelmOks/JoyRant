@@ -17,7 +17,7 @@ final class AppState: ObservableObject {
     static let shared = AppState()
     
     enum NavigationDestination: Hashable {
-        case rantDetails(rantId: Rant.ID)
+        case rantDetails(rantId: Rant.ID, scrollToCommentWithId: Comment.ID? = nil)
         case userProfile(userId: UserID)
     }
     

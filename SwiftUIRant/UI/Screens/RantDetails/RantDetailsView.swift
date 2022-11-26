@@ -154,6 +154,7 @@ struct RantDetailsView: View {
                                         .padding(.bottom, 10)
                                         .id(comment.uuid)
                                     }
+                                    .id("comment_\(comment.id)")
                                 }
                             }
                         }

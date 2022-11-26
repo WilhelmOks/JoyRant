@@ -120,10 +120,13 @@ struct NotificationsView: View {
             }
             .navigationDestination(for: AppState.NavigationDestination.self) { item in
                 switch item {
-                case .rantDetails(rantId: let rantId):
+                case .rantDetails(rantId: let rantId, scrollToCommentWithId: let scrollToCommentWithId):
                     RantDetailsView(
                         sourceTab: .notifications,
-                        viewModel: .init(rantId: rantId)
+                        viewModel: .init(
+                            rantId: rantId,
+                            scrollToCommentWithId: scrollToCommentWithId
+                        )
                     )
                 case .userProfile(userId: let userId):
                     ProfileView(

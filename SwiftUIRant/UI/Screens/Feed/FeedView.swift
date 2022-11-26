@@ -62,14 +62,15 @@ struct FeedView: View {
             }
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {
-                case .rantDetails(let rantId):
+                case .rantDetails(rantId: let rantId, scrollToCommentWithId: let scrollToCommentWithId):
                     RantDetailsView(
                         sourceTab: .feed,
                         viewModel: .init(
-                            rantId: rantId
+                            rantId: rantId,
+                            scrollToCommentWithId: scrollToCommentWithId
                         )
                     )
-                case .userProfile(let userId):
+                case .userProfile(userId: let userId):
                     ProfileView(
                         sourceTab: .feed,
                         viewModel: .init(

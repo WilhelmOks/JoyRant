@@ -136,8 +136,10 @@ struct ProfileView: View {
                     )
                     .padding(.bottom, 10)
                     .onTapGesture {
-                        AppState.shared.navigate(from: sourceTab, to: .rantDetails(rantId: comment.rantID))
-                        //TODO: this can be improved by scrolling to the comment in the Rant View.
+                        AppState.shared.navigate(
+                            from: sourceTab,
+                            to: .rantDetails(rantId: comment.rantID, scrollToCommentWithId: comment.id)
+                        )
                     }
                 }
             }

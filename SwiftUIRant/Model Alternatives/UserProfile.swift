@@ -74,6 +74,7 @@ extension UserProfile {
         content.rants += profile.content.content.rants
         content.upvoted += profile.content.content.upvoted
         content.comments += profile.content.content.comments
+        content.viewed += profile.content.content.viewed ?? []
         content.favorites += profile.content.content.favorites ?? []
     }
 }

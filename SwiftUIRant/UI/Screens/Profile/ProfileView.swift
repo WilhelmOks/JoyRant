@@ -70,40 +70,15 @@ struct ProfileView: View {
                     
                     switch viewModel.categoryTab {
                     case .rants:
-                        RantList(
-                            sourceTab: sourceTab,
-                            rants: profile.content.rants,
-                            isLoadingMore: viewModel.isLoadingMore,
-                            loadMore: {
-                                Task {
-                                    await viewModel.loadMore()
-                                }
-                            }
-                        )
+                        rantList(profile.content.rants)
                     case .upvotes:
-                        RantList(
-                            sourceTab: sourceTab,
-                            rants: profile.content.upvoted,
-                            isLoadingMore: viewModel.isLoadingMore,
-                            loadMore: {
-                                Task {
-                                    await viewModel.loadMore()
-                                }
-                            }
-                        )
+                        rantList(profile.content.upvoted)
                     case .comments:
                         EmptyView() //TODO: ...
+                    case .viewed:
+                        rantList(profile.content.viewed)
                     case .favorites:
-                        RantList(
-                            sourceTab: sourceTab,
-                            rants: profile.content.favorites,
-                            isLoadingMore: viewModel.isLoadingMore,
-                            loadMore: {
-                                Task {
-                                    await viewModel.loadMore()
-                                }
-                            }
-                        )
+                        rantList(profile.content.favorites)
                     }
                 }
             }
@@ -112,6 +87,19 @@ struct ProfileView: View {
             }
             .disabled(!viewModel.isLoaded)
         }
+    }
+    
+    @ViewBuilder private func rantList(_ rants: [RantInFeed]) -> some View {
+        RantList(
+            sourceTab: sourceTab,
+            rants: rants,
+            isLoadingMore: viewModel.isLoadingMore,
+            loadMore: {
+                Task {
+                    await viewModel.loadMore()
+                }
+            }
+        )
     }
     
     @ViewBuilder private func infoArea() -> some View {
@@ -305,6 +293,13 @@ struct ProfileView: View {
                         .fixedSize(horizontal: true, vertical: false)
                         .if(!scrolling) {
                             $0.fillHorizontally()
+                        }
+                        .if(segment.item == .viewed) {
+                            $0.opacity(0).accessibility(hidden: true)
+                                .overlay {
+                                    Image(systemName: "clock")
+                                        .font(baseSize: 17)
+                                }
                         }
                     
                     Text(segment.item.displayName)

@@ -17,13 +17,19 @@ import Foundation
     @Published var title = ""
     
     var categoryTabs: [CategoryTab] {
-        CategoryTab.allCases.filter { categoryCount(tab: $0) > 0 }
+        CategoryTab.allCases
+            .filter { $0 == .viewed || categoryCount(tab: $0) > 0 }
+            .filter { isOwnProfile || $0 != .viewed }
     }
     var categoryTab: CategoryTab {
         guard categoryTabIndex >= 0 && categoryTabIndex < categoryTabs.count else { return .rants }
         return categoryTabs[categoryTabIndex]
     }
     @Published var categoryTabIndex: Int = 0
+    
+    private var isOwnProfile: Bool {
+        LoginStore.shared.token?.authToken.userID == userId
+    }
     
     let placeholderProfile: UserProfile = .init(
         username: "Placeholder",
@@ -66,6 +72,7 @@ import Foundation
         case .rants:        return content.rants.count
         case .upvotes:      return content.upvoted.count
         case .comments:     return content.comments.count
+        case .viewed:       return content.viewed.count
         case .favorites:    return content.favorites.count
         }
     }
@@ -150,6 +157,7 @@ extension ProfileViewModel {
         case rants
         case upvotes
         case comments
+        case viewed
         case favorites
         
         var id: Int { rawValue }
@@ -159,6 +167,7 @@ extension ProfileViewModel {
             case .rants:        return "Rants"
             case .upvotes:      return "++'s"
             case .comments:     return "Comments"
+            case .viewed:       return "Viewed"
             case .favorites:    return "Favorites"
             }
         }
@@ -168,6 +177,7 @@ extension ProfileViewModel {
             case .rants:        return .rants
             case .upvoted:      return .upvotes
             case .comments:     return .comments
+            case .viewed:       return .viewed
             case .favorites:    return .favorites
             default:            return .rants
             }
@@ -178,6 +188,7 @@ extension ProfileViewModel {
             case .rants:        return .rants
             case .upvotes:      return .upvoted
             case .comments:     return .comments
+            case .viewed:       return .viewed
             case .favorites:    return .favorites
             }
         }

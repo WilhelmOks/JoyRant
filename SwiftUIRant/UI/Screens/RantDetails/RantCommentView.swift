@@ -10,9 +10,10 @@ import SwiftRant
 
 struct RantCommentView: View {
     @StateObject var viewModel: RantCommentViewModel
-    let onReply: () -> ()
-    let onEdit: () -> ()
-    let onDelete: () -> ()
+    var isLinkToRant = false
+    var onReply: (() -> ())?
+    var onEdit: (() -> ())?
+    var onDelete: (() -> ())?
     
     @State private var isDeleteConfirmationAlertPresented = false
     
@@ -43,7 +44,7 @@ struct RantCommentView: View {
                         Alert(
                             title: Text("Do you want to delete this comment?"),
                             primaryButton: Alert.Button.cancel(Text("Cancel")),
-                            secondaryButton: .destructive(Text("Delete comment"), action: { onDelete() })
+                            secondaryButton: .destructive(Text("Delete comment"), action: { onDelete?() })
                         )
                     }
             }
@@ -71,17 +72,19 @@ struct RantCommentView: View {
             
             image()
             
-            HStack(alignment: .bottom, spacing: 10) {
-                replyButton()
-                
-                Spacer()
-                
-                if viewModel.comment.isFromLoggedInUser {
-                    deleteButton()
+            if !isLinkToRant {
+                HStack(alignment: .bottom, spacing: 10) {
+                    replyButton()
                     
-                    editButton()
-                } else {
-                    //reportButton()
+                    Spacer()
+                    
+                    if viewModel.comment.isFromLoggedInUser {
+                        deleteButton()
+                        
+                        editButton()
+                    } else {
+                        //reportButton()
+                    }
                 }
             }
         }
@@ -140,7 +143,7 @@ struct RantCommentView: View {
     @ViewBuilder private func replyButton() -> some View {
         Button {
             DataStore.shared.writePostContent.append("@\(viewModel.comment.username) ")
-            onReply()
+            onReply?()
         } label: {
             Text("Reply")
                 .font(baseSize: 12, weight: .medium)
@@ -185,7 +188,7 @@ struct RantCommentView: View {
             return
         }
         DataStore.shared.writePostContent = viewModel.comment.body
-        onEdit()
+        onEdit?()
     }
     
     private func delete() {

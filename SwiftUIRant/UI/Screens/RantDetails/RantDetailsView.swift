@@ -115,7 +115,7 @@ struct RantDetailsView: View {
             ZStack {
                 ScrollViewReader { scrollProxy in
                     ScrollView {
-                        LazyVStack { // caution: Lazy might cause problems with scrollTo()
+                        VStack(spacing: 0) {
                             RantView(
                                 viewModel: .init(
                                     rant: rant
@@ -129,29 +129,32 @@ struct RantDetailsView: View {
                                     }
                                 }
                             )
+                            .padding(.bottom, 10)
                             .id(rant.uuid)
                             
-                            ForEach(viewModel.comments, id: \.id) { comment in
-                                VStack(spacing: 0) {
-                                    Divider()
-                                    
-                                    RantCommentView(
-                                        viewModel: .init(comment: comment),
-                                        onReply: {
-                                            presentedSheet = .postComment(rantId: viewModel.rantId)
-                                        },
-                                        onEdit: {
-                                            presentedSheet = .editComment(comment: comment)
-                                        },
-                                        onDelete: {
-                                            Task {
-                                                await viewModel.deleteComment(comment: comment)
+                            LazyVStack(spacing: 0) {
+                                ForEach(viewModel.comments, id: \.id) { comment in
+                                    VStack(spacing: 0) {
+                                        Divider()
+                                        
+                                        RantCommentView(
+                                            viewModel: .init(comment: comment),
+                                            onReply: {
+                                                presentedSheet = .postComment(rantId: viewModel.rantId)
+                                            },
+                                            onEdit: {
+                                                presentedSheet = .editComment(comment: comment)
+                                            },
+                                            onDelete: {
+                                                Task {
+                                                    await viewModel.deleteComment(comment: comment)
+                                                }
                                             }
-                                        }
-                                    )
-                                    .id(comment.uuid)
+                                        )
+                                        .padding(.bottom, 10)
+                                        .id(comment.uuid)
+                                    }
                                 }
-                                .id("comment_\(comment.id)")
                             }
                         }
                         .padding(.bottom, 10)

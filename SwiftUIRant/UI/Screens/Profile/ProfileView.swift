@@ -45,6 +45,14 @@ struct ProfileView: View {
                 viewModel.profile?.content.favorites.updateRant(rant)
                 viewModel.profile?.content.viewed.updateRant(rant)
             }
+            .onReceive { event in
+                switch event {
+                case .shouldUpdateCommentInLists(let comment): return comment
+                default: return nil
+                }
+            } perform: { (comment: Comment) in
+                viewModel.profile?.content.comments.updateComment(comment)
+            }
             .onChange(of: viewModel.categoryTabIndex) { newValue in
                 if let tab = viewModel.categoryTab(atIndex: newValue) {
                     Task {
@@ -86,7 +94,7 @@ struct ProfileView: View {
                         case .upvotes:
                             rantList(profile.content.upvoted)
                         case .comments:
-                            EmptyView() //TODO: ...
+                            commentList(profile.content.comments)
                         case .viewed:
                             rantList(profile.content.viewed)
                         case .favorites:
@@ -113,6 +121,42 @@ struct ProfileView: View {
                 }
             }
         )
+    }
+    
+    @ViewBuilder private func commentList(_ comments: [Comment]) -> some View {
+        LazyVStack(spacing: 0) {
+            ForEach(comments, id: \.id) { comment in
+                VStack(spacing: 0) {
+                    if comment != comments.first {
+                        Divider()
+                    }
+                    
+                    RantCommentView(
+                        viewModel: .init(comment: comment)
+                    )
+                    .padding(.bottom, 10)
+                    .onTapGesture {
+                        AppState.shared.navigate(from: sourceTab, to: .rantDetails(rantId: comment.rantID))
+                        //TODO: this can be improved by scrolling to the comment in the Rant View.
+                    }
+                }
+            }
+            
+            Divider()
+            
+            Button {
+                Task {
+                    await viewModel.loadMore(tab: viewModel.categoryTab)
+                }
+            } label: {
+                Text("load more")
+                    .foregroundColor(.primaryAccent)
+            }
+            .buttonStyle(.plain)
+            .disabled(viewModel.isLoadingMore)
+            .fillHorizontally(.center)
+            .padding()
+        }
     }
     
     @ViewBuilder private func infoArea() -> some View {

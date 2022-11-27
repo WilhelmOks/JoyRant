@@ -16,6 +16,8 @@ struct ProfileView: View {
     
     @Environment(\.openURL) private var openURL
     
+    @State private var moreMenuId = UUID()
+    
     private let emptyBgColor = Color.gray.opacity(0.3)
         
     var profile: UserProfile {
@@ -321,6 +323,11 @@ struct ProfileView: View {
                     .aspectRatio(contentMode: .fit)
                     .fillHorizontally()
                     .background(userColor())
+                    .onAppear {
+                        DispatchQueue.main.async {
+                            moreMenuId = UUID()
+                        }
+                    }
             } placeholder: {
                 userColor()
             }
@@ -418,6 +425,7 @@ struct ProfileView: View {
                 .frame(width: 26, height: 26)
         }
         .disabled(viewModel.isLoading)
+        .id(moreMenuId)
     }
     
     private func cachedImage() -> PlatformImage? {

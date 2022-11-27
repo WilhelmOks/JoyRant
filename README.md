@@ -20,9 +20,9 @@ It's built with SwiftUI and it is utilizing it for the vast majority of the app'
 
 ⏹️ Search for rants and users
 
-🚧 User profiles
+✅ User profiles
 
-⏹️ Subscribe to a user
+🚧 Subscribe to a user
 
 ✅ Upvoting/Downvoting in feed
 

@@ -132,7 +132,8 @@ struct ProfileView: View {
                     }
                     
                     RantCommentView(
-                        viewModel: .init(comment: comment)
+                        viewModel: .init(comment: comment),
+                        isLinkToRant: true
                     )
                     .padding(.bottom, 10)
                     .onTapGesture {

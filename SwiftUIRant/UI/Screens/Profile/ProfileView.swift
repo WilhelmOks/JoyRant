@@ -27,13 +27,17 @@ struct ProfileView: View {
             .background(Color.primaryBackground)
             .alert($viewModel.alertMessage)
             .navigationTitle(viewModel.title)
-            #if os(iOS)
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .principal) {
                     Text(viewModel.title).fontWeight(.semibold)
                 }
+                #endif
+                
+                ToolbarItem(placement: .automatic) {
+                    toolbarMoreButton()
+                }
             }
-            #endif
             .onReceive { event in
                 switch event {
                 case .shouldUpdateRantInLists(let rant): return rant
@@ -388,6 +392,39 @@ struct ProfileView: View {
             .padding(.vertical, 1)
         }
         .buttonStyle(.plain)
+    }
+    
+    @ViewBuilder private func toolbarMoreButton() -> some View {
+        Menu {
+            Button {
+                let devRantLink = "https://devrant.com/users/\(profile.username)"
+                Pasteboard.shared.copy(devRantLink)
+            } label: {
+                Label("Copy Profile Link", systemImage: "doc.on.doc")
+            }
+            
+            //TODO: Subscribe to User's Rants
+
+            if let avatarImage = cachedImage().flatMap({ Image(platformImage: $0) }) {
+                ShareLink(
+                    item: avatarImage,
+                    preview: SharePreview("User Avatar", image: avatarImage)
+                ) {
+                    Label("Share Avatar", systemImage: "photo")
+                }
+            }
+        } label: {
+            Image(systemName: "ellipsis")
+                .frame(width: 26, height: 26)
+        }
+        .disabled(viewModel.isLoading)
+    }
+    
+    private func cachedImage() -> PlatformImage? {
+        guard let path = profile.avatar.avatarImage else { return nil }
+        guard let url = URL(string: "https://avatars.devrant.com/\(path)") else { return nil }
+        guard let response = URLCache.profileImageCache.cachedResponse(for: .init(url: url)) else { return nil }
+        return .init(data: response.data)
     }
 }
 

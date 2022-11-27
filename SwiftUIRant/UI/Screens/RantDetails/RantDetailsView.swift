@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftRant
-import UniformTypeIdentifiers
 
 struct RantDetailsView: View {
     @Environment(\.dismiss) private var dismiss
@@ -217,8 +216,7 @@ struct RantDetailsView: View {
             if let link = viewModel.rant?.link {
                 Button {
                     let devRantLink = "https://devrant.com/\(link)"
-                    NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString(devRantLink, forType: .string)
+                    Pasteboard.shared.copy(devRantLink)
                 } label: {
                     Label("Copy Rant Link", systemImage: "doc.on.doc")
                 }
@@ -248,7 +246,7 @@ struct RantDetailsView: View {
                     .default(Text("Copy Rant Link")) {
                         if let link = viewModel.rant?.link {
                             let devRantLink = "https://devrant.com/\(link)"
-                            UIPasteboard.general.setValue(devRantLink, forPasteboardType: UTType.plainText.identifier)
+                            Pasteboard.shared.copy(devRantLink)
                         }
                     },
                     .cancel()

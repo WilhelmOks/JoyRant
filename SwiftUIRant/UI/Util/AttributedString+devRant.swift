@@ -19,20 +19,29 @@ extension AttributedString {
         var result = AttributedString(stringLiteral: postedContent)
         
         links?.forEach { link in
-            if let range = result.range(of: link.title) {
-                switch LinkInRantType.init(rawValue: link.type) {
-                case .url:
-                    result[range].foregroundColor = .primaryForeground
-                    result[range].underlineStyle = .single
-                    result[range].link = rantUrl(link: link.url)
-                case .mention:
-                    result[range].foregroundColor = .primary
-                    result[range].font = .baseSize(16).bold()
-                    result[range].swiftUI.font = .baseSize(16).bold()
-                    result[range].link = mentionUrl(userId: link.url)
-                case nil:
-                    break
-                }
+            //guard let nsRange = link.calculatedRange else { return } //TODO: calculatedRange is calculated by searching for link.title. this is a problem when there are multiple titles that are shortened and become equal. such as youtube links.
+            
+            let nsRange: NSRange
+            if let start = link.start, let end = link.end {
+                nsRange = .init(location: start, length: end - start)
+            } else {
+                nsRange = (postedContent as NSString).range(of: link.title)
+            }
+            
+            guard let range: Range<AttributedString.Index> = .init(nsRange, in: result) else { return }
+            
+            switch LinkInRantType.init(rawValue: link.type) {
+            case .url:
+                result[range].foregroundColor = .primaryForeground
+                result[range].underlineStyle = .single
+                result[range].link = rantUrl(link: link.url)
+            case .mention:
+                result[range].foregroundColor = .primary
+                result[range].font = .baseSize(16).bold()
+                result[range].swiftUI.font = .baseSize(16).bold()
+                result[range].link = mentionUrl(userId: link.url)
+            case nil:
+                break
             }
         }
         

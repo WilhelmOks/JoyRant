@@ -693,7 +693,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftUIRant/SwiftUIRant.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIRant/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "SwiftUIRant/Preview\\ Content";
 				DEVELOPMENT_TEAM = J8UL3VBQ4J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -728,7 +728,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftUIRant/SwiftUIRant.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIRant/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "SwiftUIRant/Preview\\ Content";
 				DEVELOPMENT_TEAM = J8UL3VBQ4J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -791,7 +791,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OmerFlame/SwiftRant";
 			requirement = {
-				branch = generalized_image_upload;
+				branch = main;
 				kind = branch;
 			};
 		};

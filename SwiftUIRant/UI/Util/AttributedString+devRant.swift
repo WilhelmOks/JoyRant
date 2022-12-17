@@ -21,27 +21,32 @@ extension AttributedString {
         links?.forEach { link in
             //guard let nsRange = link.calculatedRange else { return } //TODO: calculatedRange is calculated by searching for link.title. this is a problem when there are multiple titles that are shortened and become equal. such as youtube links.
             
-            let nsRange: NSRange
+            var range: Range<AttributedString.Index>?
+            
             if let start = link.start, let end = link.end {
-                nsRange = .init(location: start, length: end - start)
-            } else {
-                nsRange = (postedContent as NSString).range(of: link.title)
+                let nsRange = NSRange(location: start, length: end - start)
+                range = Range<AttributedString.Index>(nsRange, in: result)
             }
             
-            guard let range: Range<AttributedString.Index> = .init(nsRange, in: result) else { return }
+            if range == nil {
+                let nsRange = (postedContent as NSString).range(of: link.title)
+                range = Range<AttributedString.Index>(nsRange, in: result)
+            }
             
-            switch LinkInRantType.init(rawValue: link.type) {
-            case .url:
-                result[range].foregroundColor = .primaryForeground
-                result[range].underlineStyle = .single
-                result[range].link = rantUrl(link: link.url)
-            case .mention:
-                result[range].foregroundColor = .primary
-                result[range].font = .baseSize(16).bold()
-                result[range].swiftUI.font = .baseSize(16).bold()
-                result[range].link = mentionUrl(userId: link.url)
-            case nil:
-                break
+            if let range {
+                switch LinkInRantType.init(rawValue: link.type) {
+                case .url:
+                    result[range].foregroundColor = .primaryForeground
+                    result[range].underlineStyle = .single
+                    result[range].link = rantUrl(link: link.url)
+                case .mention:
+                    result[range].foregroundColor = .primary
+                    result[range].font = .baseSize(16).bold()
+                    result[range].swiftUI.font = .baseSize(16).bold()
+                    result[range].link = mentionUrl(userId: link.url)
+                case nil:
+                    break
+                }
             }
         }
         

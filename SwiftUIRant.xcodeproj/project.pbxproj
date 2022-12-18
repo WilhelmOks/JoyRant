@@ -791,7 +791,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OmerFlame/SwiftRant";
 			requirement = {
-				branch = main;
+				branch = unsubscribe_fix;
 				kind = branch;
 			};
 		};

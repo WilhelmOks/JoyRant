@@ -149,4 +149,12 @@ struct Networking {
     func userProfile(userId: UserID, contentType: Profile.ProfileContentTypes = .all, skip: Int = 0) async throws -> Profile {
         try await swiftRant.getProfileFromID(userId, token: try token(), userContentType: contentType, skip: skip).get()
     }
+    
+    func subscribe(userId: UserID) async throws {
+        try await swiftRant.subscribeToUser(try token(), userID: userId).get()
+    }
+    
+    func unsubscribe(userId: UserID) async throws {
+        try await swiftRant.unsubscribeFromUser(try token(), userID: userId).get()
+    }
 }

@@ -81,6 +81,10 @@ struct ProfileView: View {
                         joinedOnDate()
                             .padding(10)
                     }
+                    .overlay(alignment: .topTrailing) {
+                        subscribedInfo()
+                            .padding(10)
+                    }
                 
                 infoArea()
                     .fillHorizontally(.leading)
@@ -315,6 +319,15 @@ struct ProfileView: View {
             .foregroundColor(.white)
     }
     
+    @ViewBuilder private func subscribedInfo() -> some View {
+        if viewModel.profile?.subscribed == true {
+            Label("Subscribed", systemImage: "star.fill")
+                .font(baseSize: 13, weightDelta: 2)
+                .multilineTextAlignment(.trailing)
+                .foregroundColor(.white)
+        }
+    }
+    
     @ViewBuilder private func header() -> some View {
         if let url = avatarUrl() {
             CachedAsyncImage(url: url, urlCache: .profileImageCache) { image in
@@ -410,7 +423,23 @@ struct ProfileView: View {
                 Label("Copy Profile Link", systemImage: "doc.on.doc")
             }
             
-            //TODO: Subscribe to User's Rants
+            Button {
+                if viewModel.profile?.subscribed == true {
+                    Task {
+                        await viewModel.unsubscribe()
+                    }
+                } else {
+                    Task {
+                        await viewModel.subscribe()
+                    }
+                }
+            } label: {
+                if viewModel.profile?.subscribed == true {
+                    Label("Unsubscribe from User's Rants", systemImage: "star.fill")
+                } else {
+                    Label("Subscribe to User's Rants", systemImage: "star")
+                }
+            }
 
             if let avatarImage = cachedImage().flatMap({ Image(platformImage: $0) }) {
                 ShareLink(

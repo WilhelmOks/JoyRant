@@ -40,11 +40,12 @@ import Foundation
         about: "This is a placeholder text that tells something about the user. It should be long enough to span a few lines.",
         location: "Placeholder Location",
         skills: "first skill\nsecond\nand third scill",
-        github: "GithubName",
+        github: nil,
         website: "https://www.website.com",
         avatar: .init(backgroundColor: "999999", avatarImage: nil),
         avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),
         isSupporter: false,
+        subscribed: false,
         content: .init(
             counts: [.rants: 100, .upvoted: 1000, .comments: 500, .favorites: 30, .collabs: 0],
             rants: [.mocked2()],
@@ -147,6 +148,7 @@ import Foundation
                 avatar: .init(backgroundColor: "999999", avatarImage: nil),
                 avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),
                 isSupporter: false,
+                subscribed: true,
                 content: .init(
                     counts: [.rants: 100, .upvoted: 1000, .comments: 500, .favorites: 30, .collabs: 0],
                     rants: [.mocked2()],
@@ -166,6 +168,24 @@ import Foundation
     
     func categoryCount(tab: CategoryTab) -> Int {
         (profile ?? placeholderProfile).content.counts[tab.contentType] ?? 0
+    }
+    
+    func subscribe() async {
+        do {
+            try await Networking.shared.subscribe(userId: userId)
+            profile?.subscribed = true
+        } catch {
+            alertMessage = .presentedError(error)
+        }
+    }
+    
+    func unsubscribe() async {
+        do {
+            try await Networking.shared.unsubscribe(userId: userId)
+            profile?.subscribed = false
+        } catch {
+            alertMessage = .presentedError(error)
+        }
     }
 }
 

@@ -20,6 +20,7 @@ extension AttributedString {
         
         links?.forEach { link in
             //guard let nsRange = link.calculatedRange else { return } //TODO: calculatedRange is calculated by searching for link.title. this is a problem when there are multiple titles that are shortened and become equal. such as youtube links.
+            //in addition to that, the start and end ranges don't seem to work if the link is at the end of the text.
             
             var range: Range<AttributedString.Index>?
             

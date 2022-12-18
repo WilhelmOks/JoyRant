@@ -20,6 +20,7 @@ struct UserProfile: Hashable {
     var avatar: Rant.UserAvatar
     var avatarSmall: Rant.UserAvatar
     var isSupporter: Bool
+    var subscribed: Bool
     var content: Content
 }
 
@@ -36,6 +37,7 @@ extension UserProfile {
         avatar = profile.avatar
         avatarSmall = profile.avatarSmall
         isSupporter = profile.isUserDPP == 1
+        subscribed = profile.subscribed
         content = .init(
             counts: [
                 .rants: profile.content.counts.rants,
@@ -64,6 +66,7 @@ extension UserProfile {
         avatar = profile.avatar
         avatarSmall = profile.avatarSmall
         isSupporter = profile.isUserDPP == 1
+        subscribed = profile.subscribed
         content.counts = [
             .rants: profile.content.counts.rants,
             .upvoted: profile.content.counts.upvoted,

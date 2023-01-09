@@ -16,6 +16,7 @@ struct InternalView: View {
     
     enum Tab: Int, CaseIterable, Hashable, Identifiable {
         case feed
+        case weekly
         case notifications
         case settings
         
@@ -24,6 +25,7 @@ struct InternalView: View {
         var displayName: String {
             switch self {
             case .feed:             return "Feed"
+            case .weekly:           return "Weekly"
             case .notifications:    return "Notifications"
             case .settings:         return "Settings"
             }
@@ -126,6 +128,8 @@ struct InternalView: View {
         switch tab {
         case .feed:
             FeedView(navigationBar: navigationBar)
+        case .weekly:
+            AllWeekliesView(navigationBar: navigationBar)
         case .notifications:
             NotificationsView(navigationBar: navigationBar)
         case .settings:
@@ -157,6 +161,8 @@ struct InternalView: View {
         switch tab {
         case .feed:
             Image(systemName: "list.bullet.rectangle")
+        case .weekly:
+            Image(systemName: "calendar")
         case .notifications:
             Image(systemName: "bell")
         case .settings:

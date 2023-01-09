@@ -14,6 +14,8 @@ struct Networking {
     private let swiftRant = SwiftRant(shouldUseKeychainAndUserDefaults: false)
     
     private init() {}
+    
+    // login
 
     func logIn(username: String, password: String) async throws {
         LoginStore.shared.token = try await swiftRant.logIn(username: username, password: password).get()
@@ -43,6 +45,8 @@ struct Networking {
         return token
     }
     
+    // rants
+    
     func rants(sort: RantFeed.Sort, skip: Int = 0, session: String?) async throws -> RantFeed {
         try await swiftRant.getRantFeed(
             token: try token(),
@@ -60,6 +64,22 @@ struct Networking {
         ).get()
     }
     
+    // weekly
+    
+    func weekyList() async throws -> WeeklyList {
+        try await swiftRant.getWeekList(token: try token()).get()
+    }
+    
+    func weeklyRants(week: Int, skip: Int = 0, session: String?) async throws -> RantFeed {
+        try await swiftRant.getWeeklyRants(
+            token: try token(),
+            skip: skip,
+            week: week
+        ).get()
+    }
+    
+    // vote
+    
     func vote(rantID: Rant.ID, voteState: VoteState) async throws -> Rant {
         try await swiftRant.voteOnRant(
             try token(),
@@ -76,6 +96,8 @@ struct Networking {
         ).get()
     }
     
+    // favorite
+    
     func favorite(rantID: Rant.ID) async throws {
         try await swiftRant.favoriteRant(
             try token(),
@@ -89,6 +111,8 @@ struct Networking {
             rantID: rantID
         ).get()
     }
+    
+    // notifications
     
     func getNotifications(for category: Notifications.Categories) async throws -> Notifications {
         try await swiftRant.getNotificationFeed(

@@ -112,58 +112,66 @@ struct RantDetailsView: View {
     @ViewBuilder private func content() -> some View {
         if let rant = viewModel.rant, !viewModel.isLoading {
             ZStack {
-                ScrollViewReader { scrollProxy in
-                    ScrollView {
-                        VStack(spacing: 0) {
-                            RantView(
-                                viewModel: .init(
-                                    rant: rant
-                                ),
-                                onEdit: {
-                                    presentedSheet = .editRant(rant: rant)
-                                },
-                                onDelete: {
-                                    Task {
-                                        await viewModel.deleteRant(rant: rant)
+                VStack(spacing: 0) {
+                    if let weekly = viewModel.rant?.weekly {
+                        weeklyArea(weekly)
+                        
+                        Divider()
+                    }
+                    
+                    ScrollViewReader { scrollProxy in
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                RantView(
+                                    viewModel: .init(
+                                        rant: rant
+                                    ),
+                                    onEdit: {
+                                        presentedSheet = .editRant(rant: rant)
+                                    },
+                                    onDelete: {
+                                        Task {
+                                            await viewModel.deleteRant(rant: rant)
+                                        }
                                     }
-                                }
-                            )
-                            .padding(.bottom, 10)
-                            .id(rant.uuid)
-                            
-                            LazyVStack(spacing: 0) {
-                                ForEach(viewModel.comments, id: \.id) { comment in
-                                    VStack(spacing: 0) {
-                                        Divider()
-                                        
-                                        RantCommentView(
-                                            viewModel: .init(comment: comment),
-                                            onReply: {
-                                                presentedSheet = .postComment(rantId: viewModel.rantId)
-                                            },
-                                            onEdit: {
-                                                presentedSheet = .editComment(comment: comment)
-                                            },
-                                            onDelete: {
-                                                Task {
-                                                    await viewModel.deleteComment(comment: comment)
+                                )
+                                .padding(.bottom, 10)
+                                .id(rant.uuid)
+                                
+                                LazyVStack(spacing: 0) {
+                                    ForEach(viewModel.comments, id: \.id) { comment in
+                                        VStack(spacing: 0) {
+                                            Divider()
+                                            
+                                            RantCommentView(
+                                                viewModel: .init(comment: comment),
+                                                onReply: {
+                                                    presentedSheet = .postComment(rantId: viewModel.rantId)
+                                                },
+                                                onEdit: {
+                                                    presentedSheet = .editComment(comment: comment)
+                                                },
+                                                onDelete: {
+                                                    Task {
+                                                        await viewModel.deleteComment(comment: comment)
+                                                    }
                                                 }
-                                            }
-                                        )
-                                        .padding(.bottom, 10)
-                                        .id(comment.uuid)
+                                            )
+                                            .padding(.bottom, 10)
+                                            .id(comment.uuid)
+                                        }
+                                        .id("comment_\(comment.id)")
                                     }
-                                    .id("comment_\(comment.id)")
                                 }
                             }
+                            .padding(.bottom, 10)
+                            .padding(.bottom, 40) //TODO: measure comment button size and set it here
                         }
-                        .padding(.bottom, 10)
-                        .padding(.bottom, 40) //TODO: measure comment button size and set it here
-                    }
-                    .onReceive(broadcastEvent: .shouldScrollToComment) { _ in
-                        if let commentId = viewModel.scrollToCommentWithId {
-                            withAnimation {
-                                scrollProxy.scrollTo("comment_\(commentId)", anchor: .top)
+                        .onReceive(broadcastEvent: .shouldScrollToComment) { _ in
+                            if let commentId = viewModel.scrollToCommentWithId {
+                                withAnimation {
+                                    scrollProxy.scrollTo("comment_\(commentId)", anchor: .top)
+                                }
                             }
                         }
                     }
@@ -176,6 +184,24 @@ struct RantDetailsView: View {
         } else {
             ProgressView()
         }
+    }
+    
+    @ViewBuilder private func weeklyArea(_ weekly: Rant.Weekly) -> some View {
+        VStack(spacing: 4) {
+            Text(weekly.topic)
+                .font(baseSize: 15, weightDelta: 1)
+                .multilineTextAlignment(.leading)
+                .fillHorizontally(.leading)
+                .foregroundColor(.primaryForeground)
+            
+            Text("Week \(weekly.week) Group Rant")
+                .font(baseSize: 13, weightDelta: 1)
+                .multilineTextAlignment(.leading)
+                .fillHorizontally(.leading)
+                .foregroundColor(.secondaryForeground)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
     }
     
     @ViewBuilder private func commentButton() -> some View {

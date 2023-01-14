@@ -56,10 +56,9 @@ struct AllWeekliesView: View {
     @ViewBuilder func row(_ week: WeeklyList.Week) -> some View {
         VStack(spacing: 0) {
             NavigationLink(value: AppState.NavigationDestination.rantWeek(week: week.week)) {
-                VStack {
-                    Text("\(week.week)")
-                    Text("\(week.prompt)")
-                }
+                WeekRowView(week: week)
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 10)
             }
             .buttonStyle(.plain)
             

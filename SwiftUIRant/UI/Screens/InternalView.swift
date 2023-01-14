@@ -87,6 +87,10 @@ struct InternalView: View {
             NavigationStack(path: $appState.notificationsNavigationPath) {
                 tabViewWithTabs(tabBinding)
             }
+        case .weekly:
+            NavigationStack(path: $appState.weeklyNavigationPath) {
+                tabViewWithTabs(tabBinding)
+            }
         case .settings:
             NavigationStack() {
                 tabViewWithTabs(tabBinding)
@@ -113,6 +117,11 @@ struct InternalView: View {
             }
         case .notifications:
             NavigationStack(path: $appState.notificationsNavigationPath) {
+                contentForTab(tab)
+                    .navigationBarTitleDisplayModeInline()
+            }
+        case .weekly:
+            NavigationStack(path: $appState.weeklyNavigationPath) {
                 contentForTab(tab)
                     .navigationBarTitleDisplayModeInline()
             }

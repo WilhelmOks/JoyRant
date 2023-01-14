@@ -29,7 +29,7 @@ struct WeekRowView: View {
                     .foregroundColor(.secondaryBackground)
             }
             
-            VStack(spacing: 1) {
+            VStack(spacing: 2) {
                 Text(week.prompt)
                     .font(baseSize: 16, weightDelta: 0)
                     .multilineTextAlignment(.leading)
@@ -37,7 +37,7 @@ struct WeekRowView: View {
                     .foregroundColor(.primaryForeground)
                 
                 HStack {
-                    Text(week.date)
+                    Text(AbsoluteDateFormatter.shared.string(fromDevRantUS: week.date))
                         .font(baseSize: 14, weightDelta: 0)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.secondaryForeground)

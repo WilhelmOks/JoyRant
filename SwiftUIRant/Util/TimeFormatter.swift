@@ -71,4 +71,21 @@ struct AbsoluteDateFormatter {
     func string(fromSeconds seconds: Int) -> String {
         string(fromDate: .init(timeIntervalSince1970: TimeInterval(seconds)))
     }
+    
+    func string(fromDevRantUS us: String) -> String {
+        let components = us.components(separatedBy: "/")
+        guard components.count == 3 else { return "" }
+        
+        guard let yearComponent = Int(components[2]) else { return "" }
+        guard let monthComponent = Int(components[0]) else { return "" }
+        guard let dayComponent = Int(components[1]) else { return "" }
+        
+        let year = 2000 + yearComponent
+        let month = monthComponent
+        let day = dayComponent
+        
+        let dateComponents = DateComponents(calendar: .current, year: year, month: month, day: day)
+        guard let date = dateComponents.date else { return "" }
+        return string(fromDate: date)
+    }
 }

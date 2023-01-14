@@ -135,6 +135,8 @@ struct NotificationsView: View {
                             userId: userId
                         )
                     )
+                default:
+                    EmptyView()
                 }
             }
         }

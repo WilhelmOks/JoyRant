@@ -77,6 +77,8 @@ struct FeedView: View {
                             userId: userId
                         )
                     )
+                default:
+                    EmptyView()
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.feed)) { _ in

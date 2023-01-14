@@ -73,6 +73,7 @@
 		ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64228F5B1E500CFC418 /* Disambuguation.swift */; };
 		ED97D64528F8634500CFC418 /* Notification+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64428F8634500CFC418 /* Notification+Map.swift */; };
 		ED9CF43F296C676600A1C668 /* AllWeekliesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CF43E296C676600A1C668 /* AllWeekliesView.swift */; };
+		ED9CF4412972E6A100A1C668 /* AllWeekliesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CF4402972E6A100A1C668 /* AllWeekliesViewModel.swift */; };
 		EDCA4564292FD7D400C12A6D /* RantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4563292FD7D400C12A6D /* RantList.swift */; };
 		EDCEF96C292FE7940007C9BD /* RantUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCEF96B292FE7940007C9BD /* RantUpdating.swift */; };
 		EDCEF96E2930F83B0007C9BD /* CommentUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCEF96D2930F83B0007C9BD /* CommentUpdating.swift */; };
@@ -153,6 +154,7 @@
 		ED97D64228F5B1E500CFC418 /* Disambuguation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disambuguation.swift; sourceTree = "<group>"; };
 		ED97D64428F8634500CFC418 /* Notification+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Map.swift"; sourceTree = "<group>"; };
 		ED9CF43E296C676600A1C668 /* AllWeekliesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWeekliesView.swift; sourceTree = "<group>"; };
+		ED9CF4402972E6A100A1C668 /* AllWeekliesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWeekliesViewModel.swift; sourceTree = "<group>"; };
 		EDCA4563292FD7D400C12A6D /* RantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantList.swift; sourceTree = "<group>"; };
 		EDCEF96B292FE7940007C9BD /* RantUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantUpdating.swift; sourceTree = "<group>"; };
 		EDCEF96D2930F83B0007C9BD /* CommentUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdating.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				ED9CF43E296C676600A1C668 /* AllWeekliesView.swift */,
+				ED9CF4402972E6A100A1C668 /* AllWeekliesViewModel.swift */,
 			);
 			path = Weekly;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
 				ED74D50B2921117800088CE6 /* SegmentedPicker.swift in Sources */,
 				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,
+				ED9CF4412972E6A100A1C668 /* AllWeekliesViewModel.swift in Sources */,
 				ED33C23F2904178B00A59A11 /* SwiftUIRantError.swift in Sources */,
 				EDCEF9792933DDBF0007C9BD /* Image+PlatformImage.swift in Sources */,
 				ED398CA728FC59650012142B /* RefreshButton.swift in Sources */,

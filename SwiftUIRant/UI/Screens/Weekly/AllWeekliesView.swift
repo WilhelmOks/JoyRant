@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SwiftRant
 
 struct AllWeekliesView: View {
     var navigationBar = true
+    
+    @StateObject var viewModel: AllWeekliesViewModel = .init()
 
     var body: some View {
         content()
@@ -16,10 +19,52 @@ struct AllWeekliesView: View {
                 $0
                 .navigationTitle("All Weeklies")
             }
+            .navigationDestination(for: AppState.NavigationDestination.self) { destination in
+                switch destination {
+                case .rantWeek(week: let week):
+                    Text("week \(week)")
+                default:
+                    EmptyView()
+                }
+            }
+            .onReceive(broadcastEvent: .didReselectMainTab(.weekly)) { _ in
+                if AppState.shared.weeklyNavigationPath.isEmpty {
+                    Task {
+                        await viewModel.refresh()
+                    }
+                }
+            }
     }
     
     @ViewBuilder func content() -> some View {
-        Text("list of weeklies")
+        if viewModel.isLoading {
+            ProgressView()
+        } else {
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(viewModel.weeks, id: \.week) { week in
+                        row(week)
+                    }
+                }
+            }
+            .refreshable {
+                await viewModel.refresh()
+            }
+        }
+    }
+    
+    @ViewBuilder func row(_ week: WeeklyList.Week) -> some View {
+        VStack(spacing: 0) {
+            NavigationLink(value: AppState.NavigationDestination.rantWeek(week: week.week)) {
+                VStack {
+                    Text("\(week.week)")
+                    Text("\(week.prompt)")
+                }
+            }
+            .buttonStyle(.plain)
+            
+            Divider()
+        }
     }
 }
 

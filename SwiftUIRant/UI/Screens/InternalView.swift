@@ -57,6 +57,9 @@ struct InternalView: View {
             .onReceive(broadcastEvent: .didReselectMainTab(.notifications)) { _ in
                 appState.navigateToRoot(from: .notifications)
             }
+            .onReceive(broadcastEvent: .didReselectMainTab(.weekly)) { _ in
+                appState.navigateToRoot(from: .weekly)
+            }
     }
     
     @ViewBuilder private func content() -> some View {

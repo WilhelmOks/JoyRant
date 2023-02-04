@@ -22,9 +22,22 @@ struct AllWeekliesView: View {
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {
                 case .rantWeek(week: let week):
-                    Text("week \(week)")
-                default:
-                    EmptyView()
+                    WeekRantsView(viewModel: .init(week: week))
+                case .rantDetails(rantId: let rantId, scrollToCommentWithId: let scrollToCommentWithId):
+                    RantDetailsView(
+                        sourceTab: .weekly,
+                        viewModel: .init(
+                            rantId: rantId,
+                            scrollToCommentWithId: scrollToCommentWithId
+                        )
+                    )
+                case .userProfile(userId: let userId):
+                    ProfileView(
+                        sourceTab: .weekly,
+                        viewModel: .init(
+                            userId: userId
+                        )
+                    )
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.weekly)) { _ in
@@ -55,7 +68,7 @@ struct AllWeekliesView: View {
     
     @ViewBuilder func row(_ week: WeeklyList.Week) -> some View {
         VStack(spacing: 0) {
-            NavigationLink(value: AppState.NavigationDestination.rantWeek(week: week.week)) {
+            NavigationLink(value: AppState.NavigationDestination.rantWeek(week: week)) {
                 WeekRowView(week: week)
                     .padding(.vertical, 6)
                     .padding(.horizontal, 10)

@@ -26,6 +26,10 @@ import SwiftRant
         do {
             let weeklyList = try await Networking.shared.weekyList()
             weeks = weeklyList.weeks
+            
+            Task {
+                try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+            }
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -41,6 +45,10 @@ import SwiftRant
         do {
             let weeklyList = try await Networking.shared.weekyList()
             weeks = weeklyList.weeks
+            
+            Task {
+                try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+            }
         } catch {
             alertMessage = .presentedError(error)
         }

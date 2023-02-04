@@ -19,7 +19,7 @@ final class AppState: ObservableObject {
     enum NavigationDestination: Hashable {
         case rantDetails(rantId: Rant.ID, scrollToCommentWithId: Comment.ID? = nil)
         case userProfile(userId: UserID)
-        case rantWeek(week: Int)
+        case rantWeek(week: WeeklyList.Week)
     }
     
     @Published var feedNavigationPath = NavigationPath()

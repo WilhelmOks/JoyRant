@@ -16,9 +16,9 @@ It's built with SwiftUI and it is utilizing it for the vast majority of the app'
 
 ✅ Rant feed (Algo/Recent/Top)
 
-🚧 Weekly rants
+✅ Weekly rants
 
-⏹️ Search for rants and users
+🚧 Search for rants and users
 
 ✅ User profiles
 

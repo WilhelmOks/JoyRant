@@ -15,6 +15,7 @@ struct AllWeekliesView: View {
 
     var body: some View {
         content()
+            .background(Color.primaryBackground)
             .if(navigationBar) {
                 $0
                 .navigationTitle("All Weeklies")
@@ -54,7 +55,7 @@ struct AllWeekliesView: View {
             ProgressView()
         } else {
             ScrollView {
-                VStack(spacing: 0) {
+                LazyVStack(spacing: 0) {
                     ForEach(viewModel.weeks, id: \.week) { week in
                         row(week)
                     }

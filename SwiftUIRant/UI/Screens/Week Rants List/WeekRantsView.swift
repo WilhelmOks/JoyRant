@@ -12,6 +12,7 @@ struct WeekRantsView: View {
     
     var body: some View {
         content()
+            .background(Color.primaryBackground)
             .navigationTitle(Text("Week \(viewModel.week.week)"))
             .alert($viewModel.alertMessage)
             .onReceive { event in

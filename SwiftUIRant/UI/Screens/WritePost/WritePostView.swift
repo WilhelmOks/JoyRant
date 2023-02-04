@@ -268,6 +268,7 @@ struct WritePostView: View {
     @ViewBuilder private func sendButton() -> some View {
         LoadingButton(withSpinner: true, isLoading: viewModel.isLoading) {
             Task {
+                focusedControl = nil
                 await viewModel.submit()
             }
         } label: {

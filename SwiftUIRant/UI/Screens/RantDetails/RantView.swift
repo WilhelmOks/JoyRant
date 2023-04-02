@@ -220,7 +220,7 @@ struct RantView: View {
             viewModel.alertMessage = .presentedMessage(SwiftUIRantError.timeWindowForEditMissed.message)
             return
         }
-        DataStore.shared.writePostContent = viewModel.rant.text
+        DataStore.shared.writePostContent = viewModel.rant.withResolvedLinks
         onEdit()
     }
     

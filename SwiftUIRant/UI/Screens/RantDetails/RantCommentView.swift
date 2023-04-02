@@ -196,7 +196,7 @@ struct RantCommentView: View {
             viewModel.alertMessage = .presentedMessage(SwiftUIRantError.timeWindowForEditMissed.message)
             return
         }
-        DataStore.shared.writePostContent = viewModel.comment.body
+        DataStore.shared.writePostContent = viewModel.comment.withResolvedLinks
         onEdit?()
     }
     

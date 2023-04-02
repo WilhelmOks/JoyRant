@@ -16,4 +16,8 @@ extension Rant {
     var isFromLoggedInUser: Bool {
         voteState == .unvotable
     }
+    
+    var withResolvedLinks: String {
+        self.text.devRant(resolvingLinks: self.links)
+    }
 }

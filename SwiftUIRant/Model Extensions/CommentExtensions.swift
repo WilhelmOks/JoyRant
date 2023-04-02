@@ -16,4 +16,8 @@ extension Comment {
     var isFromLoggedInUser: Bool {
         voteState == .unvotable
     }
+    
+    var withResolvedLinks: String {
+        self.body.devRant(resolvingLinks: self.links)
+    }
 }

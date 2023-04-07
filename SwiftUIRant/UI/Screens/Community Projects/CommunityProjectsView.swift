@@ -69,7 +69,6 @@ struct CommunityProjectsView: View {
                     }
                     .padding(.horizontal, 10)
                     .fixedSize()
-                    
                 }
                 .tint(.primaryAccent)
                 

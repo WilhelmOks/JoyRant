@@ -39,6 +39,8 @@ struct AllWeekliesView: View {
                             userId: userId
                         )
                     )
+                default:
+                    EmptyView()
                 }
             }
             .onReceive(broadcastEvent: .didReselectMainTab(.weekly)) { _ in

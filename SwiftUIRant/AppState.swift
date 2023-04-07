@@ -20,6 +20,7 @@ final class AppState: ObservableObject {
         case rantDetails(rantId: Rant.ID, scrollToCommentWithId: Comment.ID? = nil)
         case userProfile(userId: UserID)
         case rantWeek(week: WeeklyList.Week)
+        case communityProjects
     }
     
     @Published var feedNavigationPath = NavigationPath()

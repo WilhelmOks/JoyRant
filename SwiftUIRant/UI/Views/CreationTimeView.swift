@@ -9,24 +9,15 @@ import SwiftUI
 
 struct CreationTimeView: View {
     let createdTime: Int
-    let isEdited: Bool
+    var isEdited: Bool = false
+    var addedPrefix = false
     
     var body: some View {
-        /*
-        HStack(spacing: 5) {
-            Text(TimeFormatter.shared.string(fromSeconds: createdTime))
-                .font(baseSize: 12, weight: .medium)
-                .foregroundColor(.secondaryForeground)
-            
-            if isEdited {
-                Image(systemName: "pencil.circle")
-                    .font(baseSize: 12)
-                    .foregroundColor(.secondaryForeground)
-            }
-        }*/
-        
         VStack(alignment: .trailing, spacing: 5) {
-            Text(TimeFormatter.shared.string(fromSeconds: createdTime))
+            let prefix = addedPrefix ? "added " : ""
+            let formattedTime = prefix + TimeFormatter.shared.string(fromSeconds: createdTime)
+            
+            Text(formattedTime)
                 .font(baseSize: 12, weight: .medium)
                 .foregroundColor(.secondaryForeground)
             
@@ -43,7 +34,8 @@ struct CreationTimeView_Previews: PreviewProvider {
     static var previews: some View {
         CreationTimeView(
             createdTime: Int(Date().addingTimeInterval(-15).timeIntervalSince1970),
-            isEdited: true
+            isEdited: true,
+            addedPrefix: false
         )
     }
 }

@@ -181,4 +181,14 @@ struct Networking {
     func unsubscribe(userId: UserID) async throws {
         try await swiftRant.unsubscribeFromUser(try token(), userID: userId).get()
     }
+    
+    // community projects
+    
+    func communityProjects() async throws -> [CommunityProject] {
+        let urlString = "https://raw.githubusercontent.com/joewilliams007/jsonapi/gh-pages/community.json"
+        guard let url = URL(string: urlString) else { throw SwiftUIRantError.invalidUrl(urlString) }
+        let response = try await URLSession.shared.data(for: .init(url: url))
+        let container = try JSONDecoder().decode(CommunityProject.CodingData.Container.self, from: response.0)
+        return container.projects.map(\.decoded)
+    }
 }

@@ -34,6 +34,16 @@ extension Label {
     }
 }
 
+extension Link {
+    func font(baseSize: Int = 17, weight: Font.Weight) -> some View {
+        self.font(fontFromBaseSize(baseSize)).fontWeight(weight)
+    }
+    
+    func font(baseSize: Int = 17, weightDelta: Int = 0) -> some View {
+        self.font(fontFromBaseSize(baseSize)).fontWeight(weightFromNormalizedNumber(weightDelta))
+    }
+}
+
 extension Font {
     static func baseSize(_ baseSize: Int = 17, weight: Font.Weight) -> Font {
         fontFromBaseSize(baseSize).weight(weight)

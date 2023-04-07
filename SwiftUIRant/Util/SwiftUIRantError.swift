@@ -11,6 +11,7 @@ enum SwiftUIRantError: Error {
     case noAccessTokenInKeychain
     case timeWindowForEditMissed
     case unknownProfileContentType
+    case invalidUrl(_ string: String)
     
     var message: String {
         switch self {
@@ -20,6 +21,8 @@ enum SwiftUIRantError: Error {
             return "Rants and comments can only be edited for 5 minutes (30 minutes for devRant++ subscribers) after they are posted."
         case .unknownProfileContentType:
             return "Unknown Profile Content Type"
+        case .invalidUrl(let string):
+            return "Invalid URL: \(string)"
         }
     }
 }

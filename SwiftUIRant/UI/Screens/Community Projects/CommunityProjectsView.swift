@@ -15,6 +15,7 @@ struct CommunityProjectsView: View {
             ProgressView()
         } else {
             content()
+                .background(Color.primaryBackground)
                 .alert($viewModel.alertMessage)
                 .navigationTitle(Text("Community Projects"))
                 .searchable(text: $viewModel.searchText)
@@ -84,6 +85,7 @@ struct CommunityProjectsView: View {
                 }
                 .padding(.vertical, 10)
             }
+            .padding(.top, 8)
         }
     }
 }

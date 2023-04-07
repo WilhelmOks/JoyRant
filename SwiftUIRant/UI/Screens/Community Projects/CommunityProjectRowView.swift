@@ -30,24 +30,28 @@ struct CommunityProjectRowView: View {
                 )
             }
             
-            Text(communityProject.description)
-                .font(baseSize: 15, weight: .regular)
-                .multilineTextAlignment(.leading)
-                .fillHorizontally(.leading)
-                .foregroundColor(.primaryForeground)
-            
-            HStack(alignment: .top, spacing: 3) {
-                Text("Owner:")
-                    .font(baseSize: 15, weight: .semibold)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.primaryForeground)
-                
-                Text("\(communityProject.owner)")
+            if !communityProject.description.isEmpty {
+                Text(communityProject.description)
                     .font(baseSize: 15, weight: .regular)
                     .multilineTextAlignment(.leading)
+                    .fillHorizontally(.leading)
                     .foregroundColor(.primaryForeground)
-                
-                Spacer()
+            }
+            
+            if !communityProject.owner.isEmpty {
+                HStack(alignment: .top, spacing: 3) {
+                    Text("Owner:")
+                        .font(baseSize: 15, weight: .semibold)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.primaryForeground)
+                    
+                    Text("\(communityProject.owner)")
+                        .font(baseSize: 15, weight: .regular)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.primaryForeground)
+                    
+                    Spacer()
+                }
             }
                         
             linkProperty(name: "Website", link: communityProject.website)

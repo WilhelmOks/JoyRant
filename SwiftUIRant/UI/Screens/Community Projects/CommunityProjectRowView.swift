@@ -97,13 +97,11 @@ struct CommunityProjectRowView: View {
                 communityProject.type
             }
             
-            if !communityProject.operatingSystem.isEmpty {
-                communityProject.operatingSystem
-            }
-            
             if !communityProject.language.isEmpty {
                 communityProject.language
             }
+            
+            communityProject.operatingSystems
         }
         
         return String(properties.joined(separator: ", "))

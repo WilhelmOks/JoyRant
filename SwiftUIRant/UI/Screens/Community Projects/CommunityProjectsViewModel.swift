@@ -17,6 +17,16 @@ import Foundation
             items = filter(searchText: searchText, items: loadedItems)
         }
     }
+    @Published var selectedOsIndex = 0 {
+        didSet {
+            items = filter(searchText: searchText, items: loadedItems)
+        }
+    }
+    @Published var activeOnly = false {
+        didSet {
+            items = filter(searchText: searchText, items: loadedItems)
+        }
+    }
     @Published var searchText = "" {
         didSet {
             items = filter(searchText: searchText, items: loadedItems)
@@ -51,8 +61,10 @@ import Foundation
                 item.language.localizedCaseInsensitiveContains(searchText)
             
             let typeMatches = matches(filterItems: pickableTypeItems(), selectedFilterIndex: selectedTypeIndex, item: item, keyPath: \.type)
+            let osMatches = matches(filterItems: pickableOsItems(), selectedFilterIndex: selectedOsIndex, item: item, keyPath: \.operatingSystems)
+            let activeMatches = activeOnly ? item.active : true
                         
-            return searchTextMatches && typeMatches
+            return searchTextMatches && typeMatches && osMatches && activeMatches
         }
     }
     
@@ -65,13 +77,26 @@ import Foundation
         }
     }
     
+    func matches(filterItems: [PickableFilterItem], selectedFilterIndex index: Int, item: CommunityProject, keyPath: KeyPath<CommunityProject, [String]>) -> Bool {
+        guard filterItems.indices.contains(index) else { return true }
+        let selected = filterItems[index]
+        switch selected {
+        case .all: return true
+        case .named(let name): return item[keyPath: keyPath].contains(name)
+        }
+    }
+    
     func pickableTypeItems() -> [PickableFilterItem] {
         [.all] + loadedItems.map(\.type).uniqued().map { .named($0) }
+    }
+    
+    func pickableOsItems() -> [PickableFilterItem] {
+        [.all] + loadedItems.flatMap(\.operatingSystems).uniqued().map { .named($0) }.sorted()
     }
 }
 
 extension CommunityProjectsViewModel {
-    enum PickableFilterItem: Hashable {
+    enum PickableFilterItem: Hashable, Comparable {
         case all
         case named(_ name: String)
         
@@ -80,6 +105,10 @@ extension CommunityProjectsViewModel {
             case .all: return "all"
             case .named(let name): return name
             }
+        }
+        
+        static func < (lhs: Self, rhs: Self) -> Bool {
+            lhs == .all ? true : lhs.displayName.localizedCaseInsensitiveCompare(rhs.displayName) == .orderedAscending
         }
     }
 }

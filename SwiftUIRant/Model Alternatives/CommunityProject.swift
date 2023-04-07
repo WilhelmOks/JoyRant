@@ -9,7 +9,7 @@ import Foundation
 
 struct CommunityProject: Hashable {
     let title: String
-    let operatingSystem: String
+    let operatingSystems: [String]
     let type: String
     let addedDate: Int
     let description: String
@@ -45,7 +45,7 @@ extension CommunityProject {
         var decoded: CommunityProject {
             .init(
                 title: title,
-                operatingSystem: os,
+                operatingSystems: os.split(whereSeparator: { $0 == "," || $0 == "&" }).map{ $0.trimmingCharacters(in: .whitespaces) },
                 type: type,
                 addedDate: timestamp_added,
                 description: desc,
@@ -71,7 +71,7 @@ extension CommunityProject {
     static func mockedRandom() -> Self {
         return .init(
             title: randomString(in: 3...30),
-            operatingSystem: randomString(in: 2...10),
+            operatingSystems: [randomString(in: 2...10)],
             type: randomString(in: 4...20),
             addedDate: 0,
             description: randomString(in: 3...100),

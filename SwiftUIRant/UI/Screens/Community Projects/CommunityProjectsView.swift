@@ -42,13 +42,43 @@ struct CommunityProjectsView: View {
                 }
                 .buttonStyle(.plain)
                 
+                SegmentedPicker(
+                    selectedIndex: $viewModel.selectedOsIndex,
+                    items: viewModel.pickableOsItems(),
+                    spacing: 0
+                ) { segment in
+                    Text(segment.item.displayName)
+                        .font(baseSize: 17, weightDelta: 0)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 6)
+                        .background {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .foregroundColor(segment.selected ? .secondaryBackground : .primaryBackground)
+                                .animation(.easeOut, value: viewModel.selectedOsIndex)
+                        }
+                        .padding(.vertical, 1)
+                }
+                .buttonStyle(.plain)
+                
+                HStack {
+                    Spacer()
+                    Toggle(isOn: $viewModel.activeOnly) {
+                        Text("active only")
+                            .foregroundColor(.primaryForeground)
+                    }
+                    .padding(.horizontal, 10)
+                    .fixedSize()
+                    
+                }
+                .tint(.primaryAccent)
+                
                 LazyVStack {
                     ForEach(viewModel.items, id: \.self) { item in
                         VStack(spacing: 0) {
+                            Divider()
                             CommunityProjectRowView(communityProject: item)
                                 .padding(.horizontal, 10)
-                                .padding(.bottom, 10)
-                            Divider()
+                                .padding(.top, 10)
                         }
                     }
                 }

@@ -32,6 +32,7 @@
 		ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7E28B69892008BF314 /* Logging.swift */; };
 		ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B8028B69D35008BF314 /* Networking.swift */; };
 		ED2F3C3F29E0076500A48877 /* CommunityProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2F3C3E29E0076500A48877 /* CommunityProjectRowView.swift */; };
+		ED2F3C4229E0148100A48877 /* ArrayBuilderModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2F3C4129E0148100A48877 /* ArrayBuilderModule */; };
 		ED33C2372903F31100A59A11 /* Models+IdTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED33C2362903F31100A59A11 /* Models+IdTypes.swift */; };
 		ED33C23929040E3300A59A11 /* Models+TimeToModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED33C23829040E3300A59A11 /* Models+TimeToModify.swift */; };
 		ED33C23F2904178B00A59A11 /* SwiftUIRantError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED33C23E2904178B00A59A11 /* SwiftUIRantError.swift */; };
@@ -189,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2F3C4229E0148100A48877 /* ArrayBuilderModule in Frameworks */,
 				ED2C9B7628B67BB7008BF314 /* SwiftRant in Frameworks */,
 				ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */,
 				ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */,
@@ -489,6 +491,7 @@
 				ED97D62B28E9CC4B00CFC418 /* HexUIColor */,
 				ED97D63028EB22C100CFC418 /* HexNSColor */,
 				ED427DD9291AE07500C3B30A /* Algorithms */,
+				ED2F3C4129E0148100A48877 /* ArrayBuilderModule */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -523,6 +526,7 @@
 				ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */,
 				ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -855,6 +859,14 @@
 				kind = branch;
 			};
 		};
+		ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WilhelmOks/ArrayBuilder.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
@@ -883,6 +895,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED2C9B7428B67BB7008BF314 /* XCRemoteSwiftPackageReference "SwiftRant" */;
 			productName = SwiftRant;
+		};
+		ED2F3C4129E0148100A48877 /* ArrayBuilderModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */;
+			productName = ArrayBuilderModule;
 		};
 		ED427DD9291AE07500C3B30A /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;

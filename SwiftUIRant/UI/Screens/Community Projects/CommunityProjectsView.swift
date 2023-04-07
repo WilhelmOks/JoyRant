@@ -11,9 +11,14 @@ struct CommunityProjectsView: View {
     @StateObject private var viewModel: CommunityProjectsViewModel = .init()
     
     var body: some View {
-        content()
-            .alert($viewModel.alertMessage)
-            .navigationTitle(Text("Community Projects"))
+        if viewModel.isLoading {
+            ProgressView()
+        } else {
+            content()
+                .alert($viewModel.alertMessage)
+                .navigationTitle(Text("Community Projects"))
+                .searchable(text: $viewModel.searchText)
+        }
     }
     
     @ViewBuilder private func content() -> some View {
@@ -28,6 +33,7 @@ struct CommunityProjectsView: View {
                     }
                 }
             }
+            .padding(.vertical, 10)
         }
     }
 }

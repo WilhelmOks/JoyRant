@@ -26,6 +26,7 @@ final class AppState: ObservableObject {
     @Published var feedNavigationPath = NavigationPath()
     @Published var weeklyNavigationPath = NavigationPath()
     @Published var notificationsNavigationPath = NavigationPath()
+    @Published var settingsNavigationPath = NavigationPath()
         
     var isLoggedIn: Bool {
         LoginStore.shared.isLoggedIn
@@ -40,7 +41,7 @@ final class AppState: ObservableObject {
         case .notifications:
             notificationsNavigationPath.append(destination)
         case .settings:
-            break
+            settingsNavigationPath.append(destination)
         }
     }
     
@@ -53,7 +54,7 @@ final class AppState: ObservableObject {
         case .notifications:
             notificationsNavigationPath = .init()
         case .settings:
-            break
+            settingsNavigationPath = .init()
         }
     }
     

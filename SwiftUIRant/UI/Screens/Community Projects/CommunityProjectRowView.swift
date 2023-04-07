@@ -11,10 +11,14 @@ struct CommunityProjectRowView: View {
     let communityProject: CommunityProject
     
     var body: some View {
+        content()
+    }
+    
+    @ViewBuilder private func content() -> some View {
         VStack(spacing: 10) {
-            HStack(alignment: .top) {
+            HStack(alignment: .center) {
                 Text(communityProject.title)
-                    .font(baseSize: 17, weight: .semibold)
+                    .font(baseSize: 19, weight: .bold)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
                 
@@ -32,11 +36,19 @@ struct CommunityProjectRowView: View {
                 .fillHorizontally(.leading)
                 .foregroundColor(.primaryForeground)
             
-            Text("Owner: \(communityProject.owner)")
-                .font(baseSize: 15, weight: .regular)
-                .multilineTextAlignment(.leading)
-                .fillHorizontally(.leading)
-                .foregroundColor(.primaryForeground)
+            HStack(alignment: .top, spacing: 3) {
+                Text("Owner:")
+                    .font(baseSize: 15, weight: .semibold)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.primaryForeground)
+                
+                Text("\(communityProject.owner)")
+                    .font(baseSize: 15, weight: .regular)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.primaryForeground)
+                
+                Spacer()
+            }
                         
             linkProperty(name: "Website", link: communityProject.website)
             
@@ -62,15 +74,17 @@ struct CommunityProjectRowView: View {
     
     @ViewBuilder private func linkProperty(name: String, link: String) -> some View {
         if let websiteUrl = URL(string: link) {
-            HStack {
+            HStack(alignment: .top, spacing: 3) {
                 Text("\(name): ")
-                    .font(baseSize: 15, weight: .regular)
+                    .font(baseSize: 15, weight: .semibold)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.primaryForeground)
                 
-                Link(communityProject.website, destination: websiteUrl)
-                    .font(baseSize: 15, weight: .regular)
-                    .multilineTextAlignment(.leading)
+                Link(destination: websiteUrl) {
+                    Text(link)
+                        .font(baseSize: 15, weight: .regular)
+                        .multilineTextAlignment(.leading)
+                }
                 
                 Spacer()
             }
@@ -78,11 +92,20 @@ struct CommunityProjectRowView: View {
     }
     
     private func propertiesText() -> String {
-        let properties: [String] = [
-            communityProject.type,
-            communityProject.operatingSystem,
-            communityProject.language
-        ]
+        let properties: [String] = .init {
+            if !communityProject.type.isEmpty {
+                communityProject.type
+            }
+            
+            if !communityProject.operatingSystem.isEmpty {
+                communityProject.operatingSystem
+            }
+            
+            if !communityProject.language.isEmpty {
+                communityProject.language
+            }
+        }
+        
         return String(properties.joined(separator: ", "))
     }
 }

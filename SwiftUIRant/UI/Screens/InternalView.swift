@@ -60,6 +60,9 @@ struct InternalView: View {
             .onReceive(broadcastEvent: .didReselectMainTab(.weekly)) { _ in
                 appState.navigateToRoot(from: .weekly)
             }
+            .onReceive(broadcastEvent: .didReselectMainTab(.settings)) { _ in
+                appState.navigateToRoot(from: .settings)
+            }
     }
     
     @ViewBuilder private func content() -> some View {
@@ -92,7 +95,7 @@ struct InternalView: View {
                 tabViewWithTabs(tabBinding)
             }
         case .settings:
-            NavigationStack() {
+            NavigationStack(path: $appState.settingsNavigationPath) {
                 tabViewWithTabs(tabBinding)
             }
         }
@@ -125,11 +128,18 @@ struct InternalView: View {
                 contentForTab(tab)
                     .navigationBarTitleDisplayModeInline()
             }
+        case .settings:
+            NavigationStack(path: $appState.settingsNavigationPath) {
+                contentForTab(tab)
+                    .navigationBarTitleDisplayModeInline()
+            }
+        /*
         default:
             NavigationStack() {
                 contentForTab(tab)
                     .navigationBarTitleDisplayModeInline()
             }
+        */
         }
         #elseif os(macOS)
         contentForTab(tab, navigationBar: self.tab == tab)

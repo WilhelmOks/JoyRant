@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import ArrayBuilderModule
+
+typealias ArrayBuilder = ArrayBuilderModule.ArrayBuilder
 
 @main
 struct SwiftUIRantApp: App {

@@ -18,7 +18,7 @@ It's built with SwiftUI and it is utilizing it for the vast majority of the app'
 
 ✅ Weekly rants
 
-🚧 Search for rants and users
+🚫 Search for rants and users (Won't implement because devRant API only supports searching rants, not comments and not users. This is just not useful.)
 
 ✅ User profiles
 
@@ -53,6 +53,8 @@ It's built with SwiftUI and it is utilizing it for the vast majority of the app'
 ⏹️ Creating "Collab" rants
 
 ⏹️ Tag suggestions for rants (not available in SwiftRant (yet?))
+
+⏹️ Code block highlighting
 
 ✅ Community Projects page (using https://github.com/joewilliams007/jsonapi by joewilliams007)
 

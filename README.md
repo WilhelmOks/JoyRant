@@ -54,6 +54,8 @@ It's built with SwiftUI and it is utilizing it for the vast majority of the app'
 
 ⏹️ Tag suggestions for rants (not available in SwiftRant (yet?))
 
+✅ Community Projects page (using https://github.com/joewilliams007/jsonapi by joewilliams007)
+
 ## TestFlight
 
 https://testflight.apple.com/join/NoiaKmoN

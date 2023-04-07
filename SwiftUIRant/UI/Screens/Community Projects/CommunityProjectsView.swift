@@ -23,17 +23,37 @@ struct CommunityProjectsView: View {
     
     @ViewBuilder private func content() -> some View {
         ScrollView {
-            LazyVStack {
-                ForEach(viewModel.items, id: \.self) { item in
-                    VStack(spacing: 0) {
-                        CommunityProjectRowView(communityProject: item)
-                            .padding(.horizontal, 10)
-                            .padding(.bottom, 10)
-                        Divider()
+            VStack {
+                SegmentedPicker(
+                    selectedIndex: $viewModel.selectedTypeIndex,
+                    items: viewModel.pickableTypeItems(),
+                    spacing: 0
+                ) { segment in
+                    Text(segment.item.displayName)
+                        .font(baseSize: 17, weightDelta: 0)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 6)
+                        .background {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .foregroundColor(segment.selected ? .secondaryBackground : .primaryBackground)
+                                .animation(.easeOut, value: viewModel.selectedTypeIndex)
+                        }
+                        .padding(.vertical, 1)
+                }
+                .buttonStyle(.plain)
+                
+                LazyVStack {
+                    ForEach(viewModel.items, id: \.self) { item in
+                        VStack(spacing: 0) {
+                            CommunityProjectRowView(communityProject: item)
+                                .padding(.horizontal, 10)
+                                .padding(.bottom, 10)
+                            Divider()
+                        }
                     }
                 }
+                .padding(.vertical, 10)
             }
-            .padding(.vertical, 10)
         }
     }
 }

@@ -16,9 +16,9 @@ struct CommunityProject: Hashable {
     let relevantDevRantUrl: String
     let website: String
     let github: String
-    let language: String
+    let languages: [String]
     let active: Bool
-    let owner: String
+    let owners: [String]
 }
 
 // MARK: Codable
@@ -45,18 +45,24 @@ extension CommunityProject {
         var decoded: CommunityProject {
             .init(
                 title: title,
-                operatingSystems: os.split(whereSeparator: { $0 == "," || $0 == "&" }).map{ $0.trimmingCharacters(in: .whitespaces) },
+                operatingSystems: os.splitByComma(),
                 type: type,
                 addedDate: timestamp_added,
                 description: desc,
                 relevantDevRantUrl: relevant_dr_url,
                 website: website,
                 github: github,
-                language: language,
+                languages: language.splitByComma(),
                 active: active,
-                owner: owner
+                owners: owner.splitByComma()
             )
         }
+    }
+}
+
+private extension String {
+    func splitByComma() -> [String] {
+        self.split(whereSeparator: { $0 == "," }).map{ $0.trimmingCharacters(in: .whitespaces) }
     }
 }
 
@@ -78,9 +84,9 @@ extension CommunityProject {
             relevantDevRantUrl: randomString(in: 20...100),
             website: randomString(in: 20...50),
             github: randomString(in: 20...50),
-            language: randomString(in: 2...10),
+            languages: [randomString(in: 2...10)],
             active: .random(),
-            owner: randomString(in: 3...20)
+            owners: [randomString(in: 3...20)]
         )
     }
 }

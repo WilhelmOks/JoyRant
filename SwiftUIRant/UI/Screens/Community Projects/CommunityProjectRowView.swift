@@ -38,14 +38,14 @@ struct CommunityProjectRowView: View {
                     .foregroundColor(.primaryForeground)
             }
             
-            if !communityProject.owner.isEmpty {
-                HStack(alignment: .top, spacing: 3) {
+            if !communityProject.owners.isEmpty {
+                HStack(alignment: .top, spacing: 5) {
                     Text("Owner:")
                         .font(baseSize: 15, weight: .semibold)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.primaryForeground)
                     
-                    Text("\(communityProject.owner)")
+                    Text(communityProject.owners.joinedWithComma())
                         .font(baseSize: 15, weight: .regular)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.primaryForeground)
@@ -101,14 +101,14 @@ struct CommunityProjectRowView: View {
                 communityProject.type
             }
             
-            if !communityProject.language.isEmpty {
-                communityProject.language
+            if !communityProject.languages.isEmpty {
+                communityProject.languages.joinedWithComma()
             }
             
             communityProject.operatingSystems
         }
         
-        return String(properties.joined(separator: ", "))
+        return String(properties.joinedWithComma())
     }
 }
 
@@ -116,5 +116,11 @@ struct CommunityProjectRowView_Previews: PreviewProvider {
     static var previews: some View {
         CommunityProjectRowView(communityProject: .mockedRandom())
             .padding(10)
+    }
+}
+
+private extension Array where Element == String {
+    func joinedWithComma() -> String {
+        self.joined(separator: ", ")
     }
 }

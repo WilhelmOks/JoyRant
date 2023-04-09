@@ -57,8 +57,8 @@ import Foundation
             let searchTextMatches = searchText.isEmpty ||
                 item.title.localizedCaseInsensitiveContains(searchText) ||
                 item.description.localizedCaseInsensitiveContains(searchText) ||
-                item.owner.localizedCaseInsensitiveContains(searchText) ||
-                item.language.localizedCaseInsensitiveContains(searchText)
+                item.owners.contains { $0.localizedCaseInsensitiveContains(searchText) } ||
+                item.languages.contains { $0.localizedCaseInsensitiveContains(searchText) }
             
             let typeMatches = matches(filterItems: pickableTypeItems(), selectedFilterIndex: selectedTypeIndex, item: item, keyPath: \.type)
             let osMatches = matches(filterItems: pickableOsItems(), selectedFilterIndex: selectedOsIndex, item: item, keyPath: \.operatingSystems)

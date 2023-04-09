@@ -22,8 +22,14 @@ struct SettingsView: View {
             .alert($alertMessage)
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {
-                case .communityProjects:
-                    CommunityProjectsView()
+                case .rantDetails(rantId: let rantId, scrollToCommentWithId: let scrollToCommentWithId):
+                    RantDetailsView(
+                        sourceTab: .feed,
+                        viewModel: .init(
+                            rantId: rantId,
+                            scrollToCommentWithId: scrollToCommentWithId
+                        )
+                    )
                 case .userProfile(userId: let userId):
                     ProfileView(
                         sourceTab: .settings,
@@ -31,6 +37,8 @@ struct SettingsView: View {
                             userId: userId
                         )
                     )
+                case .communityProjects:
+                    CommunityProjectsView()
                 default:
                     EmptyView()
                 }
@@ -40,6 +48,18 @@ struct SettingsView: View {
     @ViewBuilder private func content() -> some View {
         Form {
             Group {
+                if let userId = LoginStore.shared.token?.authToken.userID {
+                    Section {
+                        NavigationLink(value: AppState.NavigationDestination.userProfile(userId: userId)) {
+                            Label {
+                                Text("Profile")
+                            } icon: {
+                                Image(systemName: "person")
+                            }
+                        }
+                    }
+                }
+                
                 Section {
                     Button {
                         DispatchQueue.main.async {
@@ -92,7 +112,11 @@ struct SettingsView: View {
                 
                 Section {
                     NavigationLink(value: AppState.NavigationDestination.communityProjects) {
-                        Text("Community Projects")
+                        Label {
+                            Text("Community Projects")
+                        } icon: {
+                            Image(systemName: "network")
+                        }
                     }
                 }
                 
@@ -119,6 +143,9 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             SettingsView()
+        }
+        .onAppear {
+            LoginStore.shared.token = .init(authToken: .init(tokenID: 0, tokenKey: "", expireTime: 0, userID: 0))
         }
     }
 }

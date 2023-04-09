@@ -104,9 +104,6 @@ struct RantDetailsView: View {
             } perform: { (comment: Comment) in
                 viewModel.comments.updateComment(comment)
             }
-            .onOpenURL { url in
-                AppState.shared.navigate(from: sourceTab, to: url)
-            }
     }
     
     @ViewBuilder private func content() -> some View {

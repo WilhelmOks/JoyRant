@@ -63,6 +63,9 @@ struct InternalView: View {
             .onReceive(broadcastEvent: .didReselectMainTab(.settings)) { _ in
                 appState.navigateToRoot(from: .settings)
             }
+            .onOpenURL { url in
+                AppState.shared.navigate(from: tab, to: url)
+            }
     }
     
     @ViewBuilder private func content() -> some View {

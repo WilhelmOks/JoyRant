@@ -143,32 +143,41 @@ struct NotificationsView: View {
     }
     
     @ViewBuilder private func categoryPicker() -> some View {
-        SegmentedPicker(selectedIndex: $viewModel.categoryTabIndex, items: viewModel.tabs, spacing: 0) { segment in
-            let unread = dataStore.unreadNotifications[segment.item.category] ?? 0 > 0
-            HStack(spacing: 4) {
-                if unread {
-                    Circle()
-                        .foregroundColor(.badgeBackground)
-                        .frame(width: 6, height: 6)
-                }
-                
-                Text(segment.item.displayName)
-                    .font(baseSize: 17, weightDelta: unread ? 2 : 0)
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 6)
-            .background {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .foregroundColor(segment.selected ? .secondaryBackground : .primaryBackground)
-                    .animation(.easeOut, value: viewModel.categoryTabIndex)
-            }
-            .padding(.vertical, 1)
+        SegmentedPicker(
+            selectedIndex: $viewModel.categoryTabIndex,
+            items: viewModel.tabs,
+            spacing: 0) { segment in
+                categoryPickerSegment(
+                    unread: dataStore.unreadNotifications[segment.item.category] ?? 0 > 0,
+                    selected: segment.selected,
+                    displayName: segment.item.displayName
+                )
         }
         .buttonStyle(.plain)
         .onChange(of: viewModel.categoryTabIndex) { newValue in
             viewModel.categoryTab = viewModel.tabs[newValue]
         }
-        //.disabled(viewModel.isLoading || viewModel.isRefreshing)
+    }
+    
+    @ViewBuilder private func categoryPickerSegment(unread: Bool, selected: Bool, displayName: String) -> some View {
+        HStack(spacing: 4) {
+            if unread {
+                Circle()
+                    .foregroundColor(.badgeBackground)
+                    .frame(width: 6, height: 6)
+            }
+            
+            Text(displayName)
+                .font(baseSize: 17, weightDelta: unread ? 2 : 0)
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+        .background {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .foregroundColor(selected ? .secondaryBackground : .primaryBackground)
+                .animation(.easeOut, value: viewModel.categoryTabIndex)
+        }
+        .padding(.vertical, 1)
     }
 }
 

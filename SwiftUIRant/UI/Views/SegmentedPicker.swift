@@ -20,7 +20,8 @@ struct SegmentedPicker<Item, ItemView: View>: View {
         let selected: Bool
     }
     
-    @ViewBuilder let itemView: (Segment) -> (ItemView)
+    //@ViewBuilder let itemView: (Segment) -> (ItemView) //this suddenly causes build errors. idk why.
+    let itemView: (Segment) -> (ItemView)
     
     var body: some View {
         if horizontalScrolling {

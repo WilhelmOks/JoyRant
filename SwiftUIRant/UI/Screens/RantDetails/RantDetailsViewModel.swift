@@ -99,7 +99,7 @@ final class RantDetailsViewModel: ObservableObject {
     
     func commentMentionSuggestions() -> [String] {
         let filtered = comments.filter { comment in
-            !comment.isFromLoggedInUser && rant?.userID != comment.userID
+            !comment.isFromLoggedInUser // && rant?.userID != comment.userID
         }
         let mentiones = filtered.map { "@" + $0.username }
         return Array(mentiones.uniqued())

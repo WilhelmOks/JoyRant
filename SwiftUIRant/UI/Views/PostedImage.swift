@@ -52,11 +52,13 @@ struct PostedImage: View {
                     
                     ProgressView()
                 }
+                .frame(maxHeight: 1000)
             case .success(let image):
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .frame(maxHeight: 1000)
             case .failure:
                 Image(systemName: "photo")
             @unknown default:

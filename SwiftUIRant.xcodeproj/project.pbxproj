@@ -89,6 +89,8 @@
 		EDCEF973293142900007C9BD /* String+EmptyToNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCEF972293142900007C9BD /* String+EmptyToNil.swift */; };
 		EDCEF9772933CA9C0007C9BD /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCEF9762933CA9C0007C9BD /* Pasteboard.swift */; };
 		EDCEF9792933DDBF0007C9BD /* Image+PlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCEF9782933DDBF0007C9BD /* Image+PlatformImage.swift */; };
+		EDD52B142B3C4C87005F04D3 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = EDD52B132B3C4C87005F04D3 /* SwiftUIIntrospect */; };
+		EDD52B182B3C4C87005F04D3 /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = EDD52B172B3C4C87005F04D3 /* SwiftUIIntrospect-Static */; };
 		EDE2288C28CE15040025EDB1 /* FeedRantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288B28CE15040025EDB1 /* FeedRantViewModel.swift */; };
 		EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2288D28D5E5670025EDB1 /* RantDetailsView.swift */; };
 		EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE2289028D5E5C90025EDB1 /* RantDetailsViewModel.swift */; };
@@ -190,12 +192,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD52B142B3C4C87005F04D3 /* SwiftUIIntrospect in Frameworks */,
 				ED2F3C4229E0148100A48877 /* ArrayBuilderModule in Frameworks */,
 				ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */,
 				ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */,
 				ED427DDA291AE07500C3B30A /* Algorithms in Frameworks */,
 				ED97D63128EB22C100CFC418 /* HexNSColor in Frameworks */,
 				ED9082B22A4AEFFE00B57203 /* SwiftRant in Frameworks */,
+				EDD52B182B3C4C87005F04D3 /* SwiftUIIntrospect-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +504,8 @@
 				ED427DD9291AE07500C3B30A /* Algorithms */,
 				ED2F3C4129E0148100A48877 /* ArrayBuilderModule */,
 				ED9082B12A4AEFFE00B57203 /* SwiftRant */,
+				EDD52B132B3C4C87005F04D3 /* SwiftUIIntrospect */,
+				EDD52B172B3C4C87005F04D3 /* SwiftUIIntrospect-Static */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -535,6 +541,7 @@
 				ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 				ED9082B02A4AEFFE00B57203 /* XCRemoteSwiftPackageReference "SwiftRant" */,
+				EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -891,6 +898,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/swiftui-introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -923,6 +938,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */;
 			productName = HexNSColor;
+		};
+		EDD52B132B3C4C87005F04D3 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+		EDD52B172B3C4C87005F04D3 /* SwiftUIIntrospect-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = "SwiftUIIntrospect-Static";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

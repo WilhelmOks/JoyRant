@@ -9,7 +9,11 @@ import Foundation
 import Combine
 import SwiftRant
 
-final class WritePostViewModel: ObservableObject {
+#if os(iOS)
+import UIKit
+#endif
+
+final class WritePostViewModel: NSObject, ObservableObject {
     let kind: WriteKind
     let mentionSuggestions: [String]
     let onSubmitted: () -> ()
@@ -21,6 +25,7 @@ final class WritePostViewModel: ObservableObject {
     var selectedImageData: Data? = nil
 
     let dismiss = PassthroughSubject<Void, Never>()
+    let textCursorChanged = PassthroughSubject<Void, Never>()
     
     init(kind: WriteKind, mentionSuggestions: [String] = [], onSubmitted: @escaping () -> ()) {
         self.kind = kind
@@ -109,3 +114,23 @@ extension WritePostViewModel {
         }
     }
 }
+
+#if os(iOS)
+extension WritePostViewModel: UITextInputDelegate {
+    func selectionWillChange(_ textInput: UITextInput?) {
+        
+    }
+    
+    func selectionDidChange(_ textInput: UITextInput?) {
+        textCursorChanged.send()
+    }
+    
+    func textWillChange(_ textInput: UITextInput?) {
+        
+    }
+    
+    func textDidChange(_ textInput: UITextInput?) {
+        textCursorChanged.send()
+    }
+}
+#endif

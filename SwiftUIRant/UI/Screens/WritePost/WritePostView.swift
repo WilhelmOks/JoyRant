@@ -8,6 +8,7 @@
 import SwiftUI
 import PhotosUI
 import CachedAsyncImage
+import SwiftUIIntrospect
 
 #if os(iOS)
 import UIKit
@@ -27,6 +28,11 @@ struct WritePostView: View {
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     
     @State private var isLoadingImage = false
+    
+    #if os(iOS)
+    @State private var uiTextView: UITextView?
+    @State private var cursorPosition = 0
+    #endif
     
     enum FocusedControl {
         case content
@@ -95,6 +101,14 @@ struct WritePostView: View {
     @ViewBuilder private func content() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             TextEditor(text: $dataStore.writePostContent)
+                #if os(iOS)
+                .introspect(.textEditor, on: .iOS(.v16, .v17)) { uiTextView in
+                    DispatchQueue.main.async {
+                        self.uiTextView = uiTextView
+                        self.uiTextView?.inputDelegate = viewModel
+                    }
+                }
+                #endif
                 .font(.callout)
                 .focused($focusedControl, equals: .content)
                 .textFieldStyle(.plain)
@@ -117,6 +131,18 @@ struct WritePostView: View {
                         .foregroundColor(.secondaryForeground.opacity(0.3))
                 }
                 .onTapGesture {}
+                #if os(iOS)
+                .onChange(of: uiTextView?.selectedTextRange) { range in
+                    if let uiTextView, let range {
+                        cursorPosition = uiTextView.offset(from: uiTextView.beginningOfDocument, to: range.start)
+                    }
+                }
+                .onReceive(viewModel.textCursorChanged) { _ in
+                    if let uiTextView, let range = uiTextView.selectedTextRange {
+                        cursorPosition = uiTextView.offset(from: uiTextView.beginningOfDocument, to: range.start)
+                    }
+                }
+                #endif
             
             HStack(alignment: .top, spacing: 14) {
                 remainingCharacters()
@@ -152,7 +178,24 @@ struct WritePostView: View {
             HStack {
                 ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
                     Button {
-                        DataStore.shared.writePostContent.append(suggestion + " ")
+                        //DataStore.shared.writePostContent.append(suggestion + " ")
+                        
+                        #if os(iOS)
+                        let oldCursorPosition = cursorPosition
+                        
+                        dataStore.writePostContent.insert(
+                            contentsOf: suggestion,
+                            at: dataStore.writePostContent.index(
+                                dataStore.writePostContent.startIndex,
+                                offsetBy: cursorPosition
+                            )
+                        )
+                        
+                        DispatchQueue.main.async {
+                            uiTextView?.selectedRange.location = oldCursorPosition + suggestion.count
+                            uiTextView?.selectedRange.length = 0
+                        }
+                        #endif
                     } label: {
                         Text(suggestion)
                             .padding(.vertical, 8)

@@ -10,6 +10,10 @@ JoyRant is broadly similar to the official devRant app but tries to improve the 
 
 It's built with SwiftUI and it is utilizing it for the vast majority of the app's functions and UI.
 
+## Support
+
+Please file an issue in the "Issues" tab or contact me at wilhelm.oks@gmx.de
+
 ## Current state of development
 
 ✅ Log in and log out

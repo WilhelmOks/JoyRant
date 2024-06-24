@@ -61,9 +61,9 @@ extension AttributedString {
             // A rant link looks like this:
             // https://devrant.com/rants/<rant-id>/first-few-letters-of-rant-content
             // Convert it into this:
-            // joyrant://rant/<rant-id>
+            // joydev://rant/<rant-id>
             // so that it can be opened in this app.
-            let withCustomScheme = link.replacing(rantPrefix, with: "joyrant://rant/")
+            let withCustomScheme = link.replacing(rantPrefix, with: "joydev://rant/")
             let components = withCustomScheme.split(separator: "/", omittingEmptySubsequences: false)
             let joinedUntilRantId = components.prefix(upTo: 4).joined(separator: "/")
             return URL(string: joinedUntilRantId)
@@ -73,7 +73,7 @@ extension AttributedString {
     }
     
     private static func mentionUrl(userId: String) -> URL? {
-        return URL(string: "joyrant://profile/\(userId)")
+        return URL(string: "joydev://profile/\(userId)")
     }
 }
 

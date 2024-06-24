@@ -9,7 +9,7 @@ import Foundation
 
 struct URLHandler {
     func navigationDestination(forUrl url: URL) -> AppState.NavigationDestination? {
-        guard url.scheme == "joyrant" else { return nil }
+        guard url.scheme == "joydev" else { return nil }
         
         switch url.host {
         case "rant":

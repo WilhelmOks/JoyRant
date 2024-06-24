@@ -1,4 +1,4 @@
-# Privacy Policy of the app JoyRant
+# Privacy Policy of the app JoyDev
 
 The app itself doesn't collect or share any private data.
 

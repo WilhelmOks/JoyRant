@@ -101,7 +101,8 @@ final class RantDetailsViewModel: ObservableObject {
         let filtered = comments.filter { comment in
             !comment.isFromLoggedInUser // && rant?.userID != comment.userID
         }
-        let mentiones = filtered.map { "@" + $0.username }
+        let rantAuthorMention = "@" + (rant?.username ?? "")
+        let mentiones = [rantAuthorMention] + filtered.map { "@" + $0.username }
         return Array(mentiones.uniqued())
     }
 }

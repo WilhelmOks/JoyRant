@@ -1,4 +1,4 @@
-# JoyDev
+# JoyRant
 
 An unofficial devRant client for iOS and macOS.
 
@@ -6,13 +6,9 @@ The goal of this project is to make an app that has the most commonly used devRa
 
 Features like registration or avatar customization are not considered commonly used and are out of scope for now.
 
-JoyDev is broadly similar to the official devRant app but tries to improve the UI/UX in many places.
+JoyRant is broadly similar to the official devRant app but tries to improve the UI/UX in many places.
 
 It's built with SwiftUI and it is utilizing it for the vast majority of the app's functions and UI.
-
-## Support
-
-Please file an issue in the "Issues" tab or contact me at wilhelm.oks@gmx.de
 
 ## Current state of development
 

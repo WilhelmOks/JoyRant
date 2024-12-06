@@ -8,14 +8,14 @@
 import Foundation
 import SwiftRant
 
-final class DataLoader: ObservableObject {
+@MainActor final class DataLoader: ObservableObject {
     static let shared = DataLoader()
     
     private let dataStore = DataStore.shared
     
     private init() {}
     
-    @MainActor func loadFeed(_ sort: RantFeed.Sort) async throws {
+    func loadFeed(_ sort: RantFeed.Sort) async throws {
         let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = feed.set
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
@@ -29,7 +29,7 @@ final class DataLoader: ObservableObject {
         }
     }
     
-    @MainActor func loadMoreFeed(_ sort: RantFeed.Sort) async throws {
+    func loadMoreFeed(_ sort: RantFeed.Sort) async throws {
         let rantsToSkip = dataStore.unfilteredRantsInFeed.count
         let moreFeed = try await Networking.shared.rants(sort: sort, skip: rantsToSkip, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = moreFeed.set
@@ -40,7 +40,7 @@ final class DataLoader: ObservableObject {
         }
     }
     
-    @MainActor func reloadFeed(_ sort: RantFeed.Sort) async throws {
+    func reloadFeed(_ sort: RantFeed.Sort) async throws {
         dataStore.clearFeedForRefresh()
         let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
         dataStore.currentFeedSession = feed.set
@@ -55,7 +55,7 @@ final class DataLoader: ObservableObject {
         }
     }
     
-    @MainActor private func addMoreRantsToFeed(_ rants: [RantInFeed]) {
+    private func addMoreRantsToFeed(_ rants: [RantInFeed]) {
         for rant in rants {
             // According to OmerFlame, duplicates are normal and should be filtered out by the app.
             let isDuplicate = dataStore.rantsInFeed.first(where: { $0.id == rant.id }) != nil
@@ -69,7 +69,7 @@ final class DataLoader: ObservableObject {
         }
     }
     
-    @MainActor func loadNumbersOfUnreadNotifications() async throws {
+    func loadNumbersOfUnreadNotifications() async throws {
         dataStore.unreadNotifications = try await Networking.shared.getNumbersOfUnreadNotifications()
         dlog("Updated number of unread notifications: (\(dataStore.unreadNotifications[.all] ?? 0))")
     }

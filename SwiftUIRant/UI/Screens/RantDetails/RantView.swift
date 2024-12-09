@@ -15,6 +15,13 @@ struct RantView: View {
     
     @State private var isDeleteConfirmationAlertPresented = false
     
+    private struct TextSelectionPopoverItem: Identifiable {
+        let id: UUID = UUID()
+        let text: String
+    }
+    
+    @State private var textSelectionPopoverItem: TextSelectionPopoverItem?
+    
     var body: some View {
         content()
         .padding(.top, 10)
@@ -63,10 +70,26 @@ struct RantView: View {
             
             Text(text)
                 .font(baseSize: 16)
-                .textSelection(.enabled)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
+                #if os(iOS)
+                .onLongPressGesture {
+                    textSelectionPopoverItem = .init(text: viewModel.rant.text)
+                }
+                .popover(item: $textSelectionPopoverItem) { item in
+                    TextEditor(text: .constant(item.text))
+                        .padding(.top, 8)
+                        .padding(.horizontal, 4)
+                        .ignoresSafeArea(edges: .bottom)
+                        .introspect(.textEditor, on: .iOS(.v16, .v17, .v18)) { editor in
+                            editor.isEditable = false
+                        }
+                        .presentationDetents([.medium, .large])
+                }
+                #else
+                .textSelection(.enabled)
+                #endif
             
             image()
             

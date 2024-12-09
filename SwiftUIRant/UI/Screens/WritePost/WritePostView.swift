@@ -102,7 +102,7 @@ struct WritePostView: View {
         VStack(alignment: .leading, spacing: 10) {
             TextEditor(text: $dataStore.writePostContent)
                 #if os(iOS)
-                .introspect(.textEditor, on: .iOS(.v16, .v17)) { uiTextView in
+                .introspect(.textEditor, on: .iOS(.v16, .v17, .v18)) { uiTextView in
                     DispatchQueue.main.async {
                         self.uiTextView = uiTextView
                         self.uiTextView?.inputDelegate = viewModel

@@ -74,6 +74,7 @@ struct RantView: View {
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
                 #if os(iOS)
+                .onTapGesture { } //this prevents onLongPressGesture from interrupting the scrolling gesture on iOS 16
                 .onLongPressGesture {
                     textSelectionPopoverItem = .init(text: viewModel.rant.text)
                 }

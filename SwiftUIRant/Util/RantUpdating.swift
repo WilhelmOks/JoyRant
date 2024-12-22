@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
-extension Array where Element == RantInFeed {
+extension Array where Element == Rant {
     @discardableResult mutating func updateRant(_ rant: Rant) -> Bool {
         if let index = self.firstIndex(where: { $0.id == rant.id }) {
-            self[index] = self[index].withData(fromRant: rant)
+            self[index] = rant //self[index].withData(fromRant: rant)
             return true
         }
         return false

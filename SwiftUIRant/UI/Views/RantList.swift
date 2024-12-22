@@ -6,19 +6,19 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct RantList: View {
     let sourceTab: InternalView.Tab
-    let rants: [RantInFeed]
+    let rants: [Rant]
     var isLoadingMore = false
     var loadMore: (() -> ())?
     
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 0) {
-            ForEach(rants, id: \.uuid) { rant in
+            ForEach(rants, id: \.id) { rant in
                 row(rant: rant)
-                    .id(rant.uuid)
+                    .id(rant.id)
             }
             
             Button {
@@ -34,7 +34,7 @@ struct RantList: View {
         }
     }
     
-    @MainActor @ViewBuilder func row(rant: RantInFeed) -> some View {
+    @MainActor @ViewBuilder func row(rant: Rant) -> some View {
         VStack(spacing: 0) {
             FeedRantView(
                 sourceTab: sourceTab,

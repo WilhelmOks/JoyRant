@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct FeedRantView: View {
     let sourceTab: InternalView.Tab
@@ -61,7 +61,7 @@ struct FeedRantView: View {
                 Spacer()
                 
                 CreationTimeView(
-                    createdTime: viewModel.rant.createdTime,
+                    createdTime: viewModel.rant.created,
                     isEdited: false
                 )
             }
@@ -85,7 +85,7 @@ struct FeedRantView: View {
     }
     
     @ViewBuilder private func image() -> some View {
-        if let image = viewModel.rant.attachedImage {
+        if let image = viewModel.rant.image {
             PostedImage(image: image, opensSheet: false)
         }
     }
@@ -105,7 +105,7 @@ struct FeedRantView: View {
             Image(systemName: "bubble.right")
                 .font(baseSize: 12)
             
-            Text("\(viewModel.rant.commentCount)")
+            Text("\(viewModel.rant.numberOfComments)")
                 .font(baseSize: 12, weight: .medium)
         }
         .foregroundColor(.secondaryForeground)

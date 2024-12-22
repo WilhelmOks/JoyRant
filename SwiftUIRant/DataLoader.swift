@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class DataLoader: ObservableObject {
     static let shared = DataLoader()
@@ -17,7 +17,7 @@ import SwiftRant
     
     func loadFeed(_ sort: RantFeed.Sort) async throws {
         let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
-        dataStore.currentFeedSession = feed.set
+        dataStore.currentFeedSession = feed.sessionHash
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.unfilteredRantsInFeed = []
         dataStore.unfilteredRantsInFeed = feed.rants
@@ -32,7 +32,7 @@ import SwiftRant
     func loadMoreFeed(_ sort: RantFeed.Sort) async throws {
         let rantsToSkip = dataStore.unfilteredRantsInFeed.count
         let moreFeed = try await Networking.shared.rants(sort: sort, skip: rantsToSkip, session: dataStore.currentFeedSession)
-        dataStore.currentFeedSession = moreFeed.set
+        dataStore.currentFeedSession = moreFeed.sessionHash
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         addMoreRantsToFeed(moreFeed.rants)
         Task {
@@ -43,7 +43,7 @@ import SwiftRant
     func reloadFeed(_ sort: RantFeed.Sort) async throws {
         dataStore.clearFeedForRefresh()
         let feed = try await Networking.shared.rants(sort: sort, session: dataStore.currentFeedSession)
-        dataStore.currentFeedSession = feed.set
+        dataStore.currentFeedSession = feed.sessionHash
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = []
         dataStore.rantsInFeed = feed.rants
@@ -55,7 +55,7 @@ import SwiftRant
         }
     }
     
-    private func addMoreRantsToFeed(_ rants: [RantInFeed]) {
+    private func addMoreRantsToFeed(_ rants: [Rant]) {
         for rant in rants {
             // According to OmerFlame, duplicates are normal and should be filtered out by the app.
             let isDuplicate = dataStore.rantsInFeed.first(where: { $0.id == rant.id }) != nil

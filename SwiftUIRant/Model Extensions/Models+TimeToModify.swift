@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
-//TODO: implement this in SwiftRant
+//TODO: implement this in SwiftDevRant
 
 private let timeToModify: TimeInterval = 60 * 5 // 5 minutes
 private let timeToModifyWithDpp: TimeInterval = 60 * 30 // 30 minutes
@@ -16,8 +16,8 @@ private let timeToModifyWithDpp: TimeInterval = 60 * 30 // 30 minutes
 extension Rant {
     var canEdit: Bool {
         let now = Date().timeIntervalSince1970
-        let timeOfCreation = TimeInterval(createdTime)
-        let timeWindow = isUserDPP == 1 ? timeToModifyWithDpp : timeToModify
+        let timeOfCreation = created.timeIntervalSince1970
+        let timeWindow = isUserSupporter ? timeToModifyWithDpp : timeToModify
         return now - timeOfCreation < timeWindow
     }
 }
@@ -25,8 +25,8 @@ extension Rant {
 extension Comment {
     var canEdit: Bool {
         let now = Date().timeIntervalSince1970
-        let timeOfCreation = TimeInterval(createdTime)
-        let timeWindow = isUserDPP == 1 ? timeToModifyWithDpp : timeToModify
+        let timeOfCreation = created.timeIntervalSince1970
+        let timeWindow = isUserSupporter ? timeToModifyWithDpp : timeToModify
         return now - timeOfCreation < timeWindow
     }
 }

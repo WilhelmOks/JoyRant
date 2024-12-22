@@ -29,23 +29,29 @@ import Foundation
     @Published var categoryTabIndex: Int = 0
     
     private var isOwnProfile: Bool {
-        LoginStore.shared.token?.authToken.userID == userId
+        LoginStore.shared.token?.userId == userId
     }
     
     // This will be visible as a redacted view while the actual profile data is loading.
     let placeholderProfile: UserProfile = .init(
-        username: "Placeholder",
-        score: 100,
-        createdTime: 0,
-        about: "This is a placeholder text that tells something about the user. It should be long enough to span a few lines.",
-        location: "Placeholder Location",
-        skills: "first skill\nsecond\nand third scill",
-        github: nil,
-        website: "https://www.website.com",
-        avatar: .init(backgroundColor: "999999", avatarImage: nil),
-        avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),
-        isSupporter: false,
-        subscribed: false,
+        profile: .init(
+            username: "Placeholder",
+            score: 100,
+            created: Date(),
+            about: "This is a placeholder text that tells something about the user. It should be long enough to span a few lines.",
+            location: "Placeholder Location",
+            skills: "first skill\nsecond\nand third skill",
+            github: nil,
+            website: "https://www.website.com",
+            content: .init(
+                elements: .init(rants: [], upvotedRants: [], comments: [], favorites: [], viewed: []),
+                numbers: .init(rants: 100, upvotedRants: 1000, comments: 500, favorites: 30, collaborations: 0)
+            ),
+            avatarLarge: .init(colorHex: "999999", imageUrlPath: nil),
+            avatarSmall: .init(colorHex: "999999", imageUrlPath: nil),
+            devRantSupporter: false,
+            subscribed: false
+        ),
         content: .init(
             counts: [.rants: 100, .upvoted: 1000, .comments: 500, .favorites: 30, .collabs: 0],
             rants: [.mocked2()],
@@ -95,7 +101,7 @@ import Foundation
         
         do {
             profile = .init(profile: try await Networking.shared.userProfile(userId: userId))
-            title = profile?.username ?? ""
+            title = profile?.profile.username ?? ""
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -113,7 +119,7 @@ import Foundation
             let skip = currentLoadedContentCount(tab: tab)
             let moreProfile = try await Networking.shared.userProfile(userId: userId, contentType: contentType, skip: skip)
             profile?.append(profile: moreProfile)
-            title = profile?.username ?? ""
+            title = profile?.profile.username ?? ""
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -137,18 +143,24 @@ import Foundation
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)
             profile = .init(
-                username: "Spongeblob",
-                score: 100,
-                createdTime: 0,
-                about: "This is a mocked text that tells something about the user. It should be long enough to span a few lines.",
-                location: "Bikini Bottom",
-                skills: "first skill\nsecond\nand third scill",
-                github: "BlobberSponge",
-                website: "https://www.example.com",
-                avatar: .init(backgroundColor: "999999", avatarImage: nil),
-                avatarSmall: .init(backgroundColor: "999999", avatarImage: nil),
-                isSupporter: false,
-                subscribed: true,
+                profile: .init(
+                    username: "Spongeblob",
+                    score: 100,
+                    created: Date(),
+                    about: "This is a mocked text that tells something about the user. It should be long enough to span a few lines.",
+                    location: "Bikini Bottom",
+                    skills: "first skill\nsecond\nand third skill",
+                    github: "BlobberSponge",
+                    website: "https://www.example.com",
+                    content: .init(
+                        elements: .init(rants: [], upvotedRants: [], comments: [], favorites: [], viewed: []),
+                        numbers: .init(rants: 100, upvotedRants: 1000, comments: 500, favorites: 30, collaborations: 0)
+                    ),
+                    avatarLarge: .init(colorHex: "999999", imageUrlPath: nil),
+                    avatarSmall: .init(colorHex: "999999", imageUrlPath: nil),
+                    devRantSupporter: false,
+                    subscribed: true
+                ),
                 content: .init(
                     counts: [.rants: 100, .upvoted: 1000, .comments: 500, .favorites: 30, .collabs: 0],
                     rants: [.mocked2()],
@@ -158,7 +170,7 @@ import Foundation
                     viewed: []
                 )
             )
-            title = profile?.username ?? ""
+            title = profile?.profile.username ?? ""
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -172,8 +184,8 @@ import Foundation
     
     func subscribe() async {
         do {
-            try await Networking.shared.subscribe(userId: userId)
-            profile?.subscribed = true
+            try await Networking.shared.subscribe(userId: userId, subscribe: true)
+            profile?.profile.subscribed = true
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -181,8 +193,8 @@ import Foundation
     
     func unsubscribe() async {
         do {
-            try await Networking.shared.unsubscribe(userId: userId)
-            profile?.subscribed = false
+            try await Networking.shared.subscribe(userId: userId, subscribe: false)
+            profile?.profile.subscribed = false
         } catch {
             alertMessage = .presentedError(error)
         }

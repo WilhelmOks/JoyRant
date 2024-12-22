@@ -5,6 +5,6 @@
 //  Created by Wilhelm Oks on 11.10.22.
 //
 
-import SwiftRant
+import SwiftDevRant
 
-typealias SwiftRantNotification = Notification
+typealias DevRantNotification = Notification

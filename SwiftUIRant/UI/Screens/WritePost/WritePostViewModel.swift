@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import SwiftRant
+import SwiftDevRant
 
 #if os(iOS)
 import UIKit
@@ -61,16 +61,17 @@ final class WritePostViewModel: NSObject, ObservableObject {
             
             switch kind {
             case .postRant:
-                let newRantId = try await Networking.shared.postRant(type: rantKind.rantType, content: content, tags: tags, image: selectedImageData)
+                let newRantId = try await Networking.shared.postRant(kind: rantKind.rantType, text: content, tags: tags, image: selectedImageData)
                 AppState.shared.navigate(from: .feed, to: .rantDetails(rantId: newRantId))
             case .editRant(rant: let rant):
                 //We can not change the rant type when editing, so we pass the standard .rant type. The rant type seems to be determined by the tags.
-                try await Networking.shared.editRant(rantId: rant.id, type: .rant, content: content, tags: tags, image: selectedImageData)
+                //TODO: remove the `kind` parameter from editRant()
+                try await Networking.shared.editRant(rantId: rant.id, kind: .rant, text: content, tags: tags, image: selectedImageData)
             case .postComment(rantId: let rantId):
-                try await Networking.shared.postComment(rantId: rantId, content: content, image: selectedImageData)
+                try await Networking.shared.postComment(rantId: rantId, text: content, image: selectedImageData)
             case .editComment(comment: let comment):
                 guard comment.canEdit else { throw SwiftUIRantError.timeWindowForEditMissed }
-                try await Networking.shared.editComment(commentId: comment.id, content: content, image: selectedImageData)
+                try await Networking.shared.editComment(commentId: comment.id, text: content, image: selectedImageData)
             }
             
             DataStore.shared.writePostContent = ""
@@ -103,7 +104,7 @@ extension WritePostViewModel {
         
         var id: Int { rawValue }
         
-        var rantType: Rant.RantType {
+        var rantType: Rant.Kind {
             switch self {
             case .rant:     return .rant
             case .jokeMeme: return .meme

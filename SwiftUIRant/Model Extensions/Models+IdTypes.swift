@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 extension Rant {
     typealias ID = Int

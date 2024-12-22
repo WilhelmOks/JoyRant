@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class AllWeekliesViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isRefreshing = false
     @Published var alertMessage: AlertMessage = .none()
-    @Published var weeks: [WeeklyList.Week] = []
+    @Published var weeks: [Weekly] = []
     
     init() {
         Task {
@@ -24,8 +24,7 @@ import SwiftRant
         isLoading = true
         
         do {
-            let weeklyList = try await Networking.shared.weekyList()
-            weeks = weeklyList.weeks
+            weeks = try await Networking.shared.weekyList()
             
             Task {
                 try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
@@ -43,8 +42,7 @@ import SwiftRant
         isRefreshing = true
         
         do {
-            let weeklyList = try await Networking.shared.weekyList()
-            weeks = weeklyList.weeks
+            weeks = try await Networking.shared.weekyList()
             
             Task {
                 try? await DataLoader.shared.loadNumbersOfUnreadNotifications()

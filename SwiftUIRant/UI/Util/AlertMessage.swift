@@ -7,7 +7,8 @@
 
 import Foundation
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
+import KreeRequest
 
 struct AlertMessage {
     var isPresented: Bool
@@ -26,19 +27,26 @@ extension AlertMessage {
     }
     
     static func presentedError(_ error: Error) -> Self {
-        let message: String
+        let localizedMessage: String
+        
         switch error {
         case is CancellationError:
             return .none()
         case let swiftUIRantError as SwiftUIRantError:
-            message = swiftUIRantError.message
-        case let swiftRantError as SwiftRantError:
-            message = swiftRantError.message
+            localizedMessage = swiftUIRantError.message
+        case let swiftRantError as KreeRequest.Error<DevRantApiError.CodingData>:
+            switch swiftRantError {
+            case .apiError(let apiError):
+                localizedMessage = "DevRant API Error: \(apiError.decoded.message)"
+            default:
+                localizedMessage = swiftRantError.description
+            }
         default:
-            message = error.localizedDescription
+            localizedMessage = error.localizedDescription
         }
-        dlog("Error: \(message)")
-        return presentedError(message: message)
+        
+        dlog("Error: \(error)")
+        return presentedError(message: localizedMessage)
     }
     
     static func presentedMessage(_ message: String) -> Self {

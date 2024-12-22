@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct UserPanel: View {
-    let avatar: Rant.UserAvatar
+    let avatar: User.Avatar
     let name: String
     let score: Int
     let isSupporter: Bool
@@ -53,7 +53,7 @@ struct UserPanel: View {
     }
     
     private func userColor() -> Color {
-        Color(hexString: avatar.backgroundColor) ?? .secondaryForeground
+        Color(hexString: avatar.colorHex) ?? .secondaryForeground
     }
 }
 
@@ -62,8 +62,8 @@ struct UserPanel_Previews: PreviewProvider {
         VStack(spacing: 20) {
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "88ee88",
-                    avatarImage: nil
+                    colorHex: "88ee88",
+                    imageUrlPath: nil
                 ),
                 name: "Walter White",
                 score: 123,
@@ -72,8 +72,8 @@ struct UserPanel_Previews: PreviewProvider {
             
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "88ee88",
-                    avatarImage: nil
+                    colorHex: "88ee88",
+                    imageUrlPath: nil
                 ),
                 name: "Walter White",
                 score: 123,
@@ -82,8 +82,8 @@ struct UserPanel_Previews: PreviewProvider {
             
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "88ee88",
-                    avatarImage: nil
+                    colorHex: "88ee88",
+                    imageUrlPath: nil
                 ),
                 name: "Walter White",
                 score: -17,
@@ -92,8 +92,8 @@ struct UserPanel_Previews: PreviewProvider {
             
             UserPanel(
                 avatar: .init(
-                    backgroundColor: "88ee88",
-                    avatarImage: nil
+                    colorHex: "88ee88",
+                    imageUrlPath: nil
                 ),
                 name: "Walter White",
                 score: 0,

@@ -58,13 +58,13 @@ struct WeekRantsView: View {
     
     @ViewBuilder private func weekInfo() -> some View {
         VStack(spacing: 4) {
-            Text(viewModel.week.prompt)
+            Text(viewModel.week.topic)
                 .font(baseSize: 15, weightDelta: 1)
                 .multilineTextAlignment(.leading)
                 .fillHorizontally(.leading)
                 .foregroundColor(.primaryForeground)
             
-            Text(AbsoluteDateFormatter.shared.string(fromDevRantUS: viewModel.week.date))
+            Text(AbsoluteDateFormatter.shared.string(fromDevRantUS: viewModel.week.formattedDate))
                 .font(baseSize: 13, weightDelta: 1)
                 .multilineTextAlignment(.leading)
                 .fillHorizontally(.leading)
@@ -81,9 +81,9 @@ struct WeekRantsView_Previews: PreviewProvider {
             viewModel: .init(
                 week: .init(
                     week: 123,
-                    prompt: "Reasons to dislike JS?",
-                    date: "12/31/22",
-                    rantCount: 17
+                    topic: "Reasons to dislike JS?",
+                    formattedDate: "12/31/22",
+                    numberOfRants: 17
                 )
             )
         )

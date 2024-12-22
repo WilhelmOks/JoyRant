@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 enum BroadcastEvent: Equatable {
     case shouldUpdateRantInFeed(rantId: Int)

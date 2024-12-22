@@ -11,7 +11,7 @@ struct CommunityProject: Hashable {
     let title: String
     let operatingSystems: [String]
     let type: String
-    let addedDate: Int
+    let addedDate: Date
     let description: String
     let relevantDevRantUrl: String
     let website: String
@@ -47,7 +47,7 @@ extension CommunityProject {
                 title: title,
                 operatingSystems: os.splitByComma(),
                 type: type,
-                addedDate: timestamp_added,
+                addedDate: Date(timeIntervalSince1970: TimeInterval(timestamp_added)),
                 description: desc,
                 relevantDevRantUrl: relevant_dr_url,
                 website: website,
@@ -79,7 +79,7 @@ extension CommunityProject {
             title: randomString(in: 3...30),
             operatingSystems: [randomString(in: 2...10)],
             type: randomString(in: 4...20),
-            addedDate: 0,
+            addedDate: Date(),
             description: randomString(in: 3...100),
             relevantDevRantUrl: randomString(in: 20...100),
             website: randomString(in: 20...50),

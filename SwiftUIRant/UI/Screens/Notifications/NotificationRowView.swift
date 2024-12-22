@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct NotificationRowView: View {
-    let item: Notifications.MappedNotificationItem
+    let item: NotificationFeed.MappedNotificationItem
     
     var body: some View {
         HStack(spacing: 10) {
@@ -32,7 +32,7 @@ struct NotificationRowView: View {
             Spacer()
             
             VStack(alignment: .trailing, spacing: 8) {
-                CreationTimeView(createdTime: item.createdTime, isEdited: false)
+                CreationTimeView(createdTime: item.created, isEdited: false)
                                 
                 icon()
                     .foregroundColor(.secondaryForeground)
@@ -42,40 +42,37 @@ struct NotificationRowView: View {
     }
     
     private func message() -> String {
-        switch item.notificationType {
+        switch item.notificationKind {
         case .rantUpvote:
             return "++'d your rant"
         case .commentUpvote:
             return "++'d your comment"
-        case .commentContent:
+        case .newCommentInOwnRant:
             return "posted a comment in your rant"
-        case .commentDiscuss:
+        case .newComment:
             return "posted a comment"
-        case .commentMention:
+        case .mentionInComment:
             return "mentioned you"
-        case .rantSub:
+        case .newRantOfSubscribedUser:
             return "posted a rant"
         }
     }
     
     @ViewBuilder private func icon() -> some View {
-        switch item.notificationType {
+        switch item.notificationKind {
         case .rantUpvote:
             Text("++")
                 .font(baseSize: 13, weightDelta: 1)
         case .commentUpvote:
             Text("++")
                 .font(baseSize: 13, weightDelta: 1)
-        case .commentContent:
+        case .newComment, .newCommentInOwnRant:
             Image(systemName: "bubble.right")
                 .font(baseSize: 12)
-        case .commentDiscuss:
-            Image(systemName: "bubble.right")
-                .font(baseSize: 12)
-        case .commentMention:
+        case .mentionInComment:
             Text("@")
                 .font(baseSize: 14, weightDelta: 1)
-        case .rantSub:
+        case .newRantOfSubscribedUser:
             Image(systemName: "bubble.right.fill")
                 .font(baseSize: 12)
         }
@@ -83,13 +80,13 @@ struct NotificationRowView: View {
 }
 
 private struct ExampleView: View {
-    let notificationTypes: [NotificationType] = [
+    let notificationTypes: [DevRantNotification.Kind] = [
         .rantUpvote,
         .commentUpvote,
-        .commentContent,
-        .commentDiscuss,
-        .commentMention,
-        .rantSub,
+        .newCommentInOwnRant,
+        .newComment,
+        .mentionInComment,
+        .newRantOfSubscribedUser,
     ]
     
     var body: some View {
@@ -106,19 +103,19 @@ private struct ExampleView: View {
         }
     }
     
-    @ViewBuilder private func row(_ notificationType: NotificationType) -> some View {
+    @ViewBuilder private func row(_ notificationType: DevRantNotification.Kind) -> some View {
         NotificationRowView(
             item: .init(
                 rantId: 13,
                 commentId: 14,
                 userId: 1,
                 userAvatar: .init(
-                    backgroundColor: "99cc99",
-                    avatarImage: "v-37_c-3_b-6_g-m_9-1_1-4_16-3_3-4_8-1_7-1_5-1_12-4_6-102_10-1_2-39_22-2_15-10_11-1_4-1.jpg"
+                    colorHex: "99cc99",
+                    imageUrlPath: "v-37_c-3_b-6_g-m_9-1_1-4_16-3_3-4_8-1_7-1_5-1_12-4_6-102_10-1_2-39_22-2_15-10_11-1_4-1.jpg"
                 ),
                 userName: "ShorelockHelms",
-                notificationType: notificationType,
-                createdTime: Int(Date().addingTimeInterval(60 * -5).timeIntervalSince1970),
+                notificationKind: notificationType,
+                created: Date().addingTimeInterval(60 * -5),
                 isRead: false
             )
         )

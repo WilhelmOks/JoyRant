@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct RantDetailsView: View {
     @Environment(\.dismiss) private var dismiss
@@ -133,7 +133,7 @@ struct RantDetailsView: View {
                                     }
                                 )
                                 .padding(.bottom, 10)
-                                .id(rant.uuid)
+                                .id(rant.id)
                                 
                                 LazyVStack(spacing: 0) {
                                     ForEach(viewModel.comments, id: \.id) { comment in
@@ -155,7 +155,7 @@ struct RantDetailsView: View {
                                                 }
                                             )
                                             .padding(.bottom, 10)
-                                            .id(comment.uuid)
+                                            .id(comment.id)
                                         }
                                         .id("comment_\(comment.id)")
                                     }
@@ -267,7 +267,7 @@ struct RantDetailsView: View {
                 message: nil,
                 buttons: [
                     .default(Text("Copy Rant Link")) {
-                        if let link = viewModel.rant?.link {
+                        if let link = viewModel.rant?.linkToRant {
                             let devRantLink = "https://devrant.com/\(link)"
                             Pasteboard.shared.copy(devRantLink)
                         }

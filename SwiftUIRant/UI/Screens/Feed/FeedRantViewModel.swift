@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class FeedRantViewModel: ObservableObject {
-    @Published var rant: RantInFeed
+    @Published var rant: Rant
     
     @Published var alertMessage: AlertMessage = .none()
     
     @Published var voteController: VoteController!
     
-    init(rant: RantInFeed) {
+    init(rant: Rant) {
         self.rant = rant
         
         voteController = .init(
@@ -26,7 +26,7 @@ import SwiftRant
                 self?.rant.score ?? 0
             },
             voteAction: { [weak self] voteState in
-                let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: voteState)
+                let changedRant = try await Networking.shared.vote(rantId: rant.id, voteState: voteState)
                 self?.applyChangedData(changedRant: changedRant)
             },
             handleError: { [weak self] error in
@@ -41,7 +41,7 @@ import SwiftRant
     }
     
     private func applyChangedData(changedRant: Rant) {
-        rant = rant.withData(fromRant: changedRant)
+        rant = changedRant
         DataStore.shared.update(rantInFeed: changedRant)
     }
 }

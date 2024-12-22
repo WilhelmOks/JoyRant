@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct CreationTimeView: View {
-    let createdTime: Int
+    let createdTime: Date
     var isEdited: Bool = false
     var addedPrefix = false
     
     var body: some View {
         VStack(alignment: .trailing, spacing: 5) {
             let prefix = addedPrefix ? "added " : ""
-            let formattedTime = prefix + TimeFormatter.shared.string(fromSeconds: createdTime)
+            let formattedTime = prefix + TimeFormatter.shared.string(fromDate: createdTime)
             
             Text(formattedTime)
                 .font(baseSize: 12, weight: .medium)
@@ -33,7 +33,7 @@ struct CreationTimeView: View {
 struct CreationTimeView_Previews: PreviewProvider {
     static var previews: some View {
         CreationTimeView(
-            createdTime: Int(Date().addingTimeInterval(-15).timeIntervalSince1970),
+            createdTime: Date().addingTimeInterval(-15),
             isEdited: true,
             addedPrefix: false
         )

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct NotificationsView: View {
     var navigationBar = true
@@ -84,7 +84,7 @@ struct NotificationsView: View {
             ScrollViewReader { scrollProxy in
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.notificationItems, id: \.uuid) { item in
+                        ForEach(viewModel.notificationItems, id: \.id) { item in
                             VStack(spacing: 0) {
                                 NavigationLink(value: item) {
                                     NotificationRowView(item: item)
@@ -95,26 +95,26 @@ struct NotificationsView: View {
                                 
                                 Divider()
                             }
-                            .id(item.uuid)
+                            .id(item.id)
                         }
                     }
                 }
                 .onReceive(broadcastEvent: .shouldScrollNotificationsToTop) { _ in
                     withAnimation {
-                        scrollProxy.scrollTo(viewModel.notificationItems.first?.uuid, anchor: .top)
+                        scrollProxy.scrollTo(viewModel.notificationItems.first?.id, anchor: .top)
                     }
                 }
             }
             .refreshable {
                 await viewModel.refresh()
             }
-            .navigationDestination(for: Notifications.MappedNotificationItem.self) { item in
+            .navigationDestination(for: NotificationFeed.MappedNotificationItem.self) { item in
                 RantDetailsView(
                     sourceTab: .notifications,
                     viewModel: .init(
                         rantId: item.rantId,
                         scrollToCommentWithId: item.commentId,
-                        scrollToLastCommentWithUserId: item.notificationType == .commentDiscuss ? item.userId : nil
+                        scrollToLastCommentWithUserId: item.notificationKind == .newComment ? item.userId : nil
                     )
                 )
             }
@@ -178,6 +178,12 @@ struct NotificationsView: View {
                 .animation(.easeOut, value: viewModel.categoryTabIndex)
         }
         .padding(.vertical, 1)
+    }
+}
+
+extension NotificationFeed.MappedNotificationItem: @retroactive Identifiable {
+    public var id: Int {
+        self.hashValue
     }
 }
 

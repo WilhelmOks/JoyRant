@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import Algorithms
-import SwiftRant
+import SwiftDevRant
 
 final class RantDetailsViewModel: ObservableObject {
     let rantId: Int
@@ -56,7 +56,7 @@ final class RantDetailsViewModel: ObservableObject {
         isLoading = false
         
         if let scrollToLastCommentWithUserId {
-            scrollToCommentWithId = comments.last { $0.userID == scrollToLastCommentWithUserId }?.id
+            scrollToCommentWithId = comments.last { $0.author.id == scrollToLastCommentWithUserId }?.id
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -101,8 +101,8 @@ final class RantDetailsViewModel: ObservableObject {
         let filtered = comments.filter { comment in
             !comment.isFromLoggedInUser // && rant?.userID != comment.userID
         }
-        let rantAuthorMention = "@" + (rant?.username ?? "")
-        let mentiones = [rantAuthorMention] + filtered.map { "@" + $0.username }
+        let rantAuthorMention = "@" + (rant?.author.name ?? "")
+        let mentiones = [rantAuthorMention] + filtered.map { "@" + $0.author.name }
         return Array(mentiones.uniqued())
     }
 }

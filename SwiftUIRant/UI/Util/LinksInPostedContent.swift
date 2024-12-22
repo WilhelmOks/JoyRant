@@ -6,32 +6,24 @@
 //
 
 import Foundation
-import SwiftRant
-
-//TODO: implement in SwiftRant
-enum LinkInRantType: String {
-    case url = "url"
-    case mention = "mention"
-}
+import SwiftDevRant
 
 extension AttributedString {
-    static func from(postedContent: String, links: [Rant.Link]?) -> AttributedString {
+    static func from(postedContent: String, links: [Link]?) -> AttributedString {
         var result = AttributedString(stringLiteral: postedContent)
         
         links?.forEach { link in
             if let range = range(of: link, in: result) {
-                switch LinkInRantType.init(rawValue: link.type) {
+                switch link.kind {
                 case .url:
                     result[range].foregroundColor = .primaryForeground
                     result[range].underlineStyle = .single
                     result[range].link = rantUrl(link: link.url)
-                case .mention:
+                case .userMention:
                     result[range].foregroundColor = .primary
                     result[range].font = .baseSize(16).bold()
                     result[range].swiftUI.font = .baseSize(16).bold()
                     result[range].link = mentionUrl(userId: link.url)
-                case nil:
-                    break
                 }
             }
         }
@@ -39,7 +31,7 @@ extension AttributedString {
         return result
     }
     
-    fileprivate static func range(of link: Rant.Link, in string: AttributedString) -> Range<AttributedString.Index>? {
+    fileprivate static func range(of link: Link, in string: AttributedString) -> Range<AttributedString.Index>? {
         var range: Range<AttributedString.Index>?
         
         if let start = link.start, let end = link.end {
@@ -83,21 +75,19 @@ private struct LinkReplaceInfo {
 }
 
 extension String {
-    func devRant(resolvingLinks links: [Rant.Link]?) -> String {
+    func devRant(resolvingLinks links: [Link]?) -> String {
         guard let links else { return self }
         
         var result = AttributedString(stringLiteral: self)
         
-        let replaceInfos: [LinkReplaceInfo] = links.compactMap { link in
+        let replaceInfos: [LinkReplaceInfo] = links.compactMap { link -> LinkReplaceInfo? in
             guard let range = AttributedString.range(of: link, in: result) else { return nil }
             
-            switch LinkInRantType.init(rawValue: link.type) {
+            switch link.kind {
             case .url:
                 guard let url = AttributedString.rantUrl(link: link.url)?.absoluteString else { return nil }
                 return LinkReplaceInfo(range: range, url: url)
-            case .mention:
-                return nil
-            case nil:
+            case .userMention:
                 return nil
             }
         }

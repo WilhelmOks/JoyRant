@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 import CachedAsyncImage
 
 struct ProfileView: View {
@@ -120,7 +120,7 @@ struct ProfileView: View {
         }
     }
     
-    @ViewBuilder private func rantList(_ rants: [RantInFeed]) -> some View {
+    @ViewBuilder private func rantList(_ rants: [Rant]) -> some View {
         RantList(
             sourceTab: sourceTab,
             rants: rants,
@@ -149,7 +149,7 @@ struct ProfileView: View {
                     .onTapGesture {
                         AppState.shared.navigate(
                             from: sourceTab,
-                            to: .rantDetails(rantId: comment.rantID, scrollToCommentWithId: comment.id)
+                            to: .rantDetails(rantId: comment.rantId, scrollToCommentWithId: comment.id)
                         )
                     }
                 }
@@ -174,7 +174,7 @@ struct ProfileView: View {
     
     @ViewBuilder private func infoArea() -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            if let about = profile.about {
+            if let about = profile.profile.about {
                 infoRow {
                     infoRowIcon(systemName: "person")
                 } content: {
@@ -182,7 +182,7 @@ struct ProfileView: View {
                 }
             }
 
-            if let skills = profile.skills {
+            if let skills = profile.profile.skills {
                 infoRow {
                     infoRowIcon(systemName: "curlybraces")
                 } content: {
@@ -190,7 +190,7 @@ struct ProfileView: View {
                 }
             }
             
-            if let location = profile.location {
+            if let location = profile.profile.location {
                 infoRow {
                     infoRowIcon(systemName: "mappin.and.ellipse")
                 } content: {
@@ -198,7 +198,7 @@ struct ProfileView: View {
                 }
             }
             
-            if let website = profile.website {
+            if let website = profile.profile.website {
                 infoRow {
                     infoRowIcon(systemName: "globe")
                 } content: {
@@ -210,7 +210,7 @@ struct ProfileView: View {
                 }
             }
             
-            if let github = profile.github {
+            if let github = profile.profile.github {
                 infoRow {
                     infoRowIcon(name: "github")
                 } content: {
@@ -284,7 +284,7 @@ struct ProfileView: View {
     
     @ViewBuilder private func score() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            if profile.isSupporter {
+            if profile.profile.devRantSupporter {
                 Text("Supporter")
                     .font(baseSize: 13, weightDelta: 2)
                     .foregroundColor(.primaryForeground)
@@ -296,7 +296,7 @@ struct ProfileView: View {
                     }
             }
             
-            let score = profile.score
+            let score = profile.profile.score
             let scoreText = score > 0 ? "+\(score)" : "\(score)"
             
             Text(scoreText)
@@ -312,7 +312,7 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func joinedOnDate() -> some View {
-        let formattedDate = AbsoluteDateFormatter.shared.string(fromSeconds: profile.createdTime)
+        let formattedDate = AbsoluteDateFormatter.shared.string(fromDate: profile.profile.created)
         Text("Joined on\n\(formattedDate)")
             .font(baseSize: 13, weightDelta: 2)
             .multilineTextAlignment(.trailing)
@@ -320,7 +320,7 @@ struct ProfileView: View {
     }
     
     @ViewBuilder private func subscribedInfo() -> some View {
-        if viewModel.profile?.subscribed == true {
+        if viewModel.profile?.profile.subscribed == true {
             Label("Subscribed", systemImage: "star.fill")
                 .font(baseSize: 13, weightDelta: 2)
                 .multilineTextAlignment(.trailing)
@@ -350,13 +350,11 @@ struct ProfileView: View {
     }
     
     private func avatarUrl() -> URL? {
-        profile.avatar.avatarImage.flatMap { path in
-            URL(string: "https://avatars.devrant.com/\(path)")
-        }
+        profile.profile.avatarLarge.imageUrl
     }
     
     private func userColor() -> Color {
-        Color(hexString: profile.avatar.backgroundColor) ?? emptyBgColor
+        Color(hexString: profile.profile.avatarLarge.colorHex) ?? emptyBgColor
     }
     
     @ViewBuilder private func categoryPicker() -> some View {
@@ -417,14 +415,14 @@ struct ProfileView: View {
     @ViewBuilder private func toolbarMoreButton() -> some View {
         Menu {
             Button {
-                let devRantLink = "https://devrant.com/users/\(profile.username)"
+                let devRantLink = "https://devrant.com/users/\(profile.profile.username)"
                 Pasteboard.shared.copy(devRantLink)
             } label: {
                 Label("Copy Profile Link", systemImage: "doc.on.doc")
             }
             
             Button {
-                if viewModel.profile?.subscribed == true {
+                if viewModel.profile?.profile.subscribed == true {
                     Task {
                         await viewModel.unsubscribe()
                     }
@@ -434,7 +432,7 @@ struct ProfileView: View {
                     }
                 }
             } label: {
-                if viewModel.profile?.subscribed == true {
+                if viewModel.profile?.profile.subscribed == true {
                     Label("Unsubscribe from User's Rants", systemImage: "star.fill")
                 } else {
                     Label("Subscribe to User's Rants", systemImage: "star")
@@ -458,8 +456,7 @@ struct ProfileView: View {
     }
     
     private func cachedImage() -> PlatformImage? {
-        guard let path = profile.avatar.avatarImage else { return nil }
-        guard let url = URL(string: "https://avatars.devrant.com/\(path)") else { return nil }
+        guard let url = profile.profile.avatarLarge.imageUrl else { return nil }
         guard let response = URLCache.profileImageCache.cachedResponse(for: .init(url: url)) else { return nil }
         return .init(data: response.data)
     }

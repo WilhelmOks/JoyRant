@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct FeedView: View {
     var navigationBar = true
@@ -120,7 +120,7 @@ struct FeedView: View {
                         }
                         .onReceive(broadcastEvent: .shouldScrollFeedToTop) { _ in
                             withAnimation {
-                                scrollProxy.scrollTo(dataStore.rantsInFeed.first?.uuid, anchor: .top)
+                                scrollProxy.scrollTo(dataStore.rantsInFeed.first?.id, anchor: .top)
                             }
                         }
                     }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 import SwiftUI
 
 #if os(iOS)
@@ -19,7 +19,7 @@ final class AppState: ObservableObject {
     enum NavigationDestination: Hashable {
         case rantDetails(rantId: Rant.ID, scrollToCommentWithId: Comment.ID? = nil)
         case userProfile(userId: UserID)
-        case rantWeek(week: WeeklyList.Week)
+        case rantWeek(week: Weekly)
         case communityProjects
     }
     

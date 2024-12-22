@@ -7,34 +7,104 @@
 
 import Foundation
 import SwiftKeychainWrapper
-import SwiftRant
+import SwiftDevRant
 
 final class LoginStore {
     static let shared = LoginStore()
     private init() {}
     
     private let keychainWrapper = KeychainWrapper(serviceName: "SwiftUIRant")
-    private let tokenKeychainKeyName: KeychainWrapper.Key = "devRantToken"
+    
+    private let tokenKey: KeychainWrapper.Key = "devRantToken"
+    private let usernameKey: KeychainWrapper.Key = "username"
+    private let passwordKey: KeychainWrapper.Key = "password"
     
     var isLoggedIn: Bool { token != nil }
     
-    var token: UserCredentials? {
+    var token: AuthToken? {
         get {
-            return keychainWrapper.decode(forKey: tokenKeychainKeyName.rawValue)
+            let encodedToken: AuthToken.CodingData? = keychainWrapper.decode(forKey: tokenKey.rawValue)
+            return encodedToken?.decoded
+        }
+        set {
+            if let encodedToken = newValue?.encoded {
+                let success = keychainWrapper.encodeAndSet(
+                    encodedToken,
+                    forKey: tokenKey.rawValue,
+                    withAccessibility: .whenUnlockedThisDeviceOnly
+                )
+                if !success {
+                    dlog("Error: failed to store \(tokenKey.rawValue) in keychain")
+                }
+            } else {
+                keychainWrapper.remove(forKey: tokenKey)
+            }
+        }
+    }
+    
+    var username: String? {
+        get {
+            return keychainWrapper.decode(forKey: usernameKey.rawValue)
         }
         set {
             if let newValue {
                 let success = keychainWrapper.encodeAndSet(
                     newValue,
-                    forKey: tokenKeychainKeyName.rawValue,
+                    forKey: usernameKey.rawValue,
                     withAccessibility: .whenUnlockedThisDeviceOnly
                 )
                 if !success {
-                    dlog("Error: failed to store token in keychain")
+                    dlog("Error: failed to store \(usernameKey.rawValue) in keychain")
                 }
             } else {
-                keychainWrapper.remove(forKey: tokenKeychainKeyName)
+                keychainWrapper.remove(forKey: usernameKey)
             }
+        }
+    }
+    
+    var password: String? {
+        get {
+            return keychainWrapper.decode(forKey: passwordKey.rawValue)
+        }
+        set {
+            if let newValue {
+                let success = keychainWrapper.encodeAndSet(
+                    newValue,
+                    forKey: passwordKey.rawValue,
+                    withAccessibility: .whenUnlockedThisDeviceOnly
+                )
+                if !success {
+                    dlog("Error: failed to store \(passwordKey.rawValue) in keychain")
+                }
+            } else {
+                keychainWrapper.remove(forKey: passwordKey)
+            }
+        }
+    }
+}
+
+private extension KeychainWrapper {
+    func decode<T: Decodable>(forKey key: String) -> T? {
+        if let object = data(forKey: key) {
+            let decoder = JSONDecoder()
+            
+            if let decodedObject = try? decoder.decode(T.self, from: object) {
+                return decodedObject
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
+    func encodeAndSet<T: Encodable>(_ value: T, forKey key: String, withAccessibility accessibility: KeychainItemAccessibility?, isSynchronizable: Bool = false) -> Bool {
+        let encoder = JSONEncoder()
+        
+        if let encoded = try? encoder.encode(value) {
+            return set(encoded, forKey: key, withAccessibility: accessibility, isSynchronizable: isSynchronizable)
+        } else {
+            return false
         }
     }
 }

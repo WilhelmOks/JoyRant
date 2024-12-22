@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftDevRant
 
 struct SettingsView: View {
     var navigationBar = true
@@ -48,7 +49,7 @@ struct SettingsView: View {
     @ViewBuilder private func content() -> some View {
         Form {
             Group {
-                if let userId = LoginStore.shared.token?.authToken.userID {
+                if let userId = LoginStore.shared.token?.userId {
                     Section {
                         NavigationLink(value: AppState.NavigationDestination.userProfile(userId: userId)) {
                             Label {
@@ -145,7 +146,7 @@ struct SettingsView_Previews: PreviewProvider {
             SettingsView()
         }
         .onAppear {
-            LoginStore.shared.token = .init(authToken: .init(tokenID: 0, tokenKey: "", expireTime: 0, userID: 0))
+            LoginStore.shared.token = .init(id: 0, key: "", expireTime: Date(), userId: 0)
         }
     }
 }

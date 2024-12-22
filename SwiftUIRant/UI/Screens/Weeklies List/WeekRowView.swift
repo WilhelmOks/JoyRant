@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct WeekRowView: View {
-    let week: WeeklyList.Week
+    let week: Weekly
     
     var body: some View {
         HStack(spacing: 8) {
@@ -30,14 +30,14 @@ struct WeekRowView: View {
             }
             
             VStack(spacing: 2) {
-                Text(week.prompt)
+                Text(week.topic)
                     .font(baseSize: 16, weightDelta: 0)
                     .multilineTextAlignment(.leading)
                     .fillHorizontally(.leading)
                     .foregroundColor(.primaryForeground)
                 
                 HStack {
-                    Text(AbsoluteDateFormatter.shared.string(fromDevRantUS: week.date))
+                    Text(AbsoluteDateFormatter.shared.string(fromDevRantUS: week.formattedDate))
                         .font(baseSize: 14, weightDelta: 0)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.secondaryForeground)
@@ -48,7 +48,7 @@ struct WeekRowView: View {
                         Image(systemName: "bubble.right.fill")
                             .font(baseSize: 12)
                         
-                        Text("\(week.rantCount)")
+                        Text("\(week.numberOfRants)")
                             .font(baseSize: 13)
                     }
                     .foregroundColor(.secondaryForeground)
@@ -64,9 +64,9 @@ struct WeekRowView_Previews: PreviewProvider {
         WeekRowView(
             week: .init(
                 week: 123,
-                prompt: "Reasons to hate JS?",
-                date: "12/31/22",
-                rantCount: 13
+                topic: "Reasons to hate JS?",
+                formattedDate: "12/31/22",
+                numberOfRants: 13
             )
         )
         .padding()

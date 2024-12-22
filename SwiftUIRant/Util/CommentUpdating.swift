@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 extension Array where Element == Comment {
     @discardableResult mutating func updateComment(_ comment: Comment) -> Bool {

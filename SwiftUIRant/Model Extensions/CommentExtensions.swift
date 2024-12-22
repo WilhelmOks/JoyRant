@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 extension Comment {
     var isUserSupporter: Bool {
-        isUserDPP == 1
+        author.devRantSupporter
     }
     
     var isFromLoggedInUser: Bool {
@@ -18,6 +18,6 @@ extension Comment {
     }
     
     var withResolvedLinks: String {
-        self.body.devRant(resolvingLinks: self.links)
+        self.text.devRant(resolvingLinks: self.linksInText)
     }
 }

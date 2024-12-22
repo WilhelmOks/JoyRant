@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class RantCommentViewModel: ObservableObject {
     @Published var comment: Comment
@@ -26,7 +26,7 @@ import SwiftRant
                 self?.comment.score ?? 0
             },
             voteAction: { [weak self] voteState in
-                let changedComment = try await Networking.shared.vote(commentID: comment.id, voteState: voteState)
+                let changedComment = try await Networking.shared.vote(commentId: comment.id, voteState: voteState)
                 self?.applyChangedData(changedComment: changedComment)
             },
             handleError: { [weak self] error in

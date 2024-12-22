@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct AllWeekliesView: View {
     var navigationBar = true
@@ -69,7 +69,7 @@ struct AllWeekliesView: View {
         }
     }
     
-    @ViewBuilder func row(_ week: WeeklyList.Week) -> some View {
+    @ViewBuilder func row(_ week: Weekly) -> some View {
         VStack(spacing: 0) {
             NavigationLink(value: AppState.NavigationDestination.rantWeek(week: week)) {
                 WeekRowView(week: week)

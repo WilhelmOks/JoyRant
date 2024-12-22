@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class RantViewModel: ObservableObject {
     @Published var rant: Rant
@@ -27,7 +27,7 @@ import SwiftRant
                 self?.rant.score ?? 0
             },
             voteAction: { [weak self] voteState in
-                let changedRant = try await Networking.shared.vote(rantID: rant.id, voteState: voteState)
+                let changedRant = try await Networking.shared.vote(rantId: rant.id, voteState: voteState)
                 self?.applyChangedData(changedRant: changedRant)
             },
             handleError: { [weak self] error in
@@ -47,8 +47,8 @@ import SwiftRant
         isLoading = true
         
         do {
-            try await Networking.shared.favorite(rantID: rant.id)
-            rant.isFavorite = 1
+            try await Networking.shared.favorite(rantId: rant.id, favorite: true)
+            rant.isFavorite = true
         } catch {
             alertMessage = .presentedError(error)
         }
@@ -62,8 +62,8 @@ import SwiftRant
         isLoading = true
         
         do {
-            try await Networking.shared.unfavorite(rantID: rant.id)
-            rant.isFavorite = nil
+            try await Networking.shared.favorite(rantId: rant.id, favorite: false)
+            rant.isFavorite = false
         } catch {
             alertMessage = .presentedError(error)
         }

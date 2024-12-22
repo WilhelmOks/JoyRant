@@ -7,11 +7,11 @@
 
 import SwiftUI
 import CachedAsyncImage
-import SwiftRant
+import SwiftDevRant
 import WebKit
 
 struct PostedImage: View {
-    let image: Rant.AttachedImage
+    let image: AttachedImage
     let opensSheet: Bool
     
     @State private var isSheetPresented = false

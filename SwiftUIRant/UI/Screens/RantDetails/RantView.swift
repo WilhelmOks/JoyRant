@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct RantView: View {
     @StateObject var viewModel: RantViewModel
@@ -65,7 +65,7 @@ struct RantView: View {
             
             let text = AttributedString.from(
                 postedContent: viewModel.rant.text,
-                links: viewModel.rant.links
+                links: viewModel.rant.linksInText
             )
             
             Text(text)
@@ -134,11 +134,11 @@ struct RantView: View {
                 )
                 .disabled(rant.voteState == .unvotable)
                 
-                NavigationLink(value: AppState.NavigationDestination.userProfile(userId: rant.userID)) {
+                NavigationLink(value: AppState.NavigationDestination.userProfile(userId: rant.author.id)) {
                     UserPanel(
-                        avatar: rant.userAvatar,
-                        name: rant.username,
-                        score: rant.userScore,
+                        avatar: rant.author.avatarSmall,
+                        name: rant.author.name,
+                        score: rant.author.score,
                         isSupporter: rant.isUserSupporter
                     )
                 }
@@ -149,7 +149,7 @@ struct RantView: View {
             
             VStack(alignment: .trailing, spacing: 6) {
                 CreationTimeView(
-                    createdTime: rant.createdTime,
+                    createdTime: rant.created,
                     isEdited: rant.isEdited
                 )
                 
@@ -159,7 +159,7 @@ struct RantView: View {
     }
     
     @ViewBuilder private func image() -> some View {
-        if let image = viewModel.rant.attachedImage {
+        if let image = viewModel.rant.image {
             PostedImage(image: image, opensSheet: true)
         }
     }
@@ -178,7 +178,7 @@ struct RantView: View {
             Image(systemName: "bubble.right")
                 .font(baseSize: 12)
             
-            Text("\(viewModel.rant.commentCount)")
+            Text("\(viewModel.rant.numberOfComments)")
                 .font(baseSize: 12, weight: .medium)
         }
         .foregroundColor(.secondaryForeground)
@@ -216,7 +216,7 @@ struct RantView: View {
     }
     
     @ViewBuilder private func favoriteButton() -> some View {
-        let isFavorite = viewModel.rant.isFavorite == 1
+        let isFavorite = viewModel.rant.isFavorite
         
         Button {
             Task {
@@ -258,37 +258,28 @@ struct RantView_Previews: PreviewProvider {
         RantView(
             viewModel: .init(
                 rant: .init(
-                    weekly: nil, //TODO: test
                     id: 1,
-                    text: "Lorem ipsum dolor sit a rant",
-                    score: 83,
-                    //createdTime: Int(Date().addingTimeInterval(60 * 60 * 24 * -15).timeIntervalSince1970),
-                    createdTime: Int(Date().addingTimeInterval(-15).timeIntervalSince1970),
-                    attachedImage: nil,
-                    commentCount: 2,
-                    tags: ["rant", "js suxx"],
+                    linkToRant: nil,
                     voteState: .unvoted,
+                    score: 83,
+                    author: .init(
+                        id: 2,
+                        name: "Spongeblob",
+                        score: 666,
+                        devRantSupporter: false,
+                        avatarSmall: .init(colorHex: "66cc66", imageUrlPath: nil),
+                        avatarLarge: .init(colorHex: "66cc66", imageUrlPath: nil)
+                    ),
+                    created: Date().addingTimeInterval(-15),
                     isEdited: true,
-                    isFavorite: 0,
-                    link: nil,
-                    links: nil,
-                    collabTypeLong: nil, //TODO: test
-                    collabDescription: nil, //TODO: test
-                    collabTechStack: nil, //TODO: test
-                    collabTeamSize: nil, //TODO: test
-                    collabURL: nil, //TODO: test
-                    userID: 2,
-                    username: "Spongeblob",
-                    userScore: 666,
-                    userAvatar: .init(
-                        backgroundColor: "66cc66",
-                        avatarImage: nil
-                    ),
-                    userAvatarLarge: .init(
-                        backgroundColor: "66cc66",
-                        avatarImage: nil
-                    ),
-                    isUserDPP: nil
+                    isFavorite: false,
+                    text: "Lorem ipsum dolor sit a rant",
+                    linksInText: [],
+                    image: nil,
+                    numberOfComments: 2,
+                    tags: ["rant", "js suxx"],
+                    weekly: nil,
+                    collaboration: nil
                 )
             ),
             onEdit: {},

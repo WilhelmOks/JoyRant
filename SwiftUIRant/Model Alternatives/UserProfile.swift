@@ -6,90 +6,57 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 struct UserProfile: Hashable {
-    var username: String
-    var score: Int
-    var createdTime: Int
-    var about: String?
-    var location: String?
-    var skills: String?
-    var github: String?
-    var website: String?
-    var avatar: Rant.UserAvatar
-    var avatarSmall: Rant.UserAvatar
-    var isSupporter: Bool
-    var subscribed: Bool
+    var profile: Profile
     var content: Content
 }
 
 extension UserProfile {
     init(profile: Profile) {
-        username = profile.username
-        score = profile.score
-        createdTime = profile.createdTime
-        about = profile.about.emptyToNil
-        location = profile.location.emptyToNil
-        skills = profile.skills.emptyToNil
-        github = profile.github.emptyToNil
-        website = profile.website?.emptyToNil
-        avatar = profile.avatar
-        avatarSmall = profile.avatarSmall
-        isSupporter = profile.isUserDPP == 1
-        subscribed = profile.subscribed
+        self.profile = profile
         content = .init(
             counts: [
-                .rants: profile.content.counts.rants,
-                .upvoted: profile.content.counts.upvoted,
-                .comments: profile.content.counts.comments,
-                .favorites: profile.content.counts.favorites,
-                .collabs: profile.content.counts.collabs,
+                .rants: profile.content.numbers.rants,
+                .upvoted: profile.content.numbers.upvotedRants,
+                .comments: profile.content.numbers.comments,
+                .favorites: profile.content.numbers.favorites,
+                .collabs: profile.content.numbers.collaborations,
             ],
-            rants: profile.content.content.rants,
-            upvoted: profile.content.content.upvoted,
-            comments: profile.content.content.comments,
-            favorites: profile.content.content.favorites ?? [],
-            viewed: profile.content.content.viewed ?? []
+            rants: profile.content.elements.rants,
+            upvoted: profile.content.elements.upvotedRants,
+            comments: profile.content.elements.comments,
+            favorites: profile.content.elements.favorites,
+            viewed: profile.content.elements.viewed
         )
     }
     
     mutating func append(profile: Profile) {
-        username = profile.username
-        score = profile.score
-        createdTime = profile.createdTime
-        about = profile.about.emptyToNil
-        location = profile.location.emptyToNil
-        skills = profile.skills.emptyToNil
-        github = profile.github.emptyToNil
-        website = profile.website?.emptyToNil
-        avatar = profile.avatar
-        avatarSmall = profile.avatarSmall
-        isSupporter = profile.isUserDPP == 1
-        subscribed = profile.subscribed
+        self.profile = profile
         content.counts = [
-            .rants: profile.content.counts.rants,
-            .upvoted: profile.content.counts.upvoted,
-            .comments: profile.content.counts.comments,
-            .favorites: profile.content.counts.favorites,
-            .collabs: profile.content.counts.collabs,
+            .rants: profile.content.numbers.rants,
+            .upvoted: profile.content.numbers.upvotedRants,
+            .comments: profile.content.numbers.comments,
+            .favorites: profile.content.numbers.favorites,
+            .collabs: profile.content.numbers.collaborations,
         ]
-        content.rants += profile.content.content.rants
-        content.upvoted += profile.content.content.upvoted
-        content.comments += profile.content.content.comments
-        content.viewed += profile.content.content.viewed ?? []
-        content.favorites += profile.content.content.favorites ?? []
+        content.rants += profile.content.elements.rants
+        content.upvoted += profile.content.elements.upvotedRants
+        content.comments += profile.content.elements.comments
+        content.viewed += profile.content.elements.viewed
+        content.favorites += profile.content.elements.favorites
     }
 }
 
 extension UserProfile {
     struct Content: Hashable {
         var counts: [ContentType: Int]
-        var rants: [RantInFeed]
-        var upvoted: [RantInFeed]
+        var rants: [Rant]
+        var upvoted: [Rant]
         var comments: [Comment]
-        var favorites: [RantInFeed]
-        var viewed: [RantInFeed] //only for the logged in user
+        var favorites: [Rant]
+        var viewed: [Rant] //only for the logged in user
     }
     
     enum ContentType {
@@ -101,7 +68,7 @@ extension UserProfile {
         case viewed
         case collabs
         
-        var profileContentType: Profile.ProfileContentTypes? {
+        var profileContentType: Profile.ContentType? {
             switch self {
             case .all: return .all
             case .rants: return .rants
@@ -113,7 +80,7 @@ extension UserProfile {
             }
         }
         
-        init(from profileContentType: Profile.ProfileContentTypes) {
+        init(from profileContentType: Profile.ContentType) {
             switch profileContentType {
             case .all: self = .all
             case .rants: self = .rants

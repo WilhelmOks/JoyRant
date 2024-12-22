@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class VoteController: ObservableObject {
     @Published var loadingVoteState: VoteState?

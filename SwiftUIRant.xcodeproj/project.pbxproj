@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
+		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
 		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
 		ED0FB7E928FF34D000E5163D /* WritePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7E828FF34D000E5163D /* WritePostView.swift */; };
@@ -16,7 +18,6 @@
 		ED14DE5B28E08016005FCC9A /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */; };
 		ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */; };
 		ED14DE6028E090E7005FCC9A /* URLCache_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE5F28E090E7005FCC9A /* URLCache_Extension.swift */; };
-		ED14DE6228E20E83005FCC9A /* RantInFeed+Rant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE6128E20E83005FCC9A /* RantInFeed+Rant.swift */; };
 		ED14DE6428E36241005FCC9A /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED14DE6328E36241005FCC9A /* TimeFormatter.swift */; };
 		ED1B307728CCE1E4001A6A73 /* PostedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307628CCE1E3001A6A73 /* PostedImage.swift */; };
 		ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B307828CCE921001A6A73 /* UserPanel.swift */; };
@@ -29,7 +30,7 @@
 		ED2C9B7B28B67C53008BF314 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7A28B67C52008BF314 /* LoginView.swift */; };
 		ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7C28B67CFF008BF314 /* LoginViewModel.swift */; };
 		ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7E28B69892008BF314 /* Logging.swift */; };
-		ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B8028B69D35008BF314 /* Networking.swift */; };
+		ED2C9B8128B69D36008BF314 /* Networking_Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B8028B69D35008BF314 /* Networking_Old.swift */; };
 		ED2F3C3F29E0076500A48877 /* CommunityProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2F3C3E29E0076500A48877 /* CommunityProjectRowView.swift */; };
 		ED2F3C4229E0148100A48877 /* ArrayBuilderModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2F3C4129E0148100A48877 /* ArrayBuilderModule */; };
 		ED33C2372903F31100A59A11 /* Models+IdTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED33C2362903F31100A59A11 /* Models+IdTypes.swift */; };
@@ -76,7 +77,6 @@
 		ED97D63F28F5921800CFC418 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D63E28F5921800CFC418 /* View+If.swift */; };
 		ED97D64128F5969600CFC418 /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64028F5969600CFC418 /* NotificationRowView.swift */; };
 		ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64228F5B1E500CFC418 /* Disambuguation.swift */; };
-		ED97D64528F8634500CFC418 /* Notification+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D64428F8634500CFC418 /* Notification+Map.swift */; };
 		ED9CF43F296C676600A1C668 /* AllWeekliesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CF43E296C676600A1C668 /* AllWeekliesView.swift */; };
 		ED9CF4412972E6A100A1C668 /* AllWeekliesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CF4402972E6A100A1C668 /* AllWeekliesViewModel.swift */; };
 		ED9CF4432972F1D500A1C668 /* WeekRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CF4422972F1D500A1C668 /* WeekRowView.swift */; };
@@ -100,6 +100,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
 		ED0FB7E828FF34D000E5163D /* WritePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostView.swift; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		ED14DE5828E07A2F005FCC9A /* RantCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantCommentViewModel.swift; sourceTree = "<group>"; };
 		ED14DE5A28E08016005FCC9A /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
 		ED14DE5F28E090E7005FCC9A /* URLCache_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCache_Extension.swift; sourceTree = "<group>"; };
-		ED14DE6128E20E83005FCC9A /* RantInFeed+Rant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RantInFeed+Rant.swift"; sourceTree = "<group>"; };
 		ED14DE6328E36241005FCC9A /* TimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatter.swift; sourceTree = "<group>"; };
 		ED1B307628CCE1E3001A6A73 /* PostedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedImage.swift; sourceTree = "<group>"; };
 		ED1B307828CCE921001A6A73 /* UserPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanel.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		ED2C9B7A28B67C52008BF314 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		ED2C9B7C28B67CFF008BF314 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED2C9B7E28B69892008BF314 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
-		ED2C9B8028B69D35008BF314 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		ED2C9B8028B69D35008BF314 /* Networking_Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking_Old.swift; sourceTree = "<group>"; };
 		ED2F3C3E29E0076500A48877 /* CommunityProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityProjectRowView.swift; sourceTree = "<group>"; };
 		ED33C2362903F31100A59A11 /* Models+IdTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models+IdTypes.swift"; sourceTree = "<group>"; };
 		ED33C23829040E3300A59A11 /* Models+TimeToModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models+TimeToModify.swift"; sourceTree = "<group>"; };
@@ -166,7 +166,6 @@
 		ED97D63E28F5921800CFC418 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		ED97D64028F5969600CFC418 /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
 		ED97D64228F5B1E500CFC418 /* Disambuguation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disambuguation.swift; sourceTree = "<group>"; };
-		ED97D64428F8634500CFC418 /* Notification+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Map.swift"; sourceTree = "<group>"; };
 		ED9CF43E296C676600A1C668 /* AllWeekliesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWeekliesView.swift; sourceTree = "<group>"; };
 		ED9CF4402972E6A100A1C668 /* AllWeekliesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWeekliesViewModel.swift; sourceTree = "<group>"; };
 		ED9CF4422972F1D500A1C668 /* WeekRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRowView.swift; sourceTree = "<group>"; };
@@ -192,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */,
 				EDD52B142B3C4C87005F04D3 /* SwiftUIIntrospect in Frameworks */,
 				ED2F3C4229E0148100A48877 /* ArrayBuilderModule in Frameworks */,
 				ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */,
@@ -239,7 +239,8 @@
 				ED8622D4290D3E7F0070A7D2 /* Info.plist */,
 				ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */,
 				ED59CEC328BCE0860007B698 /* AppState.swift */,
-				ED2C9B8028B69D35008BF314 /* Networking.swift */,
+				ED2C9B8028B69D35008BF314 /* Networking_Old.swift */,
+				0C4858752D11A36A007D688D /* Networking.swift */,
 				ED2C9B7E28B69892008BF314 /* Logging.swift */,
 				ED0FB7EC2901ADA900E5163D /* LoginStore.swift */,
 				ED59CED228BD0EC60007B698 /* DataStore.swift */,
@@ -378,11 +379,9 @@
 			isa = PBXGroup;
 			children = (
 				ED59CEE728CB74180007B698 /* MockedModels.swift */,
-				ED14DE6128E20E83005FCC9A /* RantInFeed+Rant.swift */,
 				ED97D62628E9C98900CFC418 /* RantExtensions.swift */,
 				ED97D62828E9C9E200CFC418 /* CommentExtensions.swift */,
 				ED97D64228F5B1E500CFC418 /* Disambuguation.swift */,
-				ED97D64428F8634500CFC418 /* Notification+Map.swift */,
 				ED33C2362903F31100A59A11 /* Models+IdTypes.swift */,
 				ED33C23829040E3300A59A11 /* Models+TimeToModify.swift */,
 			);
@@ -506,6 +505,7 @@
 				ED9082B12A4AEFFE00B57203 /* SwiftRant */,
 				EDD52B132B3C4C87005F04D3 /* SwiftUIIntrospect */,
 				EDD52B172B3C4C87005F04D3 /* SwiftUIIntrospect-Static */,
+				0C9030582D11A075009BCBC5 /* SwiftDevRant */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -542,6 +542,7 @@
 				ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 				ED9082B02A4AEFFE00B57203 /* XCRemoteSwiftPackageReference "SwiftRant" */,
 				EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				0C9030572D11A075009BCBC5 /* XCLocalSwiftPackageReference "../SwiftDevRant" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -581,7 +582,6 @@
 				ED97D63928F44EA800CFC418 /* NotificationsViewModel.swift in Sources */,
 				ED33C23929040E3300A59A11 /* Models+TimeToModify.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,
-				ED97D64528F8634500CFC418 /* Notification+Map.swift in Sources */,
 				EDE2289728DB3F600025EDB1 /* VoteController.swift in Sources */,
 				EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */,
 				ED0FB7E928FF34D000E5163D /* WritePostView.swift in Sources */,
@@ -609,6 +609,7 @@
 				ED74D5162929291000088CE6 /* URLHandler.swift in Sources */,
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
 				EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */,
+				0C4858762D11A371007D688D /* Networking.swift in Sources */,
 				ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */,
 				ED91BF1B291589E000B400C4 /* LinksInPostedContent.swift in Sources */,
 				ED29859028BCD9AF0065D0E3 /* InternalView.swift in Sources */,
@@ -630,7 +631,6 @@
 				ED97D62928E9C9E200CFC418 /* CommentExtensions.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
 				ED74D5142928FDD300088CE6 /* ProfileViewModel.swift in Sources */,
-				ED14DE6228E20E83005FCC9A /* RantInFeed+Rant.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED97D62E28EAF46600CFC418 /* Color+Hex.swift in Sources */,
 				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,
@@ -638,7 +638,7 @@
 				ED7FCCB229DFFEFE007D8675 /* CommunityProject.swift in Sources */,
 				ED59CED128BD0B110007B698 /* FeedRantView.swift in Sources */,
 				ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */,
-				ED2C9B8128B69D36008BF314 /* Networking.swift in Sources */,
+				ED2C9B8128B69D36008BF314 /* Networking_Old.swift in Sources */,
 				ED74D50B2921117800088CE6 /* SegmentedPicker.swift in Sources */,
 				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,
 				ED9CF4412972E6A100A1C668 /* AllWeekliesViewModel.swift in Sources */,
@@ -859,6 +859,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		0C9030572D11A075009BCBC5 /* XCLocalSwiftPackageReference "../SwiftDevRant" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftDevRant;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -911,6 +918,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0C9030582D11A075009BCBC5 /* SwiftDevRant */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftDevRant;
+		};
 		ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;

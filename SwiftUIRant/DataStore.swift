@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class DataStore: ObservableObject {
     static let shared = DataStore()
@@ -14,9 +14,9 @@ import SwiftRant
     private init() {}
     
     @Published var isFeedLoaded = false
-    @Published var unfilteredRantsInFeed: [RantInFeed] = []
-    @Published var rantsInFeed: [RantInFeed] = []
-    @Published var unreadNotifications: [Notifications.Categories: Int] = [:]
+    @Published var unfilteredRantsInFeed: [Rant] = []
+    @Published var rantsInFeed: [Rant] = []
+    @Published var unreadNotifications: [NotificationFeed.Category: Int] = [:]
     
     @Published var writePostContent = ""
     
@@ -42,7 +42,7 @@ import SwiftRant
         duplicatesInFeed = 0
     }
     
-    func rantInFeed(byId id: Int) -> RantInFeed? {
+    func rantInFeed(byId id: Int) -> Rant? {
         rantsInFeed.first { $0.id == id }
     }
 

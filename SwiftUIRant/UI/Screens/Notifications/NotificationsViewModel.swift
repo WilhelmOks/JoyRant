@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class NotificationsViewModel: ObservableObject {
     let tabs = CategoryTab.allCases
@@ -20,7 +20,7 @@ import SwiftRant
         }
     }
     @Published var categoryTabIndex: Int = 0
-    @Published var notificationItems: [Notifications.MappedNotificationItem] = []
+    @Published var notificationItems: [NotificationFeed.MappedNotificationItem] = []
     @Published var isLoading = false
     @Published var isRefreshing = false
     @Published var alertMessage: AlertMessage = .none()
@@ -115,31 +115,31 @@ extension NotificationsViewModel {
         
         var displayName: String {
             switch self {
-            case .all:              return "All"
-            case .upvotes:          return "++"
-            case .mentions:         return "Mentions"
-            case .comments:         return "Comments"
-            case .subscriptions:    return "Subscriptions"
+            case .all:              "All"
+            case .upvotes:          "++"
+            case .mentions:         "Mentions"
+            case .comments:         "Comments"
+            case .subscriptions:    "Subscriptions"
             }
         }
         
-        static func from(category: Notifications.Categories) -> Self {
+        static func from(category: NotificationFeed.Category) -> Self {
             switch category {
-            case .all:      return .all
-            case .upvotes:  return .upvotes
-            case .mentions: return .mentions
-            case .comments: return .comments
-            case .subs:     return .subscriptions
+            case .all:              .all
+            case .upvotes:          .upvotes
+            case .mentions:         .mentions
+            case .comments:         .comments
+            case .subscriptions:    .subscriptions
             }
         }
         
-        var category: Notifications.Categories {
+        var category: NotificationFeed.Category {
             switch self {
-            case .all:              return .all
-            case .upvotes:          return .upvotes
-            case .mentions:         return .mentions
-            case .comments:         return .comments
-            case .subscriptions:    return .subs
+            case .all:              .all
+            case .upvotes:          .upvotes
+            case .mentions:         .mentions
+            case .comments:         .comments
+            case .subscriptions:    .subscriptions
             }
         }
     }

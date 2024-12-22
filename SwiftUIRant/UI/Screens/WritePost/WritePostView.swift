@@ -236,10 +236,10 @@ struct WritePostView: View {
     private func existingImageUrl() -> URL? {
         switch viewModel.kind {
         case .editRant(rant: let rant):
-            guard let urlString = rant.attachedImage?.url else { return nil }
+            guard let urlString = rant.image?.url else { return nil }
             return URL(string: urlString)
         case .editComment(comment: let comment):
-            guard let urlString = comment.attachedImage?.url else { return nil }
+            guard let urlString = comment.image?.url else { return nil }
             return URL(string: urlString)
         case .postComment(rantId: _), .postRant:
             return nil

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftRant
+import SwiftDevRant
 
 struct RantCommentView: View {
     @StateObject var viewModel: RantCommentViewModel
@@ -66,8 +66,8 @@ struct RantCommentView: View {
             )
             
             let text = AttributedString.from(
-                postedContent: viewModel.comment.body,
-                links: viewModel.comment.links
+                postedContent: viewModel.comment.text,
+                links: viewModel.comment.linksInText
             )
             
             Text(text)
@@ -78,7 +78,7 @@ struct RantCommentView: View {
                 #if os(iOS)
                 .onTapGesture { } //this prevents onLongPressGesture from interrupting the scrolling gesture on iOS 16
                 .onLongPressGesture {
-                    textSelectionPopoverItem = .init(text: viewModel.comment.body)
+                    textSelectionPopoverItem = .init(text: viewModel.comment.text)
                 }
                 .popover(item: $textSelectionPopoverItem) { item in
                     TextEditor(text: .constant(item.text))
@@ -137,17 +137,17 @@ struct RantCommentView: View {
                 
                 if isLinkToRant {
                     UserPanel(
-                        avatar: comment.userAvatar,
-                        name: comment.username,
-                        score: comment.userScore,
+                        avatar: comment.author.avatarSmall,
+                        name: comment.author.name,
+                        score: comment.author.score,
                         isSupporter: comment.isUserSupporter
                     )
                 } else {
-                    NavigationLink(value: AppState.NavigationDestination.userProfile(userId: comment.userID)) {
+                    NavigationLink(value: AppState.NavigationDestination.userProfile(userId: comment.author.id)) {
                         UserPanel(
-                            avatar: comment.userAvatar,
-                            name: comment.username,
-                            score: comment.userScore,
+                            avatar: comment.author.avatarSmall,
+                            name: comment.author.name,
+                            score: comment.author.score,
                             isSupporter: comment.isUserSupporter
                         )
                     }
@@ -159,7 +159,7 @@ struct RantCommentView: View {
             
             VStack(alignment: .trailing, spacing: 6) {
                 CreationTimeView(
-                    createdTime: comment.createdTime,
+                    createdTime: comment.created,
                     isEdited: comment.isEdited
                 )
             }
@@ -168,14 +168,14 @@ struct RantCommentView: View {
     }
     
     @ViewBuilder private func image() -> some View {
-        if let image = viewModel.comment.attachedImage {
+        if let image = viewModel.comment.image {
             PostedImage(image: image, opensSheet: true)
         }
     }
         
     @ViewBuilder private func replyButton() -> some View {
         Button {
-            DataStore.shared.writePostContent.append("@\(viewModel.comment.username) ")
+            DataStore.shared.writePostContent.append("@\(viewModel.comment.author.name) ")
             onReply?()
         } label: {
             Text("Reply")
@@ -235,22 +235,23 @@ struct RantCommentView_Previews: PreviewProvider {
             RantCommentView(
                 viewModel: .init(
                     comment: .init(
-                        id: 2,
-                        rantID: 1,
-                        body: "Lorem Ipsum",
-                        score: 56,
-                        createdTime: 0,
+                        id: 3,
+                        rantId: 1,
                         voteState: .unvoted,
-                        links: nil,
-                        userID: 1,
-                        username: "Saul Goodman",
-                        userScore: 43,
-                        userAvatar: .init(
-                            backgroundColor: "00cc00",
-                            avatarImage: nil
+                        score: 56,
+                        author: .init(
+                            id: 1,
+                            name: "Saul Goodman",
+                            score: 43,
+                            devRantSupporter: true,
+                            avatarSmall: .init(colorHex: "00cc00", imageUrlPath: nil),
+                            avatarLarge: .init(colorHex: "00cc00", imageUrlPath: nil)
                         ),
-                        isUserDPP: 1,
-                        attachedImage: nil
+                        created: Date(),
+                        isEdited: false,
+                        text: "Lorem Ipsum",
+                        linksInText: [],
+                        image: nil
                     )
                 ),
                 onReply: {},
@@ -264,21 +265,22 @@ struct RantCommentView_Previews: PreviewProvider {
                 viewModel: .init(
                     comment: .init(
                         id: 2,
-                        rantID: 1,
-                        body: "Comment from me",
-                        score: 100,
-                        createdTime: Int(Date().addingTimeInterval(60 * -15).timeIntervalSince1970),
+                        rantId: 1,
                         voteState: .unvotable,
-                        links: nil,
-                        userID: 1,
-                        username: "Myself and Me",
-                        userScore: 12,
-                        userAvatar: .init(
-                            backgroundColor: "00cc00",
-                            avatarImage: nil
+                        score: 100,
+                        author: .init(
+                            id: 1,
+                            name: "Myself and Me",
+                            score: 12,
+                            devRantSupporter: true,
+                            avatarSmall: .init(colorHex: "00cc00", imageUrlPath: nil),
+                            avatarLarge: .init(colorHex: "00cc00", imageUrlPath: nil)
                         ),
-                        isUserDPP: 0,
-                        attachedImage: nil
+                        created: Date(),
+                        isEdited: false,
+                        text: "Comment from me",
+                        linksInText: [],
+                        image: nil
                     )
                 ),
                 onReply: {},

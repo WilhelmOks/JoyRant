@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import SwiftRant
+import SwiftDevRant
 
 @MainActor final class WeekRantsViewModel: ObservableObject {
-    let week: WeeklyList.Week
+    let week: Weekly
     
-    @Published var rants: [RantInFeed] = []
+    @Published var rants: [Rant] = []
     
     @Published var isLoaded = false
     @Published var isLoading = false
@@ -21,7 +21,7 @@ import SwiftRant
     
     private var feed: RantFeed?
     
-    init(week: WeeklyList.Week) {
+    init(week: Weekly) {
         self.week = week
         
         Task {
@@ -70,7 +70,7 @@ import SwiftRant
         isLoadingMore = true
         
         do {
-            let feed = try await Networking.shared.weeklyRants(week: week.week, skip: rants.count, session: feed?.set)
+            let feed = try await Networking.shared.weeklyRants(week: week.week, skip: rants.count, session: feed?.sessionHash)
             self.feed = feed
             rants += feed.rants
             

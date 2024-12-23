@@ -236,7 +236,7 @@ struct RantDetailsView: View {
     @ViewBuilder private func toolbarMoreButton() -> some View {
         #if os(macOS)
         Menu {
-            if let link = viewModel.rant?.link {
+            if let link = viewModel.rant?.linkToRant {
                 Button {
                     let devRantLink = "https://devrant.com/\(link)"
                     Pasteboard.shared.copy(devRantLink)

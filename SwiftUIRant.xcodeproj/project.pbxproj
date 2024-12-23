@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
 		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
+		0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */; };
+		0CED7FE62D19BAA2000B95A2 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0CED7FE52D19BAA2000B95A2 /* SwiftDevRant */; };
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
 		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
 		ED0FB7E928FF34D000E5163D /* WritePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7E828FF34D000E5163D /* WritePostView.swift */; };
@@ -30,7 +32,6 @@
 		ED2C9B7B28B67C53008BF314 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7A28B67C52008BF314 /* LoginView.swift */; };
 		ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7C28B67CFF008BF314 /* LoginViewModel.swift */; };
 		ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B7E28B69892008BF314 /* Logging.swift */; };
-		ED2C9B8128B69D36008BF314 /* Networking_Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2C9B8028B69D35008BF314 /* Networking_Old.swift */; };
 		ED2F3C3F29E0076500A48877 /* CommunityProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2F3C3E29E0076500A48877 /* CommunityProjectRowView.swift */; };
 		ED2F3C4229E0148100A48877 /* ArrayBuilderModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2F3C4129E0148100A48877 /* ArrayBuilderModule */; };
 		ED33C2372903F31100A59A11 /* Models+IdTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED33C2362903F31100A59A11 /* Models+IdTypes.swift */; };
@@ -62,7 +63,6 @@
 		ED74D5142928FDD300088CE6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74D5132928FDD300088CE6 /* ProfileViewModel.swift */; };
 		ED74D5162929291000088CE6 /* URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74D5152929291000088CE6 /* URLHandler.swift */; };
 		ED7FCCB229DFFEFE007D8675 /* CommunityProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7FCCB129DFFEFE007D8675 /* CommunityProject.swift */; };
-		ED9082B22A4AEFFE00B57203 /* SwiftRant in Frameworks */ = {isa = PBXBuildFile; productRef = ED9082B12A4AEFFE00B57203 /* SwiftRant */; };
 		ED91BF1B291589E000B400C4 /* LinksInPostedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91BF1A291589E000B400C4 /* LinksInPostedContent.swift */; };
 		ED97D62528E86F5200CFC418 /* CreationTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62428E86F5200CFC418 /* CreationTimeView.swift */; };
 		ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED97D62628E9C98900CFC418 /* RantExtensions.swift */; };
@@ -123,7 +123,6 @@
 		ED2C9B7A28B67C52008BF314 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		ED2C9B7C28B67CFF008BF314 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED2C9B7E28B69892008BF314 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
-		ED2C9B8028B69D35008BF314 /* Networking_Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking_Old.swift; sourceTree = "<group>"; };
 		ED2F3C3E29E0076500A48877 /* CommunityProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityProjectRowView.swift; sourceTree = "<group>"; };
 		ED33C2362903F31100A59A11 /* Models+IdTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models+IdTypes.swift"; sourceTree = "<group>"; };
 		ED33C23829040E3300A59A11 /* Models+TimeToModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models+TimeToModify.swift"; sourceTree = "<group>"; };
@@ -198,8 +197,9 @@
 				ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */,
 				ED427DDA291AE07500C3B30A /* Algorithms in Frameworks */,
 				ED97D63128EB22C100CFC418 /* HexNSColor in Frameworks */,
-				ED9082B22A4AEFFE00B57203 /* SwiftRant in Frameworks */,
 				EDD52B182B3C4C87005F04D3 /* SwiftUIIntrospect-Static in Frameworks */,
+				0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */,
+				0CED7FE62D19BAA2000B95A2 /* SwiftDevRant in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +239,6 @@
 				ED8622D4290D3E7F0070A7D2 /* Info.plist */,
 				ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */,
 				ED59CEC328BCE0860007B698 /* AppState.swift */,
-				ED2C9B8028B69D35008BF314 /* Networking_Old.swift */,
 				0C4858752D11A36A007D688D /* Networking.swift */,
 				ED2C9B7E28B69892008BF314 /* Logging.swift */,
 				ED0FB7EC2901ADA900E5163D /* LoginStore.swift */,
@@ -502,10 +501,11 @@
 				ED97D63028EB22C100CFC418 /* HexNSColor */,
 				ED427DD9291AE07500C3B30A /* Algorithms */,
 				ED2F3C4129E0148100A48877 /* ArrayBuilderModule */,
-				ED9082B12A4AEFFE00B57203 /* SwiftRant */,
 				EDD52B132B3C4C87005F04D3 /* SwiftUIIntrospect */,
 				EDD52B172B3C4C87005F04D3 /* SwiftUIIntrospect-Static */,
 				0C9030582D11A075009BCBC5 /* SwiftDevRant */,
+				0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */,
+				0CED7FE52D19BAA2000B95A2 /* SwiftDevRant */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -540,9 +540,9 @@
 				ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */,
 				ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
-				ED9082B02A4AEFFE00B57203 /* XCRemoteSwiftPackageReference "SwiftRant" */,
 				EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
-				0C9030572D11A075009BCBC5 /* XCLocalSwiftPackageReference "../SwiftDevRant" */,
+				0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				0CED7FE42D19BAA2000B95A2 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -638,7 +638,6 @@
 				ED7FCCB229DFFEFE007D8675 /* CommunityProject.swift in Sources */,
 				ED59CED128BD0B110007B698 /* FeedRantView.swift in Sources */,
 				ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */,
-				ED2C9B8128B69D36008BF314 /* Networking_Old.swift in Sources */,
 				ED74D50B2921117800088CE6 /* SegmentedPicker.swift in Sources */,
 				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,
 				ED9CF4412972E6A100A1C668 /* AllWeekliesViewModel.swift in Sources */,
@@ -859,14 +858,23 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		0C9030572D11A075009BCBC5 /* XCLocalSwiftPackageReference "../SwiftDevRant" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../SwiftDevRant;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
+		0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+		0CED7FE42D19BAA2000B95A2 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WilhelmOks/SwiftDevRantSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
@@ -889,14 +897,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		ED9082B02A4AEFFE00B57203 /* XCRemoteSwiftPackageReference "SwiftRant" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OmerFlame/SwiftRant";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		ED97D62A28E9CC4B00CFC418 /* XCRemoteSwiftPackageReference "HexColor" */ = {
@@ -922,6 +922,16 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftDevRant;
 		};
+		0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+		0CED7FE52D19BAA2000B95A2 /* SwiftDevRant */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CED7FE42D19BAA2000B95A2 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */;
+			productName = SwiftDevRant;
+		};
 		ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
@@ -936,11 +946,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED427DD8291AE07500C3B30A /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
-		};
-		ED9082B12A4AEFFE00B57203 /* SwiftRant */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED9082B02A4AEFFE00B57203 /* XCRemoteSwiftPackageReference "SwiftRant" */;
-			productName = SwiftRant;
 		};
 		ED97D62B28E9CC4B00CFC418 /* HexUIColor */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -133,7 +133,7 @@ struct RantDetailsView: View {
                                     }
                                 )
                                 .padding(.bottom, 10)
-                                .id(rant.id)
+                                .id(rant.hashValue)
                                 
                                 LazyVStack(spacing: 0) {
                                     ForEach(viewModel.comments, id: \.id) { comment in
@@ -155,7 +155,7 @@ struct RantDetailsView: View {
                                                 }
                                             )
                                             .padding(.bottom, 10)
-                                            .id(comment.id)
+                                            .id(comment.hashValue)
                                         }
                                         .id("comment_\(comment.id)")
                                     }

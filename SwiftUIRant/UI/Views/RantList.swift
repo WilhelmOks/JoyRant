@@ -18,7 +18,7 @@ struct RantList: View {
         LazyVStack(alignment: .leading, spacing: 0) {
             ForEach(rants, id: \.id) { rant in
                 row(rant: rant)
-                    .id(rant.id)
+                    .id(rant.hashValue)
             }
             
             Button {

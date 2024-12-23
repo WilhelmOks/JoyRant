@@ -65,8 +65,7 @@ final class WritePostViewModel: NSObject, ObservableObject {
                 AppState.shared.navigate(from: .feed, to: .rantDetails(rantId: newRantId))
             case .editRant(rant: let rant):
                 //We can not change the rant type when editing, so we pass the standard .rant type. The rant type seems to be determined by the tags.
-                //TODO: remove the `kind` parameter from editRant()
-                try await Networking.shared.editRant(rantId: rant.id, kind: .rant, text: content, tags: tags, image: selectedImageData)
+                try await Networking.shared.editRant(rantId: rant.id, text: content, tags: tags, image: selectedImageData)
             case .postComment(rantId: let rantId):
                 try await Networking.shared.postComment(rantId: rantId, text: content, image: selectedImageData)
             case .editComment(comment: let comment):

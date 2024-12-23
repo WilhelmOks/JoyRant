@@ -12,36 +12,12 @@ import KreeRequest
 struct Networking {
     static let shared = Self()
     
-    private let devRant = SwiftDevRant(requestLogger: RequestLogger())
+    private let devRant = DevRantRequest(requestLogger: RequestLogger())
     
     private init() {}
     
     func logIn(username: String, password: String) async throws {
-        do {
-            let token = try await devRant.logIn(username: username, password: password)
-            /*LoginStore.shared.token = .init(
-                authToken: .init(
-                    tokenID: token.id,
-                    tokenKey: token.key,
-                    expireTime: Int(token.expireTime.timeIntervalSince1970),
-                    userID: token.userId
-                )
-            )*/
-            LoginStore.shared.token = token
-        } catch {
-            switch error {
-            case let requestError as KreeRequest.Error<DevRantApiError.CodingData>:
-                switch requestError {
-                case .apiError(let apiError):
-                    dlog("### API Error: \n\(apiError.decoded)")
-                default:
-                    dlog("### Request Error: \(requestError)")
-                }
-            default:
-                dlog("### Error: \(error)")
-            }
-            throw error
-        }
+        LoginStore.shared.token = try await devRant.logIn(username: username, password: password)
         
         DispatchQueue.main.async {
             AppState.shared.objectWillChange.send()
@@ -68,7 +44,6 @@ struct Networking {
             throw SwiftUIRantError.noAccessTokenInKeychain
         }
         return token
-        //return .init(id: token.tokenID, key: token.tokenKey, expireTime: Date(timeIntervalSince1970: TimeInterval(token.expireTime)), userId: token.userID)
     }
     
     func relogInIfNeeded() async {
@@ -76,6 +51,7 @@ struct Networking {
             let token = try token()
             if token.isExpired {
                 if let username = LoginStore.shared.username, let password = LoginStore.shared.password {
+                    dlog("Logging in again due to expired token")
                     try await logIn(username: username, password: password)
                 } else {
                     dlog("Failed to re-logIn with expired token due to missing username or password.")
@@ -90,10 +66,15 @@ struct Networking {
     
     func rants(sort: RantFeed.Sort, skip: Int = 0, session: String?) async throws -> RantFeed {
         await relogInIfNeeded()
-        return try await devRant.getRantFeed(token: try token(), sort: sort, skip: skip, sessionHash: session)
+        return try await devRant.getRantFeed(
+            token: try token(),
+            sort: sort,
+            skip: skip,
+            sessionHash: session
+        )
     }
     
-    func getRant(id: Rant.ID) async throws -> (Rant, [Comment]) {
+    func getRant(id: Rant.ID) async throws -> (rant: Rant, comments: [Comment]) {
         await relogInIfNeeded()
         return try await devRant.getRant(
             token: try token(),
@@ -164,7 +145,7 @@ struct Networking {
         await relogInIfNeeded()
         let notifications = try await devRant.getNotificationFeed(
             token: try token(),
-            lastChecked: Date(),
+            lastChecked: nil,
             category: .all
         )
         return notifications.unreadByCategory
@@ -188,12 +169,11 @@ struct Networking {
         )
     }
     
-    func editRant(rantId: Rant.ID, kind: Rant.Kind, text: String, tags: String, image: Data?) async throws {
+    func editRant(rantId: Rant.ID, text: String, tags: String, image: Data?) async throws {
         await relogInIfNeeded()
         try await devRant.editRant(
             token: try token(),
             rantId: rantId,
-            kind: kind,
             text: text,
             tags: tags,
             image: image
@@ -231,7 +211,11 @@ struct Networking {
     
     func subscribe(userId: UserID, subscribe: Bool) async throws {
         await relogInIfNeeded()
-        try await devRant.subscribeToUser(token: try token(), userId: userId, subscribe: subscribe)
+        if subscribe {
+            try await devRant.subscribeToUser(token: try token(), userId: userId)
+        } else {
+            try await devRant.unsubscribeFromUser(token: try token(), userId: userId)
+        }
     }
     
     // community projects

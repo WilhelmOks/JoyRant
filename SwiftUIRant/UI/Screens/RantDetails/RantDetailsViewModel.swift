@@ -38,8 +38,8 @@ final class RantDetailsViewModel: ObservableObject {
     @MainActor private func performLoad() async {
         do {
             let response = try await Networking.shared.getRant(id: rantId)
-            rant = response.0
-            comments = response.1
+            rant = response.rant
+            comments = response.comments
             
             Task {
                 try? await DataLoader.shared.loadNumbersOfUnreadNotifications()

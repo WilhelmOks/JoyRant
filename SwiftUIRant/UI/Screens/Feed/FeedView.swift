@@ -125,7 +125,9 @@ struct FeedView: View {
                         }
                     }
                     .refreshable {
-                        await viewModel.reload()
+                        await Task {
+                            await viewModel.reload()
+                        }.value
                     }
                     
                     newRantButton()

@@ -58,6 +58,8 @@ import SwiftDevRant
     }
     
     func reload() async {
+        guard !isReloading else { return }
+        
         isReloading = true
         
         do {

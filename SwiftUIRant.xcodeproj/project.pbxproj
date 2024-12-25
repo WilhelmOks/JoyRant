@@ -872,7 +872,7 @@
 			repositoryURL = "https://github.com/WilhelmOks/SwiftDevRantSDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {

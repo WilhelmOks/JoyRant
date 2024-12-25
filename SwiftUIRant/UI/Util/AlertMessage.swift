@@ -36,8 +36,8 @@ extension AlertMessage {
             localizedMessage = swiftUIRantError.message
         case let swiftRantError as KreeRequest.Error<DevRantApiError.CodingData>:
             switch swiftRantError {
-            case .apiError(let apiError):
-                localizedMessage = "DevRant API Error: \(apiError.decoded.message)"
+            case .apiError(let status, let apiError):
+                localizedMessage = "DevRant API Error (status \(status)): \(apiError.decoded.message)"
             default:
                 localizedMessage = swiftRantError.description
             }

@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
+		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
+		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
 		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
 		0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */; };
-		0CED7FE62D19BAA2000B95A2 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0CED7FE52D19BAA2000B95A2 /* SwiftDevRant */; };
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
 		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
 		ED0FB7E928FF34D000E5163D /* WritePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FB7E828FF34D000E5163D /* WritePostView.swift */; };
@@ -199,7 +200,8 @@
 				ED97D63128EB22C100CFC418 /* HexNSColor in Frameworks */,
 				EDD52B182B3C4C87005F04D3 /* SwiftUIIntrospect-Static in Frameworks */,
 				0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */,
-				0CED7FE62D19BAA2000B95A2 /* SwiftDevRant in Frameworks */,
+				0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */,
+				0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,7 +507,8 @@
 				EDD52B172B3C4C87005F04D3 /* SwiftUIIntrospect-Static */,
 				0C9030582D11A075009BCBC5 /* SwiftDevRant */,
 				0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */,
-				0CED7FE52D19BAA2000B95A2 /* SwiftDevRant */,
+				0C59E4542D20672B004A093D /* SwiftDevRant */,
+				0C59E4572D2072AA004A093D /* SwiftDevRant */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -542,7 +545,7 @@
 				ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 				EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 				0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
-				0CED7FE42D19BAA2000B95A2 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */,
+				0C59E4562D2072AA004A093D /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -859,20 +862,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0C59E4562D2072AA004A093D /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WilhelmOks/SwiftDevRantSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
 		0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.1;
-			};
-		};
-		0CED7FE42D19BAA2000B95A2 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WilhelmOks/SwiftDevRantSDK";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
 			};
 		};
 		ED14DE5C28E08EBF005FCC9A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
@@ -918,6 +921,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0C59E4542D20672B004A093D /* SwiftDevRant */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftDevRant;
+		};
+		0C59E4572D2072AA004A093D /* SwiftDevRant */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C59E4562D2072AA004A093D /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */;
+			productName = SwiftDevRant;
+		};
 		0C9030582D11A075009BCBC5 /* SwiftDevRant */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftDevRant;
@@ -926,11 +938,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
-		};
-		0CED7FE52D19BAA2000B95A2 /* SwiftDevRant */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0CED7FE42D19BAA2000B95A2 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */;
-			productName = SwiftDevRant;
 		};
 		ED14DE5D28E08EBF005FCC9A /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;

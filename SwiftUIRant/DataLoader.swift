@@ -46,6 +46,7 @@ import SwiftDevRant
         dataStore.currentFeedSession = feed.sessionHash
         dlog("current feed session: \(dataStore.currentFeedSession ?? "nil")")
         dataStore.rantsInFeed = []
+        try? await Task.sleep(for: .milliseconds(10)) //This gives the UI time to reset the view so that the scroll view scrolls to the top before the new rants come in.
         dataStore.rantsInFeed = feed.rants
         dataStore.unfilteredRantsInFeed = []
         dataStore.unfilteredRantsInFeed = feed.rants

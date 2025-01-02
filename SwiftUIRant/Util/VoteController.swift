@@ -12,17 +12,17 @@ import SwiftDevRant
     @Published var loadingVoteState: VoteState?
     let voteState: () -> VoteState
     let score: () -> Int
-    let voteAction: (VoteState) async throws -> ()
+    let voteAction: (VoteState, DownvoteReason?) async throws -> ()
     let handleError: (Error) -> ()
     
     static let empty: VoteController = .init(
         voteState: { .unvotable },
         score: { 0 },
-        voteAction: { _ in },
+        voteAction: { _, _ in },
         handleError: { _ in }
     )
     
-    init(loadingVoteState: VoteState? = nil, voteState: @escaping () -> VoteState, score: @escaping () -> Int, voteAction: @escaping (VoteState) async throws -> (), handleError: @escaping (Error) -> ()) {
+    init(loadingVoteState: VoteState? = nil, voteState: @escaping () -> VoteState, score: @escaping () -> Int, voteAction: @escaping (VoteState, DownvoteReason?) async throws -> (), handleError: @escaping (Error) -> ()) {
         self.loadingVoteState = loadingVoteState
         self.voteState = voteState
         self.score = score
@@ -82,15 +82,21 @@ import SwiftDevRant
         }
     }
     
-    func voteDown() async {
+    func voteDown(reason: DownvoteReason? = nil) async {
+        let resolvedReason = reason ?? AppState.shared.automaticDownvoteReason
+        
         switch voteState() {
         case .unvoted, .upvoted:
-            await performVote(voteState: .downvoted)
+            await performVote(voteState: .downvoted, downvoteReason: resolvedReason)
         case .downvoted:
             await performVote(voteState: .unvoted)
         default:
             break
         }
+    }
+    
+    func voteDownAlt() {
+        //TODO: 
     }
     
     func voteByContext() async {
@@ -104,12 +110,12 @@ import SwiftDevRant
         }
     }
     
-    private func performVote(voteState: VoteState) async {
+    private func performVote(voteState: VoteState, downvoteReason: DownvoteReason? = nil) async {
         guard loadingVoteState == nil else { return }
         
         loadingVoteState = voteState
         do {
-            try await voteAction(voteState)
+            try await voteAction(voteState, downvoteReason)
         } catch {
             handleError(error)
         }

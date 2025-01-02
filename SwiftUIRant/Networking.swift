@@ -101,21 +101,23 @@ struct Networking {
     
     // vote
     
-    func vote(rantId: Rant.ID, voteState: VoteState) async throws -> Rant {
+    func vote(rantId: Rant.ID, voteState: VoteState, downvoteReason: DownvoteReason = .notForMe) async throws -> Rant {
         await relogInIfNeeded()
         return try await devRant.voteOnRant(
             token: try token(),
             rantId: rantId,
-            vote: voteState
+            vote: voteState,
+            downvoteReason: downvoteReason
         )
     }
     
-    func vote(commentId: Comment.ID, voteState: VoteState) async throws -> Comment {
+    func vote(commentId: Comment.ID, voteState: VoteState, downvoteReason: DownvoteReason = .notForMe) async throws -> Comment {
         await relogInIfNeeded()
         return try await devRant.voteOnComment(
             token: try token(),
             commentId: commentId,
-            vote: voteState
+            vote: voteState,
+            downvoteReason: downvoteReason
         )
     }
     

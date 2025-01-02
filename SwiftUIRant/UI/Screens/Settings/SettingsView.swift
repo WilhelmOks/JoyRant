@@ -14,6 +14,24 @@ struct SettingsView: View {
     @State private var alertMessage: AlertMessage = .none()
     @ObservedObject private var appState = AppState.shared
     
+    enum DownvoteReasonItem: Int, Hashable, CaseIterable {
+        case alwaysAsk = -1
+        case notForMe = 0
+        case repost = 1
+        case offensiveOrSpam = 2
+        
+        var displayName: String {
+            switch self {
+            case .alwaysAsk: return "(Always ask)"
+            case .repost: return "Repost"
+            case .offensiveOrSpam: return "Offensive or spam"
+            case .notForMe: return "Not for me"
+            }
+        }
+    }
+    
+    @State private var downvoteReason: DownvoteReasonItem = .alwaysAsk
+    
     var body: some View {
         content()
             .if(navigationBar) {
@@ -43,6 +61,13 @@ struct SettingsView: View {
                 default:
                     EmptyView()
                 }
+            }
+            .onChange(of: downvoteReason) { newValue in
+                AppState.shared.automaticDownvoteReason = .init(rawValue: newValue.rawValue)
+            }
+            .onAppear {
+                let reasonRaw = AppState.shared.automaticDownvoteReason?.rawValue
+                downvoteReason = reasonRaw.flatMap { DownvoteReasonItem(rawValue: $0) } ?? .alwaysAsk
             }
     }
     
@@ -107,6 +132,14 @@ struct SettingsView: View {
                             Text("Reset to default")
                         } icon: {
                             Image(systemName: "paintbrush")
+                        }
+                    }
+                }
+                
+                Section {
+                    Picker.init("Downvote reason", selection: $downvoteReason) {
+                        ForEach(DownvoteReasonItem.allCases, id: \.self) { item in
+                            Text(item.displayName).tag(item)
                         }
                     }
                 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftDevRant
 
 struct VoteControl: View {
     @Environment(\.isEnabled) private var isEnabled
@@ -15,9 +16,33 @@ struct VoteControl: View {
     var isUpvoted: Bool = false
     var isDownvoted: Bool = false
     let upvoteAction: () -> ()
-    let downvoteAction: () -> ()
+    let downvoteAction: (DownvoteReason?) -> ()
+    
+    @State private var downvoteReasonOptionsPresented = false
     
     var body: some View {
+        content()
+            .actionSheet(isPresented: $downvoteReasonOptionsPresented) {
+                ActionSheet(
+                    title: Text("Downvote reason"),
+                    message: Text("Make this automatic in the settings"),
+                    buttons: [
+                        .default(Text("Not for me")) {
+                            downvoteAction(.notForMe)
+                        },
+                        .default(Text("Repost")) {
+                            downvoteAction(.repost)
+                        },
+                        .default(Text("Offensive or spam")) {
+                            downvoteAction(.offensiveOrSpam)
+                        },
+                        .cancel()
+                    ]
+                )
+            }
+    }
+    
+    @ViewBuilder private func content() -> some View {
         if isHorizontal {
             HStack(spacing: 4) {
                 downvoteButton()
@@ -75,7 +100,17 @@ struct VoteControl: View {
             text: "--",
             hiddenText: "++",
             highlighted: isDownvoted,
-            action: downvoteAction
+            action: {
+                if isDownvoted {
+                    downvoteAction(nil)
+                } else {
+                    if let reason = AppState.shared.automaticDownvoteReason {
+                        downvoteAction(reason)
+                    } else {
+                        downvoteReasonOptionsPresented = true
+                    }
+                }
+            }
         )
     }
     
@@ -96,7 +131,7 @@ struct VoteControl_Previews: PreviewProvider {
                 isUpvoted: false,
                 isDownvoted: false,
                 upvoteAction: {},
-                downvoteAction: {}
+                downvoteAction: { _ in }
             )
             
             VoteControl(
@@ -105,7 +140,7 @@ struct VoteControl_Previews: PreviewProvider {
                 isUpvoted: true,
                 isDownvoted: false,
                 upvoteAction: {},
-                downvoteAction: {}
+                downvoteAction: { _ in }
             )
             
             VoteControl(
@@ -114,7 +149,7 @@ struct VoteControl_Previews: PreviewProvider {
                 isUpvoted: false,
                 isDownvoted: false,
                 upvoteAction: {},
-                downvoteAction: {}
+                downvoteAction: { _ in }
             )
             .disabled(true)
             .padding(.bottom, 30)
@@ -126,7 +161,7 @@ struct VoteControl_Previews: PreviewProvider {
                     isUpvoted: false,
                     isDownvoted: false,
                     upvoteAction: {},
-                    downvoteAction: {}
+                    downvoteAction: { _ in }
                 )
                 
                 VoteControl(
@@ -135,7 +170,7 @@ struct VoteControl_Previews: PreviewProvider {
                     isUpvoted: true,
                     isDownvoted: false,
                     upvoteAction: {},
-                    downvoteAction: {}
+                    downvoteAction: { _ in }
                 )
                 
                 VoteControl(
@@ -144,7 +179,7 @@ struct VoteControl_Previews: PreviewProvider {
                     isUpvoted: false,
                     isDownvoted: false,
                     upvoteAction: {},
-                    downvoteAction: {}
+                    downvoteAction: { _ in }
                 )
                 .disabled(true)
             }

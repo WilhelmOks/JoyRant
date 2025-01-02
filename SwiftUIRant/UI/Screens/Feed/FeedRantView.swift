@@ -50,9 +50,9 @@ struct FeedRantView: View {
                             await viewModel.voteController.voteUp()
                         }
                     },
-                    downvoteAction: {
+                    downvoteAction: { reason in
                         Task {
-                            await viewModel.voteController.voteDown()
+                            await viewModel.voteController.voteDown(reason: reason)
                         }
                     }
                 )

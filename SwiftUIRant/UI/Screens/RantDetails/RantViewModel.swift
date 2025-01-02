@@ -26,8 +26,8 @@ import SwiftDevRant
             score: { [weak self] in
                 self?.rant.score ?? 0
             },
-            voteAction: { [weak self] voteState in
-                let changedRant = try await Networking.shared.vote(rantId: rant.id, voteState: voteState)
+            voteAction: { [weak self] voteState, downvoteReason in
+                let changedRant = try await Networking.shared.vote(rantId: rant.id, voteState: voteState, downvoteReason: downvoteReason ?? .notForMe)
                 self?.applyChangedData(changedRant: changedRant)
             },
             handleError: { [weak self] error in

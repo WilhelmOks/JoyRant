@@ -101,4 +101,23 @@ final class AppState: ObservableObject {
             }
         #endif
     }
+    
+    var automaticDownvoteReason: DownvoteReason? {
+        get {
+            if let reasonNumberString = UserDefaults.standard.string(forKey: "automatic_downvote_reason") {
+                return Int(reasonNumberString).flatMap { .init(rawValue: $0) }
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let newValue {
+                let reasonNumberString = String(newValue.rawValue)
+                UserDefaults.standard.set(reasonNumberString, forKey: "automatic_downvote_reason")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "automatic_downvote_reason")
+            }
+            objectWillChange.send()
+        }
+    }
 }

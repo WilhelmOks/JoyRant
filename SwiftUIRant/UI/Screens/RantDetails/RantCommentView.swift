@@ -127,9 +127,9 @@ struct RantCommentView: View {
                             await voteController.voteUp()
                         }
                     },
-                    downvoteAction: {
+                    downvoteAction: { reason in
                         Task {
-                            await voteController.voteDown()
+                            await voteController.voteDown(reason: reason)
                         }
                     }
                 )

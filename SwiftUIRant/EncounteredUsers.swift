@@ -15,8 +15,12 @@ final class EncounteredUsers {
     }
     
     func update(user: User) {
+        guard user.id != LoginStore.shared.token?.userId else { return }
+        
         if let foundIndex = transientMemory.firstIndex(where: { $0.id == user.id }) {
             transientMemory[foundIndex] = user
+        } else {
+            transientMemory.append(user)
         }
     }
 }

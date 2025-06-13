@@ -117,6 +117,11 @@ extension WritePostViewModel {
 
 #if os(iOS)
 extension WritePostViewModel: UITextInputDelegate {
+    @available(iOS 18.4, *)
+    func conversationContext(_ context: UIConversationContext?, didChange textInput: (any UITextInput)?) {
+        
+    }
+    
     func selectionWillChange(_ textInput: UITextInput?) {
         
     }

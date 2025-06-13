@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C46AA662DFC8E77005FE458 /* EncounteredUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */; };
 		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
@@ -101,6 +102,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsers.swift; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				ED0FB7EC2901ADA900E5163D /* LoginStore.swift */,
 				ED59CED228BD0EC60007B698 /* DataStore.swift */,
 				ED59CED428BD103C0007B698 /* DataLoader.swift */,
+				0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */,
 				ED2C9B6928B679D0008BF314 /* Assets.xcassets */,
 				ED2C9B6B28B679D0008BF314 /* SwiftUIRant.entitlements */,
 				ED59CEDA28C787D80007B698 /* Util */,
@@ -602,6 +605,7 @@
 				ED97D62528E86F5200CFC418 /* CreationTimeView.swift in Sources */,
 				ED97D63428F1D4C700CFC418 /* SettingsView.swift in Sources */,
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
+				0C46AA662DFC8E77005FE458 /* EncounteredUsers.swift in Sources */,
 				EDCA4564292FD7D400C12A6D /* RantList.swift in Sources */,
 				ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */,
 				ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */,

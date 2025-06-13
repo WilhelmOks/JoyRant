@@ -76,11 +76,20 @@ struct Networking {
     
     func getRant(id: Rant.ID) async throws -> (rant: Rant, comments: [Comment]) {
         await relogInIfNeeded()
-        return try await devRant.getRant(
+        
+        let result = try await devRant.getRant(
             token: try token(),
             rantId: id,
             lastCommentId: nil
         )
+        
+        EncounteredUsers.shared.update(user: result.rant.author)
+        
+        for commentAuthor in result.comments.map(\.author) {
+            EncounteredUsers.shared.update(user: commentAuthor)
+        }
+        
+        return result
     }
     
     // weekly

@@ -34,30 +34,9 @@ struct EncounteredUsersMentionPicker: View {
             }
             .padding()
             
-            ScrollView {
-                LazyVStack {
-                    let users = EncounteredUsers.shared.users.sorted(by: { $0.name.compare($1.name, options: [.caseInsensitive]) == .orderedAscending })
-                    
-                    ForEach(users, id: \.self) { user in
-                        Button {
-                            onUserPicked(user)
-                            dismiss()
-                        } label: {
-                            HStack {
-                                UserPanel(
-                                    avatar: user.avatarSmall,
-                                    name: user.name,
-                                    score: user.score,
-                                    isSupporter: user.devRantSupporter
-                                )
-                                
-                                Spacer()
-                            }
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 1)
-                    }
-                }
+            EncounteredUsersList { selectedUser in
+                onUserPicked(selectedUser)
+                dismiss()
             }
         }
     }

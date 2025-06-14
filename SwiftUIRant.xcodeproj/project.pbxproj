@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C46AA662DFC8E77005FE458 /* EncounteredUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */; };
 		0C46AA692DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA682DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift */; };
+		0C46AA6B2DFD8200005FE458 /* EncounteredUsersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA6A2DFD8200005FE458 /* EncounteredUsersList.swift */; };
+		0C46AA6D2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA6C2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift */; };
 		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
@@ -105,6 +107,8 @@
 /* Begin PBXFileReference section */
 		0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsers.swift; sourceTree = "<group>"; };
 		0C46AA682DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsersMentionPicker.swift; sourceTree = "<group>"; };
+		0C46AA6A2DFD8200005FE458 /* EncounteredUsersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsersList.swift; sourceTree = "<group>"; };
+		0C46AA6C2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsersProfilePicker.swift; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				0C46AA682DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift */,
+				0C46AA6C2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift */,
 			);
 			path = EncounteredUsers;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				ED398CA628FC59650012142B /* RefreshButton.swift */,
 				ED74D50A2921117800088CE6 /* SegmentedPicker.swift */,
 				EDCA4563292FD7D400C12A6D /* RantList.swift */,
+				0C46AA6A2DFD8200005FE458 /* EncounteredUsersList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -621,6 +627,7 @@
 				ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */,
 				ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */,
 				EDAD6517298E81AA003CC3F3 /* WeekRantsView.swift in Sources */,
+				0C46AA6B2DFD8200005FE458 /* EncounteredUsersList.swift in Sources */,
 				ED59CEC728BCF6110007B698 /* AlertMessage.swift in Sources */,
 				EDE2289528DB33660025EDB1 /* RantView.swift in Sources */,
 				EDCEF9772933CA9C0007C9BD /* Pasteboard.swift in Sources */,
@@ -649,6 +656,7 @@
 				ED97D62928E9C9E200CFC418 /* CommentExtensions.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
 				ED74D5142928FDD300088CE6 /* ProfileViewModel.swift in Sources */,
+				0C46AA6D2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED97D62E28EAF46600CFC418 /* Color+Hex.swift in Sources */,
 				ED59CEE828CB74180007B698 /* MockedModels.swift in Sources */,

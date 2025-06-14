@@ -58,6 +58,8 @@ struct SettingsView: View {
                     )
                 case .communityProjects:
                     CommunityProjectsView()
+                case .encounteredUserProfiles:
+                    EncounteredUsersProfilePicker()
                 default:
                     EmptyView()
                 }
@@ -78,9 +80,17 @@ struct SettingsView: View {
                     Section {
                         NavigationLink(value: AppState.NavigationDestination.userProfile(userId: userId)) {
                             Label {
-                                Text("Profile")
+                                Text("My Profile")
                             } icon: {
                                 Image(systemName: "person")
+                            }
+                        }
+                        
+                        NavigationLink(value: AppState.NavigationDestination.encounteredUserProfiles) {
+                            Label {
+                                Text("Encountered Profiles")
+                            } icon: {
+                                Image(systemName: "person.badge.clock")
                             }
                         }
                     }

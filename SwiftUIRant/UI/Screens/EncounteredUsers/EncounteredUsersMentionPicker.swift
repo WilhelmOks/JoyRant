@@ -13,30 +13,23 @@ struct EncounteredUsersMentionPicker: View {
     let onUserPicked: (User) -> Void
     
     var body: some View {
-        VStack {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundStyle(Color.primaryAccent)
-                }
-            
-                Spacer()
-                
-                Text("Encountered Users")
-                    .bold()
-                
-                Spacer()
-                
-                Image(systemName: "xmark")
-                    .hidden()
-            }
-            .padding()
-            
+        NavigationStack {
             EncounteredUsersList { selectedUser in
                 onUserPicked(selectedUser)
                 dismiss()
+            }
+            .padding(.horizontal, 1)
+            .navigationTitle("Encountered Users")
+            .navigationBarTitleDisplayModeInline()
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundStyle(Color.primaryAccent)
+                    }
+                }
             }
         }
     }

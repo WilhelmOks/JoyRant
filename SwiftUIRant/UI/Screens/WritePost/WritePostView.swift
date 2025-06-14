@@ -29,6 +29,8 @@ struct WritePostView: View {
     
     @State private var isLoadingImage = false
     
+    @State private var encounteredUsersPresented = false
+    
     #if os(iOS)
     @State private var uiTextView: UITextView?
     @State private var cursorPosition = 0
@@ -174,33 +176,33 @@ struct WritePostView: View {
     }
     
     @ViewBuilder private func mentionSuggestions() -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
-                    Button {
-                        //DataStore.shared.writePostContent.append(suggestion + " ")
-                        
-                        #if os(iOS)
-                        let oldCursorPosition = cursorPosition
-                        
-                        dataStore.writePostContent.insert(
-                            contentsOf: suggestion,
-                            at: dataStore.writePostContent.index(
-                                dataStore.writePostContent.startIndex,
-                                offsetBy: cursorPosition
-                            )
-                        )
-                        
-                        DispatchQueue.main.async {
-                            uiTextView?.selectedRange.location = oldCursorPosition + suggestion.count
-                            uiTextView?.selectedRange.length = 0
+        HStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModel.mentionSuggestions, id: \.self) { suggestion in
+                        Button {
+                            //DataStore.shared.writePostContent.append(suggestion + " ")
+                            insertAtCursor(suggestion)
+                        } label: {
+                            Text(suggestion)
+                                .padding(.vertical, 8)
                         }
-                        #endif
-                    } label: {
-                        Text(suggestion)
-                            .padding(.vertical, 8)
                     }
                 }
+            }
+            
+            Spacer()
+            
+            Button {
+                encounteredUsersPresented.toggle()
+            } label: {
+                Image(systemName: "person.crop.circle.badge.clock")
+            }
+            .sheet(isPresented: $encounteredUsersPresented) {
+                EncounteredUsersMentionPicker { pickedUser in
+                    insertAtCursor("@" + pickedUser.name)
+                }
+                .presentationDetents([.medium, .large])
             }
         }
     }
@@ -385,6 +387,25 @@ struct WritePostView: View {
         #else
         ToolbarItem(placement: .automatic) {
             toolbarTitle()
+        }
+        #endif
+    }
+    
+    private func insertAtCursor(_ text: String) {
+        #if os(iOS)
+        let oldCursorPosition = cursorPosition
+
+        dataStore.writePostContent.insert(
+            contentsOf: text,
+            at: dataStore.writePostContent.index(
+                dataStore.writePostContent.startIndex,
+                offsetBy: cursorPosition
+            )
+        )
+
+        DispatchQueue.main.async {
+            uiTextView?.selectedRange.location = oldCursorPosition + text.count
+            uiTextView?.selectedRange.length = 0
         }
         #endif
     }

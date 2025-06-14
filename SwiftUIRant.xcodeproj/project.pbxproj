@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C46AA662DFC8E77005FE458 /* EncounteredUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */; };
+		0C46AA692DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA682DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift */; };
 		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
@@ -103,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsers.swift; sourceTree = "<group>"; };
+		0C46AA682DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsersMentionPicker.swift; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
@@ -210,6 +212,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C46AA672DFD73D7005FE458 /* EncounteredUsers */ = {
+			isa = PBXGroup;
+			children = (
+				0C46AA682DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift */,
+			);
+			path = EncounteredUsers;
+			sourceTree = "<group>";
+		};
 		ED0FB7E728FF348400E5163D /* WritePost */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +301,7 @@
 				EDE2288F28D5E5710025EDB1 /* RantDetails */,
 				ED74D5102928FD2300088CE6 /* Profile */,
 				ED0FB7E728FF348400E5163D /* WritePost */,
+				0C46AA672DFD73D7005FE458 /* EncounteredUsers */,
 				ED97D63528F302D500CFC418 /* Notifications */,
 				ED97D63228F1D4AD00CFC418 /* Settings */,
 				ED62E10D29DFF69300E3C93D /* Community Projects */,
@@ -644,6 +655,7 @@
 				ED0FB7ED2901ADA900E5163D /* LoginStore.swift in Sources */,
 				ED7FCCB229DFFEFE007D8675 /* CommunityProject.swift in Sources */,
 				ED59CED128BD0B110007B698 /* FeedRantView.swift in Sources */,
+				0C46AA692DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift in Sources */,
 				ED97D62728E9C98900CFC418 /* RantExtensions.swift in Sources */,
 				ED74D50B2921117800088CE6 /* SegmentedPicker.swift in Sources */,
 				EDE2289328DB0FD90025EDB1 /* RantCommentView.swift in Sources */,

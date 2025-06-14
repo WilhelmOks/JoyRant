@@ -8,6 +8,7 @@
 import Foundation
 import SwiftDevRant
 import SwiftUI
+import SwiftData
 
 #if os(iOS)
 import UIKit
@@ -28,6 +29,8 @@ final class AppState: ObservableObject {
     @Published var weeklyNavigationPath = NavigationPath()
     @Published var notificationsNavigationPath = NavigationPath()
     @Published var settingsNavigationPath = NavigationPath()
+    
+    var swiftDataModelContext: ModelContext?
         
     var isLoggedIn: Bool {
         LoginStore.shared.isLoggedIn

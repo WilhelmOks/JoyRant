@@ -9,9 +9,32 @@ import SwiftUI
 import SwiftDevRant
 
 struct EncounteredUsersProfilePicker: View {
+    @State private var isClearConfirmationPresented = false
+    
     var body: some View {
         content()
             .navigationTitle("Encountered Profiles")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isClearConfirmationPresented = true
+                    } label: {
+                        Text("Clear")
+                    }
+                    .confirmationDialog(
+                        "Delete all encountered profiles?",
+                        isPresented: $isClearConfirmationPresented,
+                        actions: {
+                            Button("Delete", role: .destructive) {
+                                EncounteredUsers.shared.clear()
+                            }
+                        },
+                        message: {
+                            Text("Delete all encountered profiles?")
+                        }
+                    )
+                }
+            }
             .navigationDestination(for: AppState.NavigationDestination.self) { destination in
                 switch destination {
                 case .userProfile(userId: let userId):
@@ -35,5 +58,7 @@ struct EncounteredUsersProfilePicker: View {
 }
 
 #Preview {
-    EncounteredUsersProfilePicker()
+    NavigationStack {
+        EncounteredUsersProfilePicker()        
+    }
 }

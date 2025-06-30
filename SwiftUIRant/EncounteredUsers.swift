@@ -12,27 +12,36 @@ final class EncounteredUsers {
     }
     
     private var dataModels: [User.DataModel] {
-        (try? AppState.shared.swiftDataModelContext?.fetch(FetchDescriptor<User.DataModel>())) ?? []
+        UserSettings().encounteredUsers.compactMap { decode($0) }
+    }
+    
+    private func decode(_ json: String) -> User.DataModel? {
+        guard let data = json.data(using: .utf8) else { return nil }
+        return try? JSONDecoder().decode(User.DataModel.self, from: data)
+    }
+    
+    private func encode(_ model: User.DataModel) -> String? {
+        if let data = try? JSONEncoder().encode(model) {
+            return String(data: data, encoding: .utf8)
+        } else {
+            return nil
+        }
     }
     
     func update(user: User) {
         guard user.id != LoginStore.shared.token?.userId else { return }
-        guard let context = AppState.shared.swiftDataModelContext else { return }
         
-        if let found = dataModels.first(where: { $0.id == user.id }) {
-            context.delete(found)
+        var modifiedModels = dataModels
+        if let foundIndex = dataModels.firstIndex(where: { $0.id == user.id }) {
+            modifiedModels.remove(at: foundIndex)
         }
         
-        context.insert(user.dataModel)
+        modifiedModels.append(user.dataModel)
         
-        try? context.save()
+        UserSettings().encounteredUsers = modifiedModels.compactMap { encode($0) }
     }
     
     func clear() {
-        guard let context = AppState.shared.swiftDataModelContext else { return }
-        
-        try? context.delete(model: User.DataModel.self)
-        
-        try? context.save()
+        UserSettings().encounteredUsers = []
     }
 }

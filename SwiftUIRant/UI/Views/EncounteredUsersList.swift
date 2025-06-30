@@ -10,14 +10,12 @@ import SwiftDevRant
 import SwiftData
 
 struct EncounteredUsersList: View {
-    @Query var users: [User.DataModel]
-    
     let onUserSelected: (User) -> Void
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                let users = self.users.map(\.domainModel).sorted {
+                let users = EncounteredUsers.shared.users.sorted {
                     $0.name.compare($1.name, options: [.caseInsensitive]) == .orderedAscending
                 }
                 

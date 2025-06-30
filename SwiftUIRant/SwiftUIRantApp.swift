@@ -14,17 +14,6 @@ typealias ArrayBuilder = ArrayBuilderModule.ArrayBuilder
 
 @main
 struct SwiftUIRantApp: App {
-    let modelContainer: ModelContainer = {
-        do {
-            let container = try ModelContainer(for: User.DataModel.self)
-            AppState.shared.swiftDataModelContext = container.mainContext
-            return container
-        } catch {
-            print(error)
-            fatalError("Could not initialize ModelContainer: \(error)")
-        }
-    }()
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -36,6 +25,5 @@ struct SwiftUIRantApp: App {
                 }
         }
         .handlesExternalEvents(matching: ["*"])
-        .modelContainer(modelContainer)
     }
 }

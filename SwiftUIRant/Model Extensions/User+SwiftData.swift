@@ -10,7 +10,7 @@ import SwiftData
 import SwiftDevRant
 
 extension User {
-    @Model class DataModel {
+    struct DataModel: Codable {
         var id: Int
         var name: String
         var score: Int

@@ -10,6 +10,9 @@ import Foundation
 struct UserSettings {
     @UserDefaultsBackedDefaulting(key: "test_dummy", defaultValue: false)
     var testDummy
+    
+    @UserDefaultsBackedDefaulting(key: "encountered_users", defaultValue: [String]())
+    var encounteredUsers
 }
 
 @propertyWrapper private struct UserDefaultsBacked<Value> {

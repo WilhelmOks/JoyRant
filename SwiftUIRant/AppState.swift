@@ -30,8 +30,6 @@ final class AppState: ObservableObject {
     @Published var notificationsNavigationPath = NavigationPath()
     @Published var settingsNavigationPath = NavigationPath()
     
-    var swiftDataModelContext: ModelContext?
-        
     var isLoggedIn: Bool {
         LoginStore.shared.isLoggedIn
     }

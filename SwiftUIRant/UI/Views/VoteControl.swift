@@ -25,7 +25,7 @@ struct VoteControl: View {
             .actionSheet(isPresented: $downvoteReasonOptionsPresented) {
                 ActionSheet(
                     title: Text("Downvote reason"),
-                    message: Text("Make this automatic in the settings"),
+                    message: Text("Make this automatic in settings"),
                     buttons: [
                         .default(Text("Not for me")) {
                             downvoteAction(.notForMe)

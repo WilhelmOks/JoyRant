@@ -24,7 +24,7 @@ struct UserAvatarView: View {
     }
     
     @ViewBuilder private func content() -> some View {
-        if let url = avatar.imageUrl {            
+        if let url = avatar.imageUrl {
             CachedAsyncImage(url: url, urlCache: .userAvatarCache) { phase in
                 switch phase {
                 case .empty:
@@ -40,7 +40,8 @@ struct UserAvatarView: View {
                 case .failure:
                     Image(systemName: "photo")
                         .resizable()
-                        .padding()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(12)
                         .background(emptyBgColor)
                 @unknown default:
                     EmptyView()

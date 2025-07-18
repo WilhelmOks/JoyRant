@@ -252,7 +252,8 @@ struct Networking {
     // spam detection
     
     func loadSpamDetectionConfig() async -> SpamDetector.Config? {
-        .fromBundle(jsonFileName: "spam_detection_config.json")
+        let url = "https://raw.githubusercontent.com/WilhelmOks/JoyRant/refs/heads/main/spam_detection_config.json"
+        return await .fromRemoteUrl(jsonUrl: url)
     }
 }
 

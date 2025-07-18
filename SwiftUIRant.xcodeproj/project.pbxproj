@@ -17,7 +17,6 @@
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
 		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
 		0CBF49922E2ACF4D00E1E337 /* SpamDetector in Frameworks */ = {isa = PBXBuildFile; productRef = 0CBF49912E2ACF4D00E1E337 /* SpamDetector */; };
-		0CBF49942E2ACFBD00E1E337 /* spam_detection_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CBF49932E2ACFA300E1E337 /* spam_detection_config.json */; };
 		0CBF49962E2AD3BA00E1E337 /* Rant+SpamInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */; };
 		0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */; };
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
@@ -115,7 +114,6 @@
 		0C46AA6C2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsersProfilePicker.swift; sourceTree = "<group>"; };
 		0C46AA6E2DFDC301005FE458 /* User+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SwiftData.swift"; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		0CBF49932E2ACFA300E1E337 /* spam_detection_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = spam_detection_config.json; sourceTree = "<group>"; };
 		0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rant+SpamInfo.swift"; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 		ED2C9B6428B679CB008BF314 /* SwiftUIRant */ = {
 			isa = PBXGroup;
 			children = (
-				0CBF49932E2ACFA300E1E337 /* spam_detection_config.json */,
 				ED8622D4290D3E7F0070A7D2 /* Info.plist */,
 				ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */,
 				ED59CEC328BCE0860007B698 /* AppState.swift */,
@@ -596,7 +593,6 @@
 			files = (
 				ED2C9B6E28B679D0008BF314 /* Preview Assets.xcassets in Resources */,
 				ED2C9B6A28B679D0008BF314 /* Assets.xcassets in Resources */,
-				0CBF49942E2ACFBD00E1E337 /* spam_detection_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

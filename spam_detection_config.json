@@ -2,7 +2,7 @@
     // The minimum spam score that a rant needs to have to be considered spam.
     "spam_score_threshold": 100,
     
-    // If the user has a more upvotes than this value, the text is not considered spam.
+    // If the user has more upvotes than this value, the rant is not considered spam.
     "user_reputation_threshold": 10,
     
     "substrings": [

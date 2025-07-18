@@ -32,6 +32,8 @@ struct SettingsView: View {
     
     @State private var downvoteReason: DownvoteReasonItem = .alwaysAsk
     
+    @State private var reduceVisibilityOfSpam = UserSettings().reduceVisibilityOfSpam
+    
     var body: some View {
         content()
             .if(navigationBar) {
@@ -66,6 +68,9 @@ struct SettingsView: View {
             }
             .onChange(of: downvoteReason) { newValue in
                 AppState.shared.automaticDownvoteReason = .init(rawValue: newValue.rawValue)
+            }
+            .onChange(of: reduceVisibilityOfSpam) { newValue in
+                UserSettings().reduceVisibilityOfSpam = newValue
             }
             .onAppear {
                 let reasonRaw = AppState.shared.automaticDownvoteReason?.rawValue
@@ -152,6 +157,13 @@ struct SettingsView: View {
                             Text(item.displayName).tag(item)
                         }
                     }
+                }
+                
+                Section {
+                    Toggle(isOn: $reduceVisibilityOfSpam) {
+                        Text("Reduce visibility of spam")
+                    }
+                    .tint(Color.accentColor)
                 }
                 
                 Section {

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftDevRant
 import KreeRequest
+import SpamDetector
 
 struct Networking {
     static let shared = Self()
@@ -65,13 +66,21 @@ struct Networking {
     // rants
     
     func rants(sort: RantFeed.Sort, skip: Int = 0, session: String?) async throws -> RantFeed {
+        if AppState.shared.spamDetectorConfig == nil {
+            AppState.shared.spamDetectorConfig = await loadSpamDetectionConfig()
+        }
+        
         await relogInIfNeeded()
-        return try await devRant.getRantFeed(
+        let feed = try await devRant.getRantFeed(
             token: try token(),
             sort: sort,
             skip: skip,
             sessionHash: session
         )
+        
+        let scannedFeed = AppState.shared.scanForSpam(feed: feed)
+        
+        return scannedFeed
     }
     
     func getRant(id: Rant.ID) async throws -> (rant: Rant, comments: [Comment]) {
@@ -238,6 +247,12 @@ struct Networking {
         let response = try await URLSession.shared.data(for: .init(url: url))
         let container = try JSONDecoder().decode(CommunityProject.CodingData.Container.self, from: response.0)
         return container.projects.map(\.decoded)
+    }
+    
+    // spam detection
+    
+    func loadSpamDetectionConfig() async -> SpamDetector.Config? {
+        .fromBundle(jsonFileName: "spam_detection_config.json")
     }
 }
 

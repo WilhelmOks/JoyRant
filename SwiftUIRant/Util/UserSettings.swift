@@ -13,6 +13,9 @@ struct UserSettings {
     
     @UserDefaultsBackedDefaulting(key: "encountered_users", defaultValue: [String]())
     var encounteredUsers
+    
+    @UserDefaultsBackedDefaulting(key: "reduce_visibility_of_spam", defaultValue: true)
+    var reduceVisibilityOfSpam
 }
 
 @propertyWrapper private struct UserDefaultsBacked<Value> {

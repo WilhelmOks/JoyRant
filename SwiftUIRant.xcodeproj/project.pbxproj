@@ -16,6 +16,9 @@
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
 		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
+		0CBF49922E2ACF4D00E1E337 /* SpamDetector in Frameworks */ = {isa = PBXBuildFile; productRef = 0CBF49912E2ACF4D00E1E337 /* SpamDetector */; };
+		0CBF49942E2ACFBD00E1E337 /* spam_detection_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CBF49932E2ACFA300E1E337 /* spam_detection_config.json */; };
+		0CBF49962E2AD3BA00E1E337 /* Rant+SpamInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */; };
 		0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */; };
 		ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50A28DCC642000A01DC /* RantViewModel.swift */; };
 		ED00E50D28DDB4E6000A01DC /* BroadcastEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */; };
@@ -112,6 +115,8 @@
 		0C46AA6C2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsersProfilePicker.swift; sourceTree = "<group>"; };
 		0C46AA6E2DFDC301005FE458 /* User+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SwiftData.swift"; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		0CBF49932E2ACFA300E1E337 /* spam_detection_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = spam_detection_config.json; sourceTree = "<group>"; };
+		0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rant+SpamInfo.swift"; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
 		ED0FB7E828FF34D000E5163D /* WritePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostView.swift; sourceTree = "<group>"; };
@@ -208,6 +213,7 @@
 				ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */,
 				ED427DDA291AE07500C3B30A /* Algorithms in Frameworks */,
 				ED97D63128EB22C100CFC418 /* HexNSColor in Frameworks */,
+				0CBF49922E2ACF4D00E1E337 /* SpamDetector in Frameworks */,
 				EDD52B182B3C4C87005F04D3 /* SwiftUIIntrospect-Static in Frameworks */,
 				0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */,
 				0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */,
@@ -257,6 +263,7 @@
 		ED2C9B6428B679CB008BF314 /* SwiftUIRant */ = {
 			isa = PBXGroup;
 			children = (
+				0CBF49932E2ACFA300E1E337 /* spam_detection_config.json */,
 				ED8622D4290D3E7F0070A7D2 /* Info.plist */,
 				ED2C9B6528B679CB008BF314 /* SwiftUIRantApp.swift */,
 				ED59CEC328BCE0860007B698 /* AppState.swift */,
@@ -403,6 +410,7 @@
 			children = (
 				ED59CEE728CB74180007B698 /* MockedModels.swift */,
 				ED97D62628E9C98900CFC418 /* RantExtensions.swift */,
+				0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */,
 				ED97D62828E9C9E200CFC418 /* CommentExtensions.swift */,
 				ED97D64228F5B1E500CFC418 /* Disambuguation.swift */,
 				ED33C2362903F31100A59A11 /* Models+IdTypes.swift */,
@@ -532,6 +540,7 @@
 				0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */,
 				0C59E4542D20672B004A093D /* SwiftDevRant */,
 				0C59E4572D2072AA004A093D /* SwiftDevRant */,
+				0CBF49912E2ACF4D00E1E337 /* SpamDetector */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -569,6 +578,7 @@
 				EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 				0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				0C59E4562D2072AA004A093D /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */,
+				0CBF49902E2ACF4D00E1E337 /* XCRemoteSwiftPackageReference "SpamDetector" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -586,6 +596,7 @@
 			files = (
 				ED2C9B6E28B679D0008BF314 /* Preview Assets.xcassets in Resources */,
 				ED2C9B6A28B679D0008BF314 /* Assets.xcassets in Resources */,
+				0CBF49942E2ACFBD00E1E337 /* spam_detection_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +626,7 @@
 				ED59CEE328C78EAF0007B698 /* View+Fill.swift in Sources */,
 				ED97D63F28F5921800CFC418 /* View+If.swift in Sources */,
 				EDCEF97129313ED90007C9BD /* UserProfile.swift in Sources */,
+				0CBF49962E2AD3BA00E1E337 /* Rant+SpamInfo.swift in Sources */,
 				ED74D50D292542F700088CE6 /* ColorToHex.swift in Sources */,
 				ED59CEDC28C788010007B698 /* KeyPathModifiedCopyable.swift in Sources */,
 				ED14DE5928E07A2F005FCC9A /* RantCommentViewModel.swift in Sources */,
@@ -898,6 +910,14 @@
 				minimumVersion = 2.0.3;
 			};
 		};
+		0CBF49902E2ACF4D00E1E337 /* XCRemoteSwiftPackageReference "SpamDetector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WilhelmOks/SpamDetector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
@@ -961,6 +981,11 @@
 		0C9030582D11A075009BCBC5 /* SwiftDevRant */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftDevRant;
+		};
+		0CBF49912E2ACF4D00E1E337 /* SpamDetector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CBF49902E2ACF4D00E1E337 /* XCRemoteSwiftPackageReference "SpamDetector" */;
+			productName = SpamDetector;
 		};
 		0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */ = {
 			isa = XCSwiftPackageProductDependency;

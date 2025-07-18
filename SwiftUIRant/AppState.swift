@@ -8,7 +8,7 @@
 import Foundation
 import SwiftDevRant
 import SwiftUI
-import SwiftData
+import SpamDetector
 
 #if os(iOS)
 import UIKit
@@ -121,5 +121,27 @@ final class AppState: ObservableObject {
             }
             objectWillChange.send()
         }
+    }
+    
+    var spamDetectorConfig: SpamDetector.Config?
+    
+    func scanForSpam(feed: RantFeed) -> RantFeed {
+        guard let spamDetectorConfig else {
+            return feed
+        }
+        
+        let spamDetector = SpamDetector(config: spamDetectorConfig)
+        
+        var rants = feed.rants
+        
+        for (index, rant) in rants.enumerated() {
+            rants[index].spamInfo = .init(
+                scanResult: spamDetector.check(rant.text, userReputation: rant.author.score)
+            )
+        }
+        
+        let scannedFeed = RantFeed(rants: rants, sessionHash: feed.sessionHash, weeklyRantWeek: feed.weeklyRantWeek, devRantSupporter: feed.devRantSupporter, numberOfUnreadNotifications: feed.numberOfUnreadNotifications, news: feed.news)
+        
+        return scannedFeed
     }
 }

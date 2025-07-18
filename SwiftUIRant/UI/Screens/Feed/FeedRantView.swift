@@ -58,6 +58,13 @@ struct FeedRantView: View {
                 )
                 .disabled(viewModel.rant.voteState == .unvotable)
                 
+                if viewModel.rant.showAsSpam {
+                    Text("spam")
+                        .font(baseSize: 16)
+                        .foregroundColor(.primaryForeground)
+                        .padding(.horizontal, 6)
+                }
+                
                 Spacer()
                 
                 CreationTimeView(
@@ -67,10 +74,12 @@ struct FeedRantView: View {
             }
             
             Text(viewModel.rant.text)
-                .font(baseSize: 16)
+                .font(baseSize: viewModel.rant.showAsSpam ? 12 : 16)
+                .lineLimit(viewModel.rant.showAsSpam ? 3 : nil)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primaryForeground)
+                .opacity(viewModel.rant.showAsSpam ? 0.5 : 1)
             
             image()
             
@@ -85,7 +94,7 @@ struct FeedRantView: View {
     }
     
     @ViewBuilder private func image() -> some View {
-        if let image = viewModel.rant.image {
+        if let image = viewModel.rant.image, !viewModel.rant.showAsSpam {
             PostedImage(image: image, opensSheet: false)
         }
     }

@@ -1,0 +1,49 @@
+{
+    // The minimum spam score that a rant needs to have to be considered spam.
+    "spam_score_threshold": 100,
+    
+    // If the user has a more upvotes than this value, the text is not considered spam.
+    "user_reputation_threshold": 10,
+    
+    "substrings": [
+        {
+            "substring": "crypto",
+            "spam_score": 50
+        },{
+            "substring": "recover",
+            "spam_score": 60
+        },{
+            "substring": "hack",
+            "spam_score": 50
+        },{
+            "substring": "landscape",
+            "spam_score": 60
+        },{
+            "substring": "cyber",
+            "spam_score": 50
+        },{
+            "substring": "trust",
+            "spam_score": 50
+        },{
+            "substring": "bitcoin",
+            "spam_score": 60
+        },{
+            "substring": "telegram",
+            "spam_score": 50
+        },
+        
+    ],
+    "regex": [
+        {
+            "regex": "(?i)(?:\\+|\\(?\\s*\\+?\\s*\\)?\\s*)?(?:(?:\\d|dot|plus)[\\s\\-\\.\\(\\)\\[\\]_]*){7,}",
+            "description": "a phone number",
+            "spam_score": 110,
+        },
+        {
+            "regex": "(?ix)(?:h\\s*[tx]{2,3}\\s*p\\s*s?)(?:\\s*[:\\[\\(\\]\\)]*\\s*\\/\\/+|\\s+)(?:w\\s*w\\s*w\\s*[\\.\\[\\(])?\\s*[a-z0-9\\-]+(?:\\s*(?:\\.|\\[\\.\\]|\\(dot\\)|\\[dot\\]|dot)\\s*[a-z]{2,})(?:\\s*[\\/\\\\]\\S*)?",
+            "description": "a url",
+            "spam_score": 50,
+        },
+    ]
+}
+

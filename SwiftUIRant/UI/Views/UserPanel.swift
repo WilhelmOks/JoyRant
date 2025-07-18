@@ -13,6 +13,7 @@ struct UserPanel: View {
     let name: String
     let score: Int
     let isSupporter: Bool
+    var opaqueBackground: Bool = true
     
     var body: some View {
         HStack(spacing: 8) {
@@ -45,7 +46,7 @@ struct UserPanel: View {
                 }
             }
         }
-        .background(Color.primaryBackground)
+        .background(opaqueBackground ? Color.primaryBackground : nil)
     }
     
     private func scoreText() -> String {

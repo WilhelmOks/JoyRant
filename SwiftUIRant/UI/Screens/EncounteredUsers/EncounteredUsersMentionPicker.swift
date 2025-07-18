@@ -14,7 +14,7 @@ struct EncounteredUsersMentionPicker: View {
     
     var body: some View {
         NavigationStack {
-            EncounteredUsersList { selectedUser in
+            EncounteredUsersList(opaqueBackground: false) { selectedUser in
                 onUserPicked(selectedUser)
                 dismiss()
             }

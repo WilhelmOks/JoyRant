@@ -10,6 +10,7 @@ import SwiftDevRant
 import SwiftData
 
 struct EncounteredUsersList: View {
+    var opaqueBackground: Bool = true
     let onUserSelected: (User) -> Void
     
     var body: some View {
@@ -28,7 +29,8 @@ struct EncounteredUsersList: View {
                                 avatar: user.avatarSmall,
                                 name: user.name,
                                 score: user.score,
-                                isSupporter: user.devRantSupporter
+                                isSupporter: user.devRantSupporter,
+                                opaqueBackground: opaqueBackground
                             )
                             
                             Spacer()

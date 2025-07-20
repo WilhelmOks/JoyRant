@@ -30,6 +30,9 @@
         },{
             "substring": "telegram",
             "spam_score": 50
+        },{
+            "substring": "cheat",
+            "spam_score": 50
         },
         
     ],

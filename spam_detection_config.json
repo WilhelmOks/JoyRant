@@ -1,6 +1,6 @@
 {
     // The minimum spam score that a rant needs to have to be considered spam.
-    "spam_score_threshold": 99,
+    "spam_score_threshold": 100,
     
     // If the user has more upvotes than this value, the rant is not considered spam.
     "user_reputation_threshold": 10,
@@ -45,6 +45,9 @@
         },{
             "substring": "season",
             "spam_score": 50
+        },{
+            "substring": "EthnicWear",
+            "spam_score": 200
         },
         
     ],

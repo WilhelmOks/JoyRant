@@ -42,6 +42,9 @@
         },{
             "substring": "journey",
             "spam_score": 50
+        },{
+            "substring": "season",
+            "spam_score": 50
         },
         
     ],

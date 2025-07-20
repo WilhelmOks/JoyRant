@@ -48,6 +48,12 @@
         },{
             "substring": "EthnicWear",
             "spam_score": 200
+        },{
+            "substring": "e-commerce",
+            "spam_score": 50
+        },{
+            "substring": "whatsapp",
+            "spam_score": 50
         },
         
     ],

@@ -33,6 +33,15 @@
         },{
             "substring": "cheat",
             "spam_score": 50
+        },{
+            "substring": "quality",
+            "spam_score": 50
+        },{
+            "substring": "professional",
+            "spam_score": 50
+        },{
+            "substring": "journey",
+            "spam_score": 50
         },
         
     ],

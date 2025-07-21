@@ -136,7 +136,11 @@ final class AppState: ObservableObject {
         
         for (index, rant) in rants.enumerated() {
             rants[index].spamInfo = .init(
-                scanResult: spamDetector.check(rant.text, userReputation: rant.author.score)
+                scanResult: spamDetector.check(
+                    rant.text,
+                    userReputation: rant.author.score,
+                    userName: rant.author.name
+                )
             )
         }
         

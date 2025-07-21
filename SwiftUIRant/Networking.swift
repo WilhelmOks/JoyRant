@@ -66,9 +66,7 @@ struct Networking {
     // rants
     
     func rants(sort: RantFeed.Sort, skip: Int = 0, session: String?) async throws -> RantFeed {
-        if AppState.shared.spamDetectorConfig == nil {
-            AppState.shared.spamDetectorConfig = await loadSpamDetectionConfig()
-        }
+        await loadSpamDetectionConfig()
         
         await relogInIfNeeded()
         let feed = try await devRant.getRantFeed(
@@ -251,9 +249,11 @@ struct Networking {
     
     // spam detection
     
-    func loadSpamDetectionConfig() async -> SpamDetector.Config? {
+    func loadSpamDetectionConfig() async {
         let url = "https://raw.githubusercontent.com/WilhelmOks/JoyRant/refs/heads/main/spam_detection_config.json"
-        return await .fromRemoteUrl(jsonUrl: url)
+        if let config = await SpamDetector.Config.fromRemoteUrl(jsonUrl: url) {
+            AppState.shared.spamDetectorConfig = config
+        }
     }
 }
 

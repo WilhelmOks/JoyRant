@@ -66,6 +66,18 @@
         },{
             "substring": "demand",
             "spam_score": 50
+        },{
+            "substring": "contact us",
+            "spam_score": 150
+        },{
+            "substring": "contact",
+            "spam_score": 50
+        },{
+            "substring": "region",
+            "spam_score": 50
+        },{
+            "substring": "discover",
+            "spam_score": 50
         },
         
     ],

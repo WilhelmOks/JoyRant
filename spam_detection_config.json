@@ -92,6 +92,10 @@
             "description": "a url",
             "spam_score": 50,
         },
+    ],
+    "users": [ // users in this list are 100% spammer accounts
+        "Sasakiska",
+        "chrislewis",
     ]
 }
 

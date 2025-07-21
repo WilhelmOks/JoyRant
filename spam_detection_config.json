@@ -54,6 +54,18 @@
         },{
             "substring": "whatsapp",
             "spam_score": 50
+        },{
+            "substring": "shop",
+            "spam_score": 60
+        },{
+            "substring": "accessoire",
+            "spam_score": 50
+        },{
+            "substring": "personal",
+            "spam_score": 50
+        },{
+            "substring": "demand",
+            "spam_score": 50
         },
         
     ],

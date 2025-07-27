@@ -78,6 +78,15 @@
         },{
             "substring": "discover",
             "spam_score": 50
+        },{
+            "substring": "in touch",
+            "spam_score": 50
+        },{
+            "substring": "losing",
+            "spam_score": 30
+        },{
+            "substring": "lost",
+            "spam_score": 30
         },
         
     ],
@@ -102,6 +111,7 @@
         "hillolivia",
         "AaronHenty",
         "paleyShelie",
+        "yukitsunoda",
     ]
 }
 

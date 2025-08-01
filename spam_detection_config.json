@@ -87,6 +87,42 @@
         },{
             "substring": "lost",
             "spam_score": 30
+        },{
+            "substring": "lottery",
+            "spam_score": 50
+        },{
+            "substring": "experience",
+            "spam_score": 30
+        },{
+            "substring": "seamless",
+            "spam_score": 30
+        },{
+            "substring": "secure",
+            "spam_score": 30
+        },{
+            "substring": "reliable",
+            "spam_score": 40
+        },{
+            "substring": "celebrate",
+            "spam_score": 30
+        },{
+            "substring": "opportunity",
+            "spam_score": 40
+        },{
+            "substring": "entertain",
+            "spam_score": 30
+        },{
+            "substring": "design",
+            "spam_score": 20
+        },{
+            "substring": "join",
+            "spam_score": 20
+        },{
+            "substring": "relax",
+            "spam_score": 20
+        },{
+            "substring": "fortune",
+            "spam_score": 30
         },
         
     ],

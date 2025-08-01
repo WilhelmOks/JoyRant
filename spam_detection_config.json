@@ -123,6 +123,21 @@
         },{
             "substring": "fortune",
             "spam_score": 30
+        },{
+            "substring": "solution",
+            "spam_score": 40
+        },{
+            "substring": "product",
+            "spam_score": 30
+        },{
+            "substring": "brand",
+            "spam_score": 30
+        },{
+            "substring": "business",
+            "spam_score": 50
+        },{
+            "substring": "commercial",
+            "spam_score": 50
         },
         
     ],

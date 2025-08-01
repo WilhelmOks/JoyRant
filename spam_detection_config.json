@@ -138,6 +138,9 @@
         },{
             "substring": "commercial",
             "spam_score": 50
+        },{
+            "substring": "financ",
+            "spam_score": 40
         },
         
     ],

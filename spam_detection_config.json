@@ -7,6 +7,15 @@
     
     "substrings": [
         {
+            "substring": "fuck",
+            "spam_score": -100
+        },{
+            "substring": "crap",
+            "spam_score": -100
+        },{
+            "substring": "crypto",
+            "spam_score": 50
+        },{
             "substring": "crypto",
             "spam_score": 50
         },{

@@ -150,6 +150,15 @@
         },{
             "substring": "financ",
             "spam_score": 40
+        },{
+            "substring": "scam",
+            "spam_score": 40
+        },{
+            "substring": "devastat",
+            "spam_score": 40
+        },{
+            "substring": "money",
+            "spam_score": 40
         },
         
     ],

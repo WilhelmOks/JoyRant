@@ -159,6 +159,18 @@
         },{
             "substring": "money",
             "spam_score": 40
+        },{
+            "substring": "expert",
+            "spam_score": 40
+        },{
+            "substring": "digital",
+            "spam_score": 40
+        },{
+            "substring": "innovative",
+            "spam_score": 90
+        },{
+            "substring": "international",
+            "spam_score": 50
         },
         
     ],

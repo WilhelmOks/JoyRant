@@ -171,6 +171,15 @@
         },{
             "substring": "international",
             "spam_score": 50
+        },{
+            "substring": "environment",
+            "spam_score": 50
+        },{
+            "substring": "workplace",
+            "spam_score": 30
+        },{
+            "substring": "certification",
+            "spam_score": 50
         },
         
     ],

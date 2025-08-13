@@ -7,6 +7,15 @@
     
     "substrings": [
         {
+            "substring": "fuck",
+            "spam_score": -100
+        },{
+            "substring": "crap",
+            "spam_score": -100
+        },{
+            "substring": "crypto",
+            "spam_score": 50
+        },{
             "substring": "crypto",
             "spam_score": 50
         },{
@@ -78,6 +87,99 @@
         },{
             "substring": "discover",
             "spam_score": 50
+        },{
+            "substring": "in touch",
+            "spam_score": 50
+        },{
+            "substring": "losing",
+            "spam_score": 30
+        },{
+            "substring": "lost",
+            "spam_score": 30
+        },{
+            "substring": "lottery",
+            "spam_score": 50
+        },{
+            "substring": "experience",
+            "spam_score": 30
+        },{
+            "substring": "seamless",
+            "spam_score": 30
+        },{
+            "substring": "secure",
+            "spam_score": 30
+        },{
+            "substring": "reliable",
+            "spam_score": 40
+        },{
+            "substring": "celebrate",
+            "spam_score": 30
+        },{
+            "substring": "opportunity",
+            "spam_score": 40
+        },{
+            "substring": "entertain",
+            "spam_score": 30
+        },{
+            "substring": "design",
+            "spam_score": 20
+        },{
+            "substring": "join",
+            "spam_score": 20
+        },{
+            "substring": "relax",
+            "spam_score": 20
+        },{
+            "substring": "fortune",
+            "spam_score": 30
+        },{
+            "substring": "solution",
+            "spam_score": 40
+        },{
+            "substring": "product",
+            "spam_score": 30
+        },{
+            "substring": "brand",
+            "spam_score": 30
+        },{
+            "substring": "business",
+            "spam_score": 50
+        },{
+            "substring": "commercial",
+            "spam_score": 50
+        },{
+            "substring": "financ",
+            "spam_score": 40
+        },{
+            "substring": "scam",
+            "spam_score": 40
+        },{
+            "substring": "devastat",
+            "spam_score": 40
+        },{
+            "substring": "money",
+            "spam_score": 40
+        },{
+            "substring": "expert",
+            "spam_score": 40
+        },{
+            "substring": "digital",
+            "spam_score": 40
+        },{
+            "substring": "innovative",
+            "spam_score": 90
+        },{
+            "substring": "international",
+            "spam_score": 50
+        },{
+            "substring": "environment",
+            "spam_score": 50
+        },{
+            "substring": "workplace",
+            "spam_score": 30
+        },{
+            "substring": "certification",
+            "spam_score": 50
         },
         
     ],
@@ -95,8 +197,26 @@
     ],
     "users": [ // users in this list are 100% spammer accounts
         "Sasakiska",
+        "FinnTurner",
+        "EricWinter",
         "chrislewis",
         "indianmuneem",
+        "hillolivia",
+        "AaronHenty",
+        "paleyShelie",
+        "yukitsunoda",
+        "AaronJacobs",
+        "Gaha",
+        "Hulabi",
+        "Monisa",
+        "SupremoHelados",
+        "cbdgummiesstore",
+        "MiltonSchuster",
+        "cio23",
+        "GeorgeLawrence",
+        "DarrenMorrison",
+        "Drefft",
+        "Farrt",
     ]
 }
 

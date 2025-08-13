@@ -165,7 +165,8 @@ struct InternalView: View {
     @ViewBuilder private func tabView(_ tab: Tab) -> some View {
         let title = tab.displayName
         
-        let numberOfNotifications = dataStore.unreadNotifications[.all] ?? 0
+        //let numberOfNotifications = dataStore.unreadNotifications[.all] ?? 0
+        let numberOfNotifications = dataStore.calculatedNumberOfUnreadNotifications
         
         let badgeNumber = tab == .notifications ? numberOfNotifications : 0
         

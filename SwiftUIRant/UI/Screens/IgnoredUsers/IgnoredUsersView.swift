@@ -13,7 +13,7 @@ struct IgnoredUsersView: View {
     
     var body: some View {
         VStack {
-            Text("Rants and comments from ignored users are automatically hidden.")
+            Text("Rants, comments and notifications from ignored users are automatically hidden.")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 .padding(.top)

@@ -85,17 +85,20 @@ struct NotificationsView: View {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         ForEach(viewModel.notificationItems, id: \.id) { item in
-                            VStack(spacing: 0) {
-                                NavigationLink(value: item) {
-                                    NotificationRowView(item: item)
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 6)
+                            let hidden = UserSettings().ignoredUsers.contains(item.userName)
+                            if !hidden {
+                                VStack(spacing: 0) {
+                                    NavigationLink(value: item) {
+                                        NotificationRowView(item: item)
+                                            .padding(.horizontal, 10)
+                                            .padding(.vertical, 6)
+                                    }
+                                    .buttonStyle(.plain)
+                                    
+                                    Divider()
                                 }
-                                .buttonStyle(.plain)
-                                
-                                Divider()
+                                .id(item.id)                                
                             }
-                            .id(item.id)
                         }
                     }
                 }

@@ -18,6 +18,8 @@ import SwiftDevRant
     @Published var rantsInFeed: [Rant] = []
     @Published var unreadNotifications: [NotificationFeed.Category: Int] = [:]
     
+    @Published var calculatedNumberOfUnreadNotifications: Int = 0
+    
     @Published var writePostContent = ""
     
     var currentFeedSession: String?

@@ -15,6 +15,7 @@
 		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
+		0C707DFF2E4CFE7800200C72 /* IgnoredUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */; };
 		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
 		0CBF49922E2ACF4D00E1E337 /* SpamDetector in Frameworks */ = {isa = PBXBuildFile; productRef = 0CBF49912E2ACF4D00E1E337 /* SpamDetector */; };
 		0CBF49962E2AD3BA00E1E337 /* Rant+SpamInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */; };
@@ -114,6 +115,7 @@
 		0C46AA6C2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncounteredUsersProfilePicker.swift; sourceTree = "<group>"; };
 		0C46AA6E2DFDC301005FE458 /* User+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SwiftData.swift"; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredUsersView.swift; sourceTree = "<group>"; };
 		0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rant+SpamInfo.swift"; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
@@ -231,6 +233,14 @@
 			path = EncounteredUsers;
 			sourceTree = "<group>";
 		};
+		0C707DFD2E4CFE3A00200C72 /* IgnoredUsers */ = {
+			isa = PBXGroup;
+			children = (
+				0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */,
+			);
+			path = IgnoredUsers;
+			sourceTree = "<group>";
+		};
 		ED0FB7E728FF348400E5163D /* WritePost */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +323,7 @@
 				ED74D5102928FD2300088CE6 /* Profile */,
 				ED0FB7E728FF348400E5163D /* WritePost */,
 				0C46AA672DFD73D7005FE458 /* EncounteredUsers */,
+				0C707DFD2E4CFE3A00200C72 /* IgnoredUsers */,
 				ED97D63528F302D500CFC418 /* Notifications */,
 				ED97D63228F1D4AD00CFC418 /* Settings */,
 				ED62E10D29DFF69300E3C93D /* Community Projects */,
@@ -668,6 +679,7 @@
 				ED97D62928E9C9E200CFC418 /* CommentExtensions.swift in Sources */,
 				ED2C9B6628B679CB008BF314 /* SwiftUIRantApp.swift in Sources */,
 				ED74D5142928FDD300088CE6 /* ProfileViewModel.swift in Sources */,
+				0C707DFF2E4CFE7800200C72 /* IgnoredUsersView.swift in Sources */,
 				0C46AA6D2DFD856E005FE458 /* EncounteredUsersProfilePicker.swift in Sources */,
 				ED59CED928C7861E0007B698 /* UserSettings.swift in Sources */,
 				ED97D62E28EAF46600CFC418 /* Color+Hex.swift in Sources */,

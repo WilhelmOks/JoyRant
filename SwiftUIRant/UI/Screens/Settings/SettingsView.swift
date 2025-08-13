@@ -62,6 +62,8 @@ struct SettingsView: View {
                     CommunityProjectsView()
                 case .encounteredUserProfiles:
                     EncounteredUsersProfilePicker()
+                case .ignoredUsers:
+                    IgnoredUsersView()
                 default:
                     EmptyView()
                 }
@@ -96,6 +98,14 @@ struct SettingsView: View {
                                 Text("Encountered Profiles")
                             } icon: {
                                 Image(systemName: "person.badge.clock")
+                            }
+                        }
+                        
+                        NavigationLink(value: AppState.NavigationDestination.ignoredUsers) {
+                            Label {
+                                Text("Ignored Users")
+                            } icon: {
+                                Image(systemName: "person.badge.minus")
                             }
                         }
                     }

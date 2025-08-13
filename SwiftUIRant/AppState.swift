@@ -23,6 +23,7 @@ final class AppState: ObservableObject {
         case rantWeek(week: Weekly)
         case communityProjects
         case encounteredUserProfiles
+        case ignoredUsers
     }
     
     @Published var feedNavigationPath = NavigationPath()

@@ -17,8 +17,11 @@ struct RantList: View {
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 0) {
             ForEach(rants, id: \.id) { rant in
-                row(rant: rant)
-                    .id(rant.hashValue)
+                let hidden = UserSettings().ignoredUsers.contains(rant.author.name)
+                if !hidden {
+                    row(rant: rant)
+                        .id(rant.hashValue)
+                }
             }
             
             Button {

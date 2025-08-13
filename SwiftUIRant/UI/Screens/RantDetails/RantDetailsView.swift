@@ -137,27 +137,31 @@ struct RantDetailsView: View {
                                 
                                 LazyVStack(spacing: 0) {
                                     ForEach(viewModel.comments, id: \.id) { comment in
-                                        VStack(spacing: 0) {
-                                            Divider()
-                                            
-                                            RantCommentView(
-                                                viewModel: .init(comment: comment),
-                                                onReply: {
-                                                    presentedSheet = .postComment(rantId: viewModel.rantId)
-                                                },
-                                                onEdit: {
-                                                    presentedSheet = .editComment(comment: comment)
-                                                },
-                                                onDelete: {
-                                                    Task {
-                                                        await viewModel.deleteComment(comment: comment)
+                                        let hidden = UserSettings().ignoredUsers.contains(comment.author.name)
+                                        
+                                        if !hidden {
+                                            VStack(spacing: 0) {
+                                                Divider()
+                                                
+                                                RantCommentView(
+                                                    viewModel: .init(comment: comment),
+                                                    onReply: {
+                                                        presentedSheet = .postComment(rantId: viewModel.rantId)
+                                                    },
+                                                    onEdit: {
+                                                        presentedSheet = .editComment(comment: comment)
+                                                    },
+                                                    onDelete: {
+                                                        Task {
+                                                            await viewModel.deleteComment(comment: comment)
+                                                        }
                                                     }
-                                                }
-                                            )
-                                            .padding(.bottom, 10)
-                                            .id(comment.hashValue)
+                                                )
+                                                .padding(.bottom, 10)
+                                                .id(comment.hashValue)
+                                            }
+                                            .id("comment_\(comment.id)")
                                         }
-                                        .id("comment_\(comment.id)")
                                     }
                                 }
                             }

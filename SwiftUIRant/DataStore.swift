@@ -64,13 +64,13 @@ import SwiftDevRant
         let upvoters = notifications[.upvotes]?.filter { item in
             item.rantId == rant.id
         }.map { $0.userName } ?? []
-        return upvoters.sorted()
+        return upvoters.uniqued().sorted()
     }
     
     func upvoters(forComment comment: Comment) -> [String] {
         let upvoters = notifications[.upvotes]?.filter { item in
             item.commentId == comment.id
         }.map { $0.userName } ?? []
-        return upvoters.sorted()
+        return upvoters.uniqued().sorted()
     }
 }

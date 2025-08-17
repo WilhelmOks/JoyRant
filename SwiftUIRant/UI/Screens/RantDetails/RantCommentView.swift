@@ -98,7 +98,9 @@ struct RantCommentView: View {
             
             if !isLinkToRant {
                 HStack(alignment: .bottom, spacing: 10) {
-                    replyButton()
+                    if !viewModel.comment.isFromLoggedInUser {
+                        replyButton()
+                    }
                     
                     Spacer()
                     

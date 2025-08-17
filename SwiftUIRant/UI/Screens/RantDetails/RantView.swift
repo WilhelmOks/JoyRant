@@ -22,6 +22,13 @@ struct RantView: View {
     
     @State private var textSelectionPopoverItem: TextSelectionPopoverItem?
     
+    private struct UpvotersInfoPopoverItem: Identifiable {
+        let id: UUID = UUID()
+        let upvoters: [String]
+    }
+    
+    @State private var upvotersInfoPopoverItem: UpvotersInfoPopoverItem?
+    
     var body: some View {
         content()
         .padding(.top, 10)
@@ -114,23 +121,43 @@ struct RantView: View {
     @ViewBuilder private func topArea(rant: Rant, voteController: VoteController) -> some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 8) {
-                VoteControl(
-                    isHorizontal: true,
-                    score: voteController.displayedScore,
-                    isUpvoted: voteController.showAsUpvoted,
-                    isDownvoted: voteController.showAsDownvoted,
-                    upvoteAction: {
-                        Task {
-                            await voteController.voteUp()
+                HStack(spacing: 10) {
+                    VoteControl(
+                        isHorizontal: true,
+                        score: voteController.displayedScore,
+                        isUpvoted: voteController.showAsUpvoted,
+                        isDownvoted: voteController.showAsDownvoted,
+                        upvoteAction: {
+                            Task {
+                                await voteController.voteUp()
+                            }
+                        },
+                        downvoteAction: { reason in
+                            Task {
+                                await voteController.voteDown(reason: reason)
+                            }
                         }
-                    },
-                    downvoteAction: { reason in
-                        Task {
-                            await voteController.voteDown(reason: reason)
+                    )
+                    .disabled(rant.voteState == .unvotable)
+                    
+                    let upvoters = DataStore.shared.upvoters(forRant: rant)
+                    
+                    if rant.isFromLoggedInUser && !upvoters.isEmpty {
+                        Button {
+                            upvotersInfoPopoverItem = .init(upvoters: upvoters)
+                        } label: {
+                            Image(systemName: "info.circle")
+                        }
+                        .tint(.secondaryForeground)
+                        .popover(item: $upvotersInfoPopoverItem) { item in
+                            NavigationStack {
+                                UpvotersView(upvoters: item.upvoters)
+                                    .navigationBarTitleDisplayModeInline()
+                            }
+                            .presentationDetents([.medium])
                         }
                     }
-                )
-                .disabled(rant.voteState == .unvotable)
+                }
                 
                 NavigationLink(value: AppState.NavigationDestination.userProfile(userId: rant.author.id)) {
                     UserPanel(

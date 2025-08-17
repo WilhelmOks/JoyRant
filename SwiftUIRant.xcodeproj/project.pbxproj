@@ -16,6 +16,8 @@
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
 		0C707DFF2E4CFE7800200C72 /* IgnoredUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */; };
+		0C707E022E51D7E200200C72 /* UpvotersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707E012E51D7E200200C72 /* UpvotersView.swift */; };
+		0C707E042E51E66C00200C72 /* MappedNotificationItem+Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707E032E51E66200200C72 /* MappedNotificationItem+Id.swift */; };
 		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
 		0CBF49922E2ACF4D00E1E337 /* SpamDetector in Frameworks */ = {isa = PBXBuildFile; productRef = 0CBF49912E2ACF4D00E1E337 /* SpamDetector */; };
 		0CBF49962E2AD3BA00E1E337 /* Rant+SpamInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */; };
@@ -116,6 +118,8 @@
 		0C46AA6E2DFDC301005FE458 /* User+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SwiftData.swift"; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredUsersView.swift; sourceTree = "<group>"; };
+		0C707E012E51D7E200200C72 /* UpvotersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpvotersView.swift; sourceTree = "<group>"; };
+		0C707E032E51E66200200C72 /* MappedNotificationItem+Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MappedNotificationItem+Id.swift"; sourceTree = "<group>"; };
 		0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rant+SpamInfo.swift"; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
@@ -241,6 +245,14 @@
 			path = IgnoredUsers;
 			sourceTree = "<group>";
 		};
+		0C707E002E51D7B400200C72 /* Upvoters */ = {
+			isa = PBXGroup;
+			children = (
+				0C707E012E51D7E200200C72 /* UpvotersView.swift */,
+			);
+			path = Upvoters;
+			sourceTree = "<group>";
+		};
 		ED0FB7E728FF348400E5163D /* WritePost */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,6 +336,7 @@
 				ED0FB7E728FF348400E5163D /* WritePost */,
 				0C46AA672DFD73D7005FE458 /* EncounteredUsers */,
 				0C707DFD2E4CFE3A00200C72 /* IgnoredUsers */,
+				0C707E002E51D7B400200C72 /* Upvoters */,
 				ED97D63528F302D500CFC418 /* Notifications */,
 				ED97D63228F1D4AD00CFC418 /* Settings */,
 				ED62E10D29DFF69300E3C93D /* Community Projects */,
@@ -416,6 +429,7 @@
 		ED59CEE628CB73F10007B698 /* Model Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0C707E032E51E66200200C72 /* MappedNotificationItem+Id.swift */,
 				ED59CEE728CB74180007B698 /* MockedModels.swift */,
 				ED97D62628E9C98900CFC418 /* RantExtensions.swift */,
 				0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */,
@@ -618,6 +632,7 @@
 				ED1B307928CCE921001A6A73 /* UserPanel.swift in Sources */,
 				EDCEF973293142900007C9BD /* String+EmptyToNil.swift in Sources */,
 				ED59CEE528C78FC60007B698 /* View+NotificationCenter.swift in Sources */,
+				0C707E042E51E66C00200C72 /* MappedNotificationItem+Id.swift in Sources */,
 				ED97D63728F3035C00CFC418 /* NotificationsView.swift in Sources */,
 				ED9CF43F296C676600A1C668 /* AllWeekliesView.swift in Sources */,
 				ED0FB7EB28FF350500E5163D /* WritePostViewModel.swift in Sources */,
@@ -626,6 +641,7 @@
 				ED97D63928F44EA800CFC418 /* NotificationsViewModel.swift in Sources */,
 				ED33C23929040E3300A59A11 /* Models+TimeToModify.swift in Sources */,
 				ED59CED528BD103C0007B698 /* DataLoader.swift in Sources */,
+				0C707E022E51D7E200200C72 /* UpvotersView.swift in Sources */,
 				EDE2289728DB3F600025EDB1 /* VoteController.swift in Sources */,
 				EDE2288E28D5E5670025EDB1 /* RantDetailsView.swift in Sources */,
 				ED0FB7E928FF34D000E5163D /* WritePostView.swift in Sources */,

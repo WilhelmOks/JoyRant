@@ -14,13 +14,9 @@ import SwiftDevRant
     @Published var categoryTab: CategoryTab = .all {
         didSet {
             categoryTabIndex = tabs.firstIndex(of: categoryTab) ?? 0
-            Task {
-                await load()
-            }
         }
     }
     @Published var categoryTabIndex: Int = 0
-    @Published var notificationItems: [NotificationFeed.MappedNotificationItem] = []
     @Published var isLoading = false
     @Published var isRefreshing = false
     @Published var alertMessage: AlertMessage = .none()
@@ -39,20 +35,29 @@ import SwiftDevRant
         }
     }
     
+    private func fetch() async throws {
+        try await DataLoader.shared.loadNotifications()
+        //let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
+        try Task.checkCancellation()
+        let calculatedUnread = DataStore.shared.notifications[.all]?.count { notification in
+            notification.isRead == false && !UserSettings().ignoredUsers.contains(notification.userName)
+        } ?? 0
+        DataStore.shared.calculatedNumberOfUnreadNotifications = calculatedUnread
+        //notificationItems = notifications.mappedItems
+        /*Task {
+            try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
+        }*/
+    }
+    
     func load() async {
         currentRequestTask?.cancel()
         currentRequestTask = nil
         
-        notificationItems = []
+        //notificationItems = []
         
         currentRequestTask = Task { @MainActor in
             do {
-                let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
-                try Task.checkCancellation()
-                notificationItems = notifications.mappedItems
-                Task {
-                    try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
-                }
+                try await fetch()
                 isLoaded = true
             } catch {
                 alertMessage = .presentedError(error)
@@ -70,12 +75,7 @@ import SwiftDevRant
         
         currentRequestTask = Task { @MainActor in
             do {
-                let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
-                try Task.checkCancellation()
-                notificationItems = notifications.mappedItems
-                Task {
-                    try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
-                }
+                try await fetch()
                 isLoaded = true
             } catch {
                 dlog("Error refreshing notifications: \(error)")
@@ -92,14 +92,18 @@ import SwiftDevRant
                 
         do {
             try await Networking.shared.clearNotifications()
-            let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
-            try await DataLoader.shared.loadNumbersOfUnreadNotifications()
-            notificationItems = notifications.mappedItems
+            try await fetch()
         } catch {
             alertMessage = .presentedError(error)
         }
         
         isRefreshing = false
+    }
+    
+    func categoryHasUnreadNotifications(category: NotificationFeed.Category) -> Bool {
+        DataStore.shared.notifications[category]?.contains { item in
+            !item.isRead
+        } ?? false
     }
 }
 

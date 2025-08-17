@@ -84,7 +84,8 @@ struct NotificationsView: View {
             ScrollViewReader { scrollProxy in
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.notificationItems, id: \.id) { item in
+                        let items = dataStore.notifications[viewModel.categoryTab.category] ?? []
+                        ForEach(items, id: \.id) { item in
                             let hidden = UserSettings().ignoredUsers.contains(item.userName)
                             if !hidden {
                                 VStack(spacing: 0) {
@@ -104,7 +105,9 @@ struct NotificationsView: View {
                 }
                 .onReceive(broadcastEvent: .shouldScrollNotificationsToTop) { _ in
                     withAnimation {
-                        scrollProxy.scrollTo(viewModel.notificationItems.first?.id, anchor: .top)
+                        if let id = dataStore.notifications[viewModel.categoryTab.category]?.first?.id {
+                            scrollProxy.scrollTo(id, anchor: .top)
+                        }
                     }
                 }
             }
@@ -151,7 +154,7 @@ struct NotificationsView: View {
             items: viewModel.tabs,
             spacing: 0) { segment in
                 categoryPickerSegment(
-                    unread: dataStore.unreadNotifications[segment.item.category] ?? 0 > 0,
+                    unread: viewModel.categoryHasUnreadNotifications(category: segment.item.category),
                     selected: segment.selected,
                     displayName: segment.item.displayName
                 )
@@ -181,12 +184,6 @@ struct NotificationsView: View {
                 .animation(.easeOut, value: viewModel.categoryTabIndex)
         }
         .padding(.vertical, 1)
-    }
-}
-
-extension NotificationFeed.MappedNotificationItem: @retroactive Identifiable {
-    public var id: Int {
-        self.hashValue
     }
 }
 

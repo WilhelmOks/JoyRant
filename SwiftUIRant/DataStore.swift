@@ -16,7 +16,7 @@ import SwiftDevRant
     @Published var isFeedLoaded = false
     @Published var unfilteredRantsInFeed: [Rant] = []
     @Published var rantsInFeed: [Rant] = []
-    @Published var unreadNotifications: [NotificationFeed.Category: Int] = [:]
+    @Published var notifications: [NotificationFeed.Category: [NotificationFeed.MappedNotificationItem]] = [:]
     
     @Published var calculatedNumberOfUnreadNotifications: Int = 0
     
@@ -27,7 +27,8 @@ import SwiftDevRant
         
     func clear() {
         clearFeed()
-        unreadNotifications = [:]
+        calculatedNumberOfUnreadNotifications = 0
+        notifications = [:]
     }
     
     func clearFeed() {
@@ -57,5 +58,19 @@ import SwiftDevRant
     
     func remove(rantInFeed rant: Rant) {
         rantsInFeed.removeAll { $0.id == rant.id }
+    }
+    
+    func upvoters(forRant rant: Rant) -> [String] {
+        let upvoters = notifications[.upvotes]?.filter { item in
+            item.rantId == rant.id
+        }.map { $0.userName } ?? []
+        return upvoters.sorted()
+    }
+    
+    func upvoters(forComment comment: Comment) -> [String] {
+        let upvoters = notifications[.upvotes]?.filter { item in
+            item.commentId == comment.id
+        }.map { $0.userName } ?? []
+        return upvoters.sorted()
     }
 }

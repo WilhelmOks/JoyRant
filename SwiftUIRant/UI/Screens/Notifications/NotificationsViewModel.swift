@@ -101,9 +101,9 @@ import SwiftDevRant
     }
     
     func categoryHasUnreadNotifications(category: NotificationFeed.Category) -> Bool {
-        DataStore.shared.notifications[category]?.contains { item in
-            !item.isRead
-        } ?? false
+        DataStore.shared.notifications[category]?
+            .filter { item in !UserSettings().ignoredUsers.contains(item.userName) }
+            .contains { item in !item.isRead } ?? false
     }
 }
 

@@ -99,12 +99,10 @@ struct RantView: View {
                 
                 Spacer()
                 
-                //commentsCounter()
-                
                 if viewModel.rant.isFromLoggedInUser {
                     deleteButton()
-                    
                     editButton()
+                    commentsCounter()
                 } else {
                     //reportButton()
                     commentsCounter()

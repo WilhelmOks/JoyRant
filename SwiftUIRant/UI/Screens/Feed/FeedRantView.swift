@@ -63,6 +63,15 @@ struct FeedRantView: View {
                         .font(baseSize: 16)
                         .foregroundColor(.primaryForeground)
                         .padding(.horizontal, 6)
+                } else if UserSettings().showAuthorsInFeed {
+                    UserPanel(
+                        avatar: viewModel.rant.author.avatarSmall,
+                        name: viewModel.rant.author.name,
+                        score: viewModel.rant.author.score,
+                        isSupporter: viewModel.rant.isUserSupporter,
+                        compact: true
+                    )
+                    .frame(maxWidth: .infinity)
                 }
                 
                 Spacer()
@@ -70,15 +79,6 @@ struct FeedRantView: View {
                 CreationTimeView(
                     createdTime: viewModel.rant.created,
                     isEdited: false
-                )
-            }
-            
-            if !viewModel.rant.showAsSpam && UserSettings().showAuthorsInFeed {
-                UserPanel(
-                    avatar: viewModel.rant.author.avatarSmall,
-                    name: viewModel.rant.author.name,
-                    score: viewModel.rant.author.score,
-                    isSupporter: viewModel.rant.isUserSupporter
                 )
             }
             

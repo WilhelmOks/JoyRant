@@ -33,6 +33,7 @@ struct SettingsView: View {
     @State private var downvoteReason: DownvoteReasonItem = .alwaysAsk
     
     @State private var reduceVisibilityOfSpam = UserSettings().reduceVisibilityOfSpam
+    @State private var showAuthorsInFeed = UserSettings().showAuthorsInFeed
     
     var body: some View {
         content()
@@ -73,6 +74,9 @@ struct SettingsView: View {
             }
             .onChange(of: reduceVisibilityOfSpam) { newValue in
                 UserSettings().reduceVisibilityOfSpam = newValue
+            }
+            .onChange(of: showAuthorsInFeed) { newValue in
+                UserSettings().showAuthorsInFeed = newValue
             }
             .onAppear {
                 let reasonRaw = AppState.shared.automaticDownvoteReason?.rawValue
@@ -170,6 +174,11 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    Toggle(isOn: $showAuthorsInFeed) {
+                        Text("Show rant authors in feed")
+                    }
+                    .tint(Color.accentColor)
+                    
                     Toggle(isOn: $reduceVisibilityOfSpam) {
                         Text("Reduce visibility of spam")
                     }

@@ -73,6 +73,15 @@ struct FeedRantView: View {
                 )
             }
             
+            if !viewModel.rant.showAsSpam && UserSettings().showAuthorsInFeed {
+                UserPanel(
+                    avatar: viewModel.rant.author.avatarSmall,
+                    name: viewModel.rant.author.name,
+                    score: viewModel.rant.author.score,
+                    isSupporter: viewModel.rant.isUserSupporter
+                )
+            }
+            
             Text(viewModel.rant.text)
                 .font(baseSize: viewModel.rant.showAsSpam ? 12 : 16)
                 .lineLimit(viewModel.rant.showAsSpam ? 3 : nil)

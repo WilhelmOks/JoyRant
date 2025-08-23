@@ -19,6 +19,9 @@ struct UserSettings {
     
     @UserDefaultsBackedDefaulting(key: "reduce_visibility_of_spam", defaultValue: true)
     var reduceVisibilityOfSpam
+    
+    @UserDefaultsBackedDefaulting(key: "show_authors_in_feed", defaultValue: true)
+    var showAuthorsInFeed
 }
 
 @propertyWrapper private struct UserDefaultsBacked<Value> {

@@ -22,7 +22,7 @@ struct UpvotersView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
-        .navigationTitle("Upvoters")
+        .navigationTitle("Recent upvoters")
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {

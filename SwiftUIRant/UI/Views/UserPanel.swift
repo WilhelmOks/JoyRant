@@ -132,5 +132,6 @@ struct UserPanel_Previews: PreviewProvider {
                 isSupporter: false
             )
         }
+        //.redacted(reason: .placeholder)
     }
 }

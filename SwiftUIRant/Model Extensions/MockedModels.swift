@@ -47,8 +47,8 @@ extension Rant {
                 name: "Dr. Troll",
                 score: 666,
                 devRantSupporter: false,
-                avatarSmall: .init(colorHex: "00ff00", imageUrlPath: nil),
-                avatarLarge: .init(colorHex: "00ff00", imageUrlPath: nil)
+                avatarSmall: .init(colorHex: "cccccc", imageUrlPath: nil),
+                avatarLarge: .init(colorHex: "cccccc", imageUrlPath: nil)
             ),
             created: Date(),
             isEdited: true,

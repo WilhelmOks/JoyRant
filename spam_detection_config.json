@@ -16,9 +16,6 @@
             "substring": "crypto",
             "spam_score": 50
         },{
-            "substring": "crypto",
-            "spam_score": 50
-        },{
             "substring": "recover",
             "spam_score": 60
         },{
@@ -179,6 +176,24 @@
             "spam_score": 30
         },{
             "substring": "certification",
+            "spam_score": 50
+        },{
+            "substring": "willkommen",
+            "spam_score": 50
+        },{
+            "substring": "umgebung",
+            "spam_score": 50
+        },{
+            "substring": "expert",
+            "spam_score": 50
+        },{
+            "substring": "individu",
+            "spam_score": 50
+        },{
+            "substring": "kontakt",
+            "spam_score": 50
+        },{
+            "substring": "website",
             "spam_score": 50
         },
         

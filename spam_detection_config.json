@@ -195,6 +195,12 @@
         },{
             "substring": "website",
             "spam_score": 50
+        },{
+            "substring": "explore",
+            "spam_score": 50
+        },{
+            "substring": "perfect",
+            "spam_score": 50
         },
         
     ],

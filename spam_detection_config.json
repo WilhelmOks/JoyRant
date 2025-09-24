@@ -207,6 +207,15 @@
         },{
             "substring": "perfect",
             "spam_score": 50
+        },{
+            "substring": "delivery",
+            "spam_score": 50
+        },{
+            "substring": "deliveries",
+            "spam_score": 50
+        },{
+            "substring": "free",
+            "spam_score": 30
         },
         
     ],

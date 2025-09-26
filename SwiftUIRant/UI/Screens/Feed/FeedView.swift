@@ -164,6 +164,7 @@ struct FeedView: View {
             }
         }
         .pickerStyle(.menu)
+        .fixedSize(horizontal: true, vertical: false)
         .id(sortPickerId)
         .onChange(of: AppState.shared.customAccentColor) { newValue in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

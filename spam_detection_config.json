@@ -13,8 +13,11 @@
             "substring": "crap",
             "spam_score": -100
         },{
-            "substring": "crypto",
-            "spam_score": 50
+            "substring": "moron",
+            "spam_score": -500
+        },{
+            "substring": "buffoon",
+            "spam_score": -100
         },{
             "substring": "crypto",
             "spam_score": 50
@@ -180,6 +183,39 @@
         },{
             "substring": "certification",
             "spam_score": 50
+        },{
+            "substring": "willkommen",
+            "spam_score": 50
+        },{
+            "substring": "umgebung",
+            "spam_score": 50
+        },{
+            "substring": "expert",
+            "spam_score": 50
+        },{
+            "substring": "individu",
+            "spam_score": 50
+        },{
+            "substring": "kontakt",
+            "spam_score": 50
+        },{
+            "substring": "website",
+            "spam_score": 50
+        },{
+            "substring": "explore",
+            "spam_score": 50
+        },{
+            "substring": "perfect",
+            "spam_score": 50
+        },{
+            "substring": "delivery",
+            "spam_score": 50
+        },{
+            "substring": "deliveries",
+            "spam_score": 50
+        },{
+            "substring": "free",
+            "spam_score": 30
         },
         
     ],
@@ -226,6 +262,14 @@
         "ChadPresc5555",
         "loanacamelia",
         "shoesidea",
+        "Gaskoin",
+        "jigolokayito",
+        "DraCatharina",
+        "ezrahidaya",
+        "SistemiCons",
+        "thrivewealth",
+        "RobertMackey",
+        "AmmanSun",
     ]
 }
 

@@ -231,6 +231,9 @@
             "spam_score": 50,
         },
     ],
+    "users_whitelist": [
+        "kalenux",
+    ],
     "users": [ // users in this list are 100% spammer accounts
         "Sasakiska",
         "FinnTurner",

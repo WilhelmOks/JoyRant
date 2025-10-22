@@ -216,6 +216,12 @@
         },{
             "substring": "free",
             "spam_score": 30
+        },{
+            "substring": "escort",
+            "spam_score": 60
+        },{
+            "substring": "call girl",
+            "spam_score": 110
         },
         
     ],

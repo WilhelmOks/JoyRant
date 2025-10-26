@@ -200,6 +200,12 @@ struct RantCommentView: View {
         if let image = viewModel.comment.image {
             PostedImage(image: image, opensSheet: true)
         }
+        
+        let imageURLs = viewModel.comment.linksInText.imageURLs()
+        
+        ForEach(imageURLs, id: \.self) { url in
+            URLImage(url: url)
+        }
     }
         
     @ViewBuilder private func replyButton() -> some View {

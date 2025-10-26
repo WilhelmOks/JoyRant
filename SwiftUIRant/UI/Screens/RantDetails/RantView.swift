@@ -187,6 +187,12 @@ struct RantView: View {
         if let image = viewModel.rant.image {
             PostedImage(image: image, opensSheet: true)
         }
+        
+        let imageURLs = viewModel.rant.linksInText.imageURLs()
+        
+        ForEach(imageURLs, id: \.self) { url in
+            URLImage(url: url)
+        }
     }
     
     @ViewBuilder private func tags() -> some View {

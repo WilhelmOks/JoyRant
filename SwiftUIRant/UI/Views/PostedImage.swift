@@ -51,6 +51,7 @@ struct PostedImage: View {
                         .aspectRatio(aspectRatio, contentMode: .fit)
                     
                     ProgressView()
+                        .controlSize(.large)
                 }
                 .frame(maxHeight: 1000)
             case .success(let image):
@@ -60,7 +61,8 @@ struct PostedImage: View {
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .frame(maxHeight: 1000)
             case .failure:
-                Image(systemName: "photo")
+                Image(systemName: "photo.trianglebadge.exclamationmark")
+                    .imageScale(.large)
             @unknown default:
                 EmptyView()
             }

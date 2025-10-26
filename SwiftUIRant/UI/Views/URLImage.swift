@@ -10,6 +10,8 @@ import SwiftUI
 struct URLImage: View {
     let url: String
     
+    @State private var id = UUID()
+    
     var body: some View {
         if let url = URL(string: url) {
             AsyncImage(
@@ -29,12 +31,18 @@ struct URLImage: View {
                         .frame(maxHeight: 1000)
                         .transition(.opacity)
                 case .failure:
-                    Image(systemName: "photo.trianglebadge.exclamationmark")
-                        .imageScale(.large)
+                    Button {
+                        id = UUID()
+                    } label: {
+                        Image(systemName: "photo.trianglebadge.exclamationmark")
+                            .imageScale(.large)
+                            .foregroundStyle(Color.primaryForeground)
+                    }
                 @unknown default:
                     EmptyView()
                 }
             }
+            .id(id)
         }
     }
     

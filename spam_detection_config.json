@@ -222,6 +222,21 @@
         },{
             "substring": "call girl",
             "spam_score": 110
+        },{
+            "substring": "dme",
+            "spam_score": 60
+        },{
+            "substring": "medic",
+            "spam_score": 60
+        },{
+            "substring": "revenue",
+            "spam_score": 60
+        },{
+            "substring": "billing",
+            "spam_score": 60
+        },{
+            "substring": "purchse",
+            "spam_score": 60
         },
         
     ],

@@ -243,6 +243,9 @@
         },{
             "substring": "earn money",
             "spam_score": 150
+        },{
+            "substring": "harvington",
+            "spam_score": 150
         },
         
     ],

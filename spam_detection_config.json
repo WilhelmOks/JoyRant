@@ -240,6 +240,9 @@
         },{
             "substring": "slotjos",
             "spam_score": 200
+        },{
+            "substring": "earn money",
+            "spam_score": 150
         },
         
     ],
@@ -301,6 +304,7 @@
         "DorieBarton",
         "miathomas01",
         "selenna",
+        "sanjeevkapoor12",
     ]
 }
 

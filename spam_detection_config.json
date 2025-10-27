@@ -237,6 +237,9 @@
         },{
             "substring": "purchse",
             "spam_score": 60
+        },{
+            "substring": "slotjos",
+            "spam_score": 200
         },
         
     ],

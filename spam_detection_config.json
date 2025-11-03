@@ -246,6 +246,18 @@
         },{
             "substring": "harvington",
             "spam_score": 150
+        },{
+            "substring": "supercharge",
+            "spam_score": 110
+        },{
+            "substring": "step-by-step",
+            "spam_score": 60
+        },{
+            "substring": "real-world",
+            "spam_score": 60
+        },{
+            "substring": "job-hunting",
+            "spam_score": 40
         },
         
     ],

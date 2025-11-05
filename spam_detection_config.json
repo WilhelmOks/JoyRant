@@ -258,6 +258,9 @@
         },{
             "substring": "job-hunting",
             "spam_score": 40
+        },{
+            "substring": "dubai",
+            "spam_score": 80
         },
         
     ],

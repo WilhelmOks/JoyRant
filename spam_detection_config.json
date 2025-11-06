@@ -261,6 +261,12 @@
         },{
             "substring": "dubai",
             "spam_score": 80
+        },{
+            "substring": "asap aba",
+            "spam_score": 110
+        },{
+            "substring": "bcba",
+            "spam_score": 110
         },
         
     ],

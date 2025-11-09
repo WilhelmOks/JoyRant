@@ -52,6 +52,7 @@ final class RantDetailsViewModel: ObservableObject {
     @MainActor func load() async {
         isLoading = true
         await performLoad()
+        markMolodetzMentionsAsRead()
         BroadcastEvent.shouldRefreshNotifications.send()
         isLoading = false
         
@@ -104,5 +105,17 @@ final class RantDetailsViewModel: ObservableObject {
         let rantAuthorMention = "@" + (rant?.author.name ?? "")
         let mentiones = [rantAuthorMention] + filtered.map { "@" + $0.author.name }
         return Array(mentiones.uniqued())
+    }
+    
+    @MainActor func markMolodetzMentionsAsRead() {
+        let containedMentions = DataStore.shared.molodetzMentions.filter { mention in
+            if let commentId = mention.commentId {
+                return comments.contains(where: { $0.id == commentId })
+            } else {
+                return rant?.id == mention.rantId
+            }
+        }
+        let ids = containedMentions.map { $0.id }
+        DataStore.shared.markMolodetzMentionsAsRead(mentions: ids)
     }
 }

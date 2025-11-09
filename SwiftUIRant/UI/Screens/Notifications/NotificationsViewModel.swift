@@ -83,6 +83,9 @@ import SwiftDevRant
         isRefreshing = true
                 
         do {
+            let ids = DataStore.shared.molodetzMentions.map(\.id)
+            DataStore.shared.markMolodetzMentionsAsRead(mentions: ids)
+            
             try await Networking.shared.clearNotifications()
             try await fetch()
         } catch {

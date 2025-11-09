@@ -118,4 +118,15 @@ import SwiftDevRant
             )
         }
     }
+    
+    func markMolodetzMentionsAsRead(mentions: [String]) {
+        var molodetzReadMentionIds = UserSettings().molodetzReadMentionIds
+        
+        molodetzReadMentionIds.append(contentsOf: mentions)
+        molodetzReadMentionIds = [String](molodetzReadMentionIds.uniqued())
+        
+        UserSettings().molodetzReadMentionIds = molodetzReadMentionIds
+        
+        objectWillChange.send()
+    }
 }

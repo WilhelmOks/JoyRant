@@ -114,13 +114,13 @@ struct NotificationsView: View {
             .refreshable {
                 await viewModel.refresh()
             }
-            .navigationDestination(for: NotificationFeed.MappedNotificationItem.self) { item in
+            .navigationDestination(for: GeneralNotificationItem.self) { item in
                 RantDetailsView(
                     sourceTab: .notifications,
                     viewModel: .init(
                         rantId: item.rantId,
                         scrollToCommentWithId: item.commentId,
-                        scrollToLastCommentWithUserId: item.notificationKind == .newComment ? item.userId : nil
+                        scrollToLastCommentWithUserName: item.notificationKind == .newComment ? item.userName : nil
                     )
                 )
             }

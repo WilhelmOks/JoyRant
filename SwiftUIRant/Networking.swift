@@ -227,6 +227,13 @@ struct Networking {
         return try await devRant.getProfile(token: try token(), userId: userId, contentType: contentType, skip: skip)
     }
     
+    func getOwnUserName() async throws -> String {
+        await relogInIfNeeded()
+        let token = try token()
+        let ownProfile = try await devRant.getProfile(token: token, userId: token.userId, contentType: .favorite, skip: 0)
+        return ownProfile.username
+    }
+    
     func subscribe(userId: UserID, subscribe: Bool) async throws {
         await relogInIfNeeded()
         if subscribe {
@@ -259,12 +266,15 @@ struct Networking {
     // molodetz mentions
     
     func molodetzMentions() async throws -> [MolodetzMention.CodingData] {
+        guard UserSettings().loadMentionsFromMolodetz else { return [] }
         //TODO: use KreeRequest here
         let urlString = "https://static.molodetz.nl/dr.mentions.json"
         guard let url = URL(string: urlString) else { throw SwiftUIRantError.invalidUrl(urlString) }
         let response = try await URLSession.shared.data(for: .init(url: url))
         let codingData = try JSONDecoder().decode([MolodetzMention.CodingData].self, from: response.0)
-        return codingData.filter { $0.to == LoginStore.shared.username }
+        let withoutDuplicates = codingData.uniqued(on: \.self)
+        let ownUsername = await DataStore.shared.ownUsername
+        return withoutDuplicates.filter { $0.to == ownUsername }
     }
 }
 

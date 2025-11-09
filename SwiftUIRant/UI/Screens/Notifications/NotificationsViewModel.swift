@@ -37,16 +37,8 @@ import SwiftDevRant
     
     private func fetch() async throws {
         try await DataLoader.shared.loadNotifications()
-        //let notifications = try await Networking.shared.getNotifications(for: categoryTab.category)
         try Task.checkCancellation()
-        let calculatedUnread = DataStore.shared.notifications[.all]?.count { notification in
-            notification.isRead == false && !UserSettings().ignoredUsers.contains(notification.userName)
-        } ?? 0
-        DataStore.shared.calculatedNumberOfUnreadNotifications = calculatedUnread
-        //notificationItems = notifications.mappedItems
-        /*Task {
-            try? await DataLoader.shared.loadNumbersOfUnreadNotifications()
-        }*/
+        try await DataLoader.shared.loadNumbersOfUnreadNotifications()
     }
     
     func load() async {

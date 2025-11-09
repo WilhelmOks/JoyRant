@@ -16,6 +16,7 @@
 		0C46AA6F2DFDC301005FE458 /* User+SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA6E2DFDC301005FE458 /* User+SwiftData.swift */; };
 		0C4858762D11A371007D688D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4858752D11A36A007D688D /* Networking.swift */; };
 		0C4F12AE2EC0EC8F00F19501 /* MolodetzMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F12AD2EC0EC8F00F19501 /* MolodetzMention.swift */; };
+		0C4F12B02EC104EC00F19501 /* GeneralNotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F12AF2EC104EC00F19501 /* GeneralNotificationItem.swift */; };
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
 		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
 		0C707DFF2E4CFE7800200C72 /* IgnoredUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */; };
@@ -123,6 +124,7 @@
 		0C46AA6E2DFDC301005FE458 /* User+SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SwiftData.swift"; sourceTree = "<group>"; };
 		0C4858752D11A36A007D688D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		0C4F12AD2EC0EC8F00F19501 /* MolodetzMention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolodetzMention.swift; sourceTree = "<group>"; };
+		0C4F12AF2EC104EC00F19501 /* GeneralNotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNotificationItem.swift; sourceTree = "<group>"; };
 		0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredUsersView.swift; sourceTree = "<group>"; };
 		0C707E012E51D7E200200C72 /* UpvotersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpvotersView.swift; sourceTree = "<group>"; };
 		0C707E032E51E66200200C72 /* MappedNotificationItem+Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MappedNotificationItem+Id.swift"; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				ED7FCCB129DFFEFE007D8675 /* CommunityProject.swift */,
 				0C4F12AD2EC0EC8F00F19501 /* MolodetzMention.swift */,
+				0C4F12AF2EC104EC00F19501 /* GeneralNotificationItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				ED2C9B7D28B67CFF008BF314 /* LoginViewModel.swift in Sources */,
 				0C46AA662DFC8E77005FE458 /* EncounteredUsers.swift in Sources */,
 				EDCA4564292FD7D400C12A6D /* RantList.swift in Sources */,
+				0C4F12B02EC104EC00F19501 /* GeneralNotificationItem.swift in Sources */,
 				ED59CEE128C78A8E0007B698 /* Text+FontExtensions.swift in Sources */,
 				ED97D64328F5B1E500CFC418 /* Disambuguation.swift in Sources */,
 				EDAD6517298E81AA003CC3F3 /* WeekRantsView.swift in Sources */,

@@ -34,6 +34,7 @@ struct SettingsView: View {
     
     @State private var reduceVisibilityOfSpam = UserSettings().reduceVisibilityOfSpam
     @State private var showAuthorsInFeed = UserSettings().showAuthorsInFeed
+    @State private var loadMentionsFromMolodetz = UserSettings().loadMentionsFromMolodetz
     
     var body: some View {
         content()
@@ -77,6 +78,9 @@ struct SettingsView: View {
             }
             .onChange(of: showAuthorsInFeed) { newValue in
                 UserSettings().showAuthorsInFeed = newValue
+            }
+            .onChange(of: loadMentionsFromMolodetz) { newValue in
+                UserSettings().loadMentionsFromMolodetz = newValue
             }
             .onAppear {
                 let reasonRaw = AppState.shared.automaticDownvoteReason?.rawValue
@@ -181,6 +185,16 @@ struct SettingsView: View {
                     
                     Toggle(isOn: $reduceVisibilityOfSpam) {
                         Text("Reduce visibility of spam")
+                    }
+                    .tint(Color.accentColor)
+                    
+                    Toggle(isOn: $loadMentionsFromMolodetz) {
+                        VStack(alignment: .leading) {
+                            Text("Load molodetz mentions")
+                            Text("Enable when devRant mentions are broken")
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                     .tint(Color.accentColor)
                 }

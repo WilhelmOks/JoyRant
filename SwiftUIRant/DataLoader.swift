@@ -70,20 +70,29 @@ import SwiftDevRant
         }
     }
     
+    func loadOwnUsernameIfNeeded() async {
+        if dataStore.ownUsername == nil {
+            dataStore.ownUsername = try? await Networking.shared.getOwnUserName()
+        }
+    }
+    
     func loadNumbersOfUnreadNotifications() async throws {
-        let unreadDevrant = try await Networking.shared.getNotifications(for: .all).mappedItems.count { notification in
+        await loadOwnUsernameIfNeeded()
+        
+        async let unreadDevrant = try Networking.shared.getNotifications(for: .all).mappedItems.count { notification in
             notification.isRead == false && !UserSettings().ignoredUsers.contains(notification.userName)
         }
         
-        dataStore.molodetzMentionsRaw = (try? await Networking.shared.molodetzMentions()) ?? []
-        let unreadMolodetzMentions = dataStore.molodetzMentions.count { !$0.isRead }
+        async let unreadMolodetzMentions = dataStore.molodetzMentions(from: (try? Networking.shared.molodetzMentions()) ?? []).count { !$0.isRead }
         
-        dataStore.calculatedNumberOfUnreadNotifications = unreadDevrant + unreadMolodetzMentions
+        dataStore.calculatedNumberOfUnreadNotifications = await (try unreadDevrant + unreadMolodetzMentions)
         dlog("Updated number of unread notifications: (\(dataStore.calculatedNumberOfUnreadNotifications))")
     }
     
     func loadNotifications() async throws {
-        dataStore.notifications = try await [
+        await loadOwnUsernameIfNeeded()
+        
+        async let devRant: [NotificationFeed.Category: [NotificationFeed.MappedNotificationItem]] = try [
             .all: Networking.shared.getNotifications(for: .all).mappedItems,
             .comments: Networking.shared.getNotifications(for: .comments).mappedItems,
             .mentions: Networking.shared.getNotifications(for: .mentions).mappedItems,
@@ -91,6 +100,8 @@ import SwiftDevRant
             .subscriptions: Networking.shared.getNotifications(for: .subscriptions).mappedItems
         ]
         
-        dataStore.molodetzMentionsRaw = (try? await Networking.shared.molodetzMentions()) ?? []
+        async let molodetz = (try? Networking.shared.molodetzMentions()) ?? []
+        
+        (dataStore.notificationsDevRant, dataStore.molodetzMentionsRaw) = await (try devRant, molodetz)
     }
 }

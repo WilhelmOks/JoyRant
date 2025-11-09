@@ -23,12 +23,12 @@ final class RantDetailsViewModel: ObservableObject {
     let dismiss = PassthroughSubject<Void, Never>()
     
     var scrollToCommentWithId: Int?
-    private let scrollToLastCommentWithUserId: Int?
+    private let scrollToLastCommentWithUserName: String?
     
-    init(rantId: Int, scrollToCommentWithId: Int? = nil, scrollToLastCommentWithUserId: Int? = nil) {
+    init(rantId: Int, scrollToCommentWithId: Int? = nil, scrollToLastCommentWithUserName: String? = nil) {
         self.rantId = rantId
         self.scrollToCommentWithId = scrollToCommentWithId
-        self.scrollToLastCommentWithUserId = scrollToLastCommentWithUserId
+        self.scrollToLastCommentWithUserName = scrollToLastCommentWithUserName
         
         Task {
             await load()
@@ -55,8 +55,8 @@ final class RantDetailsViewModel: ObservableObject {
         BroadcastEvent.shouldRefreshNotifications.send()
         isLoading = false
         
-        if let scrollToLastCommentWithUserId {
-            scrollToCommentWithId = comments.last { $0.author.id == scrollToLastCommentWithUserId }?.id
+        if let scrollToLastCommentWithUserName {
+            scrollToCommentWithId = comments.last { $0.author.name == scrollToLastCommentWithUserName }?.id
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

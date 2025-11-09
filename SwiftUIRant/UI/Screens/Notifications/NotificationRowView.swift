@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftDevRant
 
 struct NotificationRowView: View {
-    let item: NotificationFeed.MappedNotificationItem
+    let item: GeneralNotificationItem
     
     var body: some View {
         HStack(spacing: 10) {
@@ -106,9 +106,10 @@ private struct ExampleView: View {
     @ViewBuilder private func row(_ notificationType: DevRantNotification.Kind) -> some View {
         NotificationRowView(
             item: .init(
+                source: .devRant,
+                id: UUID().uuidString,
                 rantId: 13,
                 commentId: 14,
-                userId: 1,
                 userAvatar: .init(
                     colorHex: "99cc99",
                     imageUrlPath: "v-37_c-3_b-6_g-m_9-1_1-4_16-3_3-4_8-1_7-1_5-1_12-4_6-102_10-1_2-39_22-2_15-10_11-1_4-1.jpg"

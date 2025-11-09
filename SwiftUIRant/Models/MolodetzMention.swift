@@ -19,7 +19,7 @@ struct MolodetzMention: Hashable {
 }
 
 extension MolodetzMention {
-    struct CodingData: Decodable {
+    struct CodingData: Decodable, Hashable {
         let from: String
         let to: String
         let rant_id: UInt64

@@ -23,6 +23,9 @@ struct UserSettings {
     @UserDefaultsBackedDefaulting(key: "show_authors_in_feed", defaultValue: true)
     var showAuthorsInFeed
     
+    @UserDefaultsBackedDefaulting(key: "load_mentions_from_molodetz", defaultValue: true)
+    var loadMentionsFromMolodetz
+    
     @UserDefaultsBackedDefaulting(key: "molodetz_read_mention_ids", defaultValue: [String]())
     var molodetzReadMentionIds
 }

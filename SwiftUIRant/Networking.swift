@@ -255,6 +255,17 @@ struct Networking {
             AppState.shared.spamDetectorConfig = config
         }
     }
+    
+    // molodetz mentions
+    
+    func molodetzMentions() async throws -> [MolodetzMention.CodingData] {
+        //TODO: use KreeRequest here
+        let urlString = "https://static.molodetz.nl/dr.mentions.json"
+        guard let url = URL(string: urlString) else { throw SwiftUIRantError.invalidUrl(urlString) }
+        let response = try await URLSession.shared.data(for: .init(url: url))
+        let codingData = try JSONDecoder().decode([MolodetzMention.CodingData].self, from: response.0)
+        return codingData.filter { $0.to == LoginStore.shared.username }
+    }
 }
 
 struct RequestLogger: Logger {

@@ -71,10 +71,14 @@ import SwiftDevRant
     }
     
     func loadNumbersOfUnreadNotifications() async throws {
-        let calculatedUnread = try await Networking.shared.getNotifications(for: .all).mappedItems.count { notification in
+        let unreadDevrant = try await Networking.shared.getNotifications(for: .all).mappedItems.count { notification in
             notification.isRead == false && !UserSettings().ignoredUsers.contains(notification.userName)
         }
-        dataStore.calculatedNumberOfUnreadNotifications = calculatedUnread
+        
+        dataStore.molodetzMentionsRaw = (try? await Networking.shared.molodetzMentions()) ?? []
+        let unreadMolodetzMentions = dataStore.molodetzMentions.count { !$0.isRead }
+        
+        dataStore.calculatedNumberOfUnreadNotifications = unreadDevrant + unreadMolodetzMentions
         dlog("Updated number of unread notifications: (\(dataStore.calculatedNumberOfUnreadNotifications))")
     }
     
@@ -86,5 +90,7 @@ import SwiftDevRant
             .upvotes: Networking.shared.getNotifications(for: .upvotes).mappedItems,
             .subscriptions: Networking.shared.getNotifications(for: .subscriptions).mappedItems
         ]
+        
+        dataStore.molodetzMentionsRaw = (try? await Networking.shared.molodetzMentions()) ?? []
     }
 }

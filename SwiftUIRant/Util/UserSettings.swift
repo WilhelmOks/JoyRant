@@ -22,6 +22,9 @@ struct UserSettings {
     
     @UserDefaultsBackedDefaulting(key: "show_authors_in_feed", defaultValue: true)
     var showAuthorsInFeed
+    
+    @UserDefaultsBackedDefaulting(key: "molodetz_read_mention_ids", defaultValue: [String]())
+    var molodetzReadMentionIds
 }
 
 @propertyWrapper private struct UserDefaultsBacked<Value> {

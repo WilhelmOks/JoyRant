@@ -20,6 +20,8 @@ import SwiftDevRant
     
     @Published var calculatedNumberOfUnreadNotifications: Int = 0
     
+    @Published var molodetzMentionsRaw: [MolodetzMention.CodingData] = []
+    
     @Published var writePostContent = ""
     
     var currentFeedSession: String?
@@ -29,6 +31,7 @@ import SwiftDevRant
         clearFeed()
         calculatedNumberOfUnreadNotifications = 0
         notifications = [:]
+        molodetzMentionsRaw = []
     }
     
     func clearFeed() {
@@ -72,5 +75,25 @@ import SwiftDevRant
             item.commentId == comment.id
         }.map { $0.userName } ?? []
         return upvoters.uniqued().sorted()
+    }
+    
+    var molodetzMentions: [MolodetzMention] {
+        let readIds = UserSettings().molodetzReadMentionIds
+        let encounteredUsers = EncounteredUsers.shared.users
+        
+        return molodetzMentionsRaw.map { mention in
+            let id = mention.id
+            let avatar = encounteredUsers.first(where: { $0.name == mention.from })?.avatarSmall ?? .init(colorHex: "999", imageUrlPath: nil)
+            
+            return .init(
+                id: id,
+                rantId: Int(mention.rant_id),
+                commentId: mention.comment_id.flatMap(Int.init),
+                created: .init(timeIntervalSince1970: TimeInterval(mention.created_time)),
+                userAvatar: avatar,
+                userName: mention.from,
+                isRead: readIds.contains(id),
+            )
+        }
     }
 }

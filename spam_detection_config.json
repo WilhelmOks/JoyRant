@@ -267,6 +267,9 @@
         },{
             "substring": "bcba",
             "spam_score": 110
+        },{
+            "substring": "tailwindbuilder",
+            "spam_score": 110
         },
         
     ],
@@ -330,6 +333,7 @@
         "selenna",
         "sanjeevkapoor12",
         "tailwindadmin",
+        "sanjayjoshi",
     ]
 }
 

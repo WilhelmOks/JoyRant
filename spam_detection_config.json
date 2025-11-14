@@ -270,6 +270,12 @@
         },{
             "substring": "tailwindbuilder",
             "spam_score": 110
+        },{
+            "substring": "revolutionize",
+            "spam_score": 110
+        },{
+            "substring": "chronaiv5",
+            "spam_score": 110
         },
         
     ],

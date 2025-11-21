@@ -276,6 +276,9 @@
         },{
             "substring": "chronaiv5",
             "spam_score": 110
+        },{
+            "substring": "casino",
+            "spam_score": 110
         },
         
     ],

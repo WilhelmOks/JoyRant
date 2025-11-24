@@ -279,6 +279,9 @@
         },{
             "substring": "casino",
             "spam_score": 110
+        },{
+            "substring": "codevision",
+            "spam_score": 110
         },
         
     ],

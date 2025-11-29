@@ -13,7 +13,7 @@ import SpamDetector
 struct Networking {
     static let shared = Self()
     
-    private let devRant = DevRantRequest(requestLogger: RequestLogger())
+    private let devRant = DevRantRequest(requestLogger: RequestLogger(), ignoreCertificateErrors: true)
     
     private init() {}
     

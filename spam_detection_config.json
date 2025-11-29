@@ -172,6 +172,9 @@
             "substring": "innovative",
             "spam_score": 90
         },{
+            "substring": "innovation",
+            "spam_score": 90
+        },{
             "substring": "international",
             "spam_score": 50
         },{
@@ -276,6 +279,15 @@
         },{
             "substring": "chronaiv5",
             "spam_score": 110
+        },{
+            "substring": "casino",
+            "spam_score": 110
+        },{
+            "substring": "codevision",
+            "spam_score": 110
+        },{
+            "substring": "impactful",
+            "spam_score": 60
         },
         
     ],
@@ -343,6 +355,14 @@
         "51fans",
         "JuliaDiaz",
         "cargames",
+        "demurerecall",
+        "katejonson",
+        "irninkil",
+        "TimothyChristen",
+        "LawiMash",
+        "FraneWatson",
+        "ClaraWeltz",
+        "uripoliavich",
     ]
 }
 

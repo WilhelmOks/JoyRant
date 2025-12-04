@@ -288,6 +288,12 @@
         },{
             "substring": "impactful",
             "spam_score": 60
+        },{
+            "substring": "aesthetic",
+            "spam_score": 40
+        },{
+            "substring": "hawashim",
+            "spam_score": 110
         },
         
     ],

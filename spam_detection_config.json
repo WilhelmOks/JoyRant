@@ -294,6 +294,9 @@
         },{
             "substring": "hawashim",
             "spam_score": 110
+        },{
+            "substring": "shadcn",
+            "spam_score": 110
         },
         
     ],

@@ -52,8 +52,6 @@ It's built with SwiftUI and it is utilizing it for the vast majority of the app'
 
 ⏹️ Creating "Collab" rants
 
-⏹️ Tag suggestions for rants (not available in SwiftRant (yet?))
-
 ⏹️ Code block highlighting
 
 ✅ Community Projects page (using https://github.com/joewilliams007/jsonapi by joewilliams007)
@@ -73,10 +71,6 @@ https://testflight.apple.com/join/NoiaKmoN
 
 * iOS 16
 * macOS 13 (Ventura)
-
-## Dependencies
-
-https://github.com/OmerFlame/SwiftRant
 
 ## Credits
 

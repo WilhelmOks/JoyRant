@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C0C4CA02EAE78E60089D7BF /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0C4C9F2EAE78E60089D7BF /* URLImage.swift */; };
 		0C0C4CA22EAE7FC40089D7BF /* Link+OnlyURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0C4CA12EAE7FC40089D7BF /* Link+OnlyURLs.swift */; };
+		0C1A8C902F113FF9004E68F1 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C1A8C8F2F113FF9004E68F1 /* SwiftDevRant */; };
+		0C1A8C932F114BDB004E68F1 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C1A8C922F114BDB004E68F1 /* SwiftDevRant */; };
 		0C46AA662DFC8E77005FE458 /* EncounteredUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA652DFC8E77005FE458 /* EncounteredUsers.swift */; };
 		0C46AA692DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA682DFD74B0005FE458 /* EncounteredUsersMentionPicker.swift */; };
 		0C46AA6B2DFD8200005FE458 /* EncounteredUsersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46AA6A2DFD8200005FE458 /* EncounteredUsersList.swift */; };
@@ -18,7 +20,6 @@
 		0C4F12AE2EC0EC8F00F19501 /* MolodetzMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F12AD2EC0EC8F00F19501 /* MolodetzMention.swift */; };
 		0C4F12B02EC104EC00F19501 /* GeneralNotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F12AF2EC104EC00F19501 /* GeneralNotificationItem.swift */; };
 		0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4542D20672B004A093D /* SwiftDevRant */; };
-		0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C59E4572D2072AA004A093D /* SwiftDevRant */; };
 		0C707DFF2E4CFE7800200C72 /* IgnoredUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */; };
 		0C707E022E51D7E200200C72 /* UpvotersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707E012E51D7E200200C72 /* UpvotersView.swift */; };
 		0C707E042E51E66C00200C72 /* MappedNotificationItem+Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707E032E51E66200200C72 /* MappedNotificationItem+Id.swift */; };
@@ -223,13 +224,14 @@
 				ED2F3C4229E0148100A48877 /* ArrayBuilderModule in Frameworks */,
 				ED14DE5E28E08EBF005FCC9A /* CachedAsyncImage in Frameworks */,
 				ED97D62C28E9CC4B00CFC418 /* HexUIColor in Frameworks */,
+				0C1A8C932F114BDB004E68F1 /* SwiftDevRant in Frameworks */,
 				ED427DDA291AE07500C3B30A /* Algorithms in Frameworks */,
 				ED97D63128EB22C100CFC418 /* HexNSColor in Frameworks */,
 				0CBF49922E2ACF4D00E1E337 /* SpamDetector in Frameworks */,
 				EDD52B182B3C4C87005F04D3 /* SwiftUIIntrospect-Static in Frameworks */,
+				0C1A8C902F113FF9004E68F1 /* SwiftDevRant in Frameworks */,
 				0CED7FE32D19BA0A000B95A2 /* SwiftKeychainWrapper in Frameworks */,
 				0C59E4552D20672B004A093D /* SwiftDevRant in Frameworks */,
-				0C59E4582D2072AA004A093D /* SwiftDevRant in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,8 +583,9 @@
 				0C9030582D11A075009BCBC5 /* SwiftDevRant */,
 				0CED7FE22D19BA0A000B95A2 /* SwiftKeychainWrapper */,
 				0C59E4542D20672B004A093D /* SwiftDevRant */,
-				0C59E4572D2072AA004A093D /* SwiftDevRant */,
 				0CBF49912E2ACF4D00E1E337 /* SpamDetector */,
+				0C1A8C8F2F113FF9004E68F1 /* SwiftDevRant */,
+				0C1A8C922F114BDB004E68F1 /* SwiftDevRant */,
 			);
 			productName = SwiftUIRant;
 			productReference = ED2C9B6228B679CB008BF314 /* JoyRant.app */;
@@ -619,8 +622,8 @@
 				ED2F3C4029E0148100A48877 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 				EDD52B122B3C4C86005F04D3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 				0CED7FE12D19BA0A000B95A2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
-				0C59E4562D2072AA004A093D /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */,
 				0CBF49902E2ACF4D00E1E337 /* XCRemoteSwiftPackageReference "SpamDetector" */,
+				0C1A8C912F114BDB004E68F1 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */,
 			);
 			productRefGroup = ED2C9B6328B679CB008BF314 /* Products */;
 			projectDirPath = "";
@@ -950,12 +953,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0C59E4562D2072AA004A093D /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */ = {
+		0C1A8C912F114BDB004E68F1 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WilhelmOks/SwiftDevRantSDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.3;
+				minimumVersion = 2.3.0;
 			};
 		};
 		0CBF49902E2ACF4D00E1E337 /* XCRemoteSwiftPackageReference "SpamDetector" */ = {
@@ -1017,13 +1020,17 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0C59E4542D20672B004A093D /* SwiftDevRant */ = {
+		0C1A8C8F2F113FF9004E68F1 /* SwiftDevRant */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftDevRant;
 		};
-		0C59E4572D2072AA004A093D /* SwiftDevRant */ = {
+		0C1A8C922F114BDB004E68F1 /* SwiftDevRant */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0C59E4562D2072AA004A093D /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */;
+			package = 0C1A8C912F114BDB004E68F1 /* XCRemoteSwiftPackageReference "SwiftDevRantSDK" */;
+			productName = SwiftDevRant;
+		};
+		0C59E4542D20672B004A093D /* SwiftDevRant */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = SwiftDevRant;
 		};
 		0C9030582D11A075009BCBC5 /* SwiftDevRant */ = {

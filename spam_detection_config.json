@@ -297,6 +297,9 @@
         },{
             "substring": "shadcn",
             "spam_score": 110
+        },{
+            "substring": "booking",
+            "spam_score": 60
         },
         
     ],
@@ -380,6 +383,8 @@
         "konteratno",
         "klestoran",
         "ThomasPando",
+        "rehaedison321",
+        "Gabapentin",
     ]
 }
 

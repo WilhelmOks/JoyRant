@@ -300,6 +300,12 @@
         },{
             "substring": "booking",
             "spam_score": 60
+        },{
+            "substring": "merchandise",
+            "spam_score": 60
+        },{
+            "substring": "elevate",
+            "spam_score": 60
         },
         
     ],

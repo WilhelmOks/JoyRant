@@ -306,7 +306,13 @@
         },{
             "substring": "elevate",
             "spam_score": 60
-        },
+        },{
+            "substring": "mumbai",
+            "spam_score": 60
+        },{
+            "substring": "rental",
+            "spam_score": 60
+        }
         
     ],
     "regex": [

@@ -312,6 +312,15 @@
         },{
             "substring": "rental",
             "spam_score": 60
+        },{
+            "substring": "comfort",
+            "spam_score": 30
+        },{
+            "substring": "adventure",
+            "spam_score": 50
+        },{
+            "substring": "motorhome",
+            "spam_score": 120
         }
         
     ],

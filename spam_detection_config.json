@@ -321,6 +321,24 @@
         },{
             "substring": "motorhome",
             "spam_score": 120
+        },{
+            "substring": "pickleball",
+            "spam_score": 110
+        },{
+            "substring": "iptv",
+            "spam_score": 60
+        },{
+            "substring": "premium",
+            "spam_score": 60
+        },{
+            "substring": "subscription",
+            "spam_score": 60
+        },{
+            "substring": "unmatched",
+            "spam_score": 60
+        },{
+            "substring": "affordable",
+            "spam_score": 60
         }
         
     ],

@@ -264,7 +264,7 @@ struct WritePostView: View {
     }
     
     @ViewBuilder private func imagePreview(url: URL, size: CGFloat = 50) -> some View {
-        CachedAsyncImage(url: url, urlCache: .postedImageCache) { phase in
+        InsecureAsyncImage(url: url, urlCache: .postedImageCache) { phase in
             switch phase {
             case .empty:
                 ProgressView()

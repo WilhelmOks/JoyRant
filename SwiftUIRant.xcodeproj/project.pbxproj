@@ -23,6 +23,7 @@
 		0C707DFF2E4CFE7800200C72 /* IgnoredUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */; };
 		0C707E022E51D7E200200C72 /* UpvotersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707E012E51D7E200200C72 /* UpvotersView.swift */; };
 		0C707E042E51E66C00200C72 /* MappedNotificationItem+Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C707E032E51E66200200C72 /* MappedNotificationItem+Id.swift */; };
+		0C80C1C12F93A06A00673451 /* InsecureAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C80C1C02F93A06A00673451 /* InsecureAsyncImage.swift */; };
 		0C9030592D11A075009BCBC5 /* SwiftDevRant in Frameworks */ = {isa = PBXBuildFile; productRef = 0C9030582D11A075009BCBC5 /* SwiftDevRant */; };
 		0CBF49922E2ACF4D00E1E337 /* SpamDetector in Frameworks */ = {isa = PBXBuildFile; productRef = 0CBF49912E2ACF4D00E1E337 /* SpamDetector */; };
 		0CBF49962E2AD3BA00E1E337 /* Rant+SpamInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */; };
@@ -129,6 +130,7 @@
 		0C707DFE2E4CFE7800200C72 /* IgnoredUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredUsersView.swift; sourceTree = "<group>"; };
 		0C707E012E51D7E200200C72 /* UpvotersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpvotersView.swift; sourceTree = "<group>"; };
 		0C707E032E51E66200200C72 /* MappedNotificationItem+Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MappedNotificationItem+Id.swift"; sourceTree = "<group>"; };
+		0C80C1C02F93A06A00673451 /* InsecureAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsecureAsyncImage.swift; sourceTree = "<group>"; };
 		0CBF49952E2AD3BA00E1E337 /* Rant+SpamInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rant+SpamInfo.swift"; sourceTree = "<group>"; };
 		ED00E50A28DCC642000A01DC /* RantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RantViewModel.swift; sourceTree = "<group>"; };
 		ED00E50C28DDB4E6000A01DC /* BroadcastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastEvent.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				ED91BF1A291589E000B400C4 /* LinksInPostedContent.swift */,
 				EDCEF9762933CA9C0007C9BD /* Pasteboard.swift */,
 				EDCEF9782933DDBF0007C9BD /* Image+PlatformImage.swift */,
+				0C80C1C02F93A06A00673451 /* InsecureAsyncImage.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				EDCEF9772933CA9C0007C9BD /* Pasteboard.swift in Sources */,
 				ED74D5162929291000088CE6 /* URLHandler.swift in Sources */,
 				ED2C9B7F28B69892008BF314 /* Logging.swift in Sources */,
+				0C80C1C12F93A06A00673451 /* InsecureAsyncImage.swift in Sources */,
 				EDE2289128D5E5C90025EDB1 /* RantDetailsViewModel.swift in Sources */,
 				0C4858762D11A371007D688D /* Networking.swift in Sources */,
 				ED00E50B28DCC642000A01DC /* RantViewModel.swift in Sources */,

@@ -330,19 +330,32 @@ struct ProfileView: View {
     
     @ViewBuilder private func header() -> some View {
         if let url = avatarUrl() {
-            CachedAsyncImage(url: url, urlCache: .profileImageCache) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .fillHorizontally()
-                    .background(userColor())
-                    .onAppear {
-                        DispatchQueue.main.async {
-                            moreMenuId = UUID()
+            InsecureAsyncImage(url: url, urlCache: .profileImageCache) { phase in
+                switch phase {
+                case .empty:
+                    userColor()
+                        .overlay {
+                            ProgressView()
                         }
-                    }
-            } placeholder: {
-                userColor()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .fillHorizontally()
+                        .background(userColor())
+                        .onAppear {
+                            DispatchQueue.main.async {
+                                moreMenuId = UUID()
+                            }
+                        }
+                case .failure:
+                    userColor()
+                        .overlay {
+                            Image(systemName: "exclamationmark.triangle")
+                        }
+                @unknown default:
+                    userColor()
+                }
             }
         } else {
             userColor()

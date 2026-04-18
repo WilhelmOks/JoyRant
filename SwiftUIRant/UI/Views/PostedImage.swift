@@ -40,7 +40,7 @@ struct PostedImage: View {
     }
     
     @ViewBuilder private func imageView() -> some View {
-        CachedAsyncImage(url: imageURL(), urlCache: .postedImageCache) { phase in
+        InsecureAsyncImage(url: imageURL(), urlCache: .postedImageCache) { phase in
             switch phase {
             case .empty:
                 ZStack {

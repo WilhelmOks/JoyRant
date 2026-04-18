@@ -25,7 +25,7 @@ struct UserAvatarView: View {
     
     @ViewBuilder private func content() -> some View {
         if let url = avatar.imageUrl {
-            CachedAsyncImage(url: url, urlCache: .userAvatarCache) { phase in
+            InsecureAsyncImage(url: url, urlCache: .userAvatarCache) { phase in
                 switch phase {
                 case .empty:
                     ZStack {
